@@ -41,7 +41,7 @@ For PicoScope 2104, 2105, 2202, 2203, 2204, 2204A, 2205 and 2205A models, please
 
 * MATLAB 2015b is recommended for 32-bit versions of MATLAB on Microsoft Windows operating systems.
 
-### Installing the Instrument Driver
+### Installing the Instrument Driver files
 
 We recommend using the [Add-Ons Explorer](https://uk.mathworks.com/help/matlab/matlab_env/get-add-ons.html) in MATLAB in order to install these files and obtain updates.
 
