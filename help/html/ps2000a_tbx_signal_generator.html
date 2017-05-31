@@ -1,0 +1,165 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Signal Generator</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_signal_generator.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Signal Generator</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Overview</a></li><li><a href="#2">Using the signal generator</a></li><li><a href="#3">AWG Index Modes</a></li></ul></div><h2 id="1">Overview</h2><p>PicoScope 2000 Series oscilloscopes supported by this toolbox also have a signal generator with the following features:</p><div><ul><li>In-built waveforms e.g. sine, square and ramp-up</li><li>Arbitrary waveform generator allowing a User to specify a custom waveform to be output</li><li>Sweep the signal generator output frequency</li><li>Output a specified number of cycles or sweeps using a trigger</li></ul></div><h2 id="2">Using the signal generator</h2><p>Below is the general procedure for using the signal generator:</p><div><ol><li>Create a device object for the Instrument using <a href="matlab:doc('instrument/icdevice'])"><tt>icdevice</tt></a>.</li><li>Connect to the Instrument using <a href="matlab:doc('instrument/connect')"><tt>connect</tt></a>.</li><li>Configure the input channels and trigger conditions as required.</li><li>Set the <tt>offsetVoltage</tt>, <tt>peakToPeakVoltage</tt>, <tt>startFrequency</tt> and <tt>stopFrequency</tt> properties of the <a href="ps2000a_tbx_sig_gen_group.html">Signalgenerator group</a> as required.</li><li>Use <a href="ps2000a_tbx_sig_gen_functions.html#4"><tt>setSigGenArbitrary</tt></a> or <a href="ps2000a_tbx_sig_gen_functions.html#9"><tt>sigGenArbitrarySimple</tt></a> to output an arbitrary waveform, or use <a href="ps2000a_tbx_sig_gen_functions.html#12"><tt>setSigGenBuiltIn</tt></a> or <a href="ps2000a_tbx_sig_gen_functions.html#15"><tt>sigGenBuiltInSimple</tt></a> to output a built-in waveform.</li><li>Start any data collection as required.</li><li>While waiting for a trigger, set the Signalgenerator group properties from step 4 if they need changing and call <a href="ps2000a_tbx_sig_gen_functions.html#20"><tt>setSigGenPropertiesArbitrary</tt></a> or <a href="ps2000a_tbx_sig_gen_functions.html#23"><tt>setSigGenPropertiesBuiltIn</tt></a> if the signal generator properties need to be changed.</li><li>If <tt>setSigGenArbitrary</tt> or <tt>setSigGenBuiltIn</tt> have been configured to output a number of shots or sweeps when a software trigger occurs call <a href="ps2000a_tbx_sig_gen_functions.html#1"><tt>ps2000aSigGenSoftwareControl</tt></a>.</li><li>Use <a href="ps2000a_tbx_sig_gen_functions.html#18"><tt>setSigGenOff</tt></a> to set the output to a 0 V DC signal.</li><li>Disconnect from the Instrument using <a href="matlab:doc('instrument/disconnect'])"><tt>disconnect</tt></a>.</li><li>Use the <a href="matlab:doc('instrument/delete')"><tt>delete</tt></a> function to clean up.</li></ol></div><h2 id="3">AWG Index Modes</h2><p>The arbitrary waveform generator supports <b>single</b> and <b>dual</b> index modes to help you make the best use of the waveform buffer.</p><p><b>Single mode.</b> The generator outputs the raw contents of the buffer repeatedly. This mode is the only one that can generate asymmetrical waveforms. You can also use this mode for symmetrical waveforms, but the dual mode make more efficient use of the buffer memory.</p><p>
+  <p align="center">
+      <table width="25%">
+          <tr>
+              <td><img style="display:block;" width="50%" height="50%" src="..\images\awg-single.bmp"></td>
+          </tr>
+      </table>
+  </p>
+</p><p><b>Dual mode.</b> The generator outputs the contents of the buffer from beginning to end, and then does a second pass in the reverse direction through the buffer. This allows you to specify only the first half of a waveform with twofold symmetry, such as a Gaussian function, and let the generator fill in the other half.</p><p>
+  <p align="center">
+      <table width="25%">
+          <tr>
+              <td><img style="display:block;" width="50%" height="50%" src="..\images\awg-dual.bmp"></td>
+          </tr>
+      </table>
+  </p>
+</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Signal Generator
+%
+%% Overview
+%
+% PicoScope 2000 Series oscilloscopes supported by this toolbox also have a
+% signal generator with the following features:
+%
+% * In-built waveforms e.g. sine, square and ramp-up
+% * Arbitrary waveform generator allowing a User to specify a custom
+% waveform to be output
+% * Sweep the signal generator output frequency
+% * Output a specified number of cycles or sweeps using a trigger
+
+%% Using the signal generator
+%
+% Below is the general procedure for using the signal generator:
+%
+% # Create a device object for the Instrument using <matlab:doc('instrument/icdevice']) |icdevice|>.
+% # Connect to the Instrument using <matlab:doc('instrument/connect') |connect|>.
+% # Configure the input channels and trigger conditions as required.
+% # Set the |offsetVoltage|, |peakToPeakVoltage|, |startFrequency| and
+% |stopFrequency| properties of the <ps2000a_tbx_sig_gen_group.html
+% Signalgenerator group> as required.
+% # Use <ps2000a_tbx_sig_gen_functions.html#4 |setSigGenArbitrary|> or
+% <ps2000a_tbx_sig_gen_functions.html#9 |sigGenArbitrarySimple|> to output
+% an arbitrary waveform, or use <ps2000a_tbx_sig_gen_functions.html#12
+% |setSigGenBuiltIn|> or <ps2000a_tbx_sig_gen_functions.html#15
+% |sigGenBuiltInSimple|> to output a built-in waveform.
+% # Start any data collection as required.
+% # While waiting for a trigger, set the Signalgenerator group properties
+% from step 4 if they need changing and call
+% <ps2000a_tbx_sig_gen_functions.html#20 |setSigGenPropertiesArbitrary|> or
+% <ps2000a_tbx_sig_gen_functions.html#23 |setSigGenPropertiesBuiltIn|> if
+% the signal generator properties need to be changed.
+% # If |setSigGenArbitrary| or |setSigGenBuiltIn| have been configured to
+% output a number of shots or sweeps when a software trigger occurs call
+% <ps2000a_tbx_sig_gen_functions.html#1 |ps2000aSigGenSoftwareControl|>.
+% # Use <ps2000a_tbx_sig_gen_functions.html#18 |setSigGenOff|> to set the output to a 0 V DC signal.
+% # Disconnect from the Instrument using <matlab:doc('instrument/disconnect']) |disconnect|>.
+% # Use the <matlab:doc('instrument/delete') |delete|> function to clean up.
+
+%% AWG Index Modes
+%
+% The arbitrary waveform generator supports *single* and *dual* index modes
+% to help you make the best use of the waveform buffer.
+%
+% *Single mode.* The generator outputs the raw contents of the buffer
+% repeatedly. This mode is the only one that can generate asymmetrical
+% waveforms. You can also use this mode for symmetrical waveforms, but the
+% dual mode make more efficient use of the buffer memory.
+%
+% <html>
+%   <p align="center">
+%       <table width="25%">
+%           <tr>
+%               <td><img style="display:block;" width="50%" height="50%" src="..\images\awg-single.bmp"></td>
+%           </tr>
+%       </table>
+%   </p>
+% </html>
+% 
+% *Dual mode.* The generator outputs the contents of the buffer from
+% beginning to end, and then does a second pass in the reverse direction
+% through the buffer. This allows you to specify only the first half of a
+% waveform with twofold symmetry, such as a Gaussian function, and let the
+% generator fill in the other half.
+%
+% <html>
+%   <p align="center">
+%       <table width="25%">
+%           <tr>
+%               <td><img style="display:block;" width="50%" height="50%" src="..\images\awg-dual.bmp"></td>
+%           </tr>
+%       </table>
+%   </p>
+% </html>
+
+##### SOURCE END #####
+--></body></html>

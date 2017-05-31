@@ -1,0 +1,313 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver User Guide</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_user_guide_intro.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver User Guide</h1><!--introduction--><p>The PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver provides functionality to configure a PicoScope 2000 Series oscilloscope or mixed signal oscilloscope through various properties and functions. This allows you to collect data using various sampling modes as well as providing the ability to configure and operate the signal generator.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">General Procedure</a></li><li><a href="#2">Voltage Ranges</a></li><li><a href="#3">MSO Digital Data</a></li><li><a href="#4">Triggering</a></li><li><a href="#5">Downsampling Modes</a></li></ul></div><h2 id="1">General Procedure</h2><p>A typical Instrument session for data acquisition will consist of the following steps:</p><div><ul><li>Open a connection to the device.</li><li>Configure the device (channels, triggering, and if required, the signal generator).</li><li>Capture data.</li><li>Process data.</li><li>Close the connection to the device.</li></ul></div><p>It is not necessary to configure the channels and triggering if only the signal generator feature is required instead of data acquisition.</p><h2 id="2">Voltage Ranges</h2><p><b>Analog input channels</b></p><p>You can set a device input channel to any voltage range from &plusmn;20 mV to &plusmn;20 V (subject to the device specification) with <a href="ps2000a_tbx_device_functions.html#20"><tt>ps2000aSetChannel</tt></a>. If you are not using the functions provided by the Instrument Driver that return the data values converted to millivolts, each sample is scaled to 16 bits, and the minimum and maximum values returned to your application are given by the Instrument Driver's <tt>minADCValue</tt> and <tt>maxADCValue</tt> <a href="ps2000a_tbx_device_object.html#1">properties</a> as follows:</p><p>
+  <table border=2>
+      <col>
+      <colgroup span="2"></colgroup>
+      <tr>
+          <th rowspan="2" style="border-color:#999; background-color:#E0E0E0">Property</th>
+          <th rowspan="2" style="border-color:#999; background-color:#E0E0E0">Voltage</th>
+          <th colspan="2" scope="colgroup" style="border-color:#999; background-color:#E0E0E0">Value returned</th>
+      </tr>
+      <tr>
+          <th scope="col" style="border-color:#999; background-color:#E0E0E0">decimal</th>
+          <th scope="col" style="border-color:#999; background-color:#E0E0E0">hex</th>
+      </tr>
+      <tr>
+          <td style="border-color:#999">maxADCValue</td>
+          <td style="border-color:#999">maximum</td>
+          <td style="border-color:#999">32512</td>
+          <td style="border-color:#999">7F00</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999"></td>
+          <td style="border-color:#999">zero</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">0000</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">minADCValue</td>
+          <td style="border-color:#999">minimum</td>
+          <td style="border-color:#999">-32512</td>
+          <td style="border-color:#999">8100</td>
+          </tr>
+  </table>
+</p><p><b>Note:</b> Oscilloscope probe and current clamp settings are not taken into account, so the values returned from the functions will need to be scaled accordingly.</p><p><b>External trigger input (PicoScope 2206, 2207 and 2208 only)</b></p><p>The external trigger input (marked EXT), has a &plusmn;5 V input.</p><h2 id="3">MSO Digital Data</h2><p><b>This section applies to mixed-signal oscilloscopes (MSOs) only.</b></p><p>A PicoScope MSO has two 8-bit digital ports&#8212;PORT0 and PORT1&#8212;making a total of 16 digital channels. The data from each port is returned in a separate buffer that is set up by the <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> and <a href="ps2000a_tbx_device_functions.html#24"><tt>ps2000aSetDataBuffers</tt></a> functions. For compatibility with the analog channels, each buffer is an array of 16-bit words. The 8-bit port data occupies the lower 8 bits of the word, and the upper 8 bits of the word are undefined.</p><p>
+  <table border=2>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">Sample</th>
+          <th style="border-color:#999; background-color:#E0E0E0"><b>PORT1 buffer</b></th>
+          <th style="border-color:#999; background-color:#E0E0E0"><b>PORT0 buffer</b></th>
+      </tr>
+      <tr>
+          <td rowspan="3" style="border-color:#999; text-align:center">Sample<sub style='vertical-align:sub;font-size:smaller'>0</sub><br>...<br>Sample<sub style='vertical-align:sub;font-size:smaller'>n-1</sub></td>
+          <td style="border-color:#999; text-align:center">[XXXXXXXX,D15...D8]<sub style='vertical-align:sub;font-size:smaller'>0</sub><br>...<br>[XXXXXXXX,D15...D8]<sub style='vertical-align:sub;font-size:smaller'>n-1</sub></td>
+          <td style="border-color:#999; text-align:center">[XXXXXXXX,D7...D0]<sub style='vertical-align:sub;font-size:smaller'>0</sub><br>...<br>[XXXXXXXX,D7...D0]<sub style='vertical-align:sub;font-size:smaller'>n-1</sub></td>
+      </tr>
+  </table>
+</p><p><b>Retrieving stored digital data</b></p><p>The <a href="..\demos.xml">Examples</a> include specific examples for mixed signal oscilloscopes and demonstrate how to extract individual bits from the values returned.</p><h2 id="4">Triggering</h2><p>PicoScope oscilloscopes can either start collecting data immediately or be programmed to wait for a trigger event - use the <a href="ps2000a_tbx_trigger_functions.html#7"><tt>setTriggerOff</tt></a> or <a href="ps2000a_tbx_trigger_functions.html#5"><tt>setSimpleTrigger</tt></a> functions respectively from the <a href="ps2000a_tbx_trigger_group.html">Trigger group</a> in order to do this.</p><p>A trigger event can occur when one of the signal or trigger input channels crosses a threshold voltage on either a rising or a falling edge.</p><p><b>Note:</b> Advanced trigger functionality is not currently supported by the Instrument Driver.</p><h2 id="5">Downsampling Modes</h2><p>Various methods of data reduction, or <b>downsampling</b>, are possible with the PicoScope 2000 Series oscilloscopes. The downsampling is done at high speed by dedicated hardware inside the scope, making your application faster and more responsive than if you had to do all the data processing in software.</p><p>You specify the downsampling mode when you call one of the data collection functions such as <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a>. The following modes are available:</p><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">Ratio Mode</th>
+          <th style="border-color:#999; background-color:#E0E0E0">Enumeration Value</th>
+          <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+      </tr>
+      <tr>
+          <td>PS2000A_RATIO_MODE_NONE</td>
+          <td>0</td>
+          <td>No downsampling is performed. The <b>downSampleRatio</b> parameter in the relevant function call is ignored.</td>
+      </tr>
+      <tr>
+          <td>PS2000A_RATIO_MODE_AGGREGATE</td>
+          <td>1</td>
+          <td>Reduces every block of <i>n</i> values to just two values: a minimum and a maximum. The minimum and maximum values are returned in two separate buffers.</td>
+      </tr>
+      <tr>
+          <td>PS2000A_RATIO_MODE_DECIMATE</td>
+          <td>2</td>
+          <td>Reduces every block of <i>n</i> values to just the first value in the block, discarding all the other values.</td>
+      </tr>
+      <tr>
+          <td>PS2000A_RATIO_MODE_AVERAGE</td>
+          <td>4</td>
+          <td>Reduces every block of <i>n</i> values to a single value representing the average (arithmetic mean) of all the values. Equivalent to the 'oversampling' function on older scopes.</td>
+      </tr>
+  </table>
+</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver User Guide
+%
+% The PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver
+% provides functionality to configure a PicoScope 2000 Series oscilloscope
+% or mixed signal oscilloscope through various properties and functions.
+% This allows you to collect data using various sampling modes as well as
+% providing the ability to configure and operate the signal generator.
+%
+%% General Procedure
+%
+% A typical Instrument session for data acquisition will consist of the following steps:
+%
+% * Open a connection to the device.
+% * Configure the device (channels, triggering, and if required, the signal generator).
+% * Capture data.
+% * Process data.
+% * Close the connection to the device.
+% 
+% It is not necessary to configure the channels and triggering if only the
+% signal generator feature is required instead of data acquisition.
+
+%% Voltage Ranges
+%
+% *Analog input channels*
+%
+% You can set a device input channel to any voltage range from ±20 mV to
+% ±20 V (subject to the device specification) with <ps2000a_tbx_device_functions.html#20 |ps2000aSetChannel|>. If
+% you are not using the functions provided by the Instrument Driver that
+% return the data values converted to millivolts, each sample is scaled to
+% 16 bits, and the minimum and maximum values returned to your application
+% are given by the Instrument Driver's |minADCValue| and |maxADCValue|
+% <ps2000a_tbx_device_object.html#1 properties> as follows:
+%
+% <html>
+%   <table border=2>
+%       <col>
+%       <colgroup span="2"></colgroup>
+%       <tr>
+%           <th rowspan="2" style="border-color:#999; background-color:#E0E0E0">Property</th>
+%           <th rowspan="2" style="border-color:#999; background-color:#E0E0E0">Voltage</th>
+%           <th colspan="2" scope="colgroup" style="border-color:#999; background-color:#E0E0E0">Value returned</th>
+%       </tr>
+%       <tr>
+%           <th scope="col" style="border-color:#999; background-color:#E0E0E0">decimal</th>
+%           <th scope="col" style="border-color:#999; background-color:#E0E0E0">hex</th>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">maxADCValue</td>
+%           <td style="border-color:#999">maximum</td>
+%           <td style="border-color:#999">32512</td>
+%           <td style="border-color:#999">7F00</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999"></td>
+%           <td style="border-color:#999">zero</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">0000</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">minADCValue</td>
+%           <td style="border-color:#999">minimum</td>
+%           <td style="border-color:#999">-32512</td>
+%           <td style="border-color:#999">8100</td>
+%           </tr>
+%   </table>
+% </html>
+%
+% *Note:* Oscilloscope probe and current clamp settings are not taken into
+% account, so the values returned from the functions will need to be scaled
+% accordingly.
+%
+% *External trigger input (PicoScope 2206, 2207 and 2208 only)*
+%
+% The external trigger input (marked EXT), has a ±5 V input.
+
+%% MSO Digital Data
+% *This section applies to mixed-signal oscilloscopes (MSOs) only.*
+%
+% A PicoScope MSO has two 8-bit digital ports—PORT0 and PORT1—making a
+% total of 16 digital channels. The data from each port is returned in a
+% separate buffer that is set up by the
+% <ps2000a_tbx_device_functions.html#21
+% |ps2000aSetDataBuffer|> and <ps2000a_tbx_device_functions.html#24
+% |ps2000aSetDataBuffers|> functions. For compatibility with the analog
+% channels, each buffer is an array of 16-bit words. The 8-bit port data
+% occupies the lower 8 bits of the word, and the upper 8 bits of the word
+% are undefined.
+%
+% <html>
+%   <table border=2>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">Sample</th>
+%           <th style="border-color:#999; background-color:#E0E0E0"><b>PORT1 buffer</b></th>
+%           <th style="border-color:#999; background-color:#E0E0E0"><b>PORT0 buffer</b></th>
+%       </tr>
+%       <tr>
+%           <td rowspan="3" style="border-color:#999; text-align:center">Sample<sub style='vertical-align:sub;font-size:smaller'>0</sub><br>...<br>Sample<sub style='vertical-align:sub;font-size:smaller'>n-1</sub></td>
+%           <td style="border-color:#999; text-align:center">[XXXXXXXX,D15...D8]<sub style='vertical-align:sub;font-size:smaller'>0</sub><br>...<br>[XXXXXXXX,D15...D8]<sub style='vertical-align:sub;font-size:smaller'>n-1</sub></td>
+%           <td style="border-color:#999; text-align:center">[XXXXXXXX,D7...D0]<sub style='vertical-align:sub;font-size:smaller'>0</sub><br>...<br>[XXXXXXXX,D7...D0]<sub style='vertical-align:sub;font-size:smaller'>n-1</sub></td>
+%       </tr>
+%   </table>
+% </html>
+%
+% *Retrieving stored digital data*
+%
+% The <..\demos.xml Examples> include specific examples for mixed signal
+% oscilloscopes and demonstrate how to extract individual bits from the
+% values returned.
+
+%% Triggering
+%
+% PicoScope oscilloscopes can either start collecting data immediately or
+% be programmed to wait for a trigger event - use the
+% <ps2000a_tbx_trigger_functions.html#7 |setTriggerOff|> or
+% <ps2000a_tbx_trigger_functions.html#5 |setSimpleTrigger|> functions
+% respectively from the <ps2000a_tbx_trigger_group.html Trigger group> in
+% order to do this.
+%
+% A trigger event can occur when one of the signal or trigger input
+% channels crosses a threshold voltage on either a rising or a falling
+% edge.
+%
+% *Note:* Advanced trigger functionality is not currently supported by the
+% Instrument Driver.
+
+%% Downsampling Modes
+%
+% Various methods of data reduction, or *downsampling*, are possible with
+% the PicoScope 2000 Series oscilloscopes. The downsampling is done at high
+% speed by dedicated hardware inside the scope, making your application
+% faster and more responsive than if you had to do all the data processing
+% in software.
+%
+% You specify the downsampling mode when you call one of the data
+% collection functions such as <ps2000a_tbx_block_functions.html#13
+% |ps2000aGetValues|>. The following modes are available:
+%
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">Ratio Mode</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">Enumeration Value</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+%       </tr>
+%       <tr>
+%           <td>PS2000A_RATIO_MODE_NONE</td>
+%           <td>0</td>
+%           <td>No downsampling is performed. The <b>downSampleRatio</b> parameter in the relevant function call is ignored.</td>
+%       </tr>
+%       <tr>
+%           <td>PS2000A_RATIO_MODE_AGGREGATE</td>
+%           <td>1</td>
+%           <td>Reduces every block of <i>n</i> values to just two values: a minimum and a maximum. The minimum and maximum values are returned in two separate buffers.</td>
+%       </tr>
+%       <tr>
+%           <td>PS2000A_RATIO_MODE_DECIMATE</td>
+%           <td>2</td>
+%           <td>Reduces every block of <i>n</i> values to just the first value in the block, discarding all the other values.</td>
+%       </tr>
+%       <tr>
+%           <td>PS2000A_RATIO_MODE_AVERAGE</td>
+%           <td>4</td>
+%           <td>Reduces every block of <i>n</i> values to a single value representing the average (arithmetic mean) of all the values. Equivalent to the 'oversampling' function on older scopes.</td>
+%       </tr>
+%   </table>
+% </html>
+
+
+##### SOURCE END #####
+--></body></html>

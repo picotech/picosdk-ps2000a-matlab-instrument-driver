@@ -1,0 +1,450 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Connecting and Disconnecting</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_connecting_and_disconnecting.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Connecting and Disconnecting</h1><!--introduction--><p>This page describes how to connect to and disconnect from a PicoScope 2000 Series (A API) Oscilloscope or Mixed Signal Oscilloscope using the the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Connecting to an Instrument</a></li><li><a href="#4">Disconnecting from an Instrument</a></li><li><a href="#5">Working with Multiple Instruments</a></li></ul></div><h2 id="1">Connecting to an Instrument</h2><p>Prior to attempting to establish a connection with the instrument, run the PS2000aConfig.m script.</p><p>First create a device object using the <a href="matlab:doc('/instrument/icdevice')"><tt>icdevice</tt></a> function. The Instrument Driver name should be passed as the argument and a second optional argument can be used to specify the serial number of the device as shown below:</p><pre class="codeinput">    ps2000aDeviceObj = icdevice(<span class="string">'picotech_ps2000a_generic.mdd'</span>, <span class="string">'TT003/0010'</span>);
+</pre><pre class="codeoutput">
+Copyright &copy; 2014 - 2017 Pico Technology Ltd. All rights reserved.
+
+PicoScope 2000 Series (A API) MATLAB Instrument Driver
+
+Number of units found: 2
+
+Serial number(s): TT003/0010,GS002/0021
+
+</pre><p>The Instrument Driver will output the number of devices using the ps2000a/libps2000a shared library which are connected to the computer, along with a list of serial numbers.</p><p>Next, use the <a href="matlab:doc('/instrument/connect')"><tt>connect</tt></a> function to connect to the PicoScope. The default settings will be displayed as shown below:</p><pre class="codeinput">    connect(ps2000aDeviceObj);
+</pre><pre class="codeoutput">Opening PicoScope 2000 Series device...
+
+   Instrument Device Object Using Driver : picotech_ps2000a_generic.mdd
+ 
+   Instrument Information
+      Type:               Oscilloscope
+      Manufacturer:       Pico Technology Ltd.
+      Model:              PicoScope 2000 Series (A API)
+ 
+   Driver Information
+      DriverType:         MATLAB generic
+      DriverName:         picotech_ps2000a_generic.mdd
+      DriverVersion:      1.2.26
+ 
+   Communication State
+      Status:             open
+
+Setting Device Parameters...
+
+Default Analog Channel Setup:-
+------------------------------
+
+Channel A:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel B:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel C:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel D:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Turning off Equivalent Time Sampling...
+Turning off trigger...
+
+Default Block mode parameters:-
+
+               Timebase index : 64
+                 Time Interval: 496.0 ns
+ Number of pre-trigger samples: 0
+Number of post-trigger samples: 8192
+       Total number of samples: 8192
+
+Default Streaming mode parameters:-
+
+ Streaming interval: 1.00e-06 s
+Streaming auto stop: 1
+
+Default Signal generator parameters:-
+
+      Start frequency: 1000 Hz
+       Stop frequency: 1000 Hz
+       Offset voltage: 0 mV
+ Peak to Peak voltage: 2000 mV
+
+Initialisation complete.
+
+Connected to PicoScope 2000 Series device:-
+
+      Instrument Model: 2408B
+   Batch/Serial Number: TT003/0010
+       Analog Channels: 4
+             Bandwidth: 200 MHz
+         Buffer memory: 128 MS
+ Maximum sampling rate: 1 GS/s
+ Signal Generator Type: Arbitrary Waveform Generator
+
+</pre><h2 id="4">Disconnecting from an Instrument</h2><p>On completion of the tasks for the instrument session, disconnect from the instrument using the <a href="matlab:doc('/instrument/disconnect')"><tt>disconnect</tt></a> function and use the <a href="matlab:doc('/instrument/delete')"><tt>delete</tt></a> function to clean up.</p><pre class="codeinput">    disconnect(ps2000aDeviceObj);
+    delete(ps2000aDeviceObj);
+</pre><pre class="codeoutput">Connection to PicoScope 2408B with serial number TT003/0010 closed successfully.
+Libraries unloaded successfully.
+</pre><h2 id="5">Working with Multiple Instruments</h2><p>The picotech_ps2000a_generic.mdd Instrument Driver can support multiple instruments but this is only recommended for Block and Rapid block mode captures as well as use of the signal generator.</p><p>Due to a limitation with the <a href="ps2000a_tbx_shared_libraries.html">ps2000aWrap/libps2000aWrap shared libraries</a>, it is not recommended to attempt to collect data in Streaming mode with multiple Instruments.</p><p>To use multiple instruments in a session, use the <tt>icdevice</tt> function to create a device object for each instrument (specifying the serial numbers as required), then call the <tt>connect</tt>, <tt>disconnect</tt> and <tt>delete</tt> functions as described above.</p><p>Due to the polling mechanism used to check if the Instrument has collected data in Block and Rapid block modes, the use of <a href="matlab:web('http://uk.mathworks.com/products/parallel-computing/')">Parallel Computing Toolbox</a> functions may be worth considering when using multiple Instruments.</p><pre class="codeinput">    <span class="comment">% Create device objects.</span>
+    ps2000aDeviceObj = icdevice(<span class="string">'picotech_ps2000a_generic.mdd'</span>);
+    ps2000aDeviceObj2 = icdevice(<span class="string">'picotech_ps2000a_generic.mdd'</span>);
+
+    <span class="comment">% Connect device objects to hardware.</span>
+    connect(ps2000aDeviceObj);
+    connect(ps2000aDeviceObj2);
+
+    <span class="comment">% Perform some tasks...</span>
+
+    <span class="comment">% Disconnect and clean up.</span>
+    disconnect(ps2000aDeviceObj);
+    delete(ps2000aDeviceObj);
+
+    disconnect(ps2000aDeviceObj2);
+    delete(ps2000aDeviceObj2);
+</pre><pre class="codeoutput">
+Copyright &copy; 2014 - 2017 Pico Technology Ltd. All rights reserved.
+
+PicoScope 2000 Series (A API) MATLAB Instrument Driver
+
+Number of units found: 2
+
+Serial number(s): TT003/0010,GS002/0021
+
+
+Copyright &copy; 2014 - 2017 Pico Technology Ltd. All rights reserved.
+
+PicoScope 2000 Series (A API) MATLAB Instrument Driver
+
+Number of units found: 2
+
+Serial number(s): TT003/0010,GS002/0021
+
+Opening PicoScope 2000 Series device...
+
+   Instrument Device Object Using Driver : picotech_ps2000a_generic.mdd
+ 
+   Instrument Information
+      Type:               Oscilloscope
+      Manufacturer:       Pico Technology Ltd.
+      Model:              PicoScope 2000 Series (A API)
+ 
+   Driver Information
+      DriverType:         MATLAB generic
+      DriverName:         picotech_ps2000a_generic.mdd
+      DriverVersion:      1.2.26
+ 
+   Communication State
+      Status:             open
+
+Setting Device Parameters...
+
+Default Analog Channel Setup:-
+------------------------------
+
+Channel A:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel B:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel C:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel D:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Turning off Equivalent Time Sampling...
+Turning off trigger...
+
+Default Block mode parameters:-
+
+               Timebase index : 64
+                 Time Interval: 496.0 ns
+ Number of pre-trigger samples: 0
+Number of post-trigger samples: 8192
+       Total number of samples: 8192
+
+Default Streaming mode parameters:-
+
+ Streaming interval: 1.00e-06 s
+Streaming auto stop: 1
+
+Default Signal generator parameters:-
+
+      Start frequency: 1000 Hz
+       Stop frequency: 1000 Hz
+       Offset voltage: 0 mV
+ Peak to Peak voltage: 2000 mV
+
+Initialisation complete.
+
+Connected to PicoScope 2000 Series device:-
+
+      Instrument Model: 2408B
+   Batch/Serial Number: TT003/0010
+       Analog Channels: 4
+             Bandwidth: 200 MHz
+         Buffer memory: 128 MS
+ Maximum sampling rate: 1 GS/s
+ Signal Generator Type: Arbitrary Waveform Generator
+
+Opening PicoScope 2000 Series device...
+
+   Instrument Device Object Using Driver : picotech_ps2000a_generic.mdd
+ 
+   Instrument Information
+      Type:               Oscilloscope
+      Manufacturer:       Pico Technology Ltd.
+      Model:              PicoScope 2000 Series (A API)
+ 
+   Driver Information
+      DriverType:         MATLAB generic
+      DriverName:         picotech_ps2000a_generic.mdd
+      DriverVersion:      1.2.26
+ 
+   Communication State
+      Status:             open
+
+Setting Device Parameters...
+
+Default Analog Channel Setup:-
+------------------------------
+
+Channel A:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Channel B:-
+	Enabled: True
+	Coupling: DC
+	Range: +/- 5 V
+	Analog Offset: 0.0 V
+
+Default Digital Port Setup:-
+----------------------------
+
+PORT0:-
+	Enabled: True
+	Logic Level: +1.5 V
+
+PORT1:-
+	Enabled: True
+	Logic Level: +1.5 V
+
+Turning off Equivalent Time Sampling...
+Turning off trigger...
+
+Default Block mode parameters:-
+
+               Timebase index : 64
+                 Time Interval: 496.0 ns
+ Number of pre-trigger samples: 0
+Number of post-trigger samples: 8192
+       Total number of samples: 8192
+
+Default Streaming mode parameters:-
+
+ Streaming interval: 1.00e-06 s
+Streaming auto stop: 1
+
+Default Signal generator parameters:-
+
+      Start frequency: 1000 Hz
+       Stop frequency: 1000 Hz
+       Offset voltage: 0 mV
+ Peak to Peak voltage: 2000 mV
+
+Initialisation complete.
+
+Connected to PicoScope 2000 Series device:-
+
+      Instrument Model: 2207BMSO
+   Batch/Serial Number: GS002/0021
+       Analog Channels: 2
+      Digital Channels: 16
+             Bandwidth: 100 MHz
+         Buffer memory: 64 MS
+ Maximum sampling rate: 1 GS/s
+ Signal Generator Type: Arbitrary Waveform Generator
+
+Connection to PicoScope 2408B with serial number TT003/0010 closed successfully.
+Other PicoScope 2000 Series (A API) devices are still connected - libraries will not be unloaded.
+Connection to PicoScope 2207BMSO with serial number GS002/0021 closed successfully.
+Libraries unloaded successfully.
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Connecting and Disconnecting
+%
+% This page describes how to connect to and disconnect from a PicoScope
+% 2000 Series (A API) Oscilloscope or Mixed Signal Oscilloscope using the
+% the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver.
+%
+
+%% Connecting to an Instrument
+%
+% Prior to attempting to establish a connection with the instrument, run the
+% PS2000aConfig.m script.
+%
+% First create a device object using the
+% <matlab:doc('/instrument/icdevice') |icdevice|> function.
+% The Instrument Driver name should be passed as the argument and a second
+% optional argument can be used to specify the serial number of the device
+% as shown below:
+
+    ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd', 'TT003/0010');
+    
+%%
+% The Instrument Driver will output the number of devices using the
+% ps2000a/libps2000a shared library which are connected to the computer,
+% along with a list of serial numbers.
+    
+%%
+% Next, use the <matlab:doc('/instrument/connect') |connect|>
+% function to connect to the PicoScope. The default settings will be
+% displayed as shown below:
+
+    connect(ps2000aDeviceObj);
+
+%% Disconnecting from an Instrument
+%
+% On completion of the tasks for the instrument session, disconnect from
+% the instrument using the
+% <matlab:doc('/instrument/disconnect') |disconnect|>
+% function and use the <matlab:doc('/instrument/delete')
+% |delete|> function to clean up.
+
+    disconnect(ps2000aDeviceObj);
+    delete(ps2000aDeviceObj);
+
+%% Working with Multiple Instruments
+% 
+% The picotech_ps2000a_generic.mdd Instrument Driver can support multiple
+% instruments but this is only recommended for Block and Rapid block mode
+% captures as well as use of the signal generator.
+%
+% Due to a limitation with the <ps2000a_tbx_shared_libraries.html
+% ps2000aWrap/libps2000aWrap shared libraries>, it is not recommended to
+% attempt to collect data in Streaming mode with multiple Instruments.
+%
+% To use multiple instruments in a session, use the |icdevice| function to
+% create a device object for each instrument (specifying the serial numbers
+% as required), then call the |connect|, |disconnect| and |delete| functions as
+% described above.
+%
+% Due to the polling mechanism used to check if the Instrument has
+% collected data in Block and Rapid block modes, the use of
+% <matlab:web('http://uk.mathworks.com/products/parallel-computing/')
+% Parallel Computing Toolbox> functions may be worth considering when using
+% multiple Instruments.
+%
+
+    % Create device objects.
+    ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd');
+    ps2000aDeviceObj2 = icdevice('picotech_ps2000a_generic.mdd');
+
+    % Connect device objects to hardware.
+    connect(ps2000aDeviceObj);
+    connect(ps2000aDeviceObj2);
+
+    % Perform some tasks...
+    
+    % Disconnect and clean up.
+    disconnect(ps2000aDeviceObj);
+    delete(ps2000aDeviceObj);
+    
+    disconnect(ps2000aDeviceObj2);
+    delete(ps2000aDeviceObj2);
+
+##### SOURCE END #####
+--></body></html>

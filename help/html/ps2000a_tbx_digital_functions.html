@@ -1,0 +1,158 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Digital Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_digital_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Digital Group Functions</h1><!--introduction--><p>This section provides a description of the Instrument Driver Digital group functions. Prior to calling the functions, a Digital group object must be created as shown in the <a href="ps2000a_tbx_digital_group.html">Digital Group</a> page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">ps2000aSetDigitalPort</a></li><li><a href="#4">setDigitalPortDefaults</a></li></ul></div><h2 id="1">ps2000aSetDigitalPort</h2><pre class="codeinput">status = ps2000aSetDigitalPort(obj, port, enabled, logicLevel)
+</pre><p><tt>ps2000aSetDigitalPort(obj, port, enabled, logicLevel)</tt> is used to enable the digital port and set the logic level (the voltage point at which the state transitions from 0 to 1 for a digital channel).</p><p>This function is for MSO devices only and is not compatible with ETS mode.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Digital group.</li></ul></div><div><ul><li><tt>port</tt> - the digital port to be configured (either the enumeration enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0 (channels D0 to D7) or enPS2000ADigitalPort.PS2000A_DIGITAL_PORT1 (channels D8 to D15)).</li></ul></div><div><ul><li><tt>enabled</tt> -  set to TRUE (1) to enable the port, FALSE (0) otherwise.</li></ul></div><div><ul><li><tt>logicLevel</tt> - the voltage at which the state transitions between 0 and 1. Range: -5 V to +5 V.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Turn on Digital Port 0</span>
+    port        = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
+    enabled     = PicoConstants.TRUE;
+    logicLevel  = 1.5;
+
+    status.setDPort0 = invoke(digitalGroupObj, <span class="string">'ps2000aSetDigitalPort'</span>, port, enabled, logicLevel);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_digital_functions.html#4"><tt>setDigitalPortDefaults</tt></a></p><h2 id="4">setDigitalPortDefaults</h2><pre class="codeinput">status = setDigitalPortDefaults(obj)
+</pre><p><tt>setDigitalPortDefaults(obj)</tt> sets the following default values for any digital ports found on the device:-</p><p>Digital Port:</p><div><ul><li>Enabled: True</li><li>Logic Level: +1.5 V</li></ul></div><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Digital group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    status = invoke(digitalGroupObj, <span class="string">'setDigitalPortDefaults'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_digital_functions.html#1"><tt>ps2000aSetDigitalPort</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Digital Group Functions
+%
+% This section provides a description of the Instrument Driver Digital group
+% functions. Prior to calling the functions, a Digital group object must be
+% created as shown in the <ps2000a_tbx_digital_group.html Digital Group> page.
+%
+%% ps2000aSetDigitalPort
+
+status = ps2000aSetDigitalPort(obj, port, enabled, logicLevel)
+    
+%% 
+% |ps2000aSetDigitalPort(obj, port, enabled, logicLevel)| is used to enable
+% the digital port and set the logic level (the voltage point at which the
+% state transitions from 0 to 1 for a digital channel).
+% 
+% This function is for MSO devices only and is not compatible with ETS
+% mode.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Digital group.
+%
+% * |port| - the digital port to be configured (either the enumeration
+% enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0 (channels D0 to D7) or
+% enPS2000ADigitalPort.PS2000A_DIGITAL_PORT1 (channels D8 to D15)).
+%
+% * |enabled| -  set to TRUE (1) to enable the port, FALSE (0) otherwise.
+%
+% * |logicLevel| - the voltage at which the state transitions between 0 and 1. Range: -5 V to +5 V.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Turn on Digital Port 0 
+    port        = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
+    enabled     = PicoConstants.TRUE;
+    logicLevel  = 1.5;
+    
+    status.setDPort0 = invoke(digitalGroupObj, 'ps2000aSetDigitalPort', port, enabled, logicLevel);
+
+%%
+% *See also:* <ps2000a_tbx_digital_functions.html#4 |setDigitalPortDefaults|>
+%
+
+%% setDigitalPortDefaults
+
+status = setDigitalPortDefaults(obj)
+    
+%% 
+% |setDigitalPortDefaults(obj)| sets the following default values for any
+% digital ports found on the device:-
+%
+% Digital Port:
+%
+% * Enabled: True
+% * Logic Level: +1.5 V
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Digital group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    status = invoke(digitalGroupObj, 'setDigitalPortDefaults');
+
+%%
+% *See also:* <ps2000a_tbx_digital_functions.html#1 |ps2000aSetDigitalPort|>
+%
+##### SOURCE END #####
+--></body></html>

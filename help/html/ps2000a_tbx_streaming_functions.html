@@ -1,0 +1,682 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Streaming Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_streaming_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Streaming Group Functions</h1><!--introduction--><p>This section provides a description of the Instrument Driver Streaming group functions. Prior to calling the functions, a Streaming group object must be created as shown in the <a href="ps2000a_tbx_streaming_group.html">Streaming Group</a> page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">autoStopped</a></li><li><a href="#4">availableData</a></li><li><a href="#6">clearTriggerReady</a></li><li><a href="#9">getStreamingLatestValues</a></li><li><a href="#12">isReady</a></li><li><a href="#15">isTriggerReady</a></li><li><a href="#18">ps2000aNoOfStreamingValues</a></li><li><a href="#21">ps2000aRunStreaming</a></li><li><a href="#24">setAppAndDriverBuffers</a></li><li><a href="#27">setAppAndDriverDigiBuffers</a></li><li><a href="#30">setMaxMinAppAndDriverBuffers</a></li><li><a href="#33">setMaxMinAppAndDriverDigiBuffers</a></li></ul></div><h2 id="1">autoStopped</h2><pre class="codeinput">autoStop = autoStopped(obj)
+</pre><p><tt>autoStopped(obj)</tt> indicates if the device has stopped on collection of the number of samples specified in the call to the <a href="ps2000a_tbx_streaming_functions.html#21"><tt>ps2000aRunStreaming</tt></a> function.</p><p>The <tt>autoStop</tt> property must have been set to 1.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>autoStop</tt> - 0 if the device has not stopped, non-zero if streaming has auto-stopped.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    hasAutoStopped = invoke(streamingGroupObj, <span class="string">'autoStopped'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_streaming_functions.html#21"><tt>ps2000aRunStreaming</tt></a></p><h2 id="4">availableData</h2><pre class="codeinput">[numSamples, startIndex] = availableData(obj)
+</pre><p><tt>availableData(obj)</tt> indicates the number of samples returned from the driver and shows the start index of the data in the buffer when collecting data in streaming mode.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>numSamples</tt> - 0, data is not yet available; Non-zero, the number of samples returned from the driver.</li><li><tt>startIndex</tt> - an index to the first valid sample in the buffer (when data is available). The startIndex value is zero-based so should be incremented by 1 when used to retrieve data from the buffer.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [numSamples, startIndex] = invoke(streamingGroupObj, <span class="string">'availableData'</span>);
+</pre><h2 id="6">clearTriggerReady</h2><pre class="codeinput">triggerCleared = clearTriggerReady(obj)
+</pre><p><tt>clearTriggerReady(obj)</tt> clears the ps2000aWrap shared library's triggered and triggeredAt flags in relation to streaming mode capture.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li>1 - Function successfully completed.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    triggerCleared = invoke(streamingGroupObj, <span class="string">'clearTriggerReady'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_streaming_functions.html#15"><tt>isTriggerReady</tt></a></p><h2 id="9">getStreamingLatestValues</h2><pre class="codeinput">status = getStreamingLatestValues(obj)
+</pre><p><tt>getStreamingLatestValues(obj)</tt> facilitates communication with the underlying driver to return the next block of values to your application when capturing data in streaming mode.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Note:</b> This function should be called in a loop with the <a href="ps2000a_tbx_streaming_functions.html#12"><tt>isReady</tt></a> function as shown in the PS2000A_ID_Streaming_Example.m <a href="../demox.xml">script</a>.</p><p><b>Example:</b></p><pre class="codeinput">    status = invoke(streamingGroupObj, <span class="string">'getStreamingLatestValues'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_streaming_functions.html#12"><tt>isReady</tt></a></p><h2 id="12">isReady</h2><pre class="codeinput">ready = isReady(obj)
+</pre><p><tt>isReady(obj)</tt> is used to poll the driver to verify that data is ready to be received. The <a href="ps2000a_tbx_streaming_functions.html#21"><tt>ps2000aRunStreaming</tt></a> function must have been called prior to calling this function.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>ready</tt> - 0, if data is not yet available; non-zero if data is ready to be collected.</li></ul></div><p><b>Note:</b> This function should be called in a loop with the <a href="ps2000a_tbx_streaming_functions.html#9"><tt>getStreamingLatestValues</tt></a> function as shown in the PS2000A_ID_Streaming_Example.m <a href="../demox.xml">script</a>.</p><p><b>Example:</b></p><pre class="codeinput">    ready = invoke(streamingGroupObj, <span class="string">'isReady'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_streaming_functions.html#9"><tt>getStreamingLatestValues</tt></a></p><h2 id="15">isTriggerReady</h2><pre class="codeinput">[triggered, triggeredAt] = isTriggerReady(obj)
+</pre><p><tt>isTriggerReady(obj)</tt> indicates whether a trigger has occurred when collecting data in streaming mode, and the location of the trigger point.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>triggered</tt> - 0, if the device has not triggered; Non-zero, if the device has been triggered.</li><li><tt>triggeredAt</tt> - the zero-based index of the sample in the buffer relative to the start index (see <a href="ps2000a_tbx_streaming_functions.html#4"><tt>availableData</tt></a>) where the trigger occurred.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [triggered, triggeredAt] = invoke(streamingGroupObj, <span class="string">'isTriggerReady'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_streaming_functions.html#4"><tt>availableData</tt></a> | <a href="ps2000a_tbx_trigger_functions.html#5"><tt>setSimpleTrigger</tt></a></p><h2 id="18">ps2000aNoOfStreamingValues</h2><pre class="codeinput">[status, noOfValues] = ps2000aNoOfStreamingValues(obj)
+</pre><p><tt>ps2000aNoOfStreamingValues(obj)</tt> returns the number of samples available after data collection in streaming mode. Call this function after calling <a href="ps2000a_tbx_device_functions.html#27"><tt>ps2000aStop</tt></a>.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>noOfValues</tt> - the number of samples.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [status, noOfValues] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aNoOfStreamingValues'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#27"><tt>ps2000aStop</tt></a></p><h2 id="21">ps2000aRunStreaming</h2><pre class="codeinput">[status, sampleInterval, sampleIntervalTimeUnitsStr] = ps2000aRunStreaming(obj, downSampleRatio, downSampleRatioMode, bufferLength)
+</pre><p><tt>ps2000aRunStreaming(obj, downSampleRatio, downSampleRatioMode, overviewBufferSize)</tt> tells the oscilloscope to start collecting data in streaming mode. Use the function <a href="ps2000a_tbx_streaming_functions.html#9"><tt>getStreamingLatestValues</tt></a> to ensure values are copied into the application buffers.</p><p>The <tt>numPreTriggerSamples</tt> and <tt>numPostTriggerSamples</tt> <a href="ps2000a_tbx_">Device Properties</a>, as well as the <tt>autoStop</tt> and <tt>streamingInterval</tt> <a href="ps2000a_tbx_streaming_group.html#">properties</a> should be set prior to calling this function, otherwise the current values will be used.</p><p>Regardless of whether a trigger is set or not set, the maximum number of samples held by the underlying ps2000a shared library will be the sum of <tt>numPreTriggerSamples</tt> and <tt>numPostTriggerSamples</tt>.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li><li><tt>downSampleRatio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>downSampleRatioMode</tt> - which downsampling mode to use (an enumeration from the <tt>enPS2000ARatioMode</tt> range).</li><li><tt>overviewBufferSize</tt> - the size of the overview buffers (the buffers passed by the application to the shared library). The size must be less than or equal to the <tt>bufferLth</tt> value passed to <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a>).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>sampleInterval</tt> - the actual time interval used.</li><li><tt>sampleIntervalTimeUnitsStr</tt> - a string representing the time unit for the sampling interval.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set Streaming group object properties</span>
+    set(ps2000aDeviceObj, <span class="string">'numPreTriggerSamples'</span>, 0);
+    set(ps2000aDeviceObj, <span class="string">'numPostTriggerSamples'</span>, 10e6);
+
+    set(streamingGroupObj, <span class="string">'streamingInterval'</span>, 1e-6);  <span class="comment">% 1 microsecond (1 MS/s)</span>
+    set(streamingGroupObj, <span class="string">'autoStop'</span>, 1);              <span class="comment">% Stop after collecting the desired number of samples</span>
+
+    <span class="comment">% Set parameters and call the function</span>
+    downSampleRatio     = 1;
+    downSampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    bufferLength        = 250000;
+
+    [status, sampleInterval, sampleIntervalTimeUnitsStr] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aRunStreaming'</span>, downSampleRatio, <span class="keyword">...</span>
+                                                                downSampleRatioMode, bufferLength)
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_streaming_functions.html#9"><tt>getStreamingLatestValues</tt></a></p><h2 id="24">setAppAndDriverBuffers</h2><pre class="codeinput">status = setAppAndDriverBuffers(obj, channel, appBuffer, driverBuffer, bufferLength)
+</pre><p><tt>setAppAndDriverBuffers(obj, channel, appBuffer, driverBuffer, bufferLength)</tt> set the application and corresponding driver buffer in the wrapper shared library for an analog input channel.</p><p>This function is required to allow the driver to copy the data into the application buffer being used in MATLAB when acquiring data from the PicoScope in streaming mode without aggregation.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li><li><tt>channel</tt> - the analog channel to which the buffer corresponds (an enumeration from the <tt>enPS2000AChannel</tt> range).</li><li><tt>appBuffer</tt> - a <a href="matlab:doc('libpointer')"><tt>libpointer</tt></a> object corresponding to a 1-D array of 16-bit integer values representing the application buffer.</li><li><tt>driverBuffer</tt> - the <tt>libpointer</tt> object passed to the driver in the <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> function call for this channel.</li><li><tt>bufferLength</tt> - the length of the arrays represented by the <tt>libpointer</tt> objects (must be equal).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the wrapper driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Create a driver buffer for channel A and register it with the driver</span>
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    bufferLength        = 250000; <span class="comment">% Size of the buffer to collect data from the driver.</span>
+    pDriverBufferChA    = libpointer(<span class="string">'int16Ptr'</span>, zeros(bufferLength, 1, <span class="string">'int16'</span>));
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetDataBuffer'</span>, channelA, pDriverBufferChA, bufferLength, <span class="keyword">...</span>
+                segmentIndex, ratioMode);
+
+    <span class="comment">% Create an application buffer for channel A</span>
+    pAppBufferChA = libpointer(<span class="string">'int16Ptr'</span>, zeros(bufferLength, 1, <span class="string">'int16'</span>));
+
+    <span class="comment">% Register the buffers with the wrapper driver</span>
+    status = invoke(streamingGroupObj, <span class="string">'setAppAndDriverBuffers'</span>, channelA, pAppBufferChA, pDriverBufferChA, bufferLength);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> | <a href="ps2000a_tbx_streaming_functions.html#30"><tt>setMaxMinAppAndDriverBuffers</tt></a></p><h2 id="27">setAppAndDriverDigiBuffers</h2><pre class="codeinput">status = setAppAndDriverDigiBuffers(obj, port, appDigiBuffer, driverDigiBuffer, digiBufferLength)
+</pre><p><tt>setAppAndDriverDigiBuffers(obj, port, appBuffer, driverBuffer, bufferLength)</tt> set the application and corresponding driver buffer for a digital port in the wrapper driver.</p><p>This function is required to allow the driver to copy the data for a digital port into the corresponding application buffer being used in MATLAB when acquiring data from the PicoScope in streaming mode without aggregation.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li><li><tt>port</tt> - the port to which the buffer corresponds (an enumeration from the <tt>enPS2000AWrapDigitalPortIndex</tt> range).</li><li><tt>appDigiBuffer</tt> - a <a href="matlab:doc('libpointer')"><tt>libpointer</tt></a> object corresponding to a 1-D array of 16-bit integer values representing the application buffer.</li><li><tt>driverDigiBuffer</tt> - the <tt>libpointer</tt> object passed to the driver in the <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> function call for this port.</li><li><tt>bufferLength</tt> - the length of the arrays represented by the <tt>libpointer</tt> objects (must be equal).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the wrapper driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Create a driver buffer for port DPORT0 and register it with the driver</span>
+    dPort0              = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
+    digiBufferLength    = 100000; <span class="comment">% Size of the buffer to collect data from the driver.</span>
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    pDriverBufferDPort0 = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetDataBuffer'</span>, dPort0, pDriverBufferDPort0, <span class="keyword">...</span>
+        digiBufferLength, segmentIndex, ratioMode);
+
+    <span class="comment">% Create an application buffer for channel A</span>
+    pAppBufferDPort0 = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+
+    <span class="comment">% The wrapper uses a zero-based enumeration to identify the digital port</span>
+    wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_DIGITAL_PORT0;
+
+    <span class="comment">% Register the buffers with the wrapper driver</span>
+    status = invoke(streamingGroupObj, <span class="string">'setAppAndDriverDigiBuffers'</span>, wrapperDPort0, <span class="keyword">...</span>
+        pAppBufferDPort0, pDriverBufferDPort0, digiBufferLength);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> | <a href="ps2000a_tbx_streaming_functions.html#33"><tt>setMaxMinAppAndDriverDigiBuffers</tt></a></p><h2 id="30">setMaxMinAppAndDriverBuffers</h2><pre class="codeinput">status = setMaxMinAppAndDriverBuffers(obj, channel, appMaxBuffer, appMinBuffer, <span class="keyword">...</span>
+            driverMaxBuffer, driverMinBuffer, bufferLength)
+</pre><p><tt>setMaxMinAppAndDriverBuffers(obj, channel, appMaxBuffer, appMinBuffer, driverMaxBuffer, driverMinBuffer, bufferLength)</tt> set the maximum and minimum application and corresponding driver buffers for an analog input channel in the wrapper driver.</p><p>This function is required to allow the driver to copy the data into the maximum and minimum application buffers being used in MATLAB when acquiring data from the PicoScope in streaming mode with aggregation.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li><li><tt>channel</tt> - the analog channel to which the buffers correspond (an enumeration from the <tt>enPS2000AChannel</tt> range).</li><li><tt>appMaxBuffer</tt> - a <a href="matlab:doc('libpointer')"><tt>libpointer</tt></a> object corresponding to a 1-D array of 16-bit integer values to hold the maximum aggregated data values.</li><li><tt>appMinBuffer</tt> - a <tt>libpointer</tt> object corresponding to a 1-D array of 16-bit integer values to hold the minimum aggregated data values.</li><li><tt>driverMaxBuffer</tt> - the <tt>libpointer</tt> object passed to the driver for the maximum aggregated data values in the <a href="ps2000a_tbx_device_functions.html#25"><tt>ps2000aSetDataBuffers</tt></a> function call.</li><li><tt>driverMinBuffer</tt> - the <tt>libpointer</tt> object passed to the driver for the minimum aggregated data values in the <tt>ps2000aSetDataBuffers</tt> function call for this channel.</li><li><tt>bufferLength</tt> - the length of the arrays represented by the <tt>libpointer</tt> objects (must be equal).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the wrapper driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Create driver buffers for channel A and register them with the driver</span>
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    bufferLength        = 250000; <span class="comment">% Size of the buffer to collect data from the driver.</span>
+    pDriverBufferChAMax = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+    pDriverBufferChAMin = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetDataBuffers'</span>, channelA, pDriverBufferChAMax, <span class="keyword">...</span>
+                pDriverBufferChAMin, bufferLength, segmentIndex, ratioMode);
+
+    <span class="comment">% Create max./min. application buffers for channel A</span>
+    pAppBufferChAMax = libpointer(<span class="string">'int16Ptr'</span>, zeros(bufferLength, 1, <span class="string">'int16'</span>));
+    pAppBufferChAMin = libpointer(<span class="string">'int16Ptr'</span>, zeros(bufferLength, 1, <span class="string">'int16'</span>));
+
+    <span class="comment">% Register the buffers with the wrapper driver</span>
+    status = invoke(streamingGroupObj, <span class="string">'setAppAndDriverBuffers'</span>, channelA, pAppBufferChAMax, pAppBufferChAMin, <span class="keyword">...</span>
+                pDriverBufferChAMax, pDriverBufferChAMin, bufferLength);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#25"><tt>ps2000aSetDataBuffers</tt></a> | <a href="ps2000a_tbx_streaming_functions.html#24"><tt>setAppAndDriverBuffers</tt></a></p><h2 id="33">setMaxMinAppAndDriverDigiBuffers</h2><pre class="codeinput">status = setMaxMinAppAndDriverDigiBuffers(obj, channel, appDigiMaxBuffer, appDigiMinBuffer, <span class="keyword">...</span>
+            driverDigiMaxBuffer, driverDigiMinBuffer, bufferLength)
+</pre><p><tt>setAppAndDriverDigiBuffers(obj, port, appBuffer, driverBuffer, bufferLength)</tt> set the application and corresponding driver buffer for a digital port in the wrapper driver.</p><p>This function is required to allow the driver to copy the data for a digital port into the corresponding application buffer being used in MATLAB when acquiring data from the PicoScope in streaming mode without aggregation.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Streaming group.</li><li><tt>port</tt> - the port to which the buffers correspond (an enumeration from the <tt>enPS2000AWrapDigitalPortIndex</tt> range).</li><li><tt>appDigiMaxBuffer</tt> - a <a href="matlab:doc('libpointer')"><tt>libpointer</tt></a> object corresponding to a 1-D array of 16-bit integer values to hold the maximum aggregated data values.</li><li><tt>appDigiMinBuffer</tt> - a <tt>libpointer</tt> object corresponding to a 1-D array of 16-bit integer values to hold the minimum aggregated data values.</li><li><tt>driverDigiMaxBuffer</tt> - the <tt>libpointer</tt> object passed to the driver for the maximum aggregated data values in the <a href="ps2000a_tbx_device_functions.html#25"><tt>ps2000aSetDataBuffers</tt></a> function call for this port.</li><li><tt>driverDigiMinBuffer</tt> - the <tt>libpointer</tt> object passed to the driver for the minimum aggregated data values in the <a href="ps2000a_tbx_device_functions.html#25"><tt>ps2000aSetDataBuffers</tt></a> function call for this port.</li><li><tt>bufferLength</tt> - the length of the arrays represented by the <tt>libpointer</tt> objects (must be equal).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the wrapper driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Create driver buffers for port DPORT0 and register them with the driver</span>
+    dPort0              = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
+    digiBufferLength    = 100000; <span class="comment">% Size of the buffer to collect data from the driver.</span>
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    pDriverBufferDPort0Max  = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+    pDriverBufferDPort0Min  = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetDataBuffers'</span>, dPort0, pDriverBufferDPort0Max, <span class="keyword">...</span>
+        pDriverBufferDPort0Min, digiBufferLength, segmentIndex, ratioMode);
+
+    <span class="comment">% Create an application buffer for channel A</span>
+    pAppDigiBufferDPort0Max = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+    pAppDigiBufferDPort0Min = libpointer(<span class="string">'int16Ptr'</span>, zeros(digiBufferLength, 1, <span class="string">'int16'</span>));
+
+    <span class="comment">% The wrapper uses a zero-based enumeration to identify the digital port</span>
+    wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_DIGITAL_PORT0;
+
+    <span class="comment">% Register the buffers with the wrapper driver</span>
+    status = invoke(streamingGroupObj, <span class="string">'setMaxMinAppAndDriverDigiBuffers'</span>, wrapperDPort0, <span class="keyword">...</span>
+        pAppDigiBufferDPort0Max, pAppDigiBufferDPort0Min, pDriverBufferDPort0Max, <span class="keyword">...</span>
+        pDriverBufferDPort0Min, digiBufferLength);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#25"><tt>ps2000aSetDataBuffers</tt></a> | <a href="ps2000a_tbx_streaming_functions.html#27"><tt>setAppAndDriverDigiBuffers</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Streaming Group Functions
+%
+% This section provides a description of the Instrument Driver Streaming group
+% functions. Prior to calling the functions, a Streaming group object must be
+% created as shown in the <ps2000a_tbx_streaming_group.html Streaming Group> page.
+
+%% autoStopped
+
+autoStop = autoStopped(obj)
+
+%% 
+% |autoStopped(obj)| indicates if the device has stopped on collection of
+% the number of samples specified in the call to the 
+% <ps2000a_tbx_streaming_functions.html#21 |ps2000aRunStreaming|> function.
+%
+% The |autoStop| property must have been set to 1.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+%
+% *Output Arguments:*
+% 
+% * |autoStop| - 0 if the device has not stopped, non-zero if streaming has
+% auto-stopped.
+%
+% *Example:*
+
+    hasAutoStopped = invoke(streamingGroupObj, 'autoStopped');
+    
+%%
+% *See also:* <ps2000a_tbx_streaming_functions.html#21 |ps2000aRunStreaming|>
+%
+
+%% availableData
+
+[numSamples, startIndex] = availableData(obj)
+
+%% 
+% |availableData(obj)| indicates the number of samples returned from the
+% driver and shows the start index of the data in the buffer when
+% collecting data in streaming mode.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+%
+% *Output Arguments:*
+% 
+% * |numSamples| - 0, data is not yet available; Non-zero, the number of
+% samples returned from the driver.
+% * |startIndex| - an index to the first valid sample in the buffer (when
+% data is available). The startIndex value is zero-based so should be
+% incremented by 1 when used to retrieve data from the buffer.
+%
+% *Example:*
+
+    [numSamples, startIndex] = invoke(streamingGroupObj, 'availableData');
+
+%% clearTriggerReady
+
+triggerCleared = clearTriggerReady(obj)
+
+%%
+% |clearTriggerReady(obj)| clears the ps2000aWrap shared library's
+% triggered and triggeredAt flags in relation to streaming mode capture.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+%
+% *Output Arguments:*
+% 
+% * 1 - Function successfully completed.
+%
+% *Example:*
+
+    triggerCleared = invoke(streamingGroupObj, 'clearTriggerReady');
+    
+%%
+% *See also:* <ps2000a_tbx_streaming_functions.html#15 |isTriggerReady|>
+% 
+
+%% getStreamingLatestValues
+
+status = getStreamingLatestValues(obj)
+
+%% 
+% |getStreamingLatestValues(obj)| facilitates communication with the
+% underlying driver to return the next block of values to your application
+% when capturing data in streaming mode.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Note:* This function should be called in a loop with the 
+% <ps2000a_tbx_streaming_functions.html#12 |isReady|>
+% function as shown in the PS2000A_ID_Streaming_Example.m <../demox.xml script>.
+%
+% *Example:*
+
+    status = invoke(streamingGroupObj, 'getStreamingLatestValues');
+    
+%%
+% *See also:* <ps2000a_tbx_streaming_functions.html#12 |isReady|>
+
+%% isReady
+
+ready = isReady(obj)
+
+%%
+% |isReady(obj)| is used to poll the driver to verify that data is ready to
+% be received. The <ps2000a_tbx_streaming_functions.html#21
+% |ps2000aRunStreaming|> function must have been called prior to calling
+% this function.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+%
+% *Output Arguments:*
+% 
+% * |ready| - 0, if data is not yet available; non-zero if data is ready to be collected.
+%
+% *Note:* This function should be called in a loop with the 
+% <ps2000a_tbx_streaming_functions.html#9 |getStreamingLatestValues|>
+% function as shown in the PS2000A_ID_Streaming_Example.m <../demox.xml script>.
+%
+% *Example:*
+
+    ready = invoke(streamingGroupObj, 'isReady');
+    
+%%
+% *See also:* <ps2000a_tbx_streaming_functions.html#9 |getStreamingLatestValues|>
+%
+
+%% isTriggerReady
+
+[triggered, triggeredAt] = isTriggerReady(obj)
+
+%%
+% |isTriggerReady(obj)| indicates whether a trigger has occurred when
+% collecting data in streaming mode, and the location of the trigger point.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% 
+% *Output Arguments:*
+% 
+% * |triggered| - 0, if the device has not triggered; Non-zero, if the
+% device has been triggered.
+% * |triggeredAt| - the zero-based index of the sample in the buffer
+% relative to the start index (see 
+% <ps2000a_tbx_streaming_functions.html#4 |availableData|>) where the
+% trigger occurred.
+%
+% *Example:*
+
+    [triggered, triggeredAt] = invoke(streamingGroupObj, 'isTriggerReady');
+    
+%%
+% *See also:* <ps2000a_tbx_streaming_functions.html#4 |availableData|> | <ps2000a_tbx_trigger_functions.html#5 |setSimpleTrigger|>
+
+%% ps2000aNoOfStreamingValues
+
+[status, noOfValues] = ps2000aNoOfStreamingValues(obj)
+
+%%
+% |ps2000aNoOfStreamingValues(obj)| returns the number of samples available
+% after data collection in streaming mode. Call this function after calling
+% <ps2000a_tbx_device_functions.html#27 |ps2000aStop|>.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |noOfValues| - the number of samples.
+%
+% *Example:*
+
+    [status, noOfValues] = invoke(ps2000aDeviceObj, 'ps2000aNoOfStreamingValues');
+
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#27 |ps2000aStop|>
+
+%% ps2000aRunStreaming
+
+[status, sampleInterval, sampleIntervalTimeUnitsStr] = ps2000aRunStreaming(obj, downSampleRatio, downSampleRatioMode, bufferLength)
+
+%%
+% |ps2000aRunStreaming(obj, downSampleRatio, downSampleRatioMode,
+% overviewBufferSize)| tells the oscilloscope to start collecting data in
+% streaming mode. Use the function 
+% <ps2000a_tbx_streaming_functions.html#9 |getStreamingLatestValues|> to
+% ensure values are copied into the application buffers.
+%
+% The |numPreTriggerSamples| and |numPostTriggerSamples| <ps2000a_tbx_
+% Device Properties>, as well as the |autoStop| and |streamingInterval|
+% <ps2000a_tbx_streaming_group.html# properties> should be set prior to calling this function, otherwise the
+% current values will be used.
+%
+% Regardless of whether a trigger is set or not set, the maximum number of
+% samples held by the underlying ps2000a shared library will be the sum of
+% |numPreTriggerSamples| and |numPostTriggerSamples|.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% * |downSampleRatio| - the downsampling factor that will be applied to the raw data.
+% * |downSampleRatioMode| - which downsampling mode to use (an enumeration
+% from the |enPS2000ARatioMode| range).
+% * |overviewBufferSize| - the size of the overview buffers (the buffers
+% passed by the application to the shared library). The size must be less than or
+% equal to the |bufferLth| value passed to
+% <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|>).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |sampleInterval| - the actual time interval used.
+% * |sampleIntervalTimeUnitsStr| - a string representing the time unit for
+% the sampling interval.
+%
+% *Example:*
+
+    % Set Streaming group object properties
+    set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
+    set(ps2000aDeviceObj, 'numPostTriggerSamples', 10e6);
+    
+    set(streamingGroupObj, 'streamingInterval', 1e-6);  % 1 microsecond (1 MS/s)
+    set(streamingGroupObj, 'autoStop', 1);              % Stop after collecting the desired number of samples
+    
+    % Set parameters and call the function
+    downSampleRatio     = 1;
+    downSampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    bufferLength        = 250000;
+
+    [status, sampleInterval, sampleIntervalTimeUnitsStr] = invoke(ps2000aDeviceObj, 'ps2000aRunStreaming', downSampleRatio, ...
+                                                                downSampleRatioMode, bufferLength)
+                                                            
+%% 
+% *See also:* <ps2000a_tbx_streaming_functions.html#9 |getStreamingLatestValues|>
+
+%% setAppAndDriverBuffers
+
+status = setAppAndDriverBuffers(obj, channel, appBuffer, driverBuffer, bufferLength)
+
+%%
+% |setAppAndDriverBuffers(obj, channel, appBuffer, driverBuffer,
+% bufferLength)| set the application and corresponding driver buffer in the
+% wrapper shared library for an analog input channel.
+%
+% This function is required to allow the driver to copy the data into the
+% application buffer being used in MATLAB when acquiring data from the
+% PicoScope in streaming mode without aggregation.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% * |channel| - the analog channel to which the buffer corresponds (an
+% enumeration from the |enPS2000AChannel| range).
+% * |appBuffer| - a <matlab:doc('libpointer') |libpointer|> object
+% corresponding to a 1-D array of 16-bit integer values representing the
+% application buffer.
+% * |driverBuffer| - the |libpointer| object passed to the driver in the
+% <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> function
+% call for this channel.
+% * |bufferLength| - the length of the arrays represented by the
+% |libpointer| objects (must be equal).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the wrapper driver.
+%
+% *Example:*
+
+    % Create a driver buffer for channel A and register it with the driver
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    bufferLength        = 250000; % Size of the buffer to collect data from the driver.
+    pDriverBufferChA    = libpointer('int16Ptr', zeros(bufferLength, 1, 'int16'));
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetDataBuffer', channelA, pDriverBufferChA, bufferLength, ...
+                segmentIndex, ratioMode);
+    
+    % Create an application buffer for channel A
+    pAppBufferChA = libpointer('int16Ptr', zeros(bufferLength, 1, 'int16'));
+    
+    % Register the buffers with the wrapper driver
+    status = invoke(streamingGroupObj, 'setAppAndDriverBuffers', channelA, pAppBufferChA, pDriverBufferChA, bufferLength); 
+   
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|>
+% | <ps2000a_tbx_streaming_functions.html#30 |setMaxMinAppAndDriverBuffers|>
+
+%% setAppAndDriverDigiBuffers
+
+status = setAppAndDriverDigiBuffers(obj, port, appDigiBuffer, driverDigiBuffer, digiBufferLength)
+
+%%
+% |setAppAndDriverDigiBuffers(obj, port, appBuffer, driverBuffer,
+% bufferLength)| set the application and corresponding driver buffer for a
+% digital port in the wrapper driver.
+%
+% This function is required to allow the driver to copy the data for a
+% digital port into the corresponding application buffer being used in
+% MATLAB when acquiring data from the PicoScope in streaming mode without
+% aggregation.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% * |port| - the port to which the buffer corresponds (an enumeration from
+% the |enPS2000AWrapDigitalPortIndex| range).
+% * |appDigiBuffer| - a <matlab:doc('libpointer') |libpointer|> object
+% corresponding to a 1-D array of 16-bit integer values representing the
+% application buffer.
+% * |driverDigiBuffer| - the |libpointer| object passed to the driver in the
+% <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> function
+% call for this port.
+% * |bufferLength| - the length of the arrays represented by the
+% |libpointer| objects (must be equal).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the wrapper driver.
+%
+% *Example:*
+
+    % Create a driver buffer for port DPORT0 and register it with the driver
+    dPort0              = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
+    digiBufferLength    = 100000; % Size of the buffer to collect data from the driver.
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    
+    pDriverBufferDPort0 = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+    
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetDataBuffer', dPort0, pDriverBufferDPort0, ...
+        digiBufferLength, segmentIndex, ratioMode);
+                     
+    % Create an application buffer for channel A
+    pAppBufferDPort0 = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+           
+    % The wrapper uses a zero-based enumeration to identify the digital port
+    wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_DIGITAL_PORT0;
+    
+    % Register the buffers with the wrapper driver
+    status = invoke(streamingGroupObj, 'setAppAndDriverDigiBuffers', wrapperDPort0, ...
+        pAppBufferDPort0, pDriverBufferDPort0, digiBufferLength);
+                        
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|>
+% | <ps2000a_tbx_streaming_functions.html#33 |setMaxMinAppAndDriverDigiBuffers|>
+
+%% setMaxMinAppAndDriverBuffers
+
+status = setMaxMinAppAndDriverBuffers(obj, channel, appMaxBuffer, appMinBuffer, ...
+            driverMaxBuffer, driverMinBuffer, bufferLength)
+
+%%
+% |setMaxMinAppAndDriverBuffers(obj, channel, appMaxBuffer, appMinBuffer,
+% driverMaxBuffer, driverMinBuffer, bufferLength)| set the maximum and
+% minimum application and corresponding driver buffers for an analog input
+% channel in the wrapper driver.
+% 
+% This function is required to allow the driver to copy the data into the
+% maximum and minimum application buffers being used in MATLAB when
+% acquiring data from the PicoScope in streaming mode with aggregation.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% * |channel| - the analog channel to which the buffers correspond (an
+% enumeration from the |enPS2000AChannel| range).
+% * |appMaxBuffer| - a <matlab:doc('libpointer') |libpointer|> object
+% corresponding to a 1-D array of 16-bit integer values to hold the maximum
+% aggregated data values.
+% * |appMinBuffer| - a |libpointer| object corresponding to a 1-D array of
+% 16-bit integer values to hold the minimum aggregated data values.
+% * |driverMaxBuffer| - the |libpointer| object passed to the driver for
+% the maximum aggregated data values in the
+% <ps2000a_tbx_device_functions.html#25 |ps2000aSetDataBuffers|> function
+% call.
+% * |driverMinBuffer| - the |libpointer| object passed to the driver for the
+% minimum aggregated data values in the |ps2000aSetDataBuffers| function
+% call for this channel.
+% * |bufferLength| - the length of the arrays represented by the
+% |libpointer| objects (must be equal).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the wrapper driver.
+%
+% *Example:*
+
+    % Create driver buffers for channel A and register them with the driver
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    bufferLength        = 250000; % Size of the buffer to collect data from the driver.
+    pDriverBufferChAMax = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+    pDriverBufferChAMin = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetDataBuffers', channelA, pDriverBufferChAMax, ...
+                pDriverBufferChAMin, bufferLength, segmentIndex, ratioMode);
+    
+    % Create max./min. application buffers for channel A
+    pAppBufferChAMax = libpointer('int16Ptr', zeros(bufferLength, 1, 'int16'));
+    pAppBufferChAMin = libpointer('int16Ptr', zeros(bufferLength, 1, 'int16'));
+    
+    % Register the buffers with the wrapper driver
+    status = invoke(streamingGroupObj, 'setAppAndDriverBuffers', channelA, pAppBufferChAMax, pAppBufferChAMin, ...
+                pDriverBufferChAMax, pDriverBufferChAMin, bufferLength);
+    
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#25 |ps2000aSetDataBuffers|>
+% | <ps2000a_tbx_streaming_functions.html#24 |setAppAndDriverBuffers|>    
+
+%% setMaxMinAppAndDriverDigiBuffers
+
+status = setMaxMinAppAndDriverDigiBuffers(obj, channel, appDigiMaxBuffer, appDigiMinBuffer, ...
+            driverDigiMaxBuffer, driverDigiMinBuffer, bufferLength)
+
+%%
+% |setAppAndDriverDigiBuffers(obj, port, appBuffer, driverBuffer,
+% bufferLength)| set the application and corresponding driver buffer for a
+% digital port in the wrapper driver.
+%
+% This function is required to allow the driver to copy the data for a
+% digital port into the corresponding application buffer being used in
+% MATLAB when acquiring data from the PicoScope in streaming mode without
+% aggregation.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Streaming group.
+% * |port| - the port to which the buffers correspond (an enumeration from
+% the |enPS2000AWrapDigitalPortIndex| range).
+% * |appDigiMaxBuffer| - a <matlab:doc('libpointer') |libpointer|> object
+% corresponding to a 1-D array of 16-bit integer values to hold the maximum
+% aggregated data values.
+% * |appDigiMinBuffer| - a |libpointer| object corresponding to a 1-D array
+% of 16-bit integer values to hold the minimum aggregated data values.
+% * |driverDigiMaxBuffer| - the |libpointer| object passed to the driver
+% for the maximum aggregated data values in the
+% <ps2000a_tbx_device_functions.html#25 |ps2000aSetDataBuffers|> function
+% call for this port.
+% * |driverDigiMinBuffer| - the |libpointer| object passed to the driver
+% for the minimum aggregated data values in the
+% <ps2000a_tbx_device_functions.html#25 |ps2000aSetDataBuffers|> function
+% call for this port.
+% * |bufferLength| - the length of the arrays represented by the
+% |libpointer| objects (must be equal).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the wrapper driver.
+%
+% *Example:*
+
+    % Create driver buffers for port DPORT0 and register them with the driver
+    dPort0              = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
+    digiBufferLength    = 100000; % Size of the buffer to collect data from the driver.
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    
+    pDriverBufferDPort0Max  = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+    pDriverBufferDPort0Min  = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+    
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetDataBuffers', dPort0, pDriverBufferDPort0Max, ...
+        pDriverBufferDPort0Min, digiBufferLength, segmentIndex, ratioMode);
+                     
+    % Create an application buffer for channel A
+    pAppDigiBufferDPort0Max = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+    pAppDigiBufferDPort0Min = libpointer('int16Ptr', zeros(digiBufferLength, 1, 'int16'));
+           
+    % The wrapper uses a zero-based enumeration to identify the digital port
+    wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_DIGITAL_PORT0;
+    
+    % Register the buffers with the wrapper driver
+    status = invoke(streamingGroupObj, 'setMaxMinAppAndDriverDigiBuffers', wrapperDPort0, ...
+        pAppDigiBufferDPort0Max, pAppDigiBufferDPort0Min, pDriverBufferDPort0Max, ...
+        pDriverBufferDPort0Min, digiBufferLength);
+                        
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#25 |ps2000aSetDataBuffers|>
+% | <ps2000a_tbx_streaming_functions.html#27 |setAppAndDriverDigiBuffers|>
+
+
+##### SOURCE END #####
+--></body></html>

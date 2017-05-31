@@ -1,0 +1,776 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Signalgenerator Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_sig_gen_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Signalgenerator Group Functions</h1><!--introduction--><p>This section provides a description of the Instrument Driver Signalgenerator group functions. Prior to calling the functions, a Signalgenerator group object must be created as shown in the <a href="ps2000a_tbx_sig_gen_group.html">Signalgenerator Group</a> page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">ps2000aSigGenSoftwareControl</a></li><li><a href="#4">setSigGenArbitrary</a></li><li><a href="#9">setSigGenArbitrarySimple</a></li><li><a href="#12">setSigGenBuiltIn</a></li><li><a href="#15">setSigGenBuiltInSimple</a></li><li><a href="#18">setSigGenOff</a></li><li><a href="#20">setSigGenPropertiesArbitrary</a></li><li><a href="#23">setSigGenPropertiesBuiltIn</a></li></ul></div><h2 id="1">ps2000aSigGenSoftwareControl</h2><pre class="codeinput">ps2000aSigGenSoftwareControl(obj, state)
+</pre><p><tt>ps2000aSigGenSoftwareControl(obj, state)</tt> causes a trigger event, or starts and stops gating. Use it as follows:</p><div><ol><li>Call <a href="ps2000a_tbx_sig_gen_functions.html#"><tt>ps2000aSetSigGenArbitrary</tt></a> or <a href="ps2000a_tbx_sig_gen_functions.html#"><tt>ps2000aSetSigGenBuiltIn</tt></a> to set up the signal generator, setting the <tt>triggerSource</tt> argument to <tt>enPS2000ASigGenTrigSource.SIGGEN_SOFT_TRIG</tt>.</li><li>(a) If you set the signal generator <tt>triggerType</tt> to edge triggering (<tt>enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING</tt> or <tt>enPS2000ASigGenTrigType.PS2000A_SIGGEN_FALLING</tt>), call <tt>ps2000aSigGenSoftwareControl</tt> once to trigger the signal generator output.</li></ol></div><p>(b) If you set the signal generator <tt>triggerType</tt> to gated triggering (<tt>enPS2000ASigGenTrigType.PS2000A_SIGGEN_GATE_HIGH</tt> or <tt>enPS2000ASigGenTrigType.PS2000A_SIGGEN_GATE_LOW</tt>), call <tt>ps2000aSigGenSoftwareControl</tt> with state set as follows:</p><p><b>triggerType = PS2000A_SIGGEN_GATE_HIGH:</b></p><div><ul><li>1 to trigger the output of the signal generator, and then again with state set to 0 to stop the trigger.</li></ul></div><p><b>triggerType = PS2000A_SIGGEN_GATE_LOW:</b></p><div><ul><li>0 to trigger the output of the signal generator, and then again with state set to 1 to stop the trigger.</li></ul></div><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>state</tt> - sets the trigger gate high or low when the trigger type is set to either PS2000A_SIGGEN_GATE_HIGH or PS2000A_SIGGEN_GATE_LOW.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Trigger the signal generator output having set the signal generator</span>
+    <span class="comment">% to trigger on a rising edge with software control.</span>
+    status = invoke(sigGenGroupObj, <span class="string">'ps2000aSigGenSoftwareControl'</span>, 1);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#4"><tt>ps2000aSetSigGenArbitrary</tt></a> | <a href="ps2000a_tbx_sig_gen_functions.html#12"><tt>ps2000aSetSigGenBuiltIn</tt></a></p><h2 id="4">setSigGenArbitrary</h2><pre class="codeinput">[status, dwellTime] = setSigGenArbitrary(obj, increment, dwellTime, arbitraryWaveform, sweepType, <span class="keyword">...</span>
+                                            operation, indexMode, shots, sweeps, triggerType, <span class="keyword">...</span>
+                                            triggerSource, extInThresholdMV)
+</pre><p><tt>setSigGenArbitrary(obj, increment, dwellTime, arbitraryWaveform, sweepType, operation, indexMode, shots, sweeps, triggerType, triggerSource, extInThresholdMV)</tt> programs the signal generator to produce an arbitrary waveform.</p><p>The arbitrary waveform generator uses direct digital synthesis (DDS). It maintains a 32-bit phase accumulator that indicates the present location in the waveform. The top bits of the phase accumulator are used as an index into a buffer containing the arbitrary waveform. The remaining bits act as the fractional part of the index, enabling high-resolution control of output frequency and allowing the generation of lower frequencies. The phase accumulator initially increments by a delta phase corresponding to the start frequency. If the AWG is set to sweep mode, the phase increment is increased at specified intervals until it reaches a delta phase corresponding to the stop frequency.</p><p>The <tt>startFrequency</tt>, <tt>stopFrequency</tt>, <tt>offsetVoltage</tt> and <tt>peakToPeakVoltage</tt> properties must be set prior to calling this function, otherwise the <a href="ps2000a_tbx_default_settings.html">default values</a> will be used.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>increment</tt> - the increase or decrease in frequency when operating in sweep mode. This determines the amount by which the generator sweeps the output frequency in each dwell period. When frequency sweeping is not required, set to zero.</li><li><tt>dwellTime</tt> - the time for which the sweep stays at each frequency, in seconds.</li><li><tt>arbitraryWaveform</tt> -  a buffer that holds the waveform pattern as a set of samples equally spaced in time in the range &plusmn;1. These values correspond to the maximum and minimum amplitude values of the waveform. Each sample is scaled to an output voltage and clipped to the overall &plusmn;2 V range of the AWG.</li><li><tt>sweepType</tt> -  determines whether the <tt>startFrequency</tt> is swept up to the <tt>stopFrequency</tt>, or down to it, or repeatedly up and down.</li><li><tt>operation</tt> - configures the white noise/PRBS (pseudo-random binary sequence) generator.</li><li><tt>indexMode</tt> - specifies how the signal will be formed from the arbitrary waveform data.</li><li><tt>shots</tt> - the number of cycles of the waveform to be produced after a trigger event.</li></ul></div><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">Value</th>
+          <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+      </tr>
+      <tr>
+          <td>0</td><td>sweep the frequency as specified by sweeps</td>
+      </tr>
+      <tr>
+          <td>1...PS2000aConstants.PS2000A_MAX_SWEEPS_SHOTS</td><td>the number of cycles of the waveform to be produced after a trigger event. sweeps must be zero.</td>
+      </tr>
+      <tr>
+          <td>PS2000aConstants.PS2000A_SHOT_SWEEP_TRIGGER_CONTINUOUS_RUN</td><td>start
+          and run continuously after trigger occurs (not PicoScope 2205
+          MSO)</td>
+  </table>
+</p><div><ul><li><tt>sweeps</tt> - the number of times to sweep the frequency after a trigger event, according to sweepType.</li></ul></div><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">Value</th>
+          <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+      </tr>
+      <tr>
+          <td>0</td>
+          <td>produce number of cycles specified by shots</td>
+      </tr>
+      <tr>
+          <td>1..PS2000aConstants.PS2000A_MAX_SWEEPS_SHOTS</td>
+          <td>the number of times to sweep the frequency after a trigger event, according to sweepType. shots must be zero.</td>
+      </tr>
+      <tr>
+          <td>PS2000A_SHOT_SWEEP_TRIGGER_CONTINUOUS_RUN</td>
+          <td>start a sweep and continue after trigger occurs (not
+          PicoScope 2205 MSO)</td>
+      </tr>
+  </table>
+</p><div><ul><li><tt>triggerType</tt> - the type of trigger that will be applied to the signal generator (an <tt>enPS2000ASigGenTrigType</tt> enumeration value).</li><li><tt>triggerSource</tt> - the source that will trigger the signal generator (an <tt>enPS2000ASigGenTrigSource</tt> enumeration value).</li><li><tt>extInThresholdMV</tt> - trigger level, in millivolts, for external trigger. This should be in the range &plusmn;5000 mV. Only used by the PicoScope 2206, 2207 and 2208 models.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>dwellTime</tt> -  the dwell time will be modified if the user specifies a dwell time corresponding to less than the minimum dwell count for the device (10).</li></ul></div><p><b>Notes:</b> Use the <a href="ps2000a_tbx_sig_gen_functions.html#"><tt>setSigGenPropertiesArbitrary</tt></a> function to change certain properties of the arbitrary waveform generator while waiting for a trigger.</p><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Define an arbitrary waveform, then set the signal generator to output</span>
+    <span class="comment">% a sweep.</span>
+
+    <span class="comment">% Find the AWG buffer size of the device</span>
+    awgBufferSize = get(sigGenGroupObj, <span class="string">'awgBufferSize'</span>);
+    x = linspace(0, 360, awgBufferSize);
+
+    <span class="comment">% Use the normalise function from the PicoScope Support Toolbox to set</span>
+    <span class="comment">% the values of the waveform in the range &plusmn;1.</span>
+    y = normalise(sind(x) + sind(2*x + 90) + sind(4*x + 45));
+
+    <span class="comment">% Set the required signalGenerator group properties</span>
+    set(sigGenGroupObj, <span class="string">'startFrequency'</span>, 100.0);
+    set(sigGenGroupObj, <span class="string">'stopFrequency'</span>, 2000.0);
+    set(sigGenGroupObj, <span class="string">'offsetVoltage'</span>, 0.0);
+    set(sigGenGroupObj, <span class="string">'peakToPeakVoltage'</span>, 4000.0);
+
+    <span class="comment">% Define other parameters and call the function</span>
+    increment       = 50;     <span class="comment">% Hz</span>
+    dwellTime       = 0.05;   <span class="comment">% seconds</span>
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_UP;
+    operation       = ps2000aEnuminfo.enPS2000AExtraOperations.PS2000A_ES_OFF;
+    indexMode       = ps2000aEnuminfo.enPS2000AIndexMode.PS2000A_SINGLE;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extInThreshold  = 0; <span class="comment">% millivolts</span>
+
+    [status, dwellTime] = invoke(sigGenGroupObj, <span class="string">'setSigGenArbitrary'</span>, increment, dwellTime, sweepType, <span class="keyword">...</span>
+                            operation, indexMode, shots, sweeps, triggerType, triggerSource, extInThreshold);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#9"><tt>setSigGenArbitrarySimple</tt></a> | <a href="ps2000a_tbx_sig_gen_functions.html#20"><tt>setSigGenPropertiesArbitrary</tt></a></p><h2 id="9">setSigGenArbitrarySimple</h2><pre class="codeinput">status = setSigGenArbitrarySimple(obj, arbitraryWaveform)
+</pre><p><tt>setSigGenArbitrary(obj, arbitraryWaveform)</tt> programs the signal generator to produce an arbitrary waveform at a constant frequency.</p><p>The <tt>startFrequency</tt>, <tt>stopFrequency</tt>, <tt>offsetVoltage</tt> and <tt>peakToPeakVoltage</tt> properties must be set prior to calling this function, otherwise the default values will be used.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>arbitraryWaveform</tt> - a buffer that holds the waveform pattern as a set of samples in the range &plusmn;1. These values correspond to the maximum and minimum amplitude values of the waveform. Each sample is scaled to an output voltage and clipped to the overall &plusmn;2 V range of the AWG.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Define an arbitrary waveform, then set the signal generator to output</span>
+    <span class="comment">% the waveform at constant frequency.</span>
+
+    <span class="comment">% Find the AWG buffer size of the device</span>
+    awgBufferSize = get(sigGenGroupObj, <span class="string">'awgBufferSize'</span>);
+    x = linspace(0, 360, awgBufferSize);
+
+    <span class="comment">% Use the normalise function from the PicoScope Support Toolbox to set</span>
+    <span class="comment">% the values of the waveform in the range &plusmn;1.</span>
+    y = normalise(sind(x) + sind(2*x + 90) + sind(4*x + 45));
+
+    <span class="comment">% Set the required signalGenerator group properties</span>
+    set(sigGenGroupObj, <span class="string">'startFrequency'</span>, 2000.0);
+    set(sigGenGroupObj, <span class="string">'stopFrequency'</span>, 2000.0);
+    set(sigGenGroupObj, <span class="string">'offsetVoltage'</span>, 0.0);
+    set(sigGenGroupObj, <span class="string">'peakToPeakVoltage'</span>, 2000.0);
+
+    status = invoke(sigGenGroupObj, <span class="string">'setSigGenArbitrarySimple'</span>, y);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#4"><tt>setSigGenArbitrary</tt></a></p><h2 id="12">setSigGenBuiltIn</h2><pre class="codeinput">status = setSigGenBuiltIn(obj, waveType, increment, dwellTime, sweepType, operation, <span class="keyword">...</span>
+                            shots, sweeps, triggerType, triggerSource, extInThresholdMV)
+</pre><p><tt>setSigGenBuiltIn(obj, waveType, increment, dwellTime, sweepType, operation, shots, sweeps, triggerType, triggerSource, extInThresholdMV)</tt> sets up the signal generator to produce a signal from a list of built-in waveforms. If different start and stop frequencies are specified, the device will sweep either up, down, or up and down.</p><p>The <tt>startFrequency</tt>, <tt>stopFrequency</tt>, <tt>offsetVoltage</tt> and <tt>peakToPeakVoltage</tt> properties must be set prior to calling this function otherwise the default values will be used.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>wavetype</tt> - the type of waveform to be generated by the oscilloscope. Use one of the <tt>enPS2000AWaveType</tt> enumeration values.</li><li><tt>increment</tt> - the amount of frequency increase or decrease in sweep mode (in hertz).</li><li><tt>dwellTime</tt> - the time for which the sweep stays at each frequency, in seconds.</li><li><tt>sweepType</tt> - whether the frequency will sweep from startFrequency to stopFrequency, or in the opposite direction, or repeatedly reverse direction. Use one of the <tt>enPS2000ASweepType</tt> enumeration values.</li><li><tt>operation</tt> - the type of waveform to be produced, specified by one of the <tt>enPS2000AExtraOperations</tt> enumeration values.</li><li><tt>shots</tt> - the number of cycles of the waveform to be produced after a trigger event. If this is set to a non-zero value then sweeps must be set to zero.</li><li><tt>sweeps</tt> - the number of times to sweep the frequency after a trigger event, according to sweepType. If this is set to a non-zero value then shots must be set to zero</li><li><tt>triggerType</tt> - the type of trigger that will be applied to the signal generator, specified by one of the <tt>enPS2000ASigGenTrigType</tt> enumeration values.</li><li><tt>triggerSource</tt> - the source that will trigger the signal generator, specified by one of the <tt>enPS2000ASigGenTrigSource</tt> enumeration values.</li><li><tt>extInThresholdMV</tt> - trigger level, in millivolts, for external trigger. This should be in the range &plusmn;5000 mV. Only used by the PicoScope 2206, 2207 and 2208 models.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Output a square wave, 2400 mVpp, 500 mV offset, and sweep continuously</span>
+    <span class="comment">% from 500 Hz to 50 Hz in steps of 50 Hz.</span>
+
+    <span class="comment">% Configure property values.</span>
+    set(sigGenGroupObj, <span class="string">'startFrequency'</span>, 50.0);
+    set(sigGenGroupObj, <span class="string">'stopFrequency'</span>, 500.0);
+    set(sigGenGroupObj, <span class="string">'offsetVoltage'</span>, 500.0);
+    set(sigGenGroupObj, <span class="string">'peakToPeakVoltage'</span>, 2400.0);
+
+    waveType        = ps2000aEnuminfo.enPS2000AWaveType.PS2000A_SQUARE;
+    increment       = 50.0; <span class="comment">% Hz</span>
+    dwellTime       = 1; <span class="comment">% second</span>
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_DOWN;
+    operation       = ps2000aEnuminfo.enPS2000AExtraOperations.PS2000A_ES_OFF;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extThresholdMv  = 0; <span class="comment">% mV (Only supported by PicoScope 2206/7/8 models)</span>
+
+    status = invoke(sigGenGroupObj, <span class="string">'setSigGenBuiltIn'</span>, waveType, increment, dwellTime, <span class="keyword">...</span>
+        sweepType, operation, shots, sweeps, triggerType, triggerSource, extThresholdMv);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#15"><tt>setSigGenBuiltInSimple</tt></a> | <a href="ps2000a_tbx_sig_gen_functions.html#23"><tt>setSigGenPropertiesBuiltIn</tt></a></p><h2 id="15">setSigGenBuiltInSimple</h2><pre class="codeinput">status = setSigGenBuiltInSimple(obj, waveType)
+</pre><p><tt>setSigGenBuiltInSimple(obj, waveType)</tt> sets up the signal generator to produce a signal of constant frequency from a list of built-in waveforms.</p><p>The <tt>startFrequency</tt>, <tt>offsetVoltage</tt> and <tt>peakToPeakVoltage</tt> properties must be set prior to using this function, or the default values will be used.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>wavetype</tt> - the type of waveform to be generated by the oscilloscope. Use one of the <tt>enPS2000AWaveType</tt> enumeration values.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Output a sine wave, 2000 mVpp, 0 mV offset, 1000 Hz (use preset values</span>
+    <span class="comment">% for offset, peak to peak voltage and frequency from the Signalgenerator</span>
+    <span class="comment">% groups's properties).</span>
+
+    waveType = ps2000aEnuminfo.enPS2000AWaveType.PS2000A_SINE;
+
+    status = invoke(sigGenGroupObj, <span class="string">'setSigGenBuiltInSimple'</span>, waveType);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#12"><tt>setSigGenBuiltIn</tt></a></p><h2 id="18">setSigGenOff</h2><pre class="codeinput">status = setSigGenOff(obj)
+</pre><p><tt>setSigGenOff(obj)</tt> effectively turns off the signal generator by setting the output to a zero DC voltage.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    status = invoke(sigGenGroupObj, <span class="string">'setSigGenOff'</span>);
+</pre><h2 id="20">setSigGenPropertiesArbitrary</h2><pre class="codeinput">[status, dwellTime] = setSigGenPropertiesArbitrary(obj, increment, dwellTime, sweepType, shots, sweeps, <span class="keyword">...</span>
+                        triggerType, triggerSource, extInThresholdMV)
+</pre><p><tt>setSigGenPropertiesArbitrary(obj, increment, dwellTime, sweepType, shots, sweeps, triggerType, triggerSource, extInThresholdMV)</tt> reprograms the arbitrary waveform generator.</p><p>All values can be reprogrammed while the signal generator is waiting for a trigger. The <tt>startFrequency</tt> and <tt>stopFrequency</tt> properties should be set if they require changing before calling this function.</p><p>The <a href="ps2000a_tbx_sig_gen_functions.html#4"><tt>setSigGenArbitrary</tt></a> function must be called prior to calling this function.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>increment</tt> - the increase or decrease in frequency when operating in sweep mode. This determines the amount by which the generator sweeps the output frequency in each dwell period. When frequency sweeping is not required, set to zero.</li><li><tt>dwellTime</tt> - the time for which the sweep stays at each frequency, in seconds.</li><li><tt>sweepType</tt> -  determines whether the startFrequency is swept up to the stopFrequency, or down to it, or repeatedly up and down.</li><li><tt>shots</tt> - the number of cycles of the waveform to be produced after a trigger event.</li><li><tt>sweeps</tt> - the number of times to sweep the frequency after a trigger event, according to sweepType.</li><li><tt>triggerType</tt> - the type of trigger that will be applied to the signal generator (an <tt>enPS2000ASigGenTrigType</tt> enumeration value).</li><li><tt>triggerSource</tt> - the source that will trigger the signal generator (an <tt>enPS2000ASigGenTrigSource</tt> enumeration value).</li><li><tt>extInThresholdMV</tt> - trigger level, in millivolts, for external trigger. This should be in the range &plusmn;5000 mV. Only used by the PicoScope 2206, 2207 and 2208 models.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>dwellTime</tt> - the dwell time will be modified if the user specifies a dwell time (125e-9) corresponding to less than the minimum dwell count for the device (10).</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set start and stop frequency for sweep</span>
+    set(sigGenGroupObj, <span class="string">'startFrequency'</span>, 100.0);
+    set(sigGenGroupObj, <span class="string">'stopFrequency'</span>, 5000.0);
+
+    <span class="comment">% Define parameters and call the function</span>
+    increment       = 100;     <span class="comment">% Hz</span>
+    dwellTime       = 0.01;   <span class="comment">% seconds</span>
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_UPDOWN;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extInThreshold  = 0; <span class="comment">% millivolts</span>
+
+    [status, dwellTime] = invoke(sigGenGroupObj, <span class="string">'setSigGenPropertiesArbitrary'</span>, increment, dwellTime, sweepType, <span class="keyword">...</span>
+                            shots, sweeps, triggerType, triggerSource, extInThreshold);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#4"><tt>setSigGenArbitrary</tt></a></p><h2 id="23">setSigGenPropertiesBuiltIn</h2><pre class="codeinput">status = setSigGenPropertiesBuiltIn(obj, increment, dwellTime, sweepType, shots, sweeps, <span class="keyword">...</span>
+            triggerType, triggerSource, extInThresholdMV)
+</pre><p><tt>setSigGenPropertiesBuiltIn(obj, increment, dwellTime, sweepType, shots, sweeps, triggerType, triggerSource, extInThresholdMV)</tt> reprograms the signal generator. Values can be changed while the signal generator is waiting for a trigger.</p><p>The <tt>startFrequency</tt> and <tt>stopFrequency</tt> properties must be set prior to calling this function or the current values will be used.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Signalgenerator group.</li><li><tt>increment</tt> - the amount of frequency increase or decrease in sweep mode (in hertz).</li><li><tt>dwellTime</tt> - the time for which the sweep stays at each frequency, in seconds.</li><li><tt>sweepType</tt> - whether the frequency will sweep from startFrequency to stopFrequency, or in the opposite direction, or repeatedly reverse direction. Use one of the <tt>enPS2000ASweepType</tt> enumeration values.</li><li><tt>shots</tt> - the number of cycles of the waveform to be produced after a trigger event. If this is set to a non-zero value then sweeps must be set to zero.</li><li><tt>sweeps</tt> - the number of times to sweep the frequency after a trigger event, according to <tt>sweepType</tt>. If this is set to a non-zero value then shots must be set to zero.</li><li><tt>triggerType</tt> - the type of trigger that will be applied to the signal generator, specified by one of the <tt>enPS2000ASigGenTrigType</tt> enumeration values.</li><li><tt>triggerSource</tt> - the source that will trigger the signal generator, specified by one of the <tt>enPS2000ASigGenTrigSource</tt> enumeration values.</li><li><tt>extInThresholdMV</tt> - trigger level, in millivolts, for external trigger. This should be in the range &plusmn;5000mV. Only used by the PicoScope 2206, 2207 and 2208 models.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set start and stop frequency for constant output</span>
+    set(sigGenGroupObj, <span class="string">'startFrequency'</span>, 5000.0);
+    set(sigGenGroupObj, <span class="string">'stopFrequency'</span>, 5000.0);
+
+    <span class="comment">% Define parameters and call the function</span>
+    increment       = 0; <span class="comment">% Hz</span>
+    dwellTime       = 0; <span class="comment">% seconds</span>
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_UP;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extInThreshold  = 0; <span class="comment">% millivolts</span>
+
+    [status, dwellTime] = invoke(sigGenGroupObj, <span class="string">'setSigGenPropertiesBuiltIn'</span>, increment, dwellTime, sweepType, <span class="keyword">...</span>
+                            shots, sweeps, triggerType, triggerSource, extInThreshold);
+</pre><p>% <b>See also:</b> <a href="ps2000a_tbx_sig_gen_functions.html#12"><tt>setSigGenBuiltIn</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Signalgenerator Group Functions
+%
+% This section provides a description of the Instrument Driver Signalgenerator group
+% functions. Prior to calling the functions, a Signalgenerator group object must be
+% created as shown in the <ps2000a_tbx_sig_gen_group.html Signalgenerator Group> page.
+%
+%% ps2000aSigGenSoftwareControl
+
+ps2000aSigGenSoftwareControl(obj, state) 
+    
+%% 
+% |ps2000aSigGenSoftwareControl(obj, state)| causes a trigger event, or starts and stops gating. Use it as follows:
+%
+% # Call <ps2000a_tbx_sig_gen_functions.html# |ps2000aSetSigGenArbitrary|>
+% or <ps2000a_tbx_sig_gen_functions.html# |ps2000aSetSigGenBuiltIn|> to set
+% up the signal generator, setting the |triggerSource| argument to
+% |enPS2000ASigGenTrigSource.SIGGEN_SOFT_TRIG|.
+% # (a) If you set the signal generator |triggerType| to edge triggering
+% (|enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING| or
+% |enPS2000ASigGenTrigType.PS2000A_SIGGEN_FALLING|), call
+% |ps2000aSigGenSoftwareControl| once to trigger the signal generator
+% output.
+%
+% (b) If you set the signal generator |triggerType| to gated triggering
+% (|enPS2000ASigGenTrigType.PS2000A_SIGGEN_GATE_HIGH| or
+% |enPS2000ASigGenTrigType.PS2000A_SIGGEN_GATE_LOW|), call
+% |ps2000aSigGenSoftwareControl| with state set as follows:
+%
+% *triggerType = PS2000A_SIGGEN_GATE_HIGH:*
+%
+% * 1 to trigger the output of the signal generator, and then again with
+% state set to 0 to stop the trigger.
+%
+% *triggerType = PS2000A_SIGGEN_GATE_LOW:*
+%
+% * 0 to trigger the output of the signal generator, and then again with
+% state set to 1 to stop the trigger.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |state| - sets the trigger gate high or low when the trigger type is
+% set to either PS2000A_SIGGEN_GATE_HIGH or PS2000A_SIGGEN_GATE_LOW.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Trigger the signal generator output having set the signal generator
+    % to trigger on a rising edge with software control.
+    status = invoke(sigGenGroupObj, 'ps2000aSigGenSoftwareControl', 1);
+
+%%
+% *See also:* <ps2000a_tbx_sig_gen_functions.html#4 |ps2000aSetSigGenArbitrary|> | <ps2000a_tbx_sig_gen_functions.html#12 |ps2000aSetSigGenBuiltIn|>
+%
+%% setSigGenArbitrary
+
+[status, dwellTime] = setSigGenArbitrary(obj, increment, dwellTime, arbitraryWaveform, sweepType, ...
+                                            operation, indexMode, shots, sweeps, triggerType, ...
+                                            triggerSource, extInThresholdMV)
+    
+%% 
+% |setSigGenArbitrary(obj, increment, dwellTime, arbitraryWaveform,
+% sweepType, operation, indexMode, shots, sweeps, triggerType,
+% triggerSource, extInThresholdMV)| programs the signal generator to
+% produce an arbitrary waveform.
+% 
+% The arbitrary waveform generator uses direct digital synthesis (DDS). It
+% maintains a 32-bit phase accumulator that indicates the present location
+% in the waveform. The top bits of the phase accumulator are used as an
+% index into a buffer containing the arbitrary waveform. The remaining bits
+% act as the fractional part of the index, enabling high-resolution control
+% of output frequency and allowing the generation of lower frequencies. The
+% phase accumulator initially increments by a delta phase corresponding to
+% the start frequency. If the AWG is set to sweep mode, the phase increment
+% is increased at specified intervals until it reaches a delta phase
+% corresponding to the stop frequency.
+% 
+% The |startFrequency|, |stopFrequency|, |offsetVoltage| and
+% |peakToPeakVoltage| properties must be set prior to calling this
+% function, otherwise the <ps2000a_tbx_default_settings.html default
+% values> will be used.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |increment| - the increase or decrease in frequency when operating in sweep
+% mode. This determines the amount by which the generator sweeps the output
+% frequency in each dwell period. When frequency sweeping is not required,
+% set to zero. 
+% * |dwellTime| - the time for which the sweep stays at each
+% frequency, in seconds. 
+% * |arbitraryWaveform| -  a buffer that holds the
+% waveform pattern as a set of samples equally spaced in time in the range
+% ±1. These values correspond to the maximum and minimum amplitude
+% values of the waveform. Each sample is scaled to an output voltage and
+% clipped to the overall ±2 V range of the AWG. 
+% * |sweepType| -  determines whether the |startFrequency| is swept up to the |stopFrequency|, or down to
+% it, or repeatedly up and down. 
+% * |operation| - configures the white noise/PRBS (pseudo-random binary sequence) generator. 
+% * |indexMode| - specifies how the signal will be formed from the arbitrary waveform data.
+% * |shots| - the number of cycles of the waveform to be produced after a
+% trigger event.
+% 
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">Value</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+%       </tr>
+%       <tr>
+%           <td>0</td><td>sweep the frequency as specified by sweeps</td>
+%       </tr>
+%       <tr>
+%           <td>1...PS2000aConstants.PS2000A_MAX_SWEEPS_SHOTS</td><td>the number of cycles of the waveform to be produced after a trigger event. sweeps must be zero.</td>
+%       </tr>
+%       <tr>
+%           <td>PS2000aConstants.PS2000A_SHOT_SWEEP_TRIGGER_CONTINUOUS_RUN</td><td>start
+%           and run continuously after trigger occurs (not PicoScope 2205
+%           MSO)</td>
+%   </table>
+% </html>
+
+%%
+% * |sweeps| - the number of times to sweep the frequency after a trigger
+% event, according to sweepType.
+% 
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">Value</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+%       </tr>
+%       <tr>
+%           <td>0</td>
+%           <td>produce number of cycles specified by shots</td>
+%       </tr>
+%       <tr>
+%           <td>1..PS2000aConstants.PS2000A_MAX_SWEEPS_SHOTS</td>
+%           <td>the number of times to sweep the frequency after a trigger event, according to sweepType. shots must be zero.</td>
+%       </tr>
+%       <tr>
+%           <td>PS2000A_SHOT_SWEEP_TRIGGER_CONTINUOUS_RUN</td>
+%           <td>start a sweep and continue after trigger occurs (not
+%           PicoScope 2205 MSO)</td>
+%       </tr>
+%   </table>
+% </html>
+% 
+%%
+% * |triggerType| - the type of trigger that will be applied to the signal
+% generator (an |enPS2000ASigGenTrigType| enumeration value).
+% * |triggerSource| - the source that will trigger the signal generator (an
+% |enPS2000ASigGenTrigSource| enumeration value).
+% * |extInThresholdMV| - trigger level, in millivolts, for external
+% trigger. This should be in the range ±5000 mV. Only used by the
+% PicoScope 2206, 2207 and 2208 models.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |dwellTime| -  the dwell time will be modified if the user specifies a
+% dwell time corresponding to less than the minimum dwell count for the
+% device (10).
+%
+% *Notes:* Use the <ps2000a_tbx_sig_gen_functions.html#
+% |setSigGenPropertiesArbitrary|> function to change certain properties of
+% the arbitrary waveform generator while waiting for a trigger.
+%
+% *Example:*
+
+    % Define an arbitrary waveform, then set the signal generator to output
+    % a sweep.
+    
+    % Find the AWG buffer size of the device
+    awgBufferSize = get(sigGenGroupObj, 'awgBufferSize');
+    x = linspace(0, 360, awgBufferSize);
+    
+    % Use the normalise function from the PicoScope Support Toolbox to set
+    % the values of the waveform in the range ±1.
+    y = normalise(sind(x) + sind(2*x + 90) + sind(4*x + 45));
+    
+    % Set the required signalGenerator group properties
+    set(sigGenGroupObj, 'startFrequency', 100.0); 
+    set(sigGenGroupObj, 'stopFrequency', 2000.0);
+    set(sigGenGroupObj, 'offsetVoltage', 0.0);
+    set(sigGenGroupObj, 'peakToPeakVoltage', 4000.0);
+    
+    % Define other parameters and call the function
+    increment       = 50;     % Hz
+    dwellTime       = 0.05;   % seconds
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_UP;
+    operation       = ps2000aEnuminfo.enPS2000AExtraOperations.PS2000A_ES_OFF;
+    indexMode       = ps2000aEnuminfo.enPS2000AIndexMode.PS2000A_SINGLE;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extInThreshold  = 0; % millivolts
+    
+    [status, dwellTime] = invoke(sigGenGroupObj, 'setSigGenArbitrary', increment, dwellTime, sweepType, ...
+                            operation, indexMode, shots, sweeps, triggerType, triggerSource, extInThreshold);
+
+    
+%%
+% *See also:* <ps2000a_tbx_sig_gen_functions.html#9 |setSigGenArbitrarySimple|> | <ps2000a_tbx_sig_gen_functions.html#20 |setSigGenPropertiesArbitrary|>
+%
+
+%% setSigGenArbitrarySimple
+
+status = setSigGenArbitrarySimple(obj, arbitraryWaveform)
+    
+%% 
+% |setSigGenArbitrary(obj, arbitraryWaveform)| programs the signal
+% generator to produce an arbitrary waveform at a constant frequency.
+%
+% The |startFrequency|, |stopFrequency|, |offsetVoltage| and
+% |peakToPeakVoltage| properties must be set prior to calling this
+% function, otherwise the default values will be used.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |arbitraryWaveform| - a buffer that holds the waveform pattern as a set
+% of samples in the range ±1. These values correspond to the maximum and
+% minimum amplitude values of the waveform. Each sample is scaled to an
+% output voltage and clipped to the overall ±2 V range of the AWG.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Define an arbitrary waveform, then set the signal generator to output
+    % the waveform at constant frequency.
+    
+    % Find the AWG buffer size of the device
+    awgBufferSize = get(sigGenGroupObj, 'awgBufferSize');
+    x = linspace(0, 360, awgBufferSize);
+    
+    % Use the normalise function from the PicoScope Support Toolbox to set
+    % the values of the waveform in the range ±1.
+    y = normalise(sind(x) + sind(2*x + 90) + sind(4*x + 45));
+    
+    % Set the required signalGenerator group properties
+    set(sigGenGroupObj, 'startFrequency', 2000.0); 
+    set(sigGenGroupObj, 'stopFrequency', 2000.0);
+    set(sigGenGroupObj, 'offsetVoltage', 0.0);
+    set(sigGenGroupObj, 'peakToPeakVoltage', 2000.0);
+    
+    status = invoke(sigGenGroupObj, 'setSigGenArbitrarySimple', y);
+
+%%
+% *See also:* <ps2000a_tbx_sig_gen_functions.html#4 |setSigGenArbitrary|>
+%
+%% setSigGenBuiltIn
+
+status = setSigGenBuiltIn(obj, waveType, increment, dwellTime, sweepType, operation, ...
+                            shots, sweeps, triggerType, triggerSource, extInThresholdMV)
+    
+%% 
+% |setSigGenBuiltIn(obj, waveType, increment, dwellTime, sweepType,
+% operation, shots, sweeps, triggerType, triggerSource, extInThresholdMV)|
+% sets up the signal generator to produce a signal from a list of built-in
+% waveforms. If different start and stop frequencies are specified, the
+% device will sweep either up, down, or up and down.
+% 
+% The |startFrequency|, |stopFrequency|, |offsetVoltage| and |peakToPeakVoltage|
+% properties must be set prior to calling this function otherwise the
+% default values will be used.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |wavetype| - the type of waveform to be generated by the oscilloscope.
+% Use one of the |enPS2000AWaveType| enumeration values.
+% * |increment| - the amount of frequency increase or decrease in sweep mode (in hertz).
+% * |dwellTime| - the time for which the sweep stays at each frequency, in seconds. 
+% * |sweepType| - whether the frequency will sweep from startFrequency to
+% stopFrequency, or in the opposite direction, or repeatedly reverse
+% direction. Use one of the |enPS2000ASweepType| enumeration values.
+% * |operation| - the type of waveform to be produced, specified by one of
+% the |enPS2000AExtraOperations| enumeration values.
+% * |shots| - the number of cycles of the waveform to be produced after a
+% trigger event. If this is set to a non-zero value then sweeps must be set
+% to zero.
+% * |sweeps| - the number of times to sweep the frequency after a trigger
+% event, according to sweepType. If this is set to a non-zero value then
+% shots must be set to zero
+% * |triggerType| - the type of trigger that will be applied to the signal
+% generator, specified by one of the |enPS2000ASigGenTrigType| enumeration
+% values.
+% * |triggerSource| - the source that will trigger the signal generator,
+% specified by one of the |enPS2000ASigGenTrigSource| enumeration values.
+% * |extInThresholdMV| - trigger level, in millivolts, for external
+% trigger. This should be in the range ±5000 mV. Only used by the
+% PicoScope 2206, 2207 and 2208 models.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Output a square wave, 2400 mVpp, 500 mV offset, and sweep continuously
+    % from 500 Hz to 50 Hz in steps of 50 Hz.
+
+    % Configure property values.
+    set(sigGenGroupObj, 'startFrequency', 50.0);
+    set(sigGenGroupObj, 'stopFrequency', 500.0);
+    set(sigGenGroupObj, 'offsetVoltage', 500.0);
+    set(sigGenGroupObj, 'peakToPeakVoltage', 2400.0);
+
+    waveType        = ps2000aEnuminfo.enPS2000AWaveType.PS2000A_SQUARE;
+    increment       = 50.0; % Hz
+    dwellTime       = 1; % second
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_DOWN;
+    operation       = ps2000aEnuminfo.enPS2000AExtraOperations.PS2000A_ES_OFF;
+    shots           = 0; 
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extThresholdMv  = 0; % mV (Only supported by PicoScope 2206/7/8 models)
+
+    status = invoke(sigGenGroupObj, 'setSigGenBuiltIn', waveType, increment, dwellTime, ...
+        sweepType, operation, shots, sweeps, triggerType, triggerSource, extThresholdMv);
+
+%%
+% *See also:* <ps2000a_tbx_sig_gen_functions.html#15 |setSigGenBuiltInSimple|> | <ps2000a_tbx_sig_gen_functions.html#23 |setSigGenPropertiesBuiltIn|>
+%
+%% setSigGenBuiltInSimple
+
+status = setSigGenBuiltInSimple(obj, waveType)
+    
+%% 
+% |setSigGenBuiltInSimple(obj, waveType)| sets up the signal generator to
+% produce a signal of constant frequency from a list of built-in waveforms.
+%
+% The |startFrequency|, |offsetVoltage| and |peakToPeakVoltage| properties must
+% be set prior to using this function, or the default values will be used.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |wavetype| - the type of waveform to be generated by the oscilloscope.
+% Use one of the |enPS2000AWaveType| enumeration values.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Output a sine wave, 2000 mVpp, 0 mV offset, 1000 Hz (use preset values
+    % for offset, peak to peak voltage and frequency from the Signalgenerator
+    % groups's properties).
+
+    waveType = ps2000aEnuminfo.enPS2000AWaveType.PS2000A_SINE;
+
+    status = invoke(sigGenGroupObj, 'setSigGenBuiltInSimple', waveType);
+
+%%
+% *See also:* <ps2000a_tbx_sig_gen_functions.html#12 |setSigGenBuiltIn|>
+%
+%% setSigGenOff
+
+status = setSigGenOff(obj)
+    
+%% 
+% |setSigGenOff(obj)| effectively turns off the signal generator by setting
+% the output to a zero DC voltage.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    status = invoke(sigGenGroupObj, 'setSigGenOff');
+
+%% setSigGenPropertiesArbitrary
+
+[status, dwellTime] = setSigGenPropertiesArbitrary(obj, increment, dwellTime, sweepType, shots, sweeps, ...
+                        triggerType, triggerSource, extInThresholdMV)
+    
+%% 
+% |setSigGenPropertiesArbitrary(obj, increment, dwellTime, sweepType,
+% shots, sweeps, triggerType, triggerSource, extInThresholdMV)| reprograms
+% the arbitrary waveform generator.
+% 
+% All values can be reprogrammed while the signal generator is waiting for
+% a trigger. The |startFrequency| and |stopFrequency| properties should be
+% set if they require changing before calling this function.
+% 
+% The <ps2000a_tbx_sig_gen_functions.html#4 |setSigGenArbitrary|> function
+% must be called prior to calling this function.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |increment| - the increase or decrease in frequency when operating in
+% sweep mode. This determines the amount by which the generator sweeps the
+% output frequency in each dwell period. When frequency sweeping is not
+% required, set to zero.
+% * |dwellTime| - the time for which the sweep stays at each frequency, in
+% seconds.
+% * |sweepType| -  determines whether the startFrequency is swept up to the
+% stopFrequency, or down to it, or repeatedly up and down.
+% * |shots| - the number of cycles of the waveform to be produced after a
+% trigger event.
+% * |sweeps| - the number of times to sweep the frequency after a trigger
+% event, according to sweepType.
+% * |triggerType| - the type of trigger that will be applied to the signal
+% generator (an |enPS2000ASigGenTrigType| enumeration value).
+% * |triggerSource| - the source that will trigger the signal generator (an
+% |enPS2000ASigGenTrigSource| enumeration value).
+% * |extInThresholdMV| - trigger level, in millivolts, for external
+% trigger. This should be in the range ±5000 mV. Only used by the
+% PicoScope 2206, 2207 and 2208 models.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |dwellTime| - the dwell time will be modified if the user specifies a
+% dwell time (125e-9) corresponding to less than the minimum dwell count
+% for the device (10).
+%
+% *Example:*
+
+    % Set start and stop frequency for sweep
+    set(sigGenGroupObj, 'startFrequency', 100.0);
+    set(sigGenGroupObj, 'stopFrequency', 5000.0);
+    
+    % Define parameters and call the function
+    increment       = 100;     % Hz
+    dwellTime       = 0.01;   % seconds
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_UPDOWN;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extInThreshold  = 0; % millivolts
+    
+    [status, dwellTime] = invoke(sigGenGroupObj, 'setSigGenPropertiesArbitrary', increment, dwellTime, sweepType, ...
+                            shots, sweeps, triggerType, triggerSource, extInThreshold);
+
+
+%%
+% *See also:* <ps2000a_tbx_sig_gen_functions.html#4 |setSigGenArbitrary|>
+%
+%% setSigGenPropertiesBuiltIn
+
+status = setSigGenPropertiesBuiltIn(obj, increment, dwellTime, sweepType, shots, sweeps, ...
+            triggerType, triggerSource, extInThresholdMV)
+    
+%% 
+% |setSigGenPropertiesBuiltIn(obj, increment, dwellTime, sweepType, shots,
+% sweeps, triggerType, triggerSource, extInThresholdMV)| reprograms the
+% signal generator. Values can be changed while the signal generator is
+% waiting for a trigger.
+%
+% The |startFrequency| and |stopFrequency| properties must be set prior to calling
+% this function or the current values will be used.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Signalgenerator group.
+% * |increment| - the amount of frequency increase or decrease in sweep
+% mode (in hertz).
+% * |dwellTime| - the time for which the sweep stays at each frequency, in
+% seconds.
+% * |sweepType| - whether the frequency will sweep from startFrequency to
+% stopFrequency, or in the opposite direction, or repeatedly reverse
+% direction. Use one of the |enPS2000ASweepType| enumeration values.
+% * |shots| - the number of cycles of the waveform to be produced after a
+% trigger event. If this is set to a non-zero value then sweeps must be set
+% to zero.
+% * |sweeps| - the number of times to sweep the frequency after a trigger
+% event, according to |sweepType|. If this is set to a non-zero value then
+% shots must be set to zero.
+% * |triggerType| - the type of trigger that will be applied to the signal
+% generator, specified by one of the |enPS2000ASigGenTrigType| enumeration
+% values.
+% * |triggerSource| - the source that will trigger the signal generator,
+% specified by one of the |enPS2000ASigGenTrigSource| enumeration values.
+% * |extInThresholdMV| - trigger level, in millivolts, for external
+% trigger. This should be in the range ±5000mV. Only used by the
+% PicoScope 2206, 2207 and 2208 models.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Set start and stop frequency for constant output
+    set(sigGenGroupObj, 'startFrequency', 5000.0);
+    set(sigGenGroupObj, 'stopFrequency', 5000.0);
+    
+    % Define parameters and call the function
+    increment       = 0; % Hz
+    dwellTime       = 0; % seconds
+    sweepType       = ps2000aEnuminfo.enPS2000ASweepType.PS2000A_UP;
+    shots           = 0;
+    sweeps          = 0;
+    triggerType     = ps2000aEnuminfo.enPS2000ASigGenTrigType.PS2000A_SIGGEN_RISING;
+    triggerSource   = ps2000aEnuminfo.enPS2000ASigGenTrigSource.PS2000A_SIGGEN_NONE;
+    extInThreshold  = 0; % millivolts
+    
+    [status, dwellTime] = invoke(sigGenGroupObj, 'setSigGenPropertiesBuiltIn', increment, dwellTime, sweepType, ...
+                            shots, sweeps, triggerType, triggerSource, extInThreshold);
+
+
+%%
+% % *See also:* <ps2000a_tbx_sig_gen_functions.html#12 |setSigGenBuiltIn|>
+%
+
+##### SOURCE END #####
+--></body></html>

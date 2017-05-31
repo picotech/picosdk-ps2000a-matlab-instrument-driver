@@ -1,0 +1,184 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Getting Started with the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_getting_started.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Getting Started with the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Requirements</a></li><li><a href="#2">Supported Hardware Models</a></li><li><a href="#3">Pico Technology Software Development Kit Information</a></li><li><a href="#4">Installing PicoScope Hardware</a></li></ul></div><h2 id="1">Requirements</h2><p>To use the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox, you must install the following hardware and software components:</p><div><ul><li>A PicoScope 2000 Series Oscilloscope or Mixed Signal Oscilloscope (see Supported Hardware Models below)</li><li>MATLAB R2016b or higher (R2015b recommended for 32-bit versions of MATLAB on Microsoft Windows platforms)</li><li>Instrument Control Toolbox (v3.10 or later; v3.8 with MATLAB 2015b)</li><li><a href="https://www.picotech.com/downloads/">Pico Technology Software Development Kit (SDK)</a> for your platform</li><li><a href="http://www.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox">PicoScope Support Toolbox</a></li><li>A supported operating system (see <a href="ps2000a_tbx_system_requirements.html">System Requirements</a>)</li></ul></div><h2 id="2">Supported Hardware Models</h2><p>The following PicoScope 2000 Series Models are supported by the Instrument Driver in this toolbox:</p><div><ul><li>PicoScope 2206/7/8 (including &#8216;A&#8217; and 'B' models)</li><li>PicoScope 2405A</li><li>PicoScope 2406/7/8 'B' models</li><li>PicoScope 2205 MSO and 2205A MSO</li><li>PicoScope 2206/7/8B MSO models</li></ul></div><p><b>Note:</b> This Instrument Driver does not support the PicoScope 2104, 2105, 2204A and 2205A models. These will require the <a href="http://uk.mathworks.com/matlabcentral/fileexchange/40134-picoscope-2000-series-matlab-generic-instrument-driver">PicoScope 2000 Series - MATLAB Generic Instrument Driver</a>.</p><h2 id="3">Pico Technology Software Development Kit Information</h2><p>Pico Technology provides drivers (<a href="ps2000a_tbx_shared_libraries.html">shared libraries</a>) for the following platforms:</p><div><ul><li>Microsoft Windows</li><li>Linux</li><li>Mac OS X</li></ul></div><p>Drivers are provided as 32-bit and 64-bit versions, although support for Linux is limited to 64-bit versions of MATLAB. A 64-bit version of MATLAB is recommended for Mac OS X platforms.</p><p>Run the <tt>PS2000aSetup.m</tt> script included in this toolbox and follow the prompts to download and install the SDK for your platform.</p><p>Alternatively, below are platform specific guidelines:</p><p><b>Microsoft Windows:</b></p><div><ul><li>For 32-bit versions of MATLAB please download and install the 32-bit Pico Technology SDK.</li><li>For 64-bit versions of MATLAB please download and install the 64-bit Pico Technology SDK.</li><li>Both are available to download from the Pico Technology <a href="https://www.picotech.com/downloads">Downloads</a> page.</li></ul></div><p><b>Note</b>: PicoSDK 10.6.11 will be the last support version for Windows XP (SP3) and Vista operating systems.</p><p><b>Linux:</b></p><div><ul><li>Download the <i>libps2000a</i> and <i>libpswrappers</i> packages using the instructions availble on the <a href="https://www.picotech.com/downloads/linux">Linux Software &amp; Drivers for Oscilloscopes and Data Loggers</a> web page.</li></ul></div><p><b>Mac OS X:</b></p><p>To use the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox on Mac OS X platforms, you will need to install the following:</p><div><ul><li><a href="https://www.picotech.com/downloads">PicoScope 6 for Mac OS X</a></li><li>A <a href="http://uk.mathworks.com/support/compilers/R2016a/index.html?sec=maci64">supported compiler</a></li></ul></div><p>Please <a href="ps2000a_tbx_support.html">contact</a> our Technical Support Team for further assistance with Mac OS X platforms.</p><p>As part of the installation process on Microsoft Windows and Linux platforms, the locations of the shared libraries should be added to the system path.</p><h2 id="4">Installing PicoScope Hardware</h2><p>To connect the data logger, plug the cable provided into any available USB port on your PC.</p><p><b>Microsoft Windows platforms:</b></p><div><ul><li>The first time you connect the unit, Windows may display a New Hardware Wizard.</li><li>Follow any instructions in the Wizard and wait for the driver to be installed. Later versions of Windows display an Installing new hardware message and complete the process automatically.</li><li>Verify that a PicoScope 2000 Series Oscilloscope device appears in the Windows Device Manager.</li></ul></div><p><b>Linux:</b></p><div><ul><li>Open a Terminal window, type <tt>lsusb</tt> at the command prompt and press ENTER.</li><li>A <i>PicoScope 2000A series PC Oscilloscope</i> entry should be in the list that is displayed.</li></ul></div><p><b>Mac OS X:</b></p><div><ul><li>Open the System Information or System Profiler app</li><li>Click on USB under the Hardware item in the left pane</li><li>Verify that the device is present in the USB Device Tree</li></ul></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Getting Started with the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox
+
+%% Requirements
+%
+% To use the PicoScope 2000 Series (A API) - MATLAB Generic Instrument
+% Driver Toolbox, you must install the following hardware and software
+% components:
+%
+% * A PicoScope 2000 Series Oscilloscope or Mixed Signal Oscilloscope (see
+% Supported Hardware Models below)
+% * MATLAB R2016b or higher (R2015b recommended for 32-bit versions of
+% MATLAB on Microsoft Windows platforms)
+% * Instrument Control Toolbox (v3.10 or later; v3.8 with MATLAB 2015b)
+% * <https://www.picotech.com/downloads/ Pico Technology Software
+% Development Kit (SDK)> for your platform
+% * <http://www.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox PicoScope Support Toolbox>
+% * A supported operating system (see <ps2000a_tbx_system_requirements.html System Requirements>)
+
+%% Supported Hardware Models
+%
+% The following PicoScope 2000 Series Models are supported by the
+% Instrument Driver in this toolbox:
+%
+% * PicoScope 2206/7/8 (including ‘A’ and 'B' models) 
+% * PicoScope 2405A
+% * PicoScope 2406/7/8 'B' models
+% * PicoScope 2205 MSO and 2205A MSO
+% * PicoScope 2206/7/8B MSO models
+%
+% *Note:* This Instrument Driver does not support the PicoScope 2104, 2105,
+% 2204A and 2205A models. These will require the <http://uk.mathworks.com/matlabcentral/fileexchange/40134-picoscope-2000-series-matlab-generic-instrument-driver PicoScope 2000 Series -
+% MATLAB Generic Instrument Driver>.
+
+%% Pico Technology Software Development Kit Information
+%
+% Pico Technology provides drivers (<ps2000a_tbx_shared_libraries.html shared libraries>) for the following platforms:
+%
+% * Microsoft Windows
+% * Linux 
+% * Mac OS X
+%
+% Drivers are provided as 32-bit and 64-bit versions, although support for
+% Linux is limited to 64-bit versions of MATLAB. A 64-bit version of MATLAB
+% is recommended for Mac OS X platforms.
+%
+% Run the |PS2000aSetup.m| script included in this toolbox and follow the
+% prompts to download and install the SDK for your platform.
+%
+% Alternatively, below are platform specific guidelines:
+%
+% *Microsoft Windows:*
+%
+% * For 32-bit versions of MATLAB please download and install the 32-bit Pico
+% Technology SDK.
+% * For 64-bit versions of MATLAB please download and install the 64-bit Pico
+% Technology SDK.
+% * Both are available to download from the Pico Technology
+% <https://www.picotech.com/downloads Downloads> page.
+%
+% *Note*: PicoSDK 10.6.11 will be the last support version for Windows XP (SP3) and Vista operating systems.  
+%
+% *Linux:*
+%
+% * Download the _libps2000a_ and _libpswrappers_ packages using the
+% instructions availble on the <https://www.picotech.com/downloads/linux Linux Software & Drivers for Oscilloscopes
+% and Data Loggers> web page.
+%
+% *Mac OS X:*
+%
+% To use the PicoScope 2000 Series (A API) - MATLAB Generic Instrument
+% Driver Toolbox on Mac OS X platforms, you will need to install the
+% following:
+%
+% * <https://www.picotech.com/downloads PicoScope 6 for Mac OS X> 
+% * A
+% <http://uk.mathworks.com/support/compilers/R2016a/index.html?sec=maci64 supported compiler>
+%
+% Please <ps2000a_tbx_support.html contact> our Technical Support Team for
+% further assistance with Mac OS X platforms.
+%
+% As part of the installation process on Microsoft Windows and Linux
+% platforms, the locations of the shared libraries should be added to the
+% system path.
+
+%% Installing PicoScope Hardware
+%
+% To connect the data logger, plug the cable provided into any available USB port on
+% your PC. 
+%
+% *Microsoft Windows platforms:*
+%
+% * The first time you connect the unit, Windows may display a New Hardware
+% Wizard. 
+% * Follow any instructions in the Wizard and wait for the driver to be
+% installed. Later versions of Windows display an Installing new hardware
+% message and complete the process automatically.
+% * Verify that a PicoScope 2000 Series Oscilloscope device appears in the
+% Windows Device Manager.
+%
+% *Linux:*
+%
+% * Open a Terminal window, type |lsusb| at the command prompt and press
+% ENTER.
+% * A _PicoScope 2000A series PC Oscilloscope_ entry should be in the list
+% that is displayed.
+%
+% *Mac OS X:*
+%
+% * Open the System Information or System Profiler app 
+% * Click on USB under the Hardware item in the left pane
+% * Verify that the device is present in the USB Device Tree 
+
+##### SOURCE END #####
+--></body></html>

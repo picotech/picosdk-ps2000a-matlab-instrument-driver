@@ -1,0 +1,160 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Trigger Group</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_trigger_group.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Trigger Group</h1><!--introduction--><p>The Trigger group contains a set of properties and functions related to the trigger functionality of the device.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Obtaining a Trigger Group Object from the Instrument Driver</a></li><li><a href="#2">Properties</a></li><li><a href="#3">Functions</a></li></ul></div><h2 id="1">Obtaining a Trigger Group Object from the Instrument Driver</h2><p>Below is an example of how to obtain a Trigger group object from the Instrument Driver device object. This step only has to be carried out once prior to accessing properties or invoking group object functions:</p><pre class="codeinput">    triggerGroupObj = get(ps2000aDeviceObj, <span class="string">'Trigger'</span>);
+    triggerGroupObj = triggerGroupObj(1);
+</pre><h2 id="2">Properties</h2><p>The following properties are defined for the Trigger group object:</p><p>
+  <table>
+      <th style="border-color:#999; background-color:#E0E0E0">Property Name</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Data type</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Default value</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Can be changed by User</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+      <tr>
+          <td style="border-color:#999">autoTriggerMs</td>
+          <td style="border-color:#999">Double</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">Yes</td>
+          <td style="border-color:#999">The number of milliseconds the device will wait if no trigger occurs. If this is set to zero, the scope device will wait indefinitely for a trigger.</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">delay</td>
+          <td style="border-color:#999">Double</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">Yes</td>
+          <td style="border-color:#999">The time, in sample periods, between the trigger occurring and the first sample being taken.</td>
+      </tr>
+  </table>
+</p><p>Use the <a href="matlab:doc('instrument/set')"><tt>set</tt></a> and <a href="matlab:doc('instrument/get')"><tt>get</tt></a> functions, where appropriate, to change the value of a property or retrieve it's value.</p><p><b>Examples:</b></p><pre class="codeinput">    <span class="comment">% Verify the autoTriggerMs value.</span>
+    autoTriggerMs = get(triggerGroupObj, <span class="string">'autoTriggerMs'</span>);
+
+    <span class="comment">% Set the trigger delay to 100 samples.</span>
+    set(triggerGroupObj, <span class="string">'delay'</span>, 100);
+</pre><h2 id="3">Functions</h2><p>Trigger group functions are defined on this <a href="ps2000a_tbx_trigger_functions.html">page</a>.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Trigger Group
+%
+% The Trigger group contains a set of properties and functions related to
+% the trigger functionality of the device.
+
+%% Obtaining a Trigger Group Object from the Instrument Driver
+% 
+% Below is an example of how to obtain a Trigger group object from
+% the Instrument Driver device object. This step only has to be carried out
+% once prior to accessing properties or invoking group object functions:
+
+    triggerGroupObj = get(ps2000aDeviceObj, 'Trigger');
+    triggerGroupObj = triggerGroupObj(1);
+
+%% Properties
+%
+% The following properties are defined for the Trigger group object: 
+%
+% <html>
+%   <table>
+%       <th style="border-color:#999; background-color:#E0E0E0">Property Name</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Data type</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Default value</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Can be changed by User</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+%       <tr>
+%           <td style="border-color:#999">autoTriggerMs</td>
+%           <td style="border-color:#999">Double</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">Yes</td>
+%           <td style="border-color:#999">The number of milliseconds the device will wait if no trigger occurs. If this is set to zero, the scope device will wait indefinitely for a trigger.</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">delay</td>
+%           <td style="border-color:#999">Double</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">Yes</td>
+%           <td style="border-color:#999">The time, in sample periods, between the trigger occurring and the first sample being taken.</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% Use the <matlab:doc('instrument/set') |set|> and <matlab:doc('instrument/get') |get|> functions, where appropriate, to change the value of
+% a property or retrieve it's value.
+%
+% *Examples:*
+%
+
+    % Verify the autoTriggerMs value.
+    autoTriggerMs = get(triggerGroupObj, 'autoTriggerMs');
+
+    % Set the trigger delay to 100 samples.
+    set(triggerGroupObj, 'delay', 100);
+    
+%% Functions
+%
+% Trigger group functions are defined on this <ps2000a_tbx_trigger_functions.html page>.
+
+
+##### SOURCE END #####
+--></body></html>

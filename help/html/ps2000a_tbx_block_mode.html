@@ -1,0 +1,181 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Block Mode</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_block_mode.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Block Mode</h1><!--introduction--><p>In <b>block mode</b>, the computer prompts a PicoScope 2000 Series oscilloscope to collect a block of data into its internal memory. When the oscilloscope has collected the whole block, it signals that it is ready and then transfers the whole block to the computer's memory through the USB port.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Block Size</a></li><li><a href="#2">Sampling Rate</a></li><li><a href="#3">Setup Time</a></li><li><a href="#4">Downsampling</a></li><li><a href="#5">Memory Segmentation</a></li><li><a href="#6">Data Retention</a></li><li><a href="#7">Using Block Mode</a></li></ul></div><h2 id="1">Block Size</h2><p>The maximum number of values depends upon the size of the oscilloscope's memory. The memory buffer is shared between the enabled channels, so if two channels are enabled, each receives half the memory, and if four channels are enabled, each receives a quarter of the memory. These features are handled transparently by the driver. The block size also depends on the number of memory segments in use (see <a href="ps2000a_tbx_device_functions.html#16"><tt>ps2000aMemorySegments</tt></a>).</p><p><b>Note:</b> The PicoScope MSO models behave differently. If only the two analog channels or only the two digital ports are enabled, each receives half the memory. If any combination of one or two analog channels and one or two digital ports is enabled, each receives a quarter of the memory.</p><h2 id="2">Sampling Rate</h2><p>A PicoScope 2000 Series oscilloscope can sample at a number of different rates according to the selected timebase and the combination of channels that are enabled. See the <a href="ps2000a_tbx_timebases.html">Timebases</a> section for the specifications that apply to your scope model.</p><h2 id="3">Setup Time</h2><p>The driver normally performs a number of setup operations, which can take up to 50 milliseconds, before collecting each block of data. If you need to collect data with the minimum time interval between blocks, use rapid block mode and avoid calling setup functions between calls to <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a>, <a href="ps2000a_tbx_device_functions.html#27"><tt>ps2000aStop</tt></a> and <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a>.</p><p><b>Note:</b> The <a href="<ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> function can be used in place of the <tt>ps2000aRunBlock</tt> and <a href="<ps2000a_tbx_block_functions.html#16"><tt>ps2000aIsReady</tt></a> functions.</p><h2 id="4">Downsampling</h2><p>When the data has been collected, you can set an optional downsampling factor and examine the data. Downsampling is a process that reduces the amount of data by combining adjacent samples. It is useful for zooming in and out of the data without having to repeatedly transfer the entire contents of the scope's buffer to the PC.</p><h2 id="5">Memory Segmentation</h2><p>The scope's internal memory can be divided into segments so that you can capture several waveforms in succession. Configure this using <a href="ps2000a_tbx_device_functions.html#16"><tt>ps2000aMemorySegments</tt></a>.</p><h2 id="6">Data Retention</h2><p>The data is lost when a new run is started in the same segment, the settings are changed, or the scope is powered down.</p><h2 id="7">Using Block Mode</h2><p>This is the general procedure for reading and displaying data in block mode using a single memory segment:</p><p><b>Note:</b> Use the * steps when using the digital ports on MSO models.</p><div><ol><li>Create a device object for the Instrument using <a href="matlab:doc('instrument/icdevice'])"><tt>icdevice</tt></a>.</li><li>Connect to the Instrument using <a href="matlab:doc('instrument/connect')"><tt>connect</tt></a>.</li><li>Select channel ranges and AC/DC coupling using <a href="ps2000a_tbx_device_functions.html#20"><tt>ps2000aSetChannel</tt></a>.</li><li>* Set the digital port using <a href="ps2000a_tbx_digital_functions.html#1"><tt>ps2000aSetDigitalPort</tt></a>.</li><li>Using <a href="ps2000a_tbx_device_functions.html#14"><tt>ps2000aGetTimebase2</tt></a>, select timebases until the required nanoseconds per sample is located and verify the maximum number of samples available for the memory segment specified.</li><li>Set the <tt>timebase</tt> <a href="ps2000a_tbx_device_object.html#1">property</a>.</li><li>Set the <a href="ps2000a_tbx_trigger_group.html">Trigger group</a> properties and use the <a href="ps2000a_tbx_trigger_functions.html#5"><tt>setSimpleTrigger</tt></a> function to setup the trigger if required.</li><li>Set the <tt>numPreTriggerSamples</tt> and <tt>numPostTriggerSamples</tt> properties to indicate how many samples to collect.</li><li>Start the oscilloscope running using the <a href="ps2000a_tbx_block_group.html">Block group's</a> <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> function. Alternatively, if you need to execute other code while waiting for the data collection to complete, call <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> and poll the <a href="ps2000a_tbx_block_functions.html#16"><tt>ps2000aIsReady</tt></a> function.</li><li>Use the <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a> function to retrieve the data for each active channel/digital port (this function combines the <a href="ps2000a_tbx_device_functions.html#22"><tt>ps2000aSetDataBuffer</tt></a>  and <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> functions  in one function).</li><li>Display/process the data.</li><li>Repeat steps 9 - 11 as required.</li><li>Stop the oscilloscope using <a href="ps2000a_tbx_device_functions.html#28"><tt>ps2000aStop</tt></a>.</li><li>Disconnect from the Instrument using <a href="matlab:doc('instrument/disconnect'])"><tt>disconnect</tt></a>.</li><li>Use the <a href="matlab:doc('instrument/delete')"><tt>delete</tt></a> function to clean up.</li></ol></div><p>Refer to the <a href="../demos.xml">Examples</a> section for published Block mode capture examples.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Block Mode
+%
+% In *block mode*, the computer prompts a PicoScope 2000 Series oscilloscope to collect
+% a block of data into its internal memory. When the oscilloscope has collected the whole
+% block, it signals that it is ready and then transfers the whole block to the computer's
+% memory through the USB port.
+
+%% Block Size
+%
+% The maximum number of values depends upon the size of the oscilloscope's
+% memory. The memory buffer is shared between the enabled channels, so if
+% two channels are enabled, each receives half the memory, and if four
+% channels are enabled, each receives a quarter of the memory. These
+% features are handled transparently by the driver. The block size also
+% depends on the number of memory segments in use (see
+% <ps2000a_tbx_device_functions.html#16 |ps2000aMemorySegments|>).
+%
+% *Note:* The PicoScope MSO models behave differently. If
+% only the two analog channels or only the two digital ports are enabled,
+% each receives half the memory. If any combination of one or two analog
+% channels and one or two digital ports is enabled, each receives a quarter
+% of the memory.
+
+%% Sampling Rate
+%
+% A PicoScope 2000 Series oscilloscope can sample at a number of different
+% rates according to the selected timebase and the combination of channels
+% that are enabled. See the <ps2000a_tbx_timebases.html Timebases>
+% section for the specifications that apply to your scope model.
+
+%% Setup Time
+%
+% The driver normally performs a number of setup operations, which can take
+% up to 50 milliseconds, before collecting each block of data. If you need
+% to collect data with the minimum time interval between blocks, use rapid
+% block mode and avoid calling setup functions between calls to
+% <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|>,
+% <ps2000a_tbx_device_functions.html#27 |ps2000aStop|> and
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|>.
+%
+% *Note:* The <<ps2000a_tbx_block_functions.html#32 |runBlock|> function can be used in place of the
+% |ps2000aRunBlock| and <<ps2000a_tbx_block_functions.html#16 |ps2000aIsReady|> functions.
+
+%% Downsampling
+%
+% When the data has been collected, you can set an optional downsampling
+% factor and examine the data. Downsampling is a process that reduces the
+% amount of data by combining adjacent samples. It is useful for zooming in
+% and out of the data without having to repeatedly transfer the entire
+% contents of the scope's buffer to the PC.
+
+%% Memory Segmentation
+%
+% The scope's internal memory can be divided into segments so that you can
+% capture several waveforms in succession. Configure this using
+% <ps2000a_tbx_device_functions.html#16 |ps2000aMemorySegments|>.
+
+%% Data Retention
+%
+% The data is lost when a new run is started in the same segment, the
+% settings are changed, or the scope is powered down.
+
+%% Using Block Mode
+%
+% This is the general procedure for reading and displaying data in block mode using a
+% single memory segment:
+%
+% *Note:* Use the * steps when using the digital ports on MSO models.
+%
+% # Create a device object for the Instrument using
+% <matlab:doc('instrument/icdevice']) |icdevice|>.
+% # Connect to the Instrument using <matlab:doc('instrument/connect')
+% |connect|>.
+% # Select channel ranges and AC/DC coupling using
+% <ps2000a_tbx_device_functions.html#20 |ps2000aSetChannel|>.
+% # * Set the digital port using <ps2000a_tbx_digital_functions.html#1
+% |ps2000aSetDigitalPort|>.
+% # Using <ps2000a_tbx_device_functions.html#14 |ps2000aGetTimebase2|>,
+% select timebases until the required nanoseconds per sample is located and
+% verify the maximum number of samples available for the memory segment
+% specified.
+% # Set the |timebase| <ps2000a_tbx_device_object.html#1 property>.
+% # Set the <ps2000a_tbx_trigger_group.html Trigger group> properties and use the
+% <ps2000a_tbx_trigger_functions.html#5 |setSimpleTrigger|> function to
+% setup the trigger if required.
+% # Set the |numPreTriggerSamples| and |numPostTriggerSamples| properties
+% to indicate how many samples to collect.
+% # Start the oscilloscope running using the <ps2000a_tbx_block_group.html Block group's>
+% <ps2000a_tbx_block_functions.html#32 |runBlock|> function. Alternatively,
+% if you need to execute other code while waiting for the data collection
+% to complete, call <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|>
+% and poll the <ps2000a_tbx_block_functions.html#16 |ps2000aIsReady|>
+% function.
+% # Use the <ps2000a_tbx_block_functions.html#1 |getBlockData|> function to
+% retrieve the data for each active channel/digital port (this function
+% combines the <ps2000a_tbx_device_functions.html#22 |ps2000aSetDataBuffer|>
+%  and <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> functions 
+%  in one function).
+% # Display/process the data.
+% # Repeat steps 9 - 11 as required.
+% # Stop the oscilloscope using <ps2000a_tbx_device_functions.html#28 |ps2000aStop|>.
+% # Disconnect from the Instrument using <matlab:doc('instrument/disconnect']) |disconnect|>.
+% # Use the <matlab:doc('instrument/delete') |delete|> function to clean up.
+%
+% Refer to the <../demos.xml Examples> section for published Block mode capture
+% examples.
+
+
+
+##### SOURCE END #####
+--></body></html>

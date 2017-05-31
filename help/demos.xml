@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<demos>
+    <name>PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver</name>
+    <type>toolbox</type>
+    <icon>HelpIcon.DEMOS</icon>
+    <description>This toolbox contains a number of examples demonstrating how to call Instrument Driver functions to collect data and also use the signal generator.</description>
+    <website></website>
+    
+    <demosection>
+        <label>Mixed Signal Oscilloscopes</label>
+        <demoitem>
+            <label>Mixed Signal Oscilloscope Block Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_MSO_Block_Example</source>
+        </demoitem>
+        <demoitem>
+            <label>Mixed Signal Oscilloscope Rapid Block Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_MSO_Rapid_Block_Plot3D_Example</source>
+        </demoitem>
+        <demoitem>
+            <label>Mixed Signal Oscilloscope Streaming Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_MSO_Streaming_Example</source>
+        </demoitem>
+    </demosection>
+    
+    <demosection>
+        <label>Oscilloscopes</label>
+        <demoitem>
+            <label>Oscilloscope Block Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_Block_Example</source>
+        </demoitem>
+        <demoitem>
+            <label>Oscilloscope Block Data Capture with FFT Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_Block_FFT_Example</source>
+        </demoitem>
+        <demoitem>
+            <label>Oscilloscope ETS Block Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_ETS_Block_Example</source>
+        </demoitem>
+        <demoitem>
+            <label>Oscilloscope Rapid Block Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_Rapid_Block_Plot3D_Example</source>
+        </demoitem>
+        <demoitem>
+            <label>Oscilloscope Streaming Data Capture Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_Streaming_Example</source>
+        </demoitem>
+    </demosection>
+    
+    <demosection>
+        <label>All Devices</label>
+        <demoitem>
+            <label>Signal Generator Example</label>
+            <type>M-file</type>
+            <source>PS2000A_ID_Sig_Gen_Example</source>
+        </demoitem>
+    </demosection>
+
+</demos>

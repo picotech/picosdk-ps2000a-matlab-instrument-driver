@@ -1,0 +1,215 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Trigger Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_trigger_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Trigger Group Functions</h1><!--introduction--><p>This section provides a description of the Instrument Driver Trigger group functions. Prior to calling the functions, a Trigger group object must be created as shown in the <a href="ps2000a_tbx_trigger_group.html">Trigger Group</a> page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">ps2000aIsTriggerOrPulseWidthQualifierEnabled</a></li><li><a href="#3">ps2000aSetTriggerDigitalPortProperties</a></li><li><a href="#5">setSimpleTrigger</a></li><li><a href="#7">setTriggerOff</a></li></ul></div><h2 id="1">ps2000aIsTriggerOrPulseWidthQualifierEnabled</h2><pre class="codeinput">[status, triggerEnabled, pwqEnabled] = ps2000aIsTriggerOrPulseWidthQualifierEnabled(obj)
+</pre><p><tt>ps2000aIsTriggerOrPulseWidthQualifierEnabled(obj)</tt> discovers whether a trigger, or pulse width triggering, is enabled.</p><p>Call after setting up the trigger, and just before calling either <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a>, <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> or <a href="ps2000a_tbx_streaming_functions.html#"><tt>ps2000aRunStreaming</tt></a>.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Trigger group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>triggerEnabled</tt> - indicates whether the trigger will successfully be set when <tt>ps2000aRunBlock</tt>, <tt>runBlock</tt> or <tt>ps2000aRunStreaming</tt> is called. A non-zero value indicates that the trigger is set, zero that the trigger is not set.</li><li><tt>pwqEnabled</tt> - indicates whether the pulse width qualifier will successfully be set when <tt>ps2000aRunBlock</tt>, <tt>runBlock</tt> or <tt>ps2000aRunStreaming</tt> is called. A non-zero value indicates that the pulse width qualifier is set, zero that the pulse width qualifier is not set.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">	[status, triggerEnabled, pwqEnabled] = invoke(triggerGroupObj, <span class="string">'ps2000aIsTriggerOrPulseWidthQualifierEnabled'</span>);
+</pre><h2 id="3">ps2000aSetTriggerDigitalPortProperties</h2><pre class="codeinput">status = ps2000aSetTriggerDigitalPortProperties(obj, directions)
+</pre><p><tt>ps2000aSetTriggerDigitalPortProperties(obj, directions)</tt> will set the individual Digital channels trigger directions.</p><p>Each trigger direction consists of a channel name and a direction. If the channel is not included in the array of <tt>tPS2000ADigitalChannelDirections</tt> structures the driver assumes the digital channel's trigger direction is PS2000A_DIGITAL_DONT_CARE.</p><p>Trigger using digital channels is <b>NOT</b> currently supported by this Instrument Driver.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Trigger group.</li><li><tt>directions</tt> - an array of <tt>tPS2000ADigitalChannelDirections</tt> structures describing the requested properties. The array can contain a single element describing the properties of one channel, or a number of elements describing several digital channels.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example</b></p><h2 id="5">setSimpleTrigger</h2><pre class="codeinput">status = setSimpleTrigger(obj, source, thresholdMV, direction)
+</pre><p><tt>setSimpleTrigger(obj, source, thresholdMV, direction)</tt> simplifies arming the trigger.</p><p>It supports only the LEVEL trigger types and does not allow more than one channel to have a trigger applied to it.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Trigger group.</li><li><tt>source</tt> - the channel on which to trigger (an <tt>enPS2000AChannel</tt> enumeration value).</li><li><tt>thresholdMV</tt> - the level at which the trigger will fire (in millivolts).</li><li><tt>direction</tt> - direction in which the signal must move to cause a trigger. The following directions are supported: ABOVE, BELOW, RISING, FALLING and RISING_OR_FALLING.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">	<span class="comment">% Set Trigger properties</span>
+	set(ps2000aDeviceObj, <span class="string">'autoTriggerMs'</span>, 0); <span class="comment">% Wait indefinitely for a trigger</span>
+	set(ps2000aDeviceObj, <span class="string">'delay'</span>, 0);
+
+	source          = ps2000aEnuminfo.enPS2000aChannel.PS2000A_CHANNEL_A;
+	thresholdMV     = 500;
+	direction       = ps2000aEnuminfo.enPS2000aDirection.RISING;
+
+	status = invoke(triggerGroupObj, <span class="string">'setSimpleTrigger'</span>, source, thresholdMV, direction);
+</pre><h2 id="7">setTriggerOff</h2><pre class="codeinput">status = setTriggerOff(obj)
+</pre><p><tt>setTriggerOff(obj)</tt> switches off triggering on the oscilloscope.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Trigger group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">	status = invoke(triggerGroupObj, <span class="string">'setTriggerOff'</span>);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_trigger_functions.html#5">setSimpleTrigger</a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Trigger Group Functions
+%
+% This section provides a description of the Instrument Driver Trigger group
+% functions. Prior to calling the functions, a Trigger group object must be
+% created as shown in the <ps2000a_tbx_trigger_group.html Trigger Group> page.
+%
+%% ps2000aIsTriggerOrPulseWidthQualifierEnabled
+
+[status, triggerEnabled, pwqEnabled] = ps2000aIsTriggerOrPulseWidthQualifierEnabled(obj)
+    
+%% 
+% |ps2000aIsTriggerOrPulseWidthQualifierEnabled(obj)| discovers whether a trigger, or pulse width triggering, is enabled.
+%
+% Call after setting up the trigger, and just before calling either
+% <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|>, 
+% <ps2000a_tbx_block_functions.html#32 |runBlock|> or
+% <ps2000a_tbx_streaming_functions.html# |ps2000aRunStreaming|>.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Trigger group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |triggerEnabled| - indicates whether the trigger will successfully be set when 
+% |ps2000aRunBlock|, |runBlock| or |ps2000aRunStreaming| is called. A non-zero value indicates 
+% that the trigger is set, zero that the trigger is not set.
+% * |pwqEnabled| - indicates whether the pulse width qualifier will successfully be set when 
+% |ps2000aRunBlock|, |runBlock| or |ps2000aRunStreaming| is called. A non-zero value indicates that
+% the pulse width qualifier is set, zero that the pulse width qualifier is not set.
+%
+% *Example:*
+
+	[status, triggerEnabled, pwqEnabled] = invoke(triggerGroupObj, 'ps2000aIsTriggerOrPulseWidthQualifierEnabled');
+	
+%% ps2000aSetTriggerDigitalPortProperties
+
+status = ps2000aSetTriggerDigitalPortProperties(obj, directions)
+    
+%% 
+% |ps2000aSetTriggerDigitalPortProperties(obj, directions)| will set the individual Digital channels trigger directions.
+%
+% Each trigger direction consists of a channel name and a direction. If the
+% channel is not included in the array of
+% |tPS2000ADigitalChannelDirections| structures the driver assumes the
+% digital channel's trigger direction is PS2000A_DIGITAL_DONT_CARE.
+%
+% Trigger using digital channels is *NOT* currently supported by this Instrument Driver.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Trigger group.
+% * |directions| - an array of |tPS2000ADigitalChannelDirections| structures describing the requested 
+% properties. The array can contain a single element describing the properties of one channel, or a number 
+% of elements describing several digital channels.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.	
+%
+% *Example*
+
+
+%% setSimpleTrigger
+
+status = setSimpleTrigger(obj, source, thresholdMV, direction)
+    
+%% 
+% |setSimpleTrigger(obj, source, thresholdMV, direction)| simplifies arming the trigger. 
+%
+% It supports only the LEVEL trigger types and does not allow more than one channel 
+% to have a trigger applied to it.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Trigger group.
+% * |source| - the channel on which to trigger (an |enPS2000AChannel| enumeration value).
+% * |thresholdMV| - the level at which the trigger will fire (in millivolts).
+% * |direction| - direction in which the signal must move to cause a trigger. The following directions are supported: 
+% ABOVE, BELOW, RISING, FALLING and RISING_OR_FALLING.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+	% Set Trigger properties
+	set(ps2000aDeviceObj, 'autoTriggerMs', 0); % Wait indefinitely for a trigger
+	set(ps2000aDeviceObj, 'delay', 0);
+	
+	source          = ps2000aEnuminfo.enPS2000aChannel.PS2000A_CHANNEL_A;
+	thresholdMV     = 500;
+	direction       = ps2000aEnuminfo.enPS2000aDirection.RISING;
+	
+	status = invoke(triggerGroupObj, 'setSimpleTrigger', source, thresholdMV, direction);
+	
+%% setTriggerOff
+
+status = setTriggerOff(obj)
+	
+%% 
+% |setTriggerOff(obj)| switches off triggering on the oscilloscope.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Trigger group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+	status = invoke(triggerGroupObj, 'setTriggerOff');
+    
+%%
+% *See also:* <ps2000a_tbx_trigger_functions.html#5 setSimpleTrigger>
+%
+##### SOURCE END #####
+--></body></html>

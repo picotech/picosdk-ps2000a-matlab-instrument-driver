@@ -1,0 +1,229 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PS2000aConstants</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="PS2000aConstants.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PS2000aConstants</h1><p>The PS2000aConstants class defines a number of constant values from the ps2000aApi.h header file that can be used to define the properties of a PicoScope 2000 Series Oscilloscope/Mixed Signal Oscilloscope or for passing as parameters to function calls.</p><p>The properties in this file are divided into the following sub-sections:</p><div><ul><li>ETS Mode Properties</li><li>ADC Count Properties</li><li>Analogue offset values</li><li>Function/Arbitrary Waveform Parameters</li><li>Maximum/Minimum Waveform Frequencies</li><li>PicoScope 2000 Series Models using this driver</li></ul></div><p>Ensure that this class file is on the MATLAB Path.</p><p>Copyright: &copy; 2013 - 2016 Pico Technology Ltd. All rights reserved.</p><pre class="codeinput"><span class="keyword">classdef</span> PS2000aConstants
+
+    <span class="keyword">properties</span> (Constant)
+
+        <span class="comment">% ETS Mode properties</span>
+        PS2208_MAX_ETS_CYCLES	= 500;
+        PS2208_MAX_INTERLEAVE	= 20;
+
+        PS2207_MAX_ETS_CYCLES	= 500;
+        PS2207_MAX_INTERLEAVE	= 20;
+
+        PS2206_MAX_ETS_CYCLES	= 250;
+        PS2206_MAX_INTERLEAVE	= 10;
+
+        <span class="comment">% External Channel ADC Count</span>
+        PS2000A_EXT_MAX_VALUE   = 32767;
+        PS2000A_EXT_MIN_VALUE   = -32767;
+
+        PS2000A_EXT_MAX_VOLTAGE = 5;
+        PS2000A_EXT_MIN_VOLTAGE = -5;
+
+        PS2000A_MAX_LOGIC_LEVEL	= 32767;
+        PS2000A_MIN_LOGIC_LEVEL = -32767;
+
+        PS2000A_MAX_LOGIC_VOLTAGE = 5;
+        PS2000A_MIN_LOGIC_VOLTAGE = -5;
+
+        <span class="comment">% Function/Arbitrary Waveform Parameters</span>
+        MIN_SIG_GEN_FREQ = 0.0;
+        MAX_SIG_GEN_FREQ = 20000000.0;
+
+        PS2000A_MAX_SIG_GEN_BUFFER_SIZE = PicoConstants.AWG_BUFFER_8KS;
+        PS2000A_MIN_SIG_GEN_BUFFER_SIZE = 1;
+
+        MIN_DWELL_COUNT                 = 3;
+        MAX_SWEEPS_SHOTS				= pow2(30) - 1; <span class="comment">%1073741823</span>
+
+        MAX_ANALOGUE_OFFSET_50MV_200MV = 0.250;
+        MIN_ANALOGUE_OFFSET_50MV_200MV = -0.250;
+        MAX_ANALOGUE_OFFSET_500MV_2V   = 2.500;
+        MIN_ANALOGUE_OFFSET_500MV_2V   = -2.500;
+        MAX_ANALOGUE_OFFSET_5V_20V     = 20;
+        MIN_ANALOGUE_OFFSET_5V_20V	   = -20;
+
+        <span class="comment">% Supported by the PicoScope 2000 Series models with the exception</span>
+        <span class="comment">% of the PicoScope 2205 MSO.</span>
+        PS2000A_SHOT_SWEEP_TRIGGER_CONTINUOUS_RUN = hex2dec(<span class="string">'FFFFFFFF'</span>);
+
+        <span class="comment">% PicoScope 2205MSO only</span>
+        PS2000A_AWG_DDS_FREQUENCY = 48e6; <span class="comment">% DDS Frequency of 48MHz.</span>
+
+        <span class="comment">% Frequencies</span>
+
+        PS2000A_SINE_MAX_FREQUENCY		= 1000000;
+        PS2000A_SQUARE_MAX_FREQUENCY	= 1000000;
+        PS2000A_TRIANGLE_MAX_FREQUENCY	= 1000000;
+        PS2000A_SINC_MAX_FREQUENCY		= 1000000;
+        PS2000A_RAMP_MAX_FREQUENCY		= 1000000;
+        PS2000A_HALF_SINE_MAX_FREQUENCY	= 1000000;
+        PS2000A_GAUSSIAN_MAX_FREQUENCY  = 1000000;
+        PS2000A_PRBS_MAX_FREQUENCY		= 1000000;
+        PS2000A_PRBS_MIN_FREQUENCY		= 0.03;
+        PS2000A_MIN_FREQUENCY			= 0.03;
+
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PS2000aConstants 
+%
+% The PS2000aConstants class defines a number of constant values from the
+% ps2000aApi.h header file that can be used to define the properties of a
+% PicoScope 2000 Series Oscilloscope/Mixed Signal Oscilloscope or for
+% passing as parameters to function calls.
+%
+% The properties in this file are divided into the following
+% sub-sections:
+% 
+% * ETS Mode Properties
+% * ADC Count Properties
+% * Analogue offset values
+% * Function/Arbitrary Waveform Parameters
+% * Maximum/Minimum Waveform Frequencies
+% * PicoScope 2000 Series Models using this driver
+%
+% Ensure that this class file is on the MATLAB Path.		
+%
+% Copyright: © 2013 - 2016 Pico Technology Ltd. All rights reserved.	
+
+classdef PS2000aConstants
+    
+    properties (Constant)
+        
+        % ETS Mode properties
+        PS2208_MAX_ETS_CYCLES	= 500;
+        PS2208_MAX_INTERLEAVE	= 20;
+
+        PS2207_MAX_ETS_CYCLES	= 500;
+        PS2207_MAX_INTERLEAVE	= 20;
+
+        PS2206_MAX_ETS_CYCLES	= 250;
+        PS2206_MAX_INTERLEAVE	= 10;
+
+        % External Channel ADC Count
+        PS2000A_EXT_MAX_VALUE   = 32767;
+        PS2000A_EXT_MIN_VALUE   = -32767;
+        
+        PS2000A_EXT_MAX_VOLTAGE = 5;
+        PS2000A_EXT_MIN_VOLTAGE = -5;
+        
+        PS2000A_MAX_LOGIC_LEVEL	= 32767;
+        PS2000A_MIN_LOGIC_LEVEL = -32767;
+        
+        PS2000A_MAX_LOGIC_VOLTAGE = 5;
+        PS2000A_MIN_LOGIC_VOLTAGE = -5;
+        
+        % Function/Arbitrary Waveform Parameters
+        MIN_SIG_GEN_FREQ = 0.0;
+        MAX_SIG_GEN_FREQ = 20000000.0;
+
+        PS2000A_MAX_SIG_GEN_BUFFER_SIZE = PicoConstants.AWG_BUFFER_8KS;
+        PS2000A_MIN_SIG_GEN_BUFFER_SIZE = 1;
+        
+        MIN_DWELL_COUNT                 = 3;
+        MAX_SWEEPS_SHOTS				= pow2(30) - 1; %1073741823
+
+        MAX_ANALOGUE_OFFSET_50MV_200MV = 0.250;
+        MIN_ANALOGUE_OFFSET_50MV_200MV = -0.250;
+        MAX_ANALOGUE_OFFSET_500MV_2V   = 2.500;
+        MIN_ANALOGUE_OFFSET_500MV_2V   = -2.500;
+        MAX_ANALOGUE_OFFSET_5V_20V     = 20;
+        MIN_ANALOGUE_OFFSET_5V_20V	   = -20; 
+
+        % Supported by the PicoScope 2000 Series models with the exception
+        % of the PicoScope 2205 MSO.
+        PS2000A_SHOT_SWEEP_TRIGGER_CONTINUOUS_RUN = hex2dec('FFFFFFFF');
+        
+        % PicoScope 2205MSO only
+        PS2000A_AWG_DDS_FREQUENCY = 48e6; % DDS Frequency of 48MHz.
+
+        % Frequencies
+        
+        PS2000A_SINE_MAX_FREQUENCY		= 1000000;
+        PS2000A_SQUARE_MAX_FREQUENCY	= 1000000;
+        PS2000A_TRIANGLE_MAX_FREQUENCY	= 1000000;
+        PS2000A_SINC_MAX_FREQUENCY		= 1000000;
+        PS2000A_RAMP_MAX_FREQUENCY		= 1000000;
+        PS2000A_HALF_SINE_MAX_FREQUENCY	= 1000000;
+        PS2000A_GAUSSIAN_MAX_FREQUENCY  = 1000000;
+        PS2000A_PRBS_MAX_FREQUENCY		= 1000000;
+        PS2000A_PRBS_MIN_FREQUENCY		= 0.03;
+        PS2000A_MIN_FREQUENCY			= 0.03;
+        
+    end
+
+end
+
+
+##### SOURCE END #####
+--></body></html>

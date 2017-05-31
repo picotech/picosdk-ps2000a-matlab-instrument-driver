@@ -1,0 +1,775 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Device Object Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_device_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Device Object Functions</h1><!--introduction--><p>This section provides a description of the Instrument Drive device object functions. Prior to calling the functions, a device object must be created using <a href="matlab:doc('instrument/icdevice')"><tt>icdevice</tt></a>, and connected to using <a href="matlab:doc('instrument/connect')"><tt>connect</tt></a> as shown in the <a href="../demos.xml">Examples</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">deviceReset</a></li><li><a href="#2">getUnitInfo</a></li><li><a href="#4">ps2000aFlashLed</a></li><li><a href="#6">ps2000aGetAnalogueOffset</a></li><li><a href="#8">ps2000aGetChannelInformation</a></li><li><a href="#10">ps2000aGetMaxDownSampleRatio</a></li><li><a href="#12">ps2000aGetMaxSegments</a></li><li><a href="#14">ps2000aGetTimebase2</a></li><li><a href="#16">ps2000aMemorySegments</a></li><li><a href="#18">ps2000aPingUnit</a></li><li><a href="#20">ps2000aSetChannel</a></li><li><a href="#22">ps2000aSetDataBuffer</a></li><li><a href="#25">ps2000aSetDataBuffers</a></li><li><a href="#28">ps2000aStop</a></li><li><a href="#30">resetDevice</a></li><li><a href="#32">setChannelDefaults</a></li></ul></div><h2 id="1">deviceReset</h2><p>The <a href="matlab:doc('instrument/devicereset')"><tt>devicereset</tt></a> function is not supported by this Instrument Driver. Please use the <a href="ps2000a_tbx_device_functions.html#15"><tt>resetDevice</tt></a> function instead.</p><h2 id="2">getUnitInfo</h2><pre class="codeinput">[status, unitInfoValues] = getUnitInfo(obj)
+</pre><p><b>Description:</b></p><p><tt>getUnitInfo</tt> retrieves information about the specified device for the following types of information:</p><div><ol><li>Driver version</li><li>USB version</li><li>Hardware version</li><li>Variant number</li><li>Batch &amp; Serial number</li><li>Calibration date</li><li>Kernel Version</li><li>Digital Hardware version</li><li>Analogue Hardware version</li><li>Firmware 1</li><li>Firmware 2</li></ol></div><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - an array containing the status codes returned by the driver on each call to the underlying <tt>ps2000aGetUnitInfo</tt> function.</li><li><tt>unitInfoValues</tt> - a cell array containing strings providing information on the device connected to.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    fprintf(<span class="string">'Unit Information:\n\n'</span>);
+    [infoStatus, unitInfo] = invoke(ps2000aDeviceObj, <span class="string">'getUnitInfo'</span>);
+    disp(unitInfo);
+</pre><h2 id="4">ps2000aFlashLed</h2><pre class="codeinput">status = ps2000aFlashLed(obj, start)
+</pre><p><tt>ps2000aFlashLed(obj, start)</tt> flashes the LED on the front of the scope without blocking the calling thread.</p><p>Calls to <a href="ps2000a_tbx_streaming_functions.html#21"><tt>ps2000aRunStreaming</tt></a>, <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> and <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> cancel any flashing started by this function. It is not possible to set the LED to be constantly illuminated, as this state is used to indicate that the scope has not been initialized.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>start</tt> - the action required:</li></ul></div><p>
+  <ul style="list-style-type:none">
+      <li>< 0 : flash the LED indefinitely.</li>
+      <li>0 : stop the LED flashing.</li>
+      <li>> 0 : flash the LED start times.</li>
+  </ul>
+</p><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Flash the LED 3 times</span>
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aFlashLed'</span>, 3);
+</pre><h2 id="6">ps2000aGetAnalogueOffset</h2><pre class="codeinput">[status, maximumVoltage, minimumVoltage] = ps2000aGetAnalogueOffset(obj, range, coupling)
+</pre><p><tt>ps2000aGetAnalogueOffset(obj, range, coupling)</tt> is used to get the maximum and minimum allowable analog offset for a specific voltage range.</p><p>This function applies to all PicoScope 2000 Series devices supported by this Instrument Driver except the PicoScope 2205 MSO.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>range</tt> - an <tt>enPS2000ARange</tt> enumeration representing the voltage range to be used.</li><li><tt>coupling</tt> - an <tt>enPS2000ACoupling</tt> enumeration representing the type of AC/DC coupling used.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>maximumVoltage</tt> - the maximum voltage allowed for the range. If device does not support analog offset, zero will be returned.</li><li><tt>minimumVoltage</tt> - the minimum voltage allowed for the range. If device does not support analog offset, zero will be returned.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    range       = ps2000aEnuminfo.enPS2000ARange.PS2000A_2V;    <span class="comment">% &plusmn;2 V range</span>
+    coupling    = ps2000aEnuminfo.enPS2000ACoupling.PS2000A_DC;
+
+    [status, maximumVoltage, minimumVoltage] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aGetAnalogueOffset'</span>, range, coupling);
+</pre><h2 id="8">ps2000aGetChannelInformation</h2><pre class="codeinput">[status, ranges, length] = ps2000aGetChannelInformation(obj, channels)
+</pre><p><tt>ps2000aGetChannelInformation(obj, channels)</tt> queries which extra voltage ranges are available on a scope device.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>channels</tt> - the channel for which the range information is required (an <tt>enPS2000AChannel</tt> enumeration value).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>ranges</tt> - an array that will be populated with available <tt>enPS2000ARange</tt> enumeration values.</li><li><tt>length</tt> - the number of elements written to the <tt>ranges</tt> array.</li></ul></div><p><b>Note</b>: The enumerations start from 0 and should be offset by +1 to be used with the <tt>SCOPE_INPUT_RANGES</tt> array in the <tt>PicoConstants</tt> class (refer to the <a href="https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox">PicoScope Support Toolbox</a> Help Documentation).</p><p><b>Example:</b></p><pre class="codeinput">    channels = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+
+    [status, ranges, length] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aGetChannelInformation'</span>, channels);
+</pre><h2 id="10">ps2000aGetMaxDownSampleRatio</h2><pre class="codeinput">[status, maxDownSampleRatio] = ps2000aGetMaxDownSampleRatio(obj, numUnaggregatedSamples, downSampleRatioMode, segmentIndex)
+</pre><p><tt>ps2000aGetMaxDownSampleRatio(obj, numUnaggregatedSamples, downSampleRatioMode, segmentIndex)</tt> returns the maximum downsampling ratio that can be used for a given number of samples in a given downsampling mode.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>numUnaggregatedSamples</tt> - the number of unprocessed samples to be downsampled.</li><li><tt>downSampleRatioMode</tt> - the downsampling mode (an <tt>enPS2000ARatioMode</tt> enumeration value - see <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a>).</li><li><tt>segmentIndex</tt> - the memory segment where the data is stored.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>maxDownSampleRatio</tt> - the maximum possible downsampling ratio.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    numUnaggregatedSamples  = 10000;
+    downSampleRatioMode     = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    segmentIndex            = 0;
+
+    [status, maxDownSampleRatio] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aGetMaxDownSampleRatio'</span>, numUnaggregatedSamples, <span class="keyword">...</span>
+                                            downSampleRatioMode, segmentIndex);
+</pre><h2 id="12">ps2000aGetMaxSegments</h2><pre class="codeinput">[status, maxSegments] = ps2000aGetMaxSegments(obj)
+</pre><p><tt>ps2000aGetMaxSegments(obj)</tt> returns the maximum number of segments allowed for the opened device. Refer to <a href="ps2000a_tbx_device_functions.html#9"><tt>ps2000aMemorySegments</tt></a> for specific figures.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>maxSegments</tt> - the maximum number of segments allowed.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [status, maxSegments] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aGetMaxSegments'</span>);
+</pre><h2 id="14">ps2000aGetTimebase2</h2><pre class="codeinput">[status, timeIntervalNanoSeconds, maxSamples] = ps2000aGetTimebase2(obj, timebase, segmentIndex)
+</pre><p><tt>ps2000aGetTimebase2(obj, timebase, segmentIndex)</tt> discovers which timebases are available on the oscilloscope, returning the time interval as a floating point value. The channels (and digital ports for MSO devices) should be setup using the <a href="ps2000a_tbx_device_functions.html#20"><tt>ps2000aSetChannel</tt></a> function first.</p><p>This function calculates the sampling rate and maximum number of samples for a given timebase under the specified conditions. The result will depend on the number of channels enabled by the last call to <tt>ps2000aSetChannel</tt>.</p><p>To use <tt>ps2000aGetTimebase2</tt>, first estimate the timebase number that you require using the information in the <a href="ps2000a_tbx_timebases.html">Timebases</a> guide. Next, call one of these functions with the timebase that you have just chosen and verify that the <tt>timeIntervalNanoseconds</tt> argument that the function returns is the value that you require. You may need to iterate this process until you obtain the time interval that you need.</p><p>This function applies to <a href="ps2000a_tbx_block_mode.html">Block</a>, <a href="ps2000a_tbx_ets_mode.html">ETS</a> and <a href="ps2000a_tbx_rapid_block_mode.html">Rapid-block</a> mode captures and may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>timebase</tt> - a timebase index (refer to the Timebases guide)</li><li><tt>segmentIndex</tt> - the index of the memory segment to use.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>timeIntervalNanoSeconds</tt> - the time interval (in nanoseconds) between readings at the selected timebase.</li><li><tt>maxSamples</tt> - the maximum number of samples available per channel for the segment.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set the number of samples to be collected per channel</span>
+    set(ps2000aDeviceObj, <span class="string">'numPreTriggerSamples'</span>, 2048);
+    set(ps2000aDeviceObj, <span class="string">'numPreTriggerSamples'</span>, 4096);
+
+    timebaseIndex = 10;
+    segmentIndex = 0;
+
+    status = PicoStatus.PICO_INVALID_TIMEBASE;
+
+    <span class="keyword">while</span> (status == PicoStatus.PICO_INVALID_TIMEBASE)
+
+        [status, timeIntervalNanoSeconds, maxSamples] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aGetTimebase2'</span>, <span class="keyword">...</span>
+                                                            timebaseIndex, segmentIndex);
+
+        <span class="keyword">if</span> (status == PicoStatus.PICO_OK)
+
+            <span class="keyword">break</span>;
+
+        <span class="keyword">else</span>
+
+            timebaseIndex = timebaseIndex + 1;
+
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+
+    <span class="comment">% Set the timebase property of the Instrument Driver</span>
+    set(ps2000aDeviceObj, <span class="string">'timebase'</span>, timebaseIndex);
+</pre><h2 id="16">ps2000aMemorySegments</h2><pre class="codeinput">[status, nMaxSamples] = ps2000aMemorySegments(obj, nSegments)
+</pre><p><tt>ps2000aMemorySegments(obj, nSegments)</tt> sets the number of memory segments that the scope will use.</p><p>When the scope is opened, the number of segments defaults to 1, meaning that each capture fills the scope's available memory. This function allows you to divide the memory into a number of segments so that the scope can store several waveforms sequentially.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>nSegments</tt> - the number of segments required from 1 to the number of maximum segments returned by <a href="ps2000a_tbx_device_functions.html#12"><tt>ps2000aGetMaxSegments</tt></a>.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>nMaxSamples</tt> - the number of samples available in each segment. This is the total number over all channels, so if more than                   one channel is in use then the number of samples available to each channel is <tt>nMaxSamples</tt> divided by 2 if 2 channels are enabled or 4 if 3 or 4 channels are enabled.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    nSegments = 64;
+    [status, nMaxSamples] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aMemorySegments'</span>, 64);
+</pre><h2 id="18">ps2000aPingUnit</h2><pre class="codeinput">status = ps2000aPingUnit(obj)
+</pre><p><tt>ps2000aPingUnit(obj)</tt> can be used to check that the already opened device is stil connected to the USB port and communication is successful.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aPingUnit'</span>);
+</pre><h2 id="20">ps2000aSetChannel</h2><pre class="codeinput">status = ps2000aSetChannel(obj, channel, enabled, type, range, analogueOffset)
+</pre><p><tt>ps2000aSetChannel(obj, channel, enabled, type, range, analogueOffset)</tt> specifies whether an input channel is to be enabled, it's input coupling type, voltage range, and analog offset.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>channel</tt> - the channel to be configured (an enumeration from the <tt>enPS2000AChannel</tt> range - <tt>PS2000A_CHANNEL_A</tt> to <tt>PS2000A_CHANNEL_B</tt> or <tt>PS2000A_CHANNEL_D</tt> depending on the number of analog channels).</li><li><tt>enabled</tt> - set to TRUE (1) to enable the channel, FALSE (0) otherwise.</li><li><tt>type</tt> - the impedance and coupling type (an enumeration from the <tt>enPS2000ACoupling</tt> range). The values are <tt>PS2000A_AC</tt> - 1 megohm impedance, AC coupling (the channel accepts input frequencies from about 1 hertz up to its maximum analog bandwidth) and <tt>PS2000A_DC</tt> - 1 megohm impedance, DC coupling (The channel accepts all input frequencies from zero (DC) up to its maximum analog bandwidth).</li><li><tt>range</tt> - the input voltage range (an enumeration from the <tt>enPS2000ARange</tt> set of values). The minimum will be <tt>PS2000A_20MV</tt> or <tt>PS2000A_50MV</tt> depending on the model, the maximum will be <tt>PS2000A_20V</tt>.</li><li><tt>analogueOffset</tt> - a voltage to add to the input channel before digitization. The allowable range of offsets can be obtained from <a href="ps2000a_tbx_device_functions.html#6"><tt>ps2000aGetAnalogueOffset</tt></a> and depends on the input range selected for the channel. This argument is ignored if the device is a PicoScope 2205 MSO.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Define parameters and set channel A</span>
+    channelA        = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    enabled         = PicoConstants.TRUE;
+    coupling        = ps2000aEnuminfo.enPS2000ACoupling.PS2000A_DC;
+    range           = ps2000aEnuminfo.enPS2000ARange.PS2000A_2V; <span class="comment">% &plusmn; 2 V range</span>
+    analogueOffset  = 0.0; <span class="comment">% Volts</span>
+
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetChannel'</span>, channelA, enabled, coupling, range, analogueOffset);
+</pre><h2 id="22">ps2000aSetDataBuffer</h2><pre class="codeinput">status = ps2000aSetDataBuffer(obj, channel, pBuffer, bufferLth, segmentIndex, mode)
+</pre><p><tt>ps2000aSetDataBuffer(obj, channel, buffer, bufferLth, segmentIndex, mode)</tt> tells the driver where to store the data, either unprocessed or downsampled, that will be returned after the next call to one of the GetValues functions. The function allows you to specify only a single buffer, so for aggregation mode, which requires two buffers, you need to call <a href="ps2000a_tbx_device_functions.html#24"><tt>ps2000aSetDataBuffers</tt></a> instead.</p><p>This function should be used if data buffers need to be set up prior to the start of data collection, otherwise consider using <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a>, <a href="ps2000a_tbx_block_functions.html#4"><tt>getEtsBlockData</tt></a> or <a href="ps2000a_tbx_rapid_block_functions.html#1"><tt>getRapidBlockData</tt></a> depending on the mode of data collection.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>channel</tt> - the channel to which the buffer corresponds (use one of the values from the <tt>enPS2000AChannel</tt> range (<tt>PS2000A_CHANNEL_A</tt> to <tt>PS2000A_CHANNEL_D</tt>) for analog channels).   To set the buffer for a digital port (MSO models only), use one of   these values: <tt>PS2000A_DIGITAL_PORT0 = hex2dec('80')</tt> or   <tt>PS2000A_DIGITAL_PORT1 = hex2dec('81')</tt>.</li><li><tt>pBuffer</tt> - a libpointer object corresponding to a 1-D array to receive the data values for the channel.</li><li><tt>bufferLth</tt> - the length of the buffer array.</li><li><tt>segmentIndex</tt> - the number of the memory segment to be used.</li><li><tt>mode</tt> - the downsampling mode. See <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> for the available modes, but note that a single call to <tt>ps2000aSetDataBuffer</tt> can only associate one buffer with one downsampling mode. If you intend to call <tt>ps2000aGetValues</tt> with more than one downsampling mode activated, then you must call <tt>ps2000aSetDataBuffer</tt> several times to associate a separate buffer with each downsampling mode.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the device.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Define parameters</span>
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    overviewBufferSize  = 250000; <span class="comment">% Size of the buffer to collect data from the driver.</span>
+    pDriverBufferChA    = libpointer(<span class="string">'int16Ptr'</span>, zeros(overviewBufferSize, 1, <span class="string">'int16'</span>));
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    <span class="comment">% Set the data buffer for channel A</span>
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetDataBuffer'</span>, channelA, pDriverBufferChA, overviewBufferSize, <span class="keyword">...</span>
+                segmentIndex, ratioMode);
+</pre><p><b>Note:</b> If capturing data in streaming mode without aggregation, the buffer for an analog channel must also be passed as the <tt>driverBuffer</tt> argument for the <a href="ps2000a_tbx_streaming_functions.html#24"><tt>setAppAndDriverBuffers</tt></a> function call. For digital ports, the buffer should be passed as the <tt>driverDigiBuffer</tt> argument for the <a href="ps2000a_tbx_streaming_functions.html#27"><tt>setAppAndDriverDigiBuffers</tt></a> function call.</p><h2 id="25">ps2000aSetDataBuffers</h2><pre class="codeinput">status = ps2000aSetDataBuffers(obj, channel, pBufferMax, pBufferMin, bufferLth, segmentIndex, ratioMode)
+</pre><p><tt>ps2000aSetDataBuffers(obj, channel, pBufferMax, pBufferMin, bufferLth, segmentIndex, ratioMode)</tt> tells the driver the location of one or two buffers for receiving data. You need to allocate memory for the buffers before calling this function. If you do not need two buffers, because you are not using aggregate mode, you can optionally use <a href="ps2000a_tbx_device_functions.html#22"><tt>ps2000aSetDataBuffer</tt></a> instead.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li><li><tt>channel</tt> - the channel to which the buffer corresponds (use one of the values from the <tt>enPS2000AChannel</tt> range (<tt>PS2000A_CHANNEL_A</tt> to <tt>PS2000A_CHANNEL_D</tt>) for analog channels).   To set the buffer for a digital port (MSO models only), use one of   these values: <tt>PS2000A_DIGITAL_PORT0 = hex2dec('80')</tt> or   <tt>PS2000A_DIGITAL_PORT1 = hex2dec('81')</tt>.</li><li><tt>pBufferMax</tt> - a libpointer object corresponding to a 1-D array to receive the maximum data values in   aggregation mode, or the non-aggregated values otherwise.</li><li><tt>pBufferMin</tt> - a libpointer object corresponding to a 1-D array to receive the minimum data values in   aggregation mode. Not used in other downsampling modes if the maximum   buffer has been defined.</li><li><tt>bufferLth</tt> - the size of the arrays referenced by <tt>pBufferMax</tt> and <tt>pBufferMin</tt>.</li><li><tt>segmentIndex</tt> - the number of the memory segment to be used.</li><li><tt>mode</tt> - the downsampling mode. See <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> as per <tt>ps2000aSetDataBuffer</tt>.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li>status - status code returned by the device.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Define parameters</span>
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    overviewBufferSize  = 250000; <span class="comment">% Size of the buffer to collect data from the driver.</span>
+    pDriverBufferChAMax = libpointer(<span class="string">'int16Ptr'</span>, zeros(overviewBufferSize, 1, <span class="string">'int16'</span>));
+    pDriverBufferChAMin = libpointer(<span class="string">'int16Ptr'</span>, zeros(overviewBufferSize, 1, <span class="string">'int16'</span>));
+    segmentIndex        = 0;
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    <span class="comment">% Set the data buffer for channel A</span>
+    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aSetDataBuffer'</span>, channelA, pDriverBufferChAMax, pDriverBufferChAMin, <span class="keyword">...</span>
+        overviewBufferSize, segmentIndex, ratioMode);
+</pre><p><b>Note:</b> If capturing data in streaming mode without aggregation, the buffers for an analog channel must also be passed as the <tt>driverMaxBuffer</tt> and <tt>driverMinBuffer</tt> arguments for the <a href="ps2000a_tbx_streaming_functions.html#24"><tt>setMaxMinAppAndDriverBuffers</tt></a> function call. For digital ports, the buffers should be passed as the <tt>driverDigiMaxBuffer</tt> and <tt>driverDigiMinBuffer</tt> arguments for the <a href="ps2000a_tbx_streaming_functions.html#33"><tt>setMaxMinAppAndDriverDigiBuffers</tt></a> function call.</p><h2 id="28">ps2000aStop</h2><pre class="codeinput">status = ps2000aStop(obj)
+</pre><p><tt>ps2000aStop(obj)</tt> stops the scope device from sampling data.</p><p>The function is mainly used in streaming mode to stop a streaming capture. It can optionally be used in block mode to stop a capture early, either before or after triggering; and in rapid block mode to stop a sequence of captures. If a block mode capture is interrupted, <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> and <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a> will indicate that no samples are available and the buffer will contain no data.</p><p>Always call this function after the end of a capture to ensure that the scope is ready for the next capture.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><p><tt>obj</tt> - the object representing the device.</p><p><b>Output Arguments:</b></p><p><tt>status</tt> - status code returned by the driver.</p><p><b>Example:</b></p><pre class="codeinput">    status = invoke(ps2000aDeviceObj, <span class="string">'ps2000aStop'</span>);
+</pre><h2 id="30">resetDevice</h2><pre class="codeinput">resetDevice(obj)
+</pre><p>resetDevice(obj) sets the default parameters for the device.</p><p>This includes the following:</p><div><ol><li>Device specific properties.</li><li>Enabling all available channels to &plusmn;5 V range, DC coupled with 0 Volt analogue offset.</li><li>Turning off the trigger (autoTriggerMs = 0 &amp; delay = 0.0).</li><li>Block mode parameters (timebase = 64, numPreTriggerSamples = 0, numPostTriggerSamples = 1000000)</li><li>Streaming mode parameters (streamingInterval = 1e-6 (seconds), autoStop = 1)</li><li>Signal Generator parameters (offsetVoltage = 0 mV, peakToPeakVoltage = 2000 mV, startFrequency = 1000 Hz, stopFrequency = 1000 Hz)</li></ol></div><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li>None.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    status = invoke(ps2000aDeviceObj, <span class="string">'resetDevice'</span>);
+</pre><h2 id="32">setChannelDefaults</h2><pre class="codeinput">status = setChannelDefaults(obj)
+</pre><p>setChannelDefaults(obj) sets the following default values for any analog channels found on the device:</p><p><b>Analog Channel:</b></p><div><ul><li>Enabled         : True</li><li>Coupling        : DC</li><li>Voltage Range   : &plusmn;5 V</li><li>Analogue Offset : 0.0 V</li></ul></div><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the device.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li>None.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    status = invoke(ps2000aDeviceObj, <span class="string">'setChannelDefaults'</span>);
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Device Object Functions
+%
+% This section provides a description of the Instrument Drive device object
+% functions. Prior to calling the functions, a device object must be
+% created using <matlab:doc('instrument/icdevice') |icdevice|>, and connected
+% to using <matlab:doc('instrument/connect') |connect|> as shown in the <../demos.xml Examples>.
+
+%% deviceReset
+%
+% The <matlab:doc('instrument/devicereset') |devicereset|> function is not supported by this Instrument Driver.
+% Please use the <ps2000a_tbx_device_functions.html#15 |resetDevice|> function instead.
+%
+%% getUnitInfo
+
+[status, unitInfoValues] = getUnitInfo(obj)
+
+%%   
+% *Description:*
+%
+% |getUnitInfo| retrieves information about the specified device for the following types of information:
+%
+% # Driver version
+% # USB version
+% # Hardware version
+% # Variant number
+% # Batch & Serial number
+% # Calibration date
+% # Kernel Version
+% # Digital Hardware version
+% # Analogue Hardware version
+% # Firmware 1
+% # Firmware 2
+%
+% *Input Arguments:*
+%
+% * |obj| - the object representing the device.
+%
+% *Output Arguments:*
+%
+% * |status| - an array containing the status codes returned by the driver on
+% each call to the underlying |ps2000aGetUnitInfo| function.
+% * |unitInfoValues| - a cell array containing strings providing information on the device connected to.
+%
+% *Example:*
+
+    fprintf('Unit Information:\n\n');
+    [infoStatus, unitInfo] = invoke(ps2000aDeviceObj, 'getUnitInfo');
+    disp(unitInfo);
+
+%% ps2000aFlashLed
+
+status = ps2000aFlashLed(obj, start)
+
+%%
+% |ps2000aFlashLed(obj, start)| flashes the LED on the front of the scope without blocking the calling thread.
+% 
+% Calls to <ps2000a_tbx_streaming_functions.html#21 |ps2000aRunStreaming|>,
+% <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|> and
+% <ps2000a_tbx_block_functions.html#32 |runBlock|> cancel any flashing
+% started by this function. It is not possible to set the LED to be
+% constantly illuminated, as this state is used to indicate that the scope
+% has not been initialized.
+%
+% This function may be used with the Test and Measurement Tool.
+% 
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |start| - the action required:
+%
+% <html>
+%   <ul style="list-style-type:none">
+%       <li>< 0 : flash the LED indefinitely.</li>
+%       <li>0 : stop the LED flashing.</li>
+%       <li>> 0 : flash the LED start times.</li>
+%   </ul>
+% </html>
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+%
+
+    % Flash the LED 3 times
+    status = invoke(ps2000aDeviceObj, 'ps2000aFlashLed', 3);
+
+%% ps2000aGetAnalogueOffset
+
+[status, maximumVoltage, minimumVoltage] = ps2000aGetAnalogueOffset(obj, range, coupling)
+
+%%
+% |ps2000aGetAnalogueOffset(obj, range, coupling)| is used to get the
+% maximum and minimum allowable analog offset for a specific voltage
+% range.
+%
+% This function applies to all PicoScope 2000 Series devices supported by
+% this Instrument Driver except the PicoScope 2205 MSO.
+%
+% This function may be used with the Test and Measurement Tool.
+% 
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |range| - an |enPS2000ARange| enumeration representing the voltage range to be used.
+% * |coupling| - an |enPS2000ACoupling| enumeration representing the type of AC/DC coupling used.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |maximumVoltage| - the maximum voltage allowed for the range. If device
+% does not support analog offset, zero will be returned.
+% * |minimumVoltage| - the minimum voltage allowed for the range. If device
+% does not support analog offset, zero will be returned.
+%
+% *Example:*
+%
+
+    range       = ps2000aEnuminfo.enPS2000ARange.PS2000A_2V;    % ±2 V range
+    coupling    = ps2000aEnuminfo.enPS2000ACoupling.PS2000A_DC;
+    
+    [status, maximumVoltage, minimumVoltage] = invoke(ps2000aDeviceObj, 'ps2000aGetAnalogueOffset', range, coupling);
+    
+%% ps2000aGetChannelInformation
+
+[status, ranges, length] = ps2000aGetChannelInformation(obj, channels)
+    
+%%
+% |ps2000aGetChannelInformation(obj, channels)| queries which extra voltage ranges are available on a scope device.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |channels| - the channel for which the range information is required (an |enPS2000AChannel| enumeration value).
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |ranges| - an array that will be populated with available |enPS2000ARange| enumeration values.
+% * |length| - the number of elements written to the |ranges| array.
+%
+% *Note*: The enumerations start from 0 and should be offset by +1 to be
+% used with the |SCOPE_INPUT_RANGES| array in the |PicoConstants| class
+% (refer to the
+% <https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox
+% PicoScope Support Toolbox> Help Documentation).
+%
+% *Example:*
+%
+
+    channels = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+
+    [status, ranges, length] = invoke(ps2000aDeviceObj, 'ps2000aGetChannelInformation', channels);
+
+%% ps2000aGetMaxDownSampleRatio
+
+[status, maxDownSampleRatio] = ps2000aGetMaxDownSampleRatio(obj, numUnaggregatedSamples, downSampleRatioMode, segmentIndex)
+
+%%
+% |ps2000aGetMaxDownSampleRatio(obj, numUnaggregatedSamples,
+% downSampleRatioMode, segmentIndex)| returns the maximum downsampling
+% ratio that can be used for a given number of samples in a given
+% downsampling mode.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |numUnaggregatedSamples| - the number of unprocessed samples to be downsampled.
+% * |downSampleRatioMode| - the downsampling mode (an
+% |enPS2000ARatioMode| enumeration value - see
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|>).
+% * |segmentIndex| - the memory segment where the data is stored.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |maxDownSampleRatio| - the maximum possible downsampling ratio.
+%
+% *Example:*
+
+    numUnaggregatedSamples  = 10000;
+    downSampleRatioMode     = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    segmentIndex            = 0;
+    
+    [status, maxDownSampleRatio] = invoke(ps2000aDeviceObj, 'ps2000aGetMaxDownSampleRatio', numUnaggregatedSamples, ...
+                                            downSampleRatioMode, segmentIndex);
+
+%% ps2000aGetMaxSegments
+
+[status, maxSegments] = ps2000aGetMaxSegments(obj)
+
+%%
+% |ps2000aGetMaxSegments(obj)| returns the maximum number of segments
+% allowed for the opened device. Refer to <ps2000a_tbx_device_functions.html#9 |ps2000aMemorySegments|> for
+% specific figures.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |maxSegments| - the maximum number of segments allowed.
+%
+% *Example:*
+
+    [status, maxSegments] = invoke(ps2000aDeviceObj, 'ps2000aGetMaxSegments');
+
+%% ps2000aGetTimebase2
+
+[status, timeIntervalNanoSeconds, maxSamples] = ps2000aGetTimebase2(obj, timebase, segmentIndex)
+
+%%
+% |ps2000aGetTimebase2(obj, timebase, segmentIndex)| discovers which
+% timebases are available on the oscilloscope, returning the time interval
+% as a floating point value. The channels (and digital ports for MSO
+% devices) should be setup using the <ps2000a_tbx_device_functions.html#20
+% |ps2000aSetChannel|> function first.
+% 
+% This function calculates the sampling rate and maximum number of samples
+% for a given timebase under the specified conditions. The result will
+% depend on the number of channels enabled by the last call to |ps2000aSetChannel|. 
+%
+% To use |ps2000aGetTimebase2|, first estimate the
+% timebase number that you require using the information in the
+% <ps2000a_tbx_timebases.html Timebases> guide. Next, call one of these
+% functions with the timebase that you have just chosen and verify that the
+% |timeIntervalNanoseconds| argument that the function returns is the value
+% that you require. You may need to iterate this process until you obtain
+% the time interval that you need.
+%
+% This function applies to <ps2000a_tbx_block_mode.html Block>,
+% <ps2000a_tbx_ets_mode.html ETS> and <ps2000a_tbx_rapid_block_mode.html
+% Rapid-block> mode captures and may be used with the Test and Measurement
+% Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |timebase| - a timebase index (refer to the Timebases guide)
+% * |segmentIndex| - the index of the memory segment to use.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |timeIntervalNanoSeconds| - the time interval (in nanoseconds) between readings at the selected timebase.
+% * |maxSamples| - the maximum number of samples available per channel for the segment.
+%
+% *Example:*
+
+    % Set the number of samples to be collected per channel
+    set(ps2000aDeviceObj, 'numPreTriggerSamples', 2048);
+    set(ps2000aDeviceObj, 'numPreTriggerSamples', 4096);
+    
+    timebaseIndex = 10;
+    segmentIndex = 0;
+    
+    status = PicoStatus.PICO_INVALID_TIMEBASE;
+    
+    while (status == PicoStatus.PICO_INVALID_TIMEBASE)
+    
+        [status, timeIntervalNanoSeconds, maxSamples] = invoke(ps2000aDeviceObj, 'ps2000aGetTimebase2', ...
+                                                            timebaseIndex, segmentIndex);
+    
+        if (status == PicoStatus.PICO_OK)
+
+            break;
+
+        else
+
+            timebaseIndex = timebaseIndex + 1;
+
+        end    
+    
+    end
+    
+    % Set the timebase property of the Instrument Driver
+    set(ps2000aDeviceObj, 'timebase', timebaseIndex);
+
+%% ps2000aMemorySegments
+
+[status, nMaxSamples] = ps2000aMemorySegments(obj, nSegments)
+
+%%
+% |ps2000aMemorySegments(obj, nSegments)| sets the number of memory segments that the scope will use.
+% 
+% When the scope is opened, the number of segments defaults to 1, meaning
+% that each capture fills the scope's available memory. This function
+% allows you to divide the memory into a number of segments so that the
+% scope can store several waveforms sequentially.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |nSegments| - the number of segments required from 1 to the number of
+% maximum segments returned by <ps2000a_tbx_device_functions.html#12
+% |ps2000aGetMaxSegments|>.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |nMaxSamples| - the number of samples available in each segment. This is the total number over all channels, so if more than
+%                   one channel is in use then the number of samples available to each channel is |nMaxSamples| divided by 2 if 2 channels are enabled or 4 if 3 or 4 channels are enabled.
+%
+% *Example:*
+
+    nSegments = 64;
+    [status, nMaxSamples] = invoke(ps2000aDeviceObj, 'ps2000aMemorySegments', 64);
+
+%% ps2000aPingUnit
+
+status = ps2000aPingUnit(obj)
+
+%%
+% |ps2000aPingUnit(obj)| can be used to check that the already opened device is stil connected to the USB port and communication is successful.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    status = invoke(ps2000aDeviceObj, 'ps2000aPingUnit');
+
+%% ps2000aSetChannel
+
+status = ps2000aSetChannel(obj, channel, enabled, type, range, analogueOffset)
+
+%%
+% |ps2000aSetChannel(obj, channel, enabled, type, range, analogueOffset)|
+% specifies whether an input channel is to be enabled, it's input coupling
+% type, voltage range, and analog offset.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |channel| - the channel to be configured (an enumeration from the
+% |enPS2000AChannel| range - |PS2000A_CHANNEL_A| to |PS2000A_CHANNEL_B| or
+% |PS2000A_CHANNEL_D| depending on the number of analog channels).
+% * |enabled| - set to TRUE (1) to enable the channel, FALSE (0) otherwise.
+% * |type| - the impedance and coupling type (an enumeration from the
+% |enPS2000ACoupling| range). The values are |PS2000A_AC| - 1 megohm
+% impedance, AC coupling (the channel accepts input frequencies from about
+% 1 hertz up to its maximum analog bandwidth) and |PS2000A_DC| - 1 megohm
+% impedance, DC coupling (The channel accepts all input frequencies from
+% zero (DC) up to its maximum analog bandwidth).
+% * |range| - the input voltage range (an enumeration from the
+% |enPS2000ARange| set of values). The minimum will be |PS2000A_20MV| or
+% |PS2000A_50MV| depending on the model, the maximum will be |PS2000A_20V|.
+% * |analogueOffset| - a voltage to add to the input channel before
+% digitization. The allowable range of offsets can be obtained from
+% <ps2000a_tbx_device_functions.html#6 |ps2000aGetAnalogueOffset|> and
+% depends on the input range selected for the channel. This argument is
+% ignored if the device is a PicoScope 2205 MSO.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Define parameters and set channel A
+    channelA        = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    enabled         = PicoConstants.TRUE;
+    coupling        = ps2000aEnuminfo.enPS2000ACoupling.PS2000A_DC;
+    range           = ps2000aEnuminfo.enPS2000ARange.PS2000A_2V; % ± 2 V range
+    analogueOffset  = 0.0; % Volts
+
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetChannel', channelA, enabled, coupling, range, analogueOffset);
+    
+%% ps2000aSetDataBuffer
+
+status = ps2000aSetDataBuffer(obj, channel, pBuffer, bufferLth, segmentIndex, mode)
+
+%% 
+% |ps2000aSetDataBuffer(obj, channel, buffer, bufferLth, segmentIndex,
+% mode)|
+% tells the driver where to store the data, either unprocessed or
+% downsampled, that will be returned after the next call to one of the
+% GetValues functions. The function allows you to specify only a single
+% buffer, so for aggregation mode, which requires two buffers, you need to
+% call <ps2000a_tbx_device_functions.html#24 |ps2000aSetDataBuffers|> instead.
+%
+% This function should be used if data buffers need to be set up prior to
+% the start of data collection, otherwise consider using
+% <ps2000a_tbx_block_functions.html#1 |getBlockData|>,
+% <ps2000a_tbx_block_functions.html#4 |getEtsBlockData|> or
+% <ps2000a_tbx_rapid_block_functions.html#1 |getRapidBlockData|> depending
+% on the mode of data collection.
+% 
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |channel| - the channel to which the buffer corresponds (use one of the
+% values from the |enPS2000AChannel| range (|PS2000A_CHANNEL_A| to
+% |PS2000A_CHANNEL_D|) for analog channels).
+%   To set the buffer for a digital port (MSO models only), use one of
+%   these values: |PS2000A_DIGITAL_PORT0 = hex2dec('80')| or
+%   |PS2000A_DIGITAL_PORT1 = hex2dec('81')|.
+% * |pBuffer| - a libpointer object corresponding to a 1-D array to receive the data values for the channel.
+% * |bufferLth| - the length of the buffer array.
+% * |segmentIndex| - the number of the memory segment to be used.
+% * |mode| - the downsampling mode. See
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> for the
+% available modes, but note that a single call to |ps2000aSetDataBuffer|
+% can only associate one buffer with one downsampling mode. If you intend
+% to call |ps2000aGetValues| with more than one downsampling mode
+% activated, then you must call |ps2000aSetDataBuffer| several times to
+% associate a separate buffer with each downsampling mode.
+%
+% *Output Arguments:*
+%
+% * |status| - status code returned by the device.
+%
+% *Example:*
+
+    % Define parameters
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    overviewBufferSize  = 250000; % Size of the buffer to collect data from the driver.
+    pDriverBufferChA    = libpointer('int16Ptr', zeros(overviewBufferSize, 1, 'int16'));
+    segmentIndex        = 0;   
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    
+    % Set the data buffer for channel A
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetDataBuffer', channelA, pDriverBufferChA, overviewBufferSize, ...
+                segmentIndex, ratioMode);
+
+%%
+% *Note:* If capturing data in streaming mode without aggregation, the
+% buffer for an analog channel must also be passed as the |driverBuffer|
+% argument for the <ps2000a_tbx_streaming_functions.html#24
+% |setAppAndDriverBuffers|> function call. For digital ports, the buffer
+% should be passed as the |driverDigiBuffer| argument for the
+% <ps2000a_tbx_streaming_functions.html#27 |setAppAndDriverDigiBuffers|>
+% function call.
+
+%% ps2000aSetDataBuffers
+
+status = ps2000aSetDataBuffers(obj, channel, pBufferMax, pBufferMin, bufferLth, segmentIndex, ratioMode)
+
+%% 
+% |ps2000aSetDataBuffers(obj, channel, pBufferMax, pBufferMin, bufferLth,
+% segmentIndex, ratioMode)| tells the driver the location of one or two
+% buffers for receiving data. You need to allocate memory for the buffers
+% before calling this function. If you do not need two buffers, because you
+% are not using aggregate mode, you can optionally use
+% <ps2000a_tbx_device_functions.html#22 |ps2000aSetDataBuffer|> instead.
+% 
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the device.
+% * |channel| - the channel to which the buffer corresponds (use one of the values from the |enPS2000AChannel| range (|PS2000A_CHANNEL_A| to |PS2000A_CHANNEL_D|) for analog channels).
+%   To set the buffer for a digital port (MSO models only), use one of
+%   these values: |PS2000A_DIGITAL_PORT0 = hex2dec('80')| or
+%   |PS2000A_DIGITAL_PORT1 = hex2dec('81')|.
+% * |pBufferMax| - a libpointer object corresponding to a 1-D array to receive the maximum data values in
+%   aggregation mode, or the non-aggregated values otherwise.
+% * |pBufferMin| - a libpointer object corresponding to a 1-D array to receive the minimum data values in
+%   aggregation mode. Not used in other downsampling modes if the maximum
+%   buffer has been defined.
+% * |bufferLth| - the size of the arrays referenced by |pBufferMax| and |pBufferMin|.
+% * |segmentIndex| - the number of the memory segment to be used.
+% * |mode| - the downsampling mode. See
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> as per
+% |ps2000aSetDataBuffer|.
+%
+% *Output Arguments:*
+%
+% * status - status code returned by the device.
+%
+% *Example:*
+
+    % Define parameters
+    channelA            = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
+    overviewBufferSize  = 250000; % Size of the buffer to collect data from the driver.
+    pDriverBufferChAMax = libpointer('int16Ptr', zeros(overviewBufferSize, 1, 'int16'));
+    pDriverBufferChAMin = libpointer('int16Ptr', zeros(overviewBufferSize, 1, 'int16'));
+    segmentIndex        = 0;   
+    ratioMode           = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    
+    % Set the data buffer for channel A
+    status = invoke(ps2000aDeviceObj, 'ps2000aSetDataBuffer', channelA, pDriverBufferChAMax, pDriverBufferChAMin, ...
+        overviewBufferSize, segmentIndex, ratioMode);
+
+%%
+% *Note:* If capturing data in streaming mode without aggregation, the
+% buffers for an analog channel must also be passed as the
+% |driverMaxBuffer| and |driverMinBuffer| arguments for the
+% <ps2000a_tbx_streaming_functions.html#24 |setMaxMinAppAndDriverBuffers|>
+% function call. For digital ports, the buffers should be passed as the
+% |driverDigiMaxBuffer| and |driverDigiMinBuffer| arguments for the
+% <ps2000a_tbx_streaming_functions.html#33
+% |setMaxMinAppAndDriverDigiBuffers|> function call.
+
+%% ps2000aStop
+
+status = ps2000aStop(obj)
+
+%%
+% |ps2000aStop(obj)| stops the scope device from sampling data.
+% 
+% The function is mainly used in streaming mode to stop a streaming
+% capture. It can optionally be used in block mode to stop a capture early,
+% either before or after triggering; and in rapid block mode to stop a
+% sequence of captures. If a block mode capture is interrupted,
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> and
+% <ps2000a_tbx_block_functions.html#1 |getBlockData|> will indicate that no
+% samples are available and the buffer will contain no data.
+% 
+% Always call this function after the end of a capture to ensure that the
+% scope is ready for the next capture.
+% 
+% This function may be used with the Test and Measurement Tool.
+% 
+% *Input Arguments:*
+% 
+% |obj| - the object representing the device.
+% 
+% *Output Arguments:*
+% 
+% |status| - status code returned by the driver.
+%
+% *Example:*
+
+    status = invoke(ps2000aDeviceObj, 'ps2000aStop');
+
+%% resetDevice
+
+resetDevice(obj)
+
+%%
+% resetDevice(obj) sets the default parameters for the device.
+% 
+% This includes the following:
+% 
+% # Device specific properties.
+% # Enabling all available channels to ±5 V range, DC coupled with 0 Volt analogue offset.
+% # Turning off the trigger (autoTriggerMs = 0 & delay = 0.0).
+% # Block mode parameters (timebase = 64, numPreTriggerSamples = 0, numPostTriggerSamples = 1000000)
+% # Streaming mode parameters (streamingInterval = 1e-6 (seconds), autoStop = 1)
+% # Signal Generator parameters (offsetVoltage = 0 mV, peakToPeakVoltage =
+% 2000 mV, startFrequency = 1000 Hz, stopFrequency = 1000 Hz)
+%       
+% *Input Arguments:*
+%
+% * |obj| - the object representing the device.
+%
+% *Output Arguments:*
+%
+% * None.
+%
+% *Example:*
+
+    status = invoke(ps2000aDeviceObj, 'resetDevice');
+
+%% setChannelDefaults
+
+status = setChannelDefaults(obj)
+
+%%
+% setChannelDefaults(obj) sets the following default values for any analog
+% channels found on the device:
+% 
+% *Analog Channel:*
+% 
+% * Enabled         : True
+% * Coupling        : DC
+% * Voltage Range   : ±5 V
+% * Analogue Offset : 0.0 V
+%
+% *Input Arguments:*
+%
+% * |obj| - the object representing the device.
+%
+% *Output Arguments:*
+%
+% * None.
+%
+% *Example:*
+
+    status = invoke(ps2000aDeviceObj, 'setChannelDefaults');
+
+##### SOURCE END #####
+--></body></html>

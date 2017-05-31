@@ -1,0 +1,309 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Signalgenerator Group</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_sig_gen_group.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Signalgenerator Group</h1><!--introduction--><p>The Signalgenerator group contains a set of properties and functions related to the <a href="ps2000a_tbx_signal_generator.html">signal generator</a> functionality of the device.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Obtaining a Signalgenerator Group Object from the Instrument Driver</a></li><li><a href="#2">Properties</a></li><li><a href="#3">Functions</a></li></ul></div><h2 id="1">Obtaining a Signalgenerator Group Object from the Instrument Driver</h2><p>Below is an example of how to obtain a Signalgenerator group object from the Instrument Driver device object. This step only has to be carried out once prior to accessing properties or invoking group object functions:</p><pre class="codeinput">    sigGenGroupObj = get(ps2000aDeviceObj, <span class="string">'Signalgenerator'</span>);
+    sigGenGroupObj = sigGenGroupObj(1);
+</pre><h2 id="2">Properties</h2><p>The following properties are defined for the Signalgenerator object:</p><p>
+  <table>
+      <th style="border-color:#999; background-color:#E0E0E0">Property Name</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Data type</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Min. Value</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Max. Value</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Default value</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Can be changed by User</th>
+      <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+      <tr>
+          <td style="border-color:#999">awgBufferSize</td>
+          <td style="border-color:#999">Double (Bounded)</td>
+          <td style="border-color:#999">16384</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">32768</td>
+          <td style="border-color:#999">No</td>
+          <td style="border-color:#999">The size of the arbitrary waveform buffer on the device, in samples.</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">dacFrequency</td>
+          <td style="border-color:#999">Double (Bounded)</td>
+          <td style="border-color:#999">2.0E7</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">2.0E7</td>
+          <td style="border-color:#999">No</td>
+          <td style="border-color:#999">The update frequency of the Arbitrary Waveform Generator (MS/s or MHz)</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">ddsFrequency</td>
+          <td style="border-color:#999">Double</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">N/A</td>
+          <td style="border-color:#999">N/A</td>
+          <td style="border-color:#999">No</td>
+          <td style="border-color:#999">ddsFrequency is the direct digital synthesis frequency for the arbitrary waveform generator (in Hz). This property is only set for the PicoScope 2205 MSO, and is set to 0 for other models.</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">offsetVoltage</td>
+          <td style="border-color:#999">Double (Bounded)</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">-2000.0</td>
+          <td style="border-color:#999">2000.0</td>
+          <td style="border-color:#999">Yes</td>
+          <td style="border-color:#999">The voltage offset, in millivolts, to be applied to the waveform. The amplitude of the waveform should not exceed +/-2000 mV.</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">peakToPeakVoltage</td>
+          <td style="border-color:#999">Double (Bounded)</td>
+          <td style="border-color:#999">2000.0</td>
+          <td style="border-color:#999">0.0</td>
+          <td style="border-color:#999">4000.0</td>
+          <td style="border-color:#999">Yes</td>
+          <td style="border-color:#999">The peak-to-peak voltage, in millivolts, of the waveform signal. The amplitude of the waveform should not exceed +/-2000 mV.</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">sigGenType</td>
+          <td style="border-color:#999">Double (Enum)</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">2</td>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">No</td>
+          <td style="border-color:#999">The type of Signal Generator on the device:<br>0 - None<br>1 - Function Generator<br>2 - Arbitrary Waveform Generator</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">startFrequency</td>
+          <td style="border-color:#999">Double (Bounded)</td>
+          <td style="border-color:#999">0.0</td>
+          <td style="border-color:#999">1000000.0</td>
+          <td style="border-color:#999">1000</td>
+          <td style="border-color:#999">Yes</td>
+          <td style="border-color:#999">The frequency that the signal generator will initially produce (Hertz).</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">stopFrequency</td>
+          <td style="border-color:#999">Double (Bounded)</td>
+          <td style="border-color:#999">0.0</td>
+          <td style="border-color:#999">1000000.0</td>
+          <td style="border-color:#999">1000</td>
+          <td style="border-color:#999">Yes</td>
+          <td style="border-color:#999">The frequency at which the sweep reverses direction or returns to the initial frequency (Hertz).</td>
+      </tr>
+  </table>
+</p><p>Use the <a href="matlab:doc('instrument/set')"><tt>set</tt></a> and <a href="matlab:doc('instrument/get')"><tt>get</tt></a> functions, where appropriate, to change the value of a property or retrieve it's value.</p><p><b>Notes:</b></p><div><ul><li>To output a signal with constant frequency, ensure that <tt>stopFrequency</tt> is equal to <tt>startFrequency</tt>.</li><li>The magnitude of the sum of <tt>offsetVoltage</tt> and <tt>peakToPeakVoltage</tt> should not exceed 4000 millivolts.</li></ul></div><p><b>Additional Information:</b></p><p>The range of allowable frequencies for the <tt>startFrequency</tt> and <tt>stopFrequency</tt> are between one of these constants:</p><div><ul><li>PS2000A_MIN_FREQUENCY</li><li>PS2000A_PRBS_MIN_FREQUENCY</li></ul></div><p>and one of these constants:</p><div><ul><li>PS2000A_SINE_MAX_FREQUENCY</li><li>PS2000A_SQUARE_MAX_FREQUENCY</li><li>PS2000A_TRIANGLE_MAX_FREQUENCY</li><li>PS2000A_SINC_MAX_FREQUENCY</li><li>PS2000A_RAMP_MAX_FREQUENCY</li><li>PS2000A_HALF_SINE_MAX_FREQUENCY</li><li>PS2000A_GAUSSIAN_MAX_FREQUENCY</li><li>PS2000A_PRBS_MAX_FREQUENCY</li></ul></div><p>depending on the signal type. These values are defined in the <tt>PS2000aConstants</tt> class which is included in this toolbox.</p><p><b>Examples:</b></p><pre class="codeinput">    <span class="comment">% Obtain the arbitrary waveform buffer size for the device</span>
+    awgBufferSize = get(sigGenGroupObj, <span class="string">'awgBufferSize'</span>);
+
+    <span class="comment">% Set the start frequency of the signal generator</span>
+    set(sigGenGroupObj, <span class="string">'startFrequency'</span>, 5000.0);
+</pre><h2 id="3">Functions</h2><p>Device object functions are defined on this <a href="ps2000a_tbx_sig_gen_functions.html">page</a>.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Signalgenerator Group
+%
+% The Signalgenerator group contains a set of properties and functions
+% related to the <ps2000a_tbx_signal_generator.html signal generator>
+% functionality of the device.
+
+%% Obtaining a Signalgenerator Group Object from the Instrument Driver
+%
+% Below is an example of how to obtain a Signalgenerator group object from
+% the Instrument Driver device object. This step only has to be carried out
+% once prior to accessing properties or invoking group object functions:
+
+    sigGenGroupObj = get(ps2000aDeviceObj, 'Signalgenerator');
+    sigGenGroupObj = sigGenGroupObj(1);
+   
+%% Properties
+%
+% The following properties are defined for the Signalgenerator object: 
+%
+% <html>
+%   <table>
+%       <th style="border-color:#999; background-color:#E0E0E0">Property Name</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Data type</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Min. Value</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Max. Value</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Default value</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Can be changed by User</th>
+%       <th style="border-color:#999; background-color:#E0E0E0">Description</th>
+%       <tr>
+%           <td style="border-color:#999">awgBufferSize</td>
+%           <td style="border-color:#999">Double (Bounded)</td>
+%           <td style="border-color:#999">16384</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">32768</td>
+%           <td style="border-color:#999">No</td>
+%           <td style="border-color:#999">The size of the arbitrary waveform buffer on the device, in samples.</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">dacFrequency</td>
+%           <td style="border-color:#999">Double (Bounded)</td>
+%           <td style="border-color:#999">2.0E7</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">2.0E7</td>
+%           <td style="border-color:#999">No</td>
+%           <td style="border-color:#999">The update frequency of the Arbitrary Waveform Generator (MS/s or MHz)</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">ddsFrequency</td>
+%           <td style="border-color:#999">Double</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">N/A</td>
+%           <td style="border-color:#999">N/A</td>
+%           <td style="border-color:#999">No</td>
+%           <td style="border-color:#999">ddsFrequency is the direct digital synthesis frequency for the arbitrary waveform generator (in Hz). This property is only set for the PicoScope 2205 MSO, and is set to 0 for other models.</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">offsetVoltage</td>
+%           <td style="border-color:#999">Double (Bounded)</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">-2000.0</td>
+%           <td style="border-color:#999">2000.0</td>
+%           <td style="border-color:#999">Yes</td>
+%           <td style="border-color:#999">The voltage offset, in millivolts, to be applied to the waveform. The amplitude of the waveform should not exceed +/-2000 mV.</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">peakToPeakVoltage</td>
+%           <td style="border-color:#999">Double (Bounded)</td>
+%           <td style="border-color:#999">2000.0</td>
+%           <td style="border-color:#999">0.0</td>
+%           <td style="border-color:#999">4000.0</td>
+%           <td style="border-color:#999">Yes</td>
+%           <td style="border-color:#999">The peak-to-peak voltage, in millivolts, of the waveform signal. The amplitude of the waveform should not exceed +/-2000 mV.</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">sigGenType</td>
+%           <td style="border-color:#999">Double (Enum)</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">2</td>
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">No</td>
+%           <td style="border-color:#999">The type of Signal Generator on the device:<br>0 - None<br>1 - Function Generator<br>2 - Arbitrary Waveform Generator</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">startFrequency</td>
+%           <td style="border-color:#999">Double (Bounded)</td>
+%           <td style="border-color:#999">0.0</td>
+%           <td style="border-color:#999">1000000.0</td>
+%           <td style="border-color:#999">1000</td>
+%           <td style="border-color:#999">Yes</td>
+%           <td style="border-color:#999">The frequency that the signal generator will initially produce (Hertz).</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">stopFrequency</td>
+%           <td style="border-color:#999">Double (Bounded)</td>
+%           <td style="border-color:#999">0.0</td>
+%           <td style="border-color:#999">1000000.0</td>
+%           <td style="border-color:#999">1000</td>
+%           <td style="border-color:#999">Yes</td>
+%           <td style="border-color:#999">The frequency at which the sweep reverses direction or returns to the initial frequency (Hertz).</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% Use the <matlab:doc('instrument/set') |set|> and <matlab:doc('instrument/get') |get|> functions, where appropriate, to change the value of
+% a property or retrieve it's value.
+%
+% *Notes:* 
+%
+% * To output a signal with constant frequency, ensure that |stopFrequency|
+% is equal to |startFrequency|.
+% * The magnitude of the sum of |offsetVoltage| and |peakToPeakVoltage|
+% should not exceed 4000 millivolts. 
+%
+% *Additional Information:*
+%
+% The range of allowable frequencies for the |startFrequency| and
+% |stopFrequency| are between one of these constants:
+% 
+% * PS2000A_MIN_FREQUENCY
+% * PS2000A_PRBS_MIN_FREQUENCY
+%
+% and one of these constants:
+% 
+% * PS2000A_SINE_MAX_FREQUENCY
+% * PS2000A_SQUARE_MAX_FREQUENCY
+% * PS2000A_TRIANGLE_MAX_FREQUENCY
+% * PS2000A_SINC_MAX_FREQUENCY
+% * PS2000A_RAMP_MAX_FREQUENCY
+% * PS2000A_HALF_SINE_MAX_FREQUENCY
+% * PS2000A_GAUSSIAN_MAX_FREQUENCY
+% * PS2000A_PRBS_MAX_FREQUENCY
+%
+% depending on the signal type. These values are defined in the
+% |PS2000aConstants| class which is included in this toolbox.
+%
+% *Examples:*
+
+    % Obtain the arbitrary waveform buffer size for the device
+    awgBufferSize = get(sigGenGroupObj, 'awgBufferSize');
+
+    % Set the start frequency of the signal generator
+    set(sigGenGroupObj, 'startFrequency', 5000.0);
+
+
+%% Functions
+%
+% Device object functions are defined on this <ps2000a_tbx_sig_gen_functions.html page>.
+
+##### SOURCE END #####
+--></body></html>

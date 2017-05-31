@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<toc version="2.0">
+<!-- First tocitem specifies top level in Help browser Contents pane -->
+<!-- This can be a roadmap page, as shown below, or a content page -->
+    <tocitem target="ps2000a_tbx_product_page.html">PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox
+        <!-- Nest tocitems to create hierarchical entries in  Contents-->
+        <!-- To include icons, use the following syntax for tocitems: -->
+        <!-- <tocitem target="foo.html" image="HelpIcon.NAME"> -->
+        <!-- Title-of-Section </tocitem> -->
+        <!-- where NAME is one of the following (use capital letters): -->
+        <!-- FUNCTION, USER_GUIDE, EXAMPLES, BLOCK, GETTING_STARTED, -->
+        <!-- DEMOS, RELEASE_NOTES --> 
+        <!-- Icon images used for these entries are also stored in -->
+        <!-- matlabroot/toolbox/matlab/icons -->
+        <!-- A Getting Started Guide usually comes first -->
+        <tocitem target="ps2000a_tbx_getting_started.html" image="HelpIcon.GETTING_STARTED">
+            Getting Started with the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver Toolbox
+            <tocitem target="ps2000a_tbx_system_requirements.html">System Requirements
+            </tocitem>
+            <tocitem target="ps2000a_tbx_toolbox_contents.html">Toolbox Contents
+            </tocitem>
+            <tocitem target="ps2000a_tbx_shared_libraries.html">Shared Libraries
+            </tocitem>
+            <tocitem target="ps2000a_tbx_prototype_and_thunk_files.html">Prototype and Thunk Files
+            </tocitem>
+        </tocitem>
+        <!-- User Guide comes next -->
+        <tocitem target="ps2000a_tbx_user_guide_intro.html" 
+            image="HelpIcon.USER_GUIDE">PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver User Guide
+            <tocitem target="ps2000a_tbx_sampling_modes.html">Sampling Modes
+                <tocitem target="ps2000a_tbx_block_mode.html">Block Mode</tocitem>
+                <tocitem target="ps2000a_tbx_rapid_block_mode.html">Rapid Block Mode</tocitem>
+                <tocitem target="ps2000a_tbx_ets.html">ETS (Equivalent Time Sampling)</tocitem>
+                <tocitem target="ps2000a_tbx_streaming_mode.html">Streaming Mode</tocitem>
+            </tocitem>
+            <tocitem target="ps2000a_tbx_signal_generator.html">Signal Generator
+            </tocitem>
+            <tocitem target="ps2000a_tbx_timebases.html">Timebases
+            </tocitem>
+            <tocitem target="ps2000a_tbx_enumerations_and_structures.html">Enumerations and Structures
+            </tocitem>
+            <tocitem target="ps2000a_tbx_connecting_and_disconnecting.html">Connecting and Disconnecting
+            </tocitem>
+            <tocitem target="ps2000a_tbx_default_settings.html">Default Settings
+            </tocitem>
+        </tocitem>
+        <!-- Function and Properties reference next -->
+        <!-- First item is page describing function categories, if any -->
+        <tocitem target="ps2000a_tbx_functions_and_properties.html" 
+                 image="HelpIcon.FUNCTION">Instrument Driver Functions and Properties Reference
+            <!-- First category, with link to anchor in above page -->
+            <tocitem target="ps2000a_tbx_device_object.html">Device Object 
+                <!-- Inside category, list its functions alphabetically -->
+                <tocitem target="ps2000a_tbx_device_object.html#1">Properties</tocitem>
+                <tocitem target="ps2000a_tbx_device_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_device_functions.html#1">deviceReset</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#2">getUnitInfo</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#4">ps2000aFlashLed</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#6">ps2000aGetAnalogueOffset</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#8">ps2000aGetChannelInformation</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#10">ps2000aGetMaxDownSampleRatio</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#12">ps2000aGetMaxSegments</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#14">ps2000aGetTimebase2</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#16">ps2000aMemorySegments</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#18">ps2000aPingUnit</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#20">ps2000aSetChannel</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#21">ps2000aSetDataBuffer</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#24">ps2000aSetDataBuffers</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#27">ps2000aStop</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#29">resetDevice</tocitem>
+                    <tocitem target="ps2000a_tbx_device_functions.html#31">setChannelDefaults</tocitem>
+                </tocitem>
+                <!-- ... -->
+            </tocitem>
+            <!-- Second category, with link to anchor in above page -->
+            <tocitem target="ps2000a_tbx_block_group.html">Block Group
+                <!-- Inside category, list its functions alphabetically -->
+                <tocitem target="ps2000a_tbx_block_group.html#2">Properties</tocitem>
+                <tocitem target="ps2000a_tbx_block_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_block_functions.html#1">getBlockData</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#4">getEtsBlockData</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#7">ps2000aGetTriggerTimeOffset</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#10">ps2000aGetTriggerTimeOffset64</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#13">ps2000aGetValues</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#16">ps2000aIsReady</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#18">ps2000aRunBlock</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#21">ps2000aSetEts</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#26">ps2000aSetEtsTimeBuffer</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#29">ps2000aSetEtsTimeBuffers</tocitem>
+                    <tocitem target="ps2000a_tbx_block_functions.html#32">runBlock</tocitem>
+                </tocitem>
+                <!-- ... -->
+             </tocitem>
+            <!-- Third category, with link to anchor in above page -->
+            <tocitem target="ps2000a_tbx_digital_group.html">Digital Group 
+                <!-- ... -->
+                <tocitem target="ps2000a_tbx_digital_group.html#2">Properties</tocitem>
+                <tocitem target="ps2000a_tbx_digital_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_digital_functions.html#1">ps2000aSetDigitalPort</tocitem>
+                    <tocitem target="ps2000a_tbx_digital_functions.html#4">setDigitalPortDefaults</tocitem>
+                </tocitem>
+            </tocitem>
+            <tocitem target="ps2000a_tbx_rapid_block_group.html">RapidBlock Group 
+                <!-- ... -->
+                <tocitem target="ps2000a_tbx_rapid_block_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_rapid_block_functions.html#1">getRapidBlockData</tocitem>
+                    <tocitem target="ps2000a_tbx_rapid_block_functions.html#4">ps2000aGetNoOfCaptures</tocitem>
+                    <tocitem target="ps2000a_tbx_rapid_block_functions.html#7">ps2000aGetNoOfProcessedCaptures</tocitem>
+                    <tocitem target="ps2000a_tbx_rapid_block_functions.html#10">ps2000aGetValuesBulk</tocitem>
+                    <tocitem target="ps2000a_tbx_rapid_block_functions.html#13">ps2000aGetValuesOverlappedBulk</tocitem>
+                    <tocitem target="ps2000a_tbx_rapid_block_functions.html#16">ps2000aSetNoOfCaptures</tocitem>
+                </tocitem>
+            </tocitem>
+            <tocitem target="ps2000a_tbx_sig_gen_group.html">Signalgenerator Group 
+                <tocitem target="ps2000a_tbx_sig_gen_group.html#2">Properties</tocitem>
+                <tocitem target="ps2000a_tbx_sig_gen_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#1">ps2000aSigGenSoftwareControl</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#4">setSigGenArbitrary</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#9">setSigGenArbitrarySimple</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#12">setSigGenBuiltIn</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#15">setSigGenBuiltInSimple</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#18">setSigGenOff</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#20">setSigGenPropertiesArbitrary</tocitem>
+                    <tocitem target="ps2000a_tbx_sig_gen_functions.html#23">setSigGenPropertiesBuiltIn</tocitem>
+                </tocitem>
+            </tocitem>
+            <tocitem target="ps2000a_tbx_streaming_group.html">Streaming 
+                <tocitem target="ps2000a_tbx_streaming_group.html#2">Properties</tocitem>
+                <tocitem target="ps2000a_tbx_streaming_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#1">autoStopped</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#4">availableData</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#6">clearTriggerReady</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#9">getStreamingLatestValues</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#12">isReady</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#15">isTriggerReady</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#18">ps2000aNoOfStreamingValues</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#21">ps2000aRunStreaming</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#24">setAppAndDriverBuffers</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#27">setAppAndDriverDigiBuffers</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#24">setMaxMinAppAndDriverBuffers</tocitem>
+                    <tocitem target="ps2000a_tbx_streaming_functions.html#33">setMaxMinAppAndDriverDigiBuffers</tocitem>
+                </tocitem>
+            </tocitem>
+            <tocitem target="ps2000a_tbx_trigger_group.html">Trigger Group 
+                <tocitem target="ps2000a_tbx_trigger_group.html#2">Properties</tocitem>
+                <tocitem target="ps2000a_tbx_trigger_functions.html">Functions
+                    <tocitem target="ps2000a_tbx_trigger_functions.html#1">ps2000aIsTriggerOrPulseWidthQualifierEnabled</tocitem>
+                    <tocitem target="ps2000a_tbx_trigger_functions.html#3">ps2000aSetTriggerDigitalPortProperties</tocitem>
+                    <tocitem target="ps2000a_tbx_trigger_functions.html#5">setSimpleTrigger</tocitem>
+                    <tocitem target="ps2000a_tbx_trigger_functions.html#7">setTriggerOff</tocitem>
+                </tocitem>
+            </tocitem>
+        </tocitem>
+        <tocitem target="ps2000a_tbx_deploying_standalone_apps.html">Deploying Standalone Applications</tocitem>
+        <tocitem target="ps2000a_tbx_release_notes.html" image="HelpIcon.RELEASE_NOTES">Release Notes</tocitem>
+        <tocitem target="ps2000a_tbx_troubleshooting.html">Troubleshooting</tocitem>
+        <tocitem target="ps2000a_tbx_support.html">Support</tocitem>
+        <tocitem target="ps2000a_tbx_acknowledgements.html">Acknowledgements</tocitem>
+        <!-- Examples are listed in the demos.xml file -->
+        <!-- Link to Pico Technology Website -->
+        <tocitem target="https://www.picotech.com" 
+                 image="$toolbox/matlab/icons/webicon.gif">
+        Pico Technology Web Site
+        </tocitem>
+    </tocitem>
+</toc>

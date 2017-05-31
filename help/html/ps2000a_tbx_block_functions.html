@@ -1,0 +1,832 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Block Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_block_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Block Group Functions</h1><!--introduction--><p>This section provides a description of the Instrument Driver Block group functions. Prior to calling the functions, a Block group object must be created as shown in the <a href="ps2000a_tbx_block_group.html">Block Group</a> page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">getBlockData</a></li><li><a href="#4">getEtsBlockData</a></li><li><a href="#7">ps2000aGetTriggerTimeOffset</a></li><li><a href="#10">ps2000aGetTriggerTimeOffset64</a></li><li><a href="#13">ps2000aGetValues</a></li><li><a href="#16">ps2000aIsReady</a></li><li><a href="#18">ps2000aRunBlock</a></li><li><a href="#21">ps2000aSetEts</a></li><li><a href="#26">ps2000aSetEtsTimeBuffer</a></li><li><a href="#29">ps2000aSetEtsTimeBuffers</a></li><li><a href="#32">runBlock</a></li></ul></div><h2 id="1">getBlockData</h2><pre class="codeinput">[numSamples, overflow, channelA, channelB, channelC, channelD, dPort0, dPort1] = getBlockData(obj, startIndex, segmentIndex, <span class="keyword">...</span>
+                                                                                                ratio, ratioMode)
+</pre><p><tt>getBlockData(obj, startIndex, segmentIndex, ratio, ratioMode)</tt> returns block mode data with or without downsampling starting at the specified sample number.</p><p>Memory for the data arrays is allocated and the driver is informed where to store the data prior to retrieval. Data collection in Aggregation mode or with more than one downsampling mode is NOT supported by this function.</p><p>Channels not enabled or not supported by the device (e.g. channels C and D for a 2-channel oscilloscope) will be returned as an empty array.</p><p>This function can be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>startIndex</tt> - a zero-based index that indicates the start point for data collection. Use zero to start at the first sample.</li><li><tt>segmentIndex</tt> - the number of the memory segment to be used/where the data is stored. Use 0 if the memory has not been segmented.</li><li><tt>ratio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>ratioMode</tt> - which downsampling mode to use (specified by an enumeration from the <tt>enPS2000aRatioMode</tt> range of enumerations excluding <tt>PS2000A_RATIO_MODE_AGGREGATE</tt>).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>numSamples</tt> - the number of samples retrieved from the driver.</li><li><tt>overflow</tt> - a set of flags that indicate whether an overvoltage has occurred on any of the channels.</li><li><tt>channelA</tt> - an array containing data values (in millivolts) for channel A.</li><li><tt>channelB</tt> - an array containing data values (in millivolts) for channel B.</li><li><tt>channelC</tt> - an array containing data values (in millivolts) for channel C.</li><li><tt>channelD</tt> - an array containing data values (in millivolts) for channel D.</li><li><tt>portD0</tt> - an array containing data values in binary format for digital Port 0 (in MSB order)</li><li><tt>portD1</tt> - an array containing data values in binary format for digital Port 1 (in MSB order)</li></ul></div><p><b>Notes:</b> Channels not enabled available on a device e.g. C and D on a 2 channel oscilloscope, or PORT0 and PORT1 on a non-MSO oscilloscope will be returned as an empty array.</p><p>Use the '~' operator to ignore output variables that are not required.</p><p>Mixed downsampling mode data collection is not supported by this function e.g. collecting averaged and decimated data. For this, use the <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> and <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> functions instead.</p><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Retrieve raw data values from the device</span>
+    startIndex      = 0;
+    segmentIndex    = 0;
+    ratio           = 1;
+    ratioMode       = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    [numSamples, overflow, chA, chB, chC, chD, portD0, portD1] = invoke(blockGroupObj, <span class="string">'getBlockData'</span>, startIndex, <span class="keyword">...</span>
+                                                                    segmentIndex, ratio, ratioMode);
+
+    <span class="comment">% Alternatively, use '~' operator to ignore output variables that are</span>
+    <span class="comment">% not required.</span>
+
+    [numSamples, overflow, chA, chB, ~, ~, ~, ~] = invoke(blockGroupObj, <span class="string">'getBlockData'</span>, startIndex, segmentIndex, <span class="keyword">...</span>
+                                                    ratio, ratioMode);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#11"><tt>ps2000aGetValues</tt></a> | <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a></p><h2 id="4">getEtsBlockData</h2><pre class="codeinput">[numSamples, overflow, etsTimes, channelA, channelB, channelC, channelD] = getEtsBlockData(obj, startIndex, segmentIndex, <span class="keyword">...</span>
+                                                                                            ratio, ratioMode)
+</pre><p><tt>getEtsBlockData(obj, startIndex, segmentIndex, ratio, ratioMode)</tt> returns <a href="ps2000a_tbx_ets.html">Equivalent Time Sampling (ETS)</a> block mode data with or without downsampling starting at the specified sample number.</p><p>Memory for the data arrays is allocated and the driver is informed where to store the data prior to retrieval. Data collection with more than one downsampling mode is NOT supported by this function. Aggregated data collection is not supported when using ETS mode.</p><p>This function can be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>startIndex</tt> - a zero-based index that indicates the start point for data collection. Use zero to start at the first sample.</li><li><tt>segmentIndex</tt> - the number of the memory segment to be used/where the data is stored. Use 0 if the memory has not been segmented.</li><li><tt>ratio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>ratioMode</tt> - which downsampling mode to use (specified by an enumeration from the <tt>enPS2000ARatioMode</tt> range of enumerations excluding <tt>PS2000A_RATIO_MODE_AGGREGATE</tt>).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>numSamples</tt> - the number of samples retrieved from the driver.</li><li><tt>overflow</tt> - a set of flags that indicate whether an overvoltage has occurred on any of the channels.</li><li><tt>etsTimes</tt> - an array containing the times (in femtoseconds) at which each sample was captured.</li><li><tt>channelA</tt> - an array containing data values (in millivolts) for channel A.</li><li><tt>channelB</tt> - an array containing data values (in millivolts) for channel B.</li><li><tt>channelC</tt> - an array containing data values (in millivolts) for channel C.</li><li><tt>channelD</tt> - an array containing data values (in millivolts) for channel D.</li></ul></div><p><b>Notes:</b> Channels not enabled or not available on a device e.g. C and D on a 2 channel oscilloscope, or PORT0 and PORT1 on a non-MSO oscilloscope will be returned as an empty array.</p><p>Use the '~' operator to ignore output variables that are not required.</p><p>Mixed downsampling mode data collection is not supported by this function e.g. collecting averaged and decimated data. For this, use the <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> and <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> functions instead.</p><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Retrieve raw data values from the device</span>
+    startIndex      = 0;
+    segmentIndex    = 0;
+    ratio           = 1;
+    ratioMode       = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    [numSamples, overflow, etsTimes, chA, ~, ~, ~] = invoke(blockGroupObj, <span class="string">'getEtsBlockData'</span>, startIndex, segmentIndex, <span class="keyword">...</span>
+                                                        ratio, ratioMode);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> | <a href="ps2000a_tbx_block_functions.html#21"><tt>ps2000aSetEtsTimeBuffer</tt></a> | <a href="ps2000a_tbx_block_functions.html#11"><tt>ps2000aGetValues</tt></a></p><h2 id="7">ps2000aGetTriggerTimeOffset</h2><pre class="codeinput">[status, timeUpper, timeLower, timeUnits] = ps2000aGetTriggerTimeOffset(obj, segmentIndex)
+</pre><p><tt>ps2000aGetTriggerTimeOffset(obj, segmentIndex)</tt> gets the time, as two 4-byte values, at which the trigger occurred.</p><p>Call it after block-mode data has been captured or when data has been retrieved from a previous block-mode capture. Using the 64-bit version of this function, <a href="ps2000a_tbx_block_functions.html#9"><tt>ps2000aGetTriggerTimeOffset64</tt></a>, is recommended.</p><p>The time offset of a waveform is the delay from the trigger sampling instant to the time at which the driver estimates the waveform to have crossed the trigger threshold. You can add this offset to the time of each sample in the waveform to reduce trigger jitter. Without using the time offset, trigger jitter can be up to 1 sample period; adding the time offset reduces jitter to a small fraction of a sample period.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>segmentIndex</tt> - the number of the memory segment for which the information is required.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>timeUpper</tt> - the upper 32 bits of the time at which the trigger point occurred.</li><li><tt>timeLower</tt> - the lower 32 bits of the time at which the trigger point occurred.</li><li><tt>timeUnits</tt> - the time units in which timeUpper and timeLower are measured (represented by an <tt>enPS2000ATimeUnits</tt> enumeration value).</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    segmentIndex = 0;
+
+    [status, timeUpper, timeLower, timeUnits] = invoke(blockGroupObj, <span class="string">'ps2000aGetTriggerTimeOffset'</span>, segmentIndex);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#9"><tt>ps2000aGetTriggerTimeOffset64</tt></a></p><h2 id="10">ps2000aGetTriggerTimeOffset64</h2><pre class="codeinput">[status, time, timeUnits] = ps2000aGetTriggerTimeOffset64(obj, segmentIndex)
+</pre><p><tt>ps2000aGetTriggerTimeOffset64(obj, segmentIndex)</tt> gets the time, as a single 64-bit value, at which the trigger occurred.</p><p>Call it after block-mode data has been captured or when data has been retrieved from a previous block-mode capture.</p><p>The time offset of a waveform is the delay from the trigger sampling instant to the time at which the driver estimates the waveform to have crossed the trigger threshold. You can add this offset to the time of each sample in the waveform to reduce trigger jitter. Without using the time offset, trigger jitter can be up to 1 sample period; adding the time offset reduces jitter to a small fraction of a sample period.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>segmentIndex</tt> - the number of the memory segment for which the information is required.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>time</tt> - the time at which the trigger point occurred.</li><li><tt>timeUnits</tt> - the time units in which time is measured (represented by an <tt>enPS2000ATimeUnits</tt> enumeration value).</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    segmentIndex = 0;
+
+    [status, time, timeUnits] = invoke(blockGroupObj, <span class="string">'ps2000aGetTriggerTimeOffset64'</span>, segmentIndex);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#7"><tt>ps2000aGetTriggerTimeOffset</tt></a></p><h2 id="13">ps2000aGetValues</h2><pre class="codeinput">[status, numSamples, overflow] = ps2000aGetValues(obj, startIndex, noOfSamples, downSampleRatio, <span class="keyword">...</span>
+                                                    downSampleRatioMode, segmentIndex)
+</pre><p><tt>ps2000aGetValues(obj, startIndex, noOfSamples, downSampleRatio, downSampleRatioMode, segmentIndex)</tt> returns block-mode data, with or without downsampling, starting at the specified sample number.</p><p>Use this function if you need to set up data buffers prior to starting data collection, otherwise consider using the <a href="ps2000a_tbx_block_functions.html#1">getBlockData</a> function which sets up data buffers and retrieves the data converted to millivolts.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>startIndex</tt> - a zero-based index that indicates the start point for data collection.</li><li><tt>noOfSamples</tt> - the number of samples required.</li><li><tt>downSampleRatio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>downSampleRatioMode</tt> - which downsampling mode to use (specified by an <tt>enPS2000ARatioMode</tt> enumeration value).</li><li><tt>segmentIndex</tt> - the zero-based number of the memory segment where the data is stored.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>numSamples</tt> - the actual number of samples retrieved from the driver. The number of samples retrieved will not be more than the number requested, and the data retrieved starts at startIndex.</li><li><tt>overflow</tt> - a set of flags that indicate whether an overvoltage has occurred on any of the channels. It is a bit field with bit 0 denoting Channel A.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Retrieve averaged data values from the driver</span>
+    startIndex          = 0
+    numSamples          = 10000;
+    downsampleRatio     = 10;
+    downsampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_AVERAGE;
+    segmentIndex        = 0;
+
+    [status, numCollectedSamples, overflow] = invoke(blockGroupObj, <span class="string">'ps2000aGetValues'</span>, startIndex, numSamples, <span class="keyword">...</span>
+                                                downsampleRatio, downsampleRatioMode, segmentIndex);
+</pre><p><b>See also</b> <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a> | <a href="ps2000a_tbx_block_functions.html#4"><tt>getEtsBlockData</tt></a></p><h2 id="16">ps2000aIsReady</h2><pre class="codeinput">[status, ready] = ps2000aIsReady(obj)
+</pre><p><tt>ps2000aIsReady(obj)</tt> indicates if the driver has finished collecting the requested samples.</p><p>Use this function to poll the driver to indicate if block data collection has finished if using the <a href="ps2000a_tbx_block_functions.html#15"><tt>ps2000aRunBlock</tt></a> function, which should be called prior to calling this function.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Call the function in a loop until the device is ready. The</span>
+    <span class="comment">% ps2000aRunBlock function should already have been called.</span>
+
+    ready = 0;
+
+    <span class="keyword">while</span> ready == 0
+
+        [status, ready] = invoke(ps2000aDeviceObj, <span class="string">'ps2000aIsReady'</span>);
+        pause(0.01);
+
+    <span class="keyword">end</span>
+</pre><h2 id="18">ps2000aRunBlock</h2><pre class="codeinput">[status, timeIndisposedMs] = ps2000aRunBlock(obj, segmentIndex)
+</pre><p><tt>ps2000aRunBlock(obj, segmentIndex)</tt> starts collecting data in block mode. For a step-by-step guide to this process, see <a href="ps2000a_tbx_block_mode.html#7">Using block mode</a>.</p><p>If additional code does not need to be called prior to the device indicating that it has collected data, use the <a href="ps2000a_tbx_block_functions.html#27"><tt>runBlock</tt></a> function in place of this function and the <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aIsReady</tt></a> function.</p><p>This function requires the following Instrument Driver properties to have been set:</p><div><ul><li>numPreTriggerSamples - the number of samples to store before the trigger event.</li><li>numPostTriggerSamples - the number of samples to store after the trigger event.</li><li>timebase - a number in the range 0 to <a href="matlab:doc('pow2')"><tt>pow2</tt></a>(32)-1. See the <a href="ps2000a_tbx_timebases.html">guide to calculating timebase values</a>.</li></ul></div><p><b>Notes:</b></p><div><ul><li>The maximum number of samples returned is always numPreTriggerSamples + numPostTriggerSamples. This is true even if no trigger event has been set.</li><li>The <tt>timebase</tt> property is ignored in ETS mode, when <a href="ps2000a_tbx_block_functions.html#"><tt>ps2000aSetEts</tt></a> selects the timebase instead.</li></ul></div><p>This function can be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>segmentIndex</tt> - zero-based index, specifying which memory segment to use. Set this parameter to 0, if memory has not been segmented.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>timeIndisposedMs</tt> - the time, in milliseconds, that the scope will spend collecting samples. This does not include any auto trigger timeout and is not valid in ETS capture mode.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set properties</span>
+    set(ps2000aDeviceObj, <span class="string">'numPreTriggerSamples'</span>, 0);
+    set(ps2000aDeviceObj, <span class="string">'numPostTriggerSamples'</span>, 10000);
+    set(ps2000aDeviceObj, <span class="string">'timebase'</span>, 15);
+
+    segmentIndex = 0;
+
+    <span class="comment">% Start the data collection</span>
+    [status, timeIndisposed] = invoke(blockGroupObj, <span class="string">'ps2000aRunBlock'</span>, segmentIndex);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#13"><tt>ps2000aIsReady</tt></a> | <a href="ps2000a_tbx_device_functions.html#27"><tt>runBlock</tt></a></p><h2 id="21">ps2000aSetEts</h2><pre class="codeinput">[status, sampleTimePicoSeconds] = ps2000aSetEts(obj, mode, etsCycles, etsInterleave)
+</pre><p><tt>ps2000aSetEts(obj, mode, etsCycles, etsInterleave)</tt> is used to enable or disable ETS (equivalent-time sampling) and to set the ETS parameters. See <a href="ps2000a_tbx_ets.html">ETS (Equivalent Time Sampling)</a> for an explanation of ETS mode.</p><p>ETS mode cannot be used when MSO digital ports are enabled.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>mode</tt> - must be one of the following <tt>enPS2000AEtsMode</tt> range of enumeration values:</li></ul></div><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">ETS Mode</th>
+          <th style="border-color:#999; background-color:#E0E0E0;">Description</th>
+      </tr>
+      <tr>
+          <td style="border-color:#999">PS2000A_ETS_OFF</td>
+          <td style="border-color:#999;">disables ETS</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">PS2000A_ETS_FAST</td>
+          <td style="border-color:#999;">enables ETS and provides etsCycles of data, which may contain data from previously returned cycles</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">PS2000A_ETS_SLOW</td>
+          <td style="border-color:#999">enables ETS and provides fresh data every etsCycles. This mode takes longer to provide each data set,<br>but the data sets are more stable and are guaranteed to contain only new data.</td>
+      </tr>
+  </table>
+</p><div><ul><li><tt>etsCycles</tt> - the number of cycles to store: the computer can then select etsInterleave cycles to give the most uniform spread of samples.</li></ul></div><p>
+  <p>Range: between two and five times the value of etsInterleave, and
+  not more than the appropriate MAX_ETS_CYCLES constant (defined in the
+  PS2000AConstants.m file):
+  </p>
+      <table>
+          <tr>
+              <th style="border-color:#999; background-color:#E0E0E0">Max ETS Cycles</th>
+              <th style="border-color:#999; background-color:#E0E0E0;">PicoScope Models</th>
+          </tr>
+          <tr>
+              <td style="border-color:#999">500</td>
+              <td style="border-color:#999;">2206B, 2206B MSO, 2207B, 2207B MSO, 2208B,<br>2208B MSO, 2405A, 2406B, 2407B, 2408B</td>
+          </tr>
+          <tr>
+              <td style="border-color:#999">PS2206_MAX_ETS_CYCLES</td>
+              <td style="border-color:#999;">2206, 2206A</td>
+          </tr>
+          <tr>
+              <td style="border-color:#999">PS2207_MAX_ETS_CYCLES</td>
+              <td style="border-color:#999">2207, 2207A</td>
+          </tr>
+          <tr>
+              <td style="border-color:#999">PS2208_MAX_ETS_CYCLES</td>
+              <td style="border-color:#999">2208, 2208A</td>
+          </tr>
+      </table>
+  </p><div><ul><li><tt>etsInterleave</tt> - the number of waveforms to combine into a single ETS capture. Maximum value is:</li></ul></div><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">Max ETS Interleave</th>
+          <th style="border-color:#999; background-color:#E0E0E0;">PicoScope Models</th>
+      </tr>
+      <tr>
+          <td style="border-color:#999">40</td>
+          <td style="border-color:#999;">2206B, 2206B MSO, 2207B, 2207B MSO, 2208B,<br>2208B MSO, 2405A, 2406B, 2407B, 2408B</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">PS2206_MAX_INTERLEAVE</td>
+          <td style="border-color:#999;">2206, 2206A</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">PS2207_MAX_INTERLEAVE</td>
+          <td style="border-color:#999">2207, 2207A</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">PS2208_MAX_INTERLEAVE</td>
+          <td style="border-color:#999">2208, 2208A</td>
+      </tr>
+  </table>
+</p><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>sampleTimePicoSeconds</tt> - the effective sampling interval of the ETS data. For example, if the captured sample time is 4 ns and etsInterleave is 10, then the effective sample time in ETS mode is 400 ps.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    mode            = ps2000aEnuminfo.enPS2000AEtsMode.PS2000A_ETS_FAST;
+    etsCycles       = 250;
+    etsInterleave   = 25;
+
+    [status, sampleTimePicoSeconds] = invoke(blockGroupObj, <span class="string">'ps2000aSetEts'</span>, mode, etsCycles, etsInterleave);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#4"><tt>getEtsBlockData</tt></a> | <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetEtsTimeBuffer</tt></a></p><h2 id="26">ps2000aSetEtsTimeBuffer</h2><pre class="codeinput">    [status] = ps2000aSetEtsTimeBuffer(obj, pEtsTimeBuffer)
+</pre><p><tt>ps2000aSetEtsTimeBuffer(obj, pEtsTimeBuffer)</tt> tells the driver where to find your application's ETS time buffers. These buffers contain the 64-bit timing information for each ETS sample after you run a block-mode ETS capture.</p><p>This function should be called before calling <a href="ps2000a_tbx_block_functions.html#"><tt>ps2000aGetValues</tt></a>.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>pEtsTimeBuffer</tt> - a libpointer object corresponding to a 1-D array of 64-bit words, each representing the time in femtoseconds at which the sample was captured.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    numSamples = 1024;
+    pEtsTimeBuffer = libpointer(<span class="string">'int64Ptr'</span>, zeros(numSamples, 1, <span class="string">'int64'</span>));
+
+    status = invoke(blockGroupObj, <span class="string">'ps2000aSetEtsTimeBuffer'</span>, pEtsTimeBuffer);
+</pre><p><b>See Also:</b> <a href="ps2000a_tbx_blockfunctions.html#4"><tt>getEtsBlockData</tt></a> | <a href="ps2000a_tbx_device_functions.html#17"><tt>ps2000aSetEts</tt></a></p><h2 id="29">ps2000aSetEtsTimeBuffers</h2><pre class="codeinput">    [status] = ps2000aSetEtsTimeBuffers(obj, etsTimeBufferUpper, etsTimeBufferLower)
+</pre><p><tt>ps2000aSetEtsTimeBuffers(obj, etsTimeBufferUpper, etsTimeBufferLower)</tt> tells the driver where to find your application's ETS time buffers. These buffers contain the timing information for each ETS sample after you run a block mode ETS capture.</p><p>Using the <a href="ps2000a_tbx_block_functions.html#21"><tt>ps2000aSetEtsTimeBuffer</tt></a> function is recommended.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>pEtsTimeBufferUpper</tt> - an array of 32-bit words, each representing the upper 32 bits of the time in femtoseconds (e-15 s) at which the sample was captured.</li><li><tt>pEtsTimeBufferLower</tt> - an array of 32-bit words, each representing the lower 32 bits of the time in femtoseconds (e-15 s) at which the sample was captured.</li></ul></div><p><b>Output Arguments:</b></p><p><tt>status</tt> - status code returned by the driver.</p><p><b>Example:</b></p><pre class="codeinput">    numSamples = 1024;
+    pEtsTimeBufferUpper = libpointer(<span class="string">'int64Ptr'</span>, zeros(numSamples, 1, <span class="string">'int64'</span>));
+    pEtsTimeBufferLower = libpointer(<span class="string">'int64Ptr'</span>, zeros(numSamples, 1, <span class="string">'int64'</span>));
+
+    status = invoke(blockGroupObj, <span class="string">'ps2000aSetEtsTimeBuffer'</span>, pEtsTimeBufferUpper, pEtsTimeBufferLower);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#21"><tt>ps2000aSetEtsTimeBuffer</tt></a> | <a href="ps2000a_tbx_block_functions.html#4"><tt>getEtsBlockData</tt></a></p><h2 id="32">runBlock</h2><pre class="codeinput">    [status, timeIndisposedMs] = runBlock(obj, segmentIndex)
+</pre><p><tt>runBlock(obj, segmentIndex)</tt> starts collecting data in block mode and returns when the device is ready for data to be collected. If additional code needs to be called prior to the device indicating that it has collected data, use the <a href="ps2000a_tbx_block_functions.html#"><tt>ps2000aRunBlock</tt></a> and <a href="ps2000a_tbx_block_functions.html#"><tt>ps2000aIsReady</tt></a> functions instead.</p><p>This function can be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Block group.</li><li><tt>segmentIndex</tt> - zero-based index, specifying which memory segment to use. Set this parameter to 0, if memory has not been segmented.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set Instrument Driver properties</span>
+    set(ps2000aDeviceObj, <span class="string">'timebase'</span>, 10);
+    set(ps2000aDeviceObj, <span class="string">'numPreTriggerSamples'</span>, 0);
+    set(ps2000aDeviceObj, <span class="string">'numPostTriggerSamples'</span>, 16384);
+
+    <span class="comment">% Start the data acquisition</span>
+    status = invoke(blockGroupObj, <span class="string">'runBlock'</span>, 0);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aIsReady</tt></a> | <a href="ps2000a_tbx_block_functions.html#15"><tt>ps2000aRunBlock</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Block Group Functions
+%
+% This section provides a description of the Instrument Driver Block group
+% functions. Prior to calling the functions, a Block group object must be
+% created as shown in the <ps2000a_tbx_block_group.html Block Group> page.
+%
+%% getBlockData
+
+[numSamples, overflow, channelA, channelB, channelC, channelD, dPort0, dPort1] = getBlockData(obj, startIndex, segmentIndex, ... 
+                                                                                                ratio, ratioMode)
+
+%%
+% |getBlockData(obj, startIndex, segmentIndex, ratio, ratioMode)| returns
+% block mode data with or without downsampling starting at the specified
+% sample number.
+% 
+% Memory for the data arrays is allocated and the driver is informed where
+% to store the data prior to retrieval. Data collection in Aggregation mode
+% or with more than one downsampling mode is NOT supported by this
+% function.
+% 
+% Channels not enabled or not supported by the device (e.g. channels C and
+% D for a 2-channel oscilloscope) will be returned as an empty array.
+%
+% This function can be used with the Test and Measurement Tool.
+% 
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |startIndex| - a zero-based index that indicates the start point for data collection. Use zero to start at the first sample.
+% * |segmentIndex| - the number of the memory segment to be used/where the data is stored. Use 0 if the memory has not been segmented.
+% * |ratio| - the downsampling factor that will be applied to the raw data.
+% * |ratioMode| - which downsampling mode to use (specified by an
+% enumeration from the |enPS2000aRatioMode| range of enumerations excluding
+% |PS2000A_RATIO_MODE_AGGREGATE|).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |numSamples| - the number of samples retrieved from the driver.
+% * |overflow| - a set of flags that indicate whether an overvoltage has occurred on any of the channels.
+% * |channelA| - an array containing data values (in millivolts) for channel A.
+% * |channelB| - an array containing data values (in millivolts) for channel B.
+% * |channelC| - an array containing data values (in millivolts) for channel C.
+% * |channelD| - an array containing data values (in millivolts) for channel D.
+% * |portD0| - an array containing data values in binary format for digital Port 0 (in MSB order)
+% * |portD1| - an array containing data values in binary format for digital Port 1 (in MSB order)
+%
+% *Notes:* Channels not enabled available on a device e.g. C and D on a 2
+% channel oscilloscope, or PORT0 and PORT1 on a non-MSO oscilloscope will
+% be returned as an empty array.
+%
+% Use the '~' operator to ignore output variables that are not required.
+%
+% Mixed downsampling mode data collection is not supported by this function
+% e.g. collecting averaged and decimated data. For this, use the <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> and
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> functions instead.
+%
+% *Example:*
+
+    % Retrieve raw data values from the device
+    startIndex      = 0;
+    segmentIndex    = 0;
+    ratio           = 1;
+    ratioMode       = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    [numSamples, overflow, chA, chB, chC, chD, portD0, portD1] = invoke(blockGroupObj, 'getBlockData', startIndex, ...
+                                                                    segmentIndex, ratio, ratioMode);
+    
+    % Alternatively, use '~' operator to ignore output variables that are
+    % not required.
+    
+    [numSamples, overflow, chA, chB, ~, ~, ~, ~] = invoke(blockGroupObj, 'getBlockData', startIndex, segmentIndex, ...
+                                                    ratio, ratioMode);
+
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#11 |ps2000aGetValues|> | <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|>
+%
+
+%% getEtsBlockData
+
+[numSamples, overflow, etsTimes, channelA, channelB, channelC, channelD] = getEtsBlockData(obj, startIndex, segmentIndex, ...
+                                                                                            ratio, ratioMode)
+
+%%
+% |getEtsBlockData(obj, startIndex, segmentIndex, ratio, ratioMode)|
+% returns <ps2000a_tbx_ets.html Equivalent Time Sampling (ETS)> block mode
+% data with or without downsampling starting at the specified sample
+% number.
+% 
+% Memory for the data arrays is allocated and the driver is informed where
+% to store the data prior to retrieval. Data collection with more than one
+% downsampling mode is NOT supported by this function. Aggregated data
+% collection is not supported when using ETS mode.
+% 
+% This function can be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |startIndex| - a zero-based index that indicates the start point for data collection. Use zero to start at the first sample.
+% * |segmentIndex| - the number of the memory segment to be used/where the data is stored. Use 0 if the memory has not been segmented.
+% * |ratio| - the downsampling factor that will be applied to the raw data.
+% * |ratioMode| - which downsampling mode to use (specified by an enumeration from the |enPS2000ARatioMode| range of enumerations excluding |PS2000A_RATIO_MODE_AGGREGATE|).
+%
+% *Output Arguments:*
+%
+% * |numSamples| - the number of samples retrieved from the driver.
+% * |overflow| - a set of flags that indicate whether an overvoltage has occurred on any of the channels.
+% * |etsTimes| - an array containing the times (in femtoseconds) at which each sample was captured.
+% * |channelA| - an array containing data values (in millivolts) for channel A.
+% * |channelB| - an array containing data values (in millivolts) for channel B.
+% * |channelC| - an array containing data values (in millivolts) for channel C.
+% * |channelD| - an array containing data values (in millivolts) for channel D.
+% 
+% *Notes:* Channels not enabled or not available on a device e.g. C and D on a 2 channel
+% oscilloscope, or PORT0 and PORT1 on a non-MSO oscilloscope will be
+% returned as an empty array.
+%
+% Use the '~' operator to ignore output variables that are not required.
+%
+% Mixed downsampling mode data collection is not supported by this function
+% e.g. collecting averaged and decimated data. For this, use the
+% <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> and
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> functions
+% instead.
+%
+% *Example:*
+
+    % Retrieve raw data values from the device
+    startIndex      = 0;
+    segmentIndex    = 0;
+    ratio           = 1;
+    ratioMode       = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    
+    [numSamples, overflow, etsTimes, chA, ~, ~, ~] = invoke(blockGroupObj, 'getEtsBlockData', startIndex, segmentIndex, ...
+                                                        ratio, ratioMode);
+    
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> | <ps2000a_tbx_block_functions.html#21 |ps2000aSetEtsTimeBuffer|> | <ps2000a_tbx_block_functions.html#11 |ps2000aGetValues|> 
+%
+
+%% ps2000aGetTriggerTimeOffset
+
+[status, timeUpper, timeLower, timeUnits] = ps2000aGetTriggerTimeOffset(obj, segmentIndex)
+
+%%
+% |ps2000aGetTriggerTimeOffset(obj, segmentIndex)| gets the time, as two 4-byte values, at which the trigger occurred.
+%
+% Call it after block-mode data has been captured or when data has been
+% retrieved from a previous block-mode capture. Using the 64-bit version of
+% this function, <ps2000a_tbx_block_functions.html#9
+% |ps2000aGetTriggerTimeOffset64|>, is recommended.
+% 
+% The time offset of a waveform is the delay from the trigger sampling
+% instant to the time at which the driver estimates the waveform to have
+% crossed the trigger threshold. You can add this offset to the time of
+% each sample in the waveform to reduce trigger jitter. Without using the
+% time offset, trigger jitter can be up to 1 sample period; adding the time
+% offset reduces jitter to a small fraction of a sample period.
+% 
+% This function may be used with the Test and Measurement Tool.
+% 
+% *Input Arguments:*
+%
+% * |obj| - the object representing the Block group.
+% * |segmentIndex| - the number of the memory segment for which the information is required.
+%
+% *Output Arguments:*
+%
+% * |status| - status code returned by the driver.
+% * |timeUpper| - the upper 32 bits of the time at which the trigger point occurred.
+% * |timeLower| - the lower 32 bits of the time at which the trigger point occurred.
+% * |timeUnits| - the time units in which timeUpper and timeLower are measured (represented by an |enPS2000ATimeUnits| enumeration value).
+%
+% *Example:*
+
+    segmentIndex = 0;
+    
+    [status, timeUpper, timeLower, timeUnits] = invoke(blockGroupObj, 'ps2000aGetTriggerTimeOffset', segmentIndex);
+
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#9 |ps2000aGetTriggerTimeOffset64|>
+%
+    
+%% ps2000aGetTriggerTimeOffset64
+
+[status, time, timeUnits] = ps2000aGetTriggerTimeOffset64(obj, segmentIndex)
+
+%%
+% |ps2000aGetTriggerTimeOffset64(obj, segmentIndex)| gets the time, as a
+% single 64-bit value, at which the trigger occurred.
+% 
+% Call it after block-mode data has been captured or when data has been
+% retrieved from a previous block-mode capture.
+% 
+% The time offset of a waveform is the delay from the trigger sampling
+% instant to the time at which the driver estimates the waveform to have
+% crossed the trigger threshold. You can add this offset to the time of
+% each sample in the waveform to reduce trigger jitter. Without using the
+% time offset, trigger jitter can be up to 1 sample period; adding the time
+% offset reduces jitter to a small fraction of a sample period.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+%
+% * |obj| - the object representing the Block group.
+% * |segmentIndex| - the number of the memory segment for which the information is required.
+%
+% *Output Arguments:*
+%
+% * |status| - status code returned by the driver.
+% * |time| - the time at which the trigger point occurred.
+% * |timeUnits| - the time units in which time is measured (represented by an |enPS2000ATimeUnits| enumeration value).
+%
+% *Example:*
+
+    segmentIndex = 0;
+    
+    [status, time, timeUnits] = invoke(blockGroupObj, 'ps2000aGetTriggerTimeOffset64', segmentIndex);
+    
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#7 |ps2000aGetTriggerTimeOffset|> 
+%
+
+%% ps2000aGetValues
+
+[status, numSamples, overflow] = ps2000aGetValues(obj, startIndex, noOfSamples, downSampleRatio, ...
+                                                    downSampleRatioMode, segmentIndex)
+
+%%
+% |ps2000aGetValues(obj, startIndex, noOfSamples, downSampleRatio,
+% downSampleRatioMode, segmentIndex)| returns block-mode data, with or
+% without downsampling, starting at the specified sample number.
+% 
+% Use this function if you need to set up data buffers prior to starting
+% data collection, otherwise consider using the
+% <ps2000a_tbx_block_functions.html#1 getBlockData> function which sets up
+% data buffers and retrieves the data converted to millivolts.
+% 
+% This function may be used with the Test and Measurement Tool.
+% 
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |startIndex| - a zero-based index that indicates the start point for data collection.
+% * |noOfSamples| - the number of samples required.
+% * |downSampleRatio| - the downsampling factor that will be applied to the raw data.
+% * |downSampleRatioMode| - which downsampling mode to use (specified by an |enPS2000ARatioMode| enumeration value).
+% * |segmentIndex| - the zero-based number of the memory segment where the data is stored.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |numSamples| - the actual number of samples retrieved from the driver. The number of samples retrieved will
+% not be more than the number requested, and the data retrieved starts at startIndex.
+% * |overflow| - a set of flags that indicate whether an overvoltage has occurred on any of the channels. It is a bit field with
+% bit 0 denoting Channel A.
+%
+% *Example:*
+
+    % Retrieve averaged data values from the driver
+    startIndex          = 0
+    numSamples          = 10000;
+    downsampleRatio     = 10;
+    downsampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_AVERAGE;  
+    segmentIndex        = 0;
+    
+    [status, numCollectedSamples, overflow] = invoke(blockGroupObj, 'ps2000aGetValues', startIndex, numSamples, ...
+                                                downsampleRatio, downsampleRatioMode, segmentIndex);
+                                            
+%% 
+% *See also* <ps2000a_tbx_block_functions.html#1 |getBlockData|> | <ps2000a_tbx_block_functions.html#4 |getEtsBlockData|>
+%
+
+%% ps2000aIsReady
+
+[status, ready] = ps2000aIsReady(obj)
+
+%%
+% |ps2000aIsReady(obj)| indicates if the driver has finished collecting the requested samples.
+% 
+% Use this function to poll the driver to indicate if block data collection
+% has finished if using the <ps2000a_tbx_block_functions.html#15
+% |ps2000aRunBlock|> function, which should be called prior to calling this function.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Call the function in a loop until the device is ready. The
+    % ps2000aRunBlock function should already have been called.
+    
+    ready = 0;
+    
+    while ready == 0
+        
+        [status, ready] = invoke(ps2000aDeviceObj, 'ps2000aIsReady');
+        pause(0.01);
+            
+    end
+
+
+%% ps2000aRunBlock
+
+[status, timeIndisposedMs] = ps2000aRunBlock(obj, segmentIndex)
+
+%%
+% |ps2000aRunBlock(obj, segmentIndex)| starts collecting data in block mode. For a
+% step-by-step guide to this process, see <ps2000a_tbx_block_mode.html#7
+% Using block mode>.
+%
+% If additional code does not need to be called prior to the device
+% indicating that it has collected data, use the
+% <ps2000a_tbx_block_functions.html#27 |runBlock|> function in place of this
+% function and the <ps2000a_tbx_block_functions.html#13 |ps2000aIsReady|>
+% function.
+% 
+% This function requires the following Instrument Driver properties to have
+% been set:
+%
+% * numPreTriggerSamples - the number of samples to store before the trigger event.
+% * numPostTriggerSamples - the number of samples to store after the trigger event.
+% * timebase - a number in the range 0 to <matlab:doc('pow2') |pow2|>(32)-1. See the <ps2000a_tbx_timebases.html guide to calculating timebase values>.
+%
+% *Notes:*
+%
+% * The maximum number of samples returned is always numPreTriggerSamples +
+% numPostTriggerSamples. This is true even if no trigger event has been
+% set.
+% * The |timebase| property is ignored in ETS mode, when
+% <ps2000a_tbx_block_functions.html# |ps2000aSetEts|> selects the timebase
+% instead.
+%
+% This function can be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |segmentIndex| - zero-based index, specifying which memory segment to
+% use. Set this parameter to 0, if memory has not been segmented.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |timeIndisposedMs| - the time, in milliseconds, that the scope will
+% spend collecting samples. This does not include any auto trigger timeout and is not valid in ETS capture mode.
+%
+% *Example:*
+
+    % Set properties
+    set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
+    set(ps2000aDeviceObj, 'numPostTriggerSamples', 10000);
+    set(ps2000aDeviceObj, 'timebase', 15);
+
+    segmentIndex = 0;
+    
+    % Start the data collection
+    [status, timeIndisposed] = invoke(blockGroupObj, 'ps2000aRunBlock', segmentIndex);
+    
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#13 |ps2000aIsReady|> | <ps2000a_tbx_device_functions.html#27 |runBlock|>
+%
+%% ps2000aSetEts
+
+[status, sampleTimePicoSeconds] = ps2000aSetEts(obj, mode, etsCycles, etsInterleave)
+
+%%
+% |ps2000aSetEts(obj, mode, etsCycles, etsInterleave)| is used to enable or
+% disable ETS (equivalent-time sampling) and to set the ETS parameters. See
+% <ps2000a_tbx_ets.html ETS (Equivalent Time Sampling)> for an explanation of ETS mode.
+%
+% ETS mode cannot be used when MSO digital ports are enabled.
+% 
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |mode| - must be one of the following |enPS2000AEtsMode| range of enumeration values: 
+%
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">ETS Mode</th>
+%           <th style="border-color:#999; background-color:#E0E0E0;">Description</th>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">PS2000A_ETS_OFF</td>
+%           <td style="border-color:#999;">disables ETS</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">PS2000A_ETS_FAST</td>
+%           <td style="border-color:#999;">enables ETS and provides etsCycles of data, which may contain data from previously returned cycles</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">PS2000A_ETS_SLOW</td>
+%           <td style="border-color:#999">enables ETS and provides fresh data every etsCycles. This mode takes longer to provide each data set,<br>but the data sets are more stable and are guaranteed to contain only new data.</td>
+%       </tr>
+%   </table>
+% </html>
+
+%%
+% * |etsCycles| - the number of cycles to store: the computer can then select etsInterleave cycles to give the most uniform spread of samples.
+%
+% <html>
+%   <p>Range: between two and five times the value of etsInterleave, and
+%   not more than the appropriate MAX_ETS_CYCLES constant (defined in the
+%   PS2000AConstants.m file):
+%   </p>
+%       <table>
+%           <tr>
+%               <th style="border-color:#999; background-color:#E0E0E0">Max ETS Cycles</th>
+%               <th style="border-color:#999; background-color:#E0E0E0;">PicoScope Models</th>
+%           </tr>
+%           <tr>
+%               <td style="border-color:#999">500</td>
+%               <td style="border-color:#999;">2206B, 2206B MSO, 2207B, 2207B MSO, 2208B,<br>2208B MSO, 2405A, 2406B, 2407B, 2408B</td>
+%           </tr>
+%           <tr>
+%               <td style="border-color:#999">PS2206_MAX_ETS_CYCLES</td>
+%               <td style="border-color:#999;">2206, 2206A</td>
+%           </tr>
+%           <tr>
+%               <td style="border-color:#999">PS2207_MAX_ETS_CYCLES</td>
+%               <td style="border-color:#999">2207, 2207A</td>
+%           </tr>
+%           <tr>
+%               <td style="border-color:#999">PS2208_MAX_ETS_CYCLES</td>
+%               <td style="border-color:#999">2208, 2208A</td>
+%           </tr>
+%       </table>
+%   </html>
+
+
+%%
+% * |etsInterleave| - the number of waveforms to combine into a single ETS capture. Maximum value is:
+%
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">Max ETS Interleave</th>
+%           <th style="border-color:#999; background-color:#E0E0E0;">PicoScope Models</th>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">40</td>
+%           <td style="border-color:#999;">2206B, 2206B MSO, 2207B, 2207B MSO, 2208B,<br>2208B MSO, 2405A, 2406B, 2407B, 2408B</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">PS2206_MAX_INTERLEAVE</td>
+%           <td style="border-color:#999;">2206, 2206A</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">PS2207_MAX_INTERLEAVE</td>
+%           <td style="border-color:#999">2207, 2207A</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">PS2208_MAX_INTERLEAVE</td>
+%           <td style="border-color:#999">2208, 2208A</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |sampleTimePicoSeconds| - the effective sampling interval of the ETS
+% data. For example, if the captured sample time is 4 ns and etsInterleave
+% is 10, then the effective sample time in ETS mode is 400 ps.
+%
+% *Example:*
+
+    mode            = ps2000aEnuminfo.enPS2000AEtsMode.PS2000A_ETS_FAST;
+    etsCycles       = 250;
+    etsInterleave   = 25;
+    
+    [status, sampleTimePicoSeconds] = invoke(blockGroupObj, 'ps2000aSetEts', mode, etsCycles, etsInterleave);
+    
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#4 |getEtsBlockData|> | <ps2000a_tbx_device_functions.html#21 |ps2000aSetEtsTimeBuffer|>
+%
+
+%% ps2000aSetEtsTimeBuffer
+
+    [status] = ps2000aSetEtsTimeBuffer(obj, pEtsTimeBuffer)
+    
+%%
+% |ps2000aSetEtsTimeBuffer(obj, pEtsTimeBuffer)| tells the driver where to
+% find your application's ETS time buffers. These buffers contain the
+% 64-bit timing information for each ETS sample after you run a block-mode
+% ETS capture.
+%
+% This function should be called before calling <ps2000a_tbx_block_functions.html# |ps2000aGetValues|>.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |pEtsTimeBuffer| - a libpointer object corresponding to a 1-D array of
+% 64-bit words, each representing the time in femtoseconds at which the
+% sample was captured.
+%
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    numSamples = 1024;
+    pEtsTimeBuffer = libpointer('int64Ptr', zeros(numSamples, 1, 'int64'));
+    
+    status = invoke(blockGroupObj, 'ps2000aSetEtsTimeBuffer', pEtsTimeBuffer);
+
+%%
+% *See Also:* <ps2000a_tbx_blockfunctions.html#4 |getEtsBlockData|> | <ps2000a_tbx_device_functions.html#17 |ps2000aSetEts|>
+
+
+%% ps2000aSetEtsTimeBuffers
+
+    [status] = ps2000aSetEtsTimeBuffers(obj, etsTimeBufferUpper, etsTimeBufferLower)
+    
+%%
+% |ps2000aSetEtsTimeBuffers(obj, etsTimeBufferUpper, etsTimeBufferLower)|
+% tells the driver where to find your application's ETS time buffers. These
+% buffers contain the timing information for each ETS sample after you run
+% a block mode ETS capture.
+%
+% Using the <ps2000a_tbx_block_functions.html#21 |ps2000aSetEtsTimeBuffer|> function is recommended. 
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |pEtsTimeBufferUpper| - an array of 32-bit words, each representing the
+% upper 32 bits of the time in femtoseconds (e-15 s) at which the sample
+% was captured.
+% * |pEtsTimeBufferLower| - an array of 32-bit words, each representing the
+% lower 32 bits of the time in femtoseconds (e-15 s) at which the sample
+% was captured.
+%
+% *Output Arguments:*
+% 
+% |status| - status code returned by the driver.
+%
+% *Example:*
+
+    numSamples = 1024;
+    pEtsTimeBufferUpper = libpointer('int64Ptr', zeros(numSamples, 1, 'int64'));
+    pEtsTimeBufferLower = libpointer('int64Ptr', zeros(numSamples, 1, 'int64'));
+    
+    status = invoke(blockGroupObj, 'ps2000aSetEtsTimeBuffer', pEtsTimeBufferUpper, pEtsTimeBufferLower);
+    
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#21 |ps2000aSetEtsTimeBuffer|> | <ps2000a_tbx_block_functions.html#4 |getEtsBlockData|>
+
+%% runBlock
+
+    [status, timeIndisposedMs] = runBlock(obj, segmentIndex)
+    
+%%
+% |runBlock(obj, segmentIndex)| starts collecting data in block mode and
+% returns when the device is ready for data to be collected. If additional
+% code needs to be called prior to the device indicating that it has
+% collected data, use the <ps2000a_tbx_block_functions.html#
+% |ps2000aRunBlock|> and <ps2000a_tbx_block_functions.html#
+% |ps2000aIsReady|> functions instead.
+%
+% This function can be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Block group.
+% * |segmentIndex| - zero-based index, specifying which memory segment to
+% use. Set this parameter to 0, if memory has not been segmented.
+%
+% *Output Arguments:*
+%
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Set Instrument Driver properties
+    set(ps2000aDeviceObj, 'timebase', 10);
+    set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
+    set(ps2000aDeviceObj, 'numPostTriggerSamples', 16384);
+    
+    % Start the data acquisition
+    status = invoke(blockGroupObj, 'runBlock', 0);
+    
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#13 |ps2000aIsReady|> | <ps2000a_tbx_block_functions.html#15 |ps2000aRunBlock|>
+    
+##### SOURCE END #####
+--></body></html>

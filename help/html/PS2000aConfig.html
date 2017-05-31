@@ -1,0 +1,480 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PS2000aConfig</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="PS2000aConfig.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PS2000aConfig</h1><!--introduction--><p>Configures paths according to platforms and loads information from prototype files for PicoScope 2000 Series (A API) Oscilloscopes. The folder that this file is located in must be added to the MATLAB path.</p><p><b>Platform Specific Information:-</b></p><p>Microsoft Windows: Download the Software Development Kit installer from the <a href="https://www.picotech.com/downloads">Pico Technology Download software and manuals for oscilloscopes and data loggers</a> page.</p><p>Linux: Follow the instructions to install the libps2000a and libpswrappers packages from the <a href="https://www.picotech.com/downloads/linux">Pico Technology Linux Software &amp; Drivers for Oscilloscopes and Data Loggers</a> page.</p><p>Apple Mac OS X: Follow the instructions to install the PicoScope 6 application from the <a href="https://www.picotech.com/downloads">Pico Technology Download software and manuals for oscilloscopes and data loggers</a> page. Optionally, create a <tt>maci64</tt> folder in the same directory as this file and copy the following files into it:</p><div><ul><li>libps2000a.dylib and any other libps2000a library files</li><li>libps2000aWrap.dylib and any other libps2000aWrap library files</li><li>libpicoipp.dylib and any other libpicoipp library files</li><li>libiomp5.dylib</li></ul></div><p>Contact our Technical Support team via the <a href="https://www.picotech.com/tech-support">Technical Enquiries form</a> for further assistance.</p><p>Run this script in the MATLAB environment prior to connecting to the device.</p><p>This file can be edited to suit application requirements.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Set Path to Shared Libraries, Prototype and Thunk Files</a></li><li><a href="#2">Set Path for PicoScope Support Toolbox Files if not Installed</a></li><li><a href="#3">Load Enumerations and Structure Information</a></li></ul></div><h2 id="1">Set Path to Shared Libraries, Prototype and Thunk Files</h2><p>Set paths to shared library files, prototype and thunk files according to the operating system and architecture.</p><pre class="codeinput"><span class="comment">% Identify working directory</span>
+ps2000aConfigInfo.workingDir = pwd;
+
+<span class="comment">% Find file name</span>
+ps2000aConfigInfo.configFileName = mfilename(<span class="string">'fullpath'</span>);
+
+<span class="comment">% Only require the path to the config file</span>
+[ps2000aConfigInfo.pathStr] = fileparts(ps2000aConfigInfo.configFileName);
+
+<span class="comment">% Identify architecture e.g. 'win64'</span>
+ps2000aConfigInfo.archStr = computer(<span class="string">'arch'</span>);
+ps2000aConfigInfo.archPath = fullfile(ps2000aConfigInfo.pathStr, ps2000aConfigInfo.archStr);
+
+<span class="comment">% Add path to Prototype and Thunk files if not already present</span>
+<span class="keyword">if</span> (isempty(strfind(path, ps2000aConfigInfo.archPath)))
+
+    <span class="keyword">try</span>
+
+        addpath(ps2000aConfigInfo.archPath);
+
+    <span class="keyword">catch</span> err
+
+        error(<span class="string">'PS2000aConfig:OperatingSystemNotSupported'</span>, <span class="keyword">...</span>
+            <span class="string">'Operating system not supported - please contact support@picotech.com'</span>);
+
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+<span class="comment">% Set the path to drivers according to operating system.</span>
+
+<span class="comment">% Define possible paths for drivers - edit to specify location of drivers</span>
+
+ps2000aConfigInfo.macDriverPath = <span class="string">'/Applications/PicoScope6.app/Contents/Resources/lib'</span>;
+ps2000aConfigInfo.linuxDriverPath = <span class="string">'/opt/picoscope/lib/'</span>;
+
+ps2000aConfigInfo.winSDKInstallPath = <span class="string">'C:\Program Files\Pico Technology\SDK'</span>;
+ps2000aConfigInfo.winDriverPath = fullfile(ps2000aConfigInfo.winSDKInstallPath, <span class="string">'lib'</span>);
+
+<span class="comment">%32-bit version of MATLAB on Windows 64-bit</span>
+ps2000aConfigInfo.woW64SDKInstallPath = <span class="string">'C:\Program Files (x86)\Pico Technology\SDK'</span>;
+ps2000aConfigInfo.woW64DriverPath = fullfile(ps2000aConfigInfo.woW64SDKInstallPath, <span class="string">'lib'</span>);
+
+<span class="keyword">if</span> (ismac())
+
+    <span class="comment">% Libraries (including wrapper libraries) are stored in the PicoScope</span>
+    <span class="comment">% 6 App folder. Add locations of library files to environment variable.</span>
+
+    setenv(<span class="string">'DYLD_LIBRARY_PATH'</span>, ps2000aConfigInfo.macDriverPath);
+
+    <span class="keyword">if</span> (strfind(getenv(<span class="string">'DYLD_LIBRARY_PATH'</span>), ps2000aConfigInfo.macDriverPath))
+
+        <span class="comment">% Add path to drivers if not already on the MATLAB path</span>
+        <span class="keyword">if</span> (isempty(strfind(path, ps2000aConfigInfo.macDriverPath)))
+
+            addpath(ps2000aConfigInfo.macDriverPath);
+
+        <span class="keyword">end</span>
+
+    <span class="keyword">else</span>
+
+        warning(<span class="string">'PS2000aConfig:LibraryPathNotFound'</span>,<span class="string">'Locations of libraries not found in DYLD_LIBRARY_PATH'</span>);
+
+    <span class="keyword">end</span>
+
+<span class="keyword">elseif</span> (isunix())
+
+    <span class="comment">% Add path to drivers if not already on the MATLAB path</span>
+    <span class="keyword">if</span> (isempty(strfind(path, ps2000aConfigInfo.linuxDriverPath)))
+
+        addpath(ps2000aConfigInfo.linuxDriverPath);
+
+    <span class="keyword">end</span>
+
+<span class="keyword">elseif</span> (ispc())
+
+    <span class="comment">% Microsoft Windows operating systems</span>
+
+    <span class="comment">% Set path to dll files if the Pico Technology SDK Installer has been</span>
+    <span class="comment">% used or place dll files in the folder corresponding to the</span>
+    <span class="comment">% architecture. Detect if 32-bit version of MATLAB on 64-bit Microsoft</span>
+    <span class="comment">% Windows.</span>
+
+    ps2000aConfigInfo.winSDKInstallPath = <span class="string">''</span>;
+
+    <span class="keyword">if</span> (strcmp(ps2000aConfigInfo.archStr, <span class="string">'win32'</span>) &amp;&amp; exist(<span class="string">'C:\Program Files (x86)\'</span>, <span class="string">'dir'</span>) == 7)
+
+        <span class="comment">% Add path to drivers if not already on the MATLAB path</span>
+        <span class="keyword">if</span> (isempty(strfind(path, ps2000aConfigInfo.woW64DriverPath)))
+
+            <span class="keyword">try</span>
+
+                addpath(ps2000aConfigInfo.woW64DriverPath);
+
+            <span class="keyword">catch</span> err
+
+                warning(<span class="string">'PS2000aConfig:DirectoryNotFound'</span>, [<span class="string">'Folder C:\Program Files (x86)\Pico Technology\SDK\lib\ not found. '</span><span class="keyword">...</span>
+                <span class="string">'Please ensure that the location of the library files are on the MATLAB path.'</span>]);
+
+            <span class="keyword">end</span>
+
+        <span class="keyword">end</span>
+
+    <span class="keyword">else</span>
+
+        <span class="comment">% 32-bit MATLAB on 32-bit Windows or 64-bit MATLAB on 64-bit</span>
+        <span class="comment">% Windows operating systems</span>
+
+        <span class="comment">% Add path to drivers if not already on the MATLAB path</span>
+        <span class="keyword">if</span> (isempty(strfind(path, ps2000aConfigInfo.winDriverPath)))
+
+            <span class="keyword">try</span>
+
+                addpath(ps2000aConfigInfo.winDriverPath);
+
+            <span class="keyword">catch</span> err
+
+                warning(<span class="string">'PS2000aConfig:DirectoryNotFound'</span>, [<span class="string">'Folder C:\Program Files\Pico Technology\SDK\lib\ not found. '</span><span class="keyword">...</span>
+                    <span class="string">'Please ensure that the location of the library files are on the MATLAB path.'</span>]);
+
+            <span class="keyword">end</span>
+
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+
+<span class="keyword">else</span>
+
+    error(<span class="string">'PS2000aConfig:OperatingSystemNotSupported'</span>, <span class="string">'Operating system not supported - please contact support@picotech.com'</span>);
+
+<span class="keyword">end</span>
+</pre><h2 id="2">Set Path for PicoScope Support Toolbox Files if not Installed</h2><p>Set MATLAB Path to include location of PicoScope Support Toolbox Functions and Classes if the Toolbox has not been installed. Installation of the toolbox is only supported in MATLAB 2014b and later versions.</p><p>Check if PicoScope Support Toolbox is installed - using code based on <a href="http://stackoverflow.com/questions/6926021/how-to-check-if-matlab-toolbox-installed-in-matlab">How to check if matlab toolbox installed in matlab</a></p><pre class="codeinput">ps2000aConfigInfo.psTbxName = <span class="string">'PicoScope Support Toolbox'</span>;
+ps2000aConfigInfo.v = ver; <span class="comment">% Find installed toolbox information</span>
+
+<span class="keyword">if</span> (~any(strcmp(ps2000aConfigInfo.psTbxName, {ps2000aConfigInfo.v.Name})))
+
+    warning(<span class="string">'PS2000aConfig:PSTbxNotFound'</span>, <span class="string">'PicoScope Support Toolbox not found, searching for folder.'</span>);
+
+    <span class="comment">% If the PicoScope Support Toolbox has not been installed, check to see</span>
+    <span class="comment">% if the folder is on the MATLAB path, having been downloaded via zip</span>
+    <span class="comment">% file or copied from the Microsoft Windows Pico SDK installer</span>
+    <span class="comment">% directory.</span>
+
+    ps2000aConfigInfo.psTbxFound = strfind(path, ps2000aConfigInfo.psTbxName);
+
+    <span class="keyword">if</span> (isempty(ps2000aConfigInfo.psTbxFound) &amp;&amp; ispc())
+
+        <span class="comment">% Check if the folder is present in the relevant SDK installation</span>
+        <span class="comment">% directory on Windows platforms (if the SDK installer has been</span>
+        <span class="comment">% used).</span>
+
+        <span class="comment">% Obtain the folder name</span>
+        ps2000aConfigInfo.psTbxFolderName = fullfile(<span class="string">'C:\PicoSDK'</span>, <span class="string">'MATLAB'</span> , ps2000aConfigInfo.psTbxName);
+
+        <span class="comment">% If it is present in the SDK directory, add the PicoScope Support</span>
+        <span class="comment">% Toolbox folder and sub-folders to the MATLAB path.</span>
+        <span class="keyword">if</span> (exist(ps2000aConfigInfo.psTbxFolderName, <span class="string">'dir'</span>) == 7)
+
+            addpath(genpath(ps2000aConfigInfo.psTbxFolderName));
+
+        <span class="keyword">end</span>
+
+    <span class="keyword">else</span>
+
+        warning(<span class="string">'PS2000aConfig:PSTbxDirNotFound'</span>, <span class="string">'PicoScope Support Toolbox directory not found.'</span>);
+
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+<span class="comment">% Change back to the folder where the script was called from.</span>
+cd(ps2000aConfigInfo.workingDir);
+</pre><h2 id="3">Load Enumerations and Structure Information</h2><p>Enumerations and structures are used by certain Intrument Driver functions.</p><pre class="codeinput"><span class="comment">% Find prototype file names based on architecture</span>
+
+ps2000aConfigInfo.ps2000aMFile = str2func(strcat(<span class="string">'ps2000aMFile_'</span>, ps2000aConfigInfo.archStr));
+ps2000aConfigInfo.ps2000aWrapMFile = str2func(strcat(<span class="string">'ps2000aWrapMFile_'</span>, ps2000aConfigInfo.archStr));
+
+[ps2000aMethodinfo, ps2000aStructs, ps2000aEnuminfo, ps2000aThunkLibName] = ps2000aConfigInfo.ps2000aMFile();
+
+[ps2000aWrapMethodinfo, ps2000aWrapStructs, ps2000aWrapEnuminfo, ps2000aWrapThunkLibName] = ps2000aConfigInfo.ps2000aWrapMFile();
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PS2000aConfig
+% Configures paths according to platforms and loads information from
+% prototype files for PicoScope 2000 Series (A API) Oscilloscopes. The folder 
+% that this file is located in must be added to the MATLAB path.
+%
+% *Platform Specific Information:-*
+%
+% Microsoft Windows: Download the Software Development Kit installer from
+% the <https://www.picotech.com/downloads Pico Technology Download software and manuals for oscilloscopes and data loggers> page.
+% 
+% Linux: Follow the instructions to install the libps2000a and libpswrappers
+% packages from the <https://www.picotech.com/downloads/linux Pico Technology Linux Software & Drivers for Oscilloscopes and Data Loggers> page.
+%
+% Apple Mac OS X: Follow the instructions to install the PicoScope 6
+% application from the <https://www.picotech.com/downloads Pico Technology Download software and manuals for oscilloscopes and data loggers> page.
+% Optionally, create a |maci64| folder in the same directory as this file
+% and copy the following files into it:
+%
+% * libps2000a.dylib and any other libps2000a library files
+% * libps2000aWrap.dylib and any other libps2000aWrap library files
+% * libpicoipp.dylib and any other libpicoipp library files
+% * libiomp5.dylib
+%
+% Contact our Technical Support team via the <https://www.picotech.com/tech-support Technical Enquiries form> for further assistance.
+%
+% Run this script in the MATLAB environment prior to connecting to the 
+% device.
+%
+% This file can be edited to suit application requirements.
+
+%% Set Path to Shared Libraries, Prototype and Thunk Files
+% Set paths to shared library files, prototype and thunk files according to
+% the operating system and architecture.
+
+% Identify working directory
+ps2000aConfigInfo.workingDir = pwd;
+
+% Find file name
+ps2000aConfigInfo.configFileName = mfilename('fullpath');
+
+% Only require the path to the config file
+[ps2000aConfigInfo.pathStr] = fileparts(ps2000aConfigInfo.configFileName);
+
+% Identify architecture e.g. 'win64'
+ps2000aConfigInfo.archStr = computer('arch');
+ps2000aConfigInfo.archPath = fullfile(ps2000aConfigInfo.pathStr, ps2000aConfigInfo.archStr);
+
+% Add path to Prototype and Thunk files if not already present
+if (isempty(strfind(path, ps2000aConfigInfo.archPath)))
+    
+    try
+
+        addpath(ps2000aConfigInfo.archPath);
+
+    catch err
+
+        error('PS2000aConfig:OperatingSystemNotSupported', ...
+            'Operating system not supported - please contact support@picotech.com');
+
+    end
+    
+end
+
+% Set the path to drivers according to operating system.
+
+% Define possible paths for drivers - edit to specify location of drivers
+
+ps2000aConfigInfo.macDriverPath = '/Applications/PicoScope6.app/Contents/Resources/lib';
+ps2000aConfigInfo.linuxDriverPath = '/opt/picoscope/lib/';
+
+ps2000aConfigInfo.winSDKInstallPath = 'C:\Program Files\Pico Technology\SDK';
+ps2000aConfigInfo.winDriverPath = fullfile(ps2000aConfigInfo.winSDKInstallPath, 'lib');
+
+%32-bit version of MATLAB on Windows 64-bit
+ps2000aConfigInfo.woW64SDKInstallPath = 'C:\Program Files (x86)\Pico Technology\SDK'; 
+ps2000aConfigInfo.woW64DriverPath = fullfile(ps2000aConfigInfo.woW64SDKInstallPath, 'lib');
+
+if (ismac())
+    
+    % Libraries (including wrapper libraries) are stored in the PicoScope
+    % 6 App folder. Add locations of library files to environment variable.
+    
+    setenv('DYLD_LIBRARY_PATH', ps2000aConfigInfo.macDriverPath);
+    
+    if (strfind(getenv('DYLD_LIBRARY_PATH'), ps2000aConfigInfo.macDriverPath))
+        
+        % Add path to drivers if not already on the MATLAB path
+        if (isempty(strfind(path, ps2000aConfigInfo.macDriverPath)))
+        
+            addpath(ps2000aConfigInfo.macDriverPath);
+            
+        end
+        
+    else
+        
+        warning('PS2000aConfig:LibraryPathNotFound','Locations of libraries not found in DYLD_LIBRARY_PATH');
+        
+    end
+    
+elseif (isunix())
+    
+    % Add path to drivers if not already on the MATLAB path
+    if (isempty(strfind(path, ps2000aConfigInfo.linuxDriverPath)))
+        
+        addpath(ps2000aConfigInfo.linuxDriverPath);
+            
+    end
+		
+elseif (ispc())
+    
+    % Microsoft Windows operating systems
+    
+    % Set path to dll files if the Pico Technology SDK Installer has been
+    % used or place dll files in the folder corresponding to the
+    % architecture. Detect if 32-bit version of MATLAB on 64-bit Microsoft
+    % Windows.
+    
+    ps2000aConfigInfo.winSDKInstallPath = '';
+    
+    if (strcmp(ps2000aConfigInfo.archStr, 'win32') && exist('C:\Program Files (x86)\', 'dir') == 7)
+        
+        % Add path to drivers if not already on the MATLAB path
+        if (isempty(strfind(path, ps2000aConfigInfo.woW64DriverPath)))
+        
+            try
+                
+                addpath(ps2000aConfigInfo.woW64DriverPath);
+                
+            catch err
+           
+                warning('PS2000aConfig:DirectoryNotFound', ['Folder C:\Program Files (x86)\Pico Technology\SDK\lib\ not found. '...
+                'Please ensure that the location of the library files are on the MATLAB path.']);
+            
+            end
+            
+        end
+            
+    else
+        
+        % 32-bit MATLAB on 32-bit Windows or 64-bit MATLAB on 64-bit
+        % Windows operating systems
+        
+        % Add path to drivers if not already on the MATLAB path
+        if (isempty(strfind(path, ps2000aConfigInfo.winDriverPath)))
+            
+            try 
+
+                addpath(ps2000aConfigInfo.winDriverPath);
+
+            catch err
+
+                warning('PS2000aConfig:DirectoryNotFound', ['Folder C:\Program Files\Pico Technology\SDK\lib\ not found. '...
+                    'Please ensure that the location of the library files are on the MATLAB path.']);
+
+            end
+            
+        end
+        
+    end
+    
+else
+    
+    error('PS2000aConfig:OperatingSystemNotSupported', 'Operating system not supported - please contact support@picotech.com');
+    
+end
+
+%% Set Path for PicoScope Support Toolbox Files if not Installed
+% Set MATLAB Path to include location of PicoScope Support Toolbox
+% Functions and Classes if the Toolbox has not been installed. Installation
+% of the toolbox is only supported in MATLAB 2014b and later versions.
+%
+% Check if PicoScope Support Toolbox is installed - using code based on
+% <http://stackoverflow.com/questions/6926021/how-to-check-if-matlab-toolbox-installed-in-matlab How to check if matlab toolbox installed in matlab>
+
+ps2000aConfigInfo.psTbxName = 'PicoScope Support Toolbox';
+ps2000aConfigInfo.v = ver; % Find installed toolbox information
+
+if (~any(strcmp(ps2000aConfigInfo.psTbxName, {ps2000aConfigInfo.v.Name})))
+   
+    warning('PS2000aConfig:PSTbxNotFound', 'PicoScope Support Toolbox not found, searching for folder.');
+    
+    % If the PicoScope Support Toolbox has not been installed, check to see
+    % if the folder is on the MATLAB path, having been downloaded via zip
+    % file or copied from the Microsoft Windows Pico SDK installer
+    % directory.
+    
+    ps2000aConfigInfo.psTbxFound = strfind(path, ps2000aConfigInfo.psTbxName);
+    
+    if (isempty(ps2000aConfigInfo.psTbxFound) && ispc())
+        
+        % Check if the folder is present in the relevant SDK installation
+        % directory on Windows platforms (if the SDK installer has been
+        % used).
+        
+        % Obtain the folder name
+        ps2000aConfigInfo.psTbxFolderName = fullfile('C:\PicoSDK', 'MATLAB' , ps2000aConfigInfo.psTbxName);
+
+        % If it is present in the SDK directory, add the PicoScope Support
+        % Toolbox folder and sub-folders to the MATLAB path.
+        if (exist(ps2000aConfigInfo.psTbxFolderName, 'dir') == 7)
+
+            addpath(genpath(ps2000aConfigInfo.psTbxFolderName));
+
+        end
+            
+    else
+        
+        warning('PS2000aConfig:PSTbxDirNotFound', 'PicoScope Support Toolbox directory not found.');
+            
+    end
+    
+end
+
+% Change back to the folder where the script was called from.
+cd(ps2000aConfigInfo.workingDir);
+
+%% Load Enumerations and Structure Information
+% Enumerations and structures are used by certain Intrument Driver functions.
+
+% Find prototype file names based on architecture
+
+ps2000aConfigInfo.ps2000aMFile = str2func(strcat('ps2000aMFile_', ps2000aConfigInfo.archStr));
+ps2000aConfigInfo.ps2000aWrapMFile = str2func(strcat('ps2000aWrapMFile_', ps2000aConfigInfo.archStr));
+
+[ps2000aMethodinfo, ps2000aStructs, ps2000aEnuminfo, ps2000aThunkLibName] = ps2000aConfigInfo.ps2000aMFile(); 
+
+[ps2000aWrapMethodinfo, ps2000aWrapStructs, ps2000aWrapEnuminfo, ps2000aWrapThunkLibName] = ps2000aConfigInfo.ps2000aWrapMFile();
+
+##### SOURCE END #####
+--></body></html>

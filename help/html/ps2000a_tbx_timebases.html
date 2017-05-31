@@ -1,0 +1,262 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Timebases</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_timebases.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Timebases</h1><p>The ps2000a API allows you to select any of 2&sup3;&sup2; different timebases based on the maximum sampling rate&sup1; of your oscilloscope. The timebases allow slow enough sampling in block mode to overlap the streaming sample intervals, so that you can make a smooth transition between block mode and streaming mode. Calculate the timebase using the <a href="ps2000a_tbx_device_functions.html#14"><tt>ps2000aGetTimebase2</tt></a> call.</p><p><b>500 MS/s maximum sampling rate models:</b></p><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">timebase (n)</th>
+          <th style="border-color:#999; background-color:#E0E0E0">sample interval formula</th>
+          <th style="border-color:#999; background-color:#E0E0E0">sample interval examples</th>
+      </tr>
+      <tr>
+          <td style="border-color:#999">0</td>
+          <td rowspan="3"  style="border-color:#999; vertical-align:middle">2<sup style='vertical-align:super;font-size:smaller'>n</sup>/ 500,000,000</td>
+          <td style="border-color:#999">2 ns<sup style='vertical-align:super;font-size:smaller'>2</sup></td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">1</td>
+          <td style="border-color:#999">4 ns</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">2</td>
+          <td style="border-color:#999">8 ns</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999; vertical-align:middle">3 to 2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1</td>
+          <td style="border-color:#999; vertical-align:middle">(n – 2) / 62,500,000</td>
+          <td style="border-color:#999" rowspan="3">3 => 16 ns<br>...<br>2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1 => ~ 69 s</td>
+      </tr>
+  </table>
+</p><p><b>1 GS/s maximum sampling rate models:</b></p><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">timebase (n)</th>
+          <th style="border-color:#999; background-color:#E0E0E0">sample interval formula</th>
+          <th style="border-color:#999; background-color:#E0E0E0">sample interval examples</th>
+      </tr>
+      <tr>
+          <td style="border-color:#999">0</td><td rowspan="3" style="border-color:#999; vertical-align:middle">2<sup style='vertical-align:super;font-size:smaller'>n</sup>/ 1,000,000,000</td>
+          <td style="border-color:#999">1 ns<sup style='vertical-align:super;font-size:smaller'>2</sup></td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">1</td>
+          <td style="border-color:#999">2 ns</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">2</td>
+          <td style="border-color:#999">4 ns</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999; vertical-align:middle">3 to 2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1</td>
+          <td style="border-color:#999; vertical-align:middle">(n – 2) / 125,000,000</td>
+          <td style="border-color:#999" rowspan="3">3 => 8 ns<br>...<br>2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1 => ~ 34 s</td>
+      </tr>
+  </table>
+</p><p><b>PicoScope 2205 MSO:</b></p><p>
+  <table>
+      <tr>
+          <th style="border-color:#999; background-color:#E0E0E0">timebase (n)</th>
+          <th style="border-color:#999; background-color:#E0E0E0">sample interval formula</th>
+          <th style="border-color:#999; background-color:#E0E0E0">sample interval examples</th>
+      </tr>
+      <tr>
+          <td style="border-color:#999">0</td>
+          <td style="border-color:#999">2<sup style='vertical-align:super;font-size:smaller'>n</sup> / 200,000,000</td>
+          <td style="border-color:#999">0 => 5 ns<sup style='vertical-align:super;font-size:smaller'>3</sup></td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">1</td>
+          <td rowspan="5"  style="border-color:#999; vertical-align:middle">n / 100,000,000</td>
+          <td style="border-color:#999">10 ns</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999">2</td>
+          <td style="border-color:#999">20 ns</td>
+      </tr>
+      <tr>
+          <td style="border-color:#999; vertical-align:middle">3 to 2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1</td>
+          <td  style="border-color:#999" rowspan="3">3 => 30 ns<br>...<br>2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1 => ~ 43 s</td>
+      </tr>
+  </table>
+</p><p>&sup1; The fastest available sampling rate may depend on which channels are enabled, and on the sampling mode. Refer to the oscilloscope data sheet for sampling rate specifications. In streaming mode the sampling rate may additionally be limited by the speed of the USB port.</p><p>&sup2; Available only in single-channel mode.</p><p>&sup3; Not available when channel B active, nor when channel A and both digital ports active.</p><p><b>ETS mode</b></p><p>In ETS mode the sample time is not set according to the above tables but is instead calculated and returned by <a href="ps2000a_tbx_block_functions.html#21"><tt>ps2000aSetEts</tt></a>.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Timebases
+%
+% The ps2000a API allows you to select any of 
+% 2&#179;&#178; different timebases based
+% on the maximum sampling rate&#185; of your oscilloscope. The timebases allow
+% slow enough sampling in block mode to overlap the streaming sample
+% intervals, so that you can make a smooth transition between block mode
+% and streaming mode. Calculate the timebase using the
+% <ps2000a_tbx_device_functions.html#14 |ps2000aGetTimebase2|> call.
+%
+% *500 MS/s maximum sampling rate models:*
+%
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">timebase (n)</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">sample interval formula</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">sample interval examples</th>
+%       </tr>
+%       <tr> 
+%           <td style="border-color:#999">0</td>
+%           <td rowspan="3"  style="border-color:#999; vertical-align:middle">2<sup style='vertical-align:super;font-size:smaller'>n</sup>/ 500,000,000</td>
+%           <td style="border-color:#999">2 ns<sup style='vertical-align:super;font-size:smaller'>2</sup></td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">1</td>
+%           <td style="border-color:#999">4 ns</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">2</td>
+%           <td style="border-color:#999">8 ns</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999; vertical-align:middle">3 to 2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1</td>
+%           <td style="border-color:#999; vertical-align:middle">(n – 2) / 62,500,000</td>
+%           <td style="border-color:#999" rowspan="3">3 => 16 ns<br>...<br>2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1 => ~ 69 s</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% *1 GS/s maximum sampling rate models:*
+%
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">timebase (n)</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">sample interval formula</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">sample interval examples</th>
+%       </tr>
+%       <tr> 
+%           <td style="border-color:#999">0</td><td rowspan="3" style="border-color:#999; vertical-align:middle">2<sup style='vertical-align:super;font-size:smaller'>n</sup>/ 1,000,000,000</td>
+%           <td style="border-color:#999">1 ns<sup style='vertical-align:super;font-size:smaller'>2</sup></td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">1</td>
+%           <td style="border-color:#999">2 ns</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">2</td>
+%           <td style="border-color:#999">4 ns</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999; vertical-align:middle">3 to 2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1</td>
+%           <td style="border-color:#999; vertical-align:middle">(n – 2) / 125,000,000</td>
+%           <td style="border-color:#999" rowspan="3">3 => 8 ns<br>...<br>2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1 => ~ 34 s</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% *PicoScope 2205 MSO:*
+%
+% <html>
+%   <table>
+%       <tr>
+%           <th style="border-color:#999; background-color:#E0E0E0">timebase (n)</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">sample interval formula</th>
+%           <th style="border-color:#999; background-color:#E0E0E0">sample interval examples</th>
+%       </tr>
+%       <tr> 
+%           <td style="border-color:#999">0</td>
+%           <td style="border-color:#999">2<sup style='vertical-align:super;font-size:smaller'>n</sup> / 200,000,000</td>
+%           <td style="border-color:#999">0 => 5 ns<sup style='vertical-align:super;font-size:smaller'>3</sup></td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">1</td>
+%           <td rowspan="5"  style="border-color:#999; vertical-align:middle">n / 100,000,000</td>
+%           <td style="border-color:#999">10 ns</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999">2</td>
+%           <td style="border-color:#999">20 ns</td>
+%       </tr>
+%       <tr>
+%           <td style="border-color:#999; vertical-align:middle">3 to 2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1</td>
+%           <td  style="border-color:#999" rowspan="3">3 => 30 ns<br>...<br>2<sup style='vertical-align:super;font-size:smaller'>32</sup>-1 => ~ 43 s</td>
+%       </tr>
+%   </table>
+% </html>
+%
+% &#185; The fastest available sampling rate may depend on which channels are enabled, and on the sampling
+% mode. Refer to the oscilloscope data sheet for sampling rate specifications. In streaming mode the
+% sampling rate may additionally be limited by the speed of the USB port. 
+%
+% &#178; Available only in single-channel mode. 
+%
+% &#179; Not available when channel B active, nor when channel A and both
+% digital ports active.
+%
+% *ETS mode*
+%
+% In ETS mode the sample time is not set according to the above tables but is instead
+% calculated and returned by <ps2000a_tbx_block_functions.html#21 |ps2000aSetEts|>.
+%
+##### SOURCE END #####
+--></body></html>

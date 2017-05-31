@@ -1,0 +1,471 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Rapidblock Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_rapid_block_functions.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Rapidblock Group Functions</h1><!--introduction--><p>This section provides a description of the Instrument Driver Rapidblock group functions. Prior to calling the functions, a Rapidblock group object must be created as shown in the <a href="ps2000a_tbx_rapid_block_group.html">Rapidblock Group</a> page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">getRapidBlockData</a></li><li><a href="#4">ps2000aGetNoOfCaptures</a></li><li><a href="#7">ps2000aGetNoOfProcessedCaptures</a></li><li><a href="#10">ps2000aGetValuesBulk</a></li><li><a href="#13">ps2000aGetValuesOverlappedBulk</a></li><li><a href="#16">ps2000aSetNoOfCaptures</a></li></ul></div><h2 id="1">getRapidBlockData</h2><pre class="codeinput">[numSamples, overflow, channelA, channelB, channelC, channelD, dPort0, dPort1] = getRapidBlockData(obj, numCaptures, <span class="keyword">...</span>
+                                                                                                    ratio, ratioMode)
+</pre><p><tt>getRapidBlockData(obj, numCaptures, ratio, ratioMode)</tt> retrieves waveforms captured using rapid block mode. The waveforms must have been collected sequentially and in the same run.</p><p>Memory for the data arrays from segment index 0 to <tt>numCaptures</tt> - 1 is allocated and the driver is informed where to store the data prior to retrieval. Data collection in Aggregation mode or with more than one downsampling mode  is NOT supported by this function.</p><p>Channel data will be returned as an array in the form <tt>numSamples</tt> x <tt>numCaptures</tt> . Channels not enabled or not supported by this device will be returned as an empty array.</p><p>This function can be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li><li><tt>numCaptures</tt> - the number of waveform captures to retrieve.</li><li><tt>ratio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>ratioMode</tt> - which <a href="ps2000a_tbx_user_intro_guide.html#5">downsampling mode</a> to use (specified by an enumeration from the <tt>enPS2000ARatioMode</tt> set excluding <tt>PS2000A_RATIO_MODE_AGGREGATE</tt>).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>numSamples</tt> - the number of samples per waveform retrieved from the driver.</li><li><tt>overflow</tt> - a set of bit flags that indicate whether an overvoltage has occurred on any of the channels. Each segment index has a corresponding entry in the overflow array, with overflow(1) containing the flags for the segment numbered fromSegmentIndex and the last element in the array containing the flags for the segment numbered toSegmentIndex.</li></ul></div><div><ul><li><tt>channelA</tt> - an array containing data values (in millivolts) for channel A.</li><li><tt>channelB</tt> - an array containing data values (in millivolts) for channel B.</li><li><tt>channelC</tt> - an array containing data values (in millivolts) for channel C.</li><li><tt>channelD</tt> - an array containing data values (in millivolts) for channel D.</li><li><tt>portD0</tt> - an array containing data values in binary format for digital Port 0 (in MSB order)</li><li><tt>portD1</tt> - an array containing data values in binary format for digital Port 1 (in MSB order)</li></ul></div><p><b>Notes:</b> Channels not enabled available on a device e.g. C and D on a 2 channel oscilloscope, or PORT0 and PORT1 on a non-MSO oscilloscope will be returned as an empty array.</p><p>Use the '~' operator to ignore output variables that are not required.</p><p>Mixed downsampling mode data collection is not supported by this function e.g. collecting averaged and decimated data. For this, use the <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> and <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> functions instead.</p><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Retrieve raw data values for channel A following a rapid block capture</span>
+
+    numCaptures = 16;
+    ratio       = 1;
+    ratioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    <span class="comment">% Provide additional output arguments for the remaining channels e.g. chB</span>
+    <span class="comment">% for channel B, dPort1 for Digital PORT1.</span>
+    [numSamples, overflow, chA, ~, ~, ~, dPort0, ~] = invoke(rapidBlockGroupObj, <span class="string">'getRapidBlockData'</span>, numCaptures, <span class="keyword">...</span>
+                                                        ratio, ratioMode);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_rapid_block_functions.html#11"><tt>ps2000aGetValuesBulk</tt></a> | <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> | <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> | <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a></p><h2 id="4">ps2000aGetNoOfCaptures</h2><pre class="codeinput">[status, nCaptures] = ps2000aGetNoOfCaptures(obj)
+</pre><p><tt>ps2000aGetNoOfCaptures(obj)</tt> finds out how many captures are available in rapid block mode after <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> or <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> have been called when either the collection completed or the collection of waveforms was interrupted by calling <a href="ps2000a_tbx_device_functions.html#27"><tt>ps2000aStop</tt></a>.</p><p>The returned value (nCaptures) can then be used to iterate through the number of segments using <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> or <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a>, or in a single call to <a href="ps2000a_tbx_rapid_block_functions.html"><tt>ps2000aGetValuesBulk</tt></a> where it is used to calculate the <tt>toSegmentIndex</tt> parameter.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>nCaptures</tt> - the number of available captures that has been collected from calling <tt>ps2000aRunBlock</tt> or <tt>runBlock</tt>.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [status, nCaptures] = ps2000aGetNoOfCaptures(rapidBlockGroupObj)
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_rapid_block_functions.html#11"><tt>ps2000aGetNoOfProcesedCaptures</tt></a> | <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a> | <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> | <a href="ps2000a_tbx_rapid_block_functions.html#1"><tt>getRapidBlockData</tt></a> | <a href="ps2000a_tbx_rapid_block_functions.html#"><tt>ps2000aGetValuesBulk</tt></a></p><h2 id="7">ps2000aGetNoOfProcessedCaptures</h2><pre class="codeinput">[status, nProcessedCaptures] = ps2000aGetNoOfProcessedCaptures(obj)
+</pre><p><tt>ps2000aGetNoOfProcessedCaptures(obj)</tt> gets the number of captures collected and processed in one run of rapid block mode. It enables your application to start processing captured data while the driver is still transferring later captures from the device to the computer.</p><p>The function returns the number of captures the driver has processed since you called <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> or <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a>. It is for use in rapid block mode, alongside the <a href="ps2000a_tbx_rapid_block_functions.html"><tt>ps2000aGetValuesOverlappedBulk</tt></a> function, when the driver is set to transfer data from the device automatically as soon as the <tt>ps2000aRunBlock</tt> or <tt>runBlock</tt> function is called. You can call <tt>ps2000aGetNoOfProcessedCaptures</tt> during device capture, after collection has completed or after interrupting waveform collection by calling <a href="ps2000a_tbx_device_functions.html#27"><tt>ps2000aStop</tt></a>.</p><p>The returned value (<tt>nProcessedCaptures</tt>) can then be used to iterate through the number of segments using <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> or <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a>, or in a single call to <a href="ps2000a_tbx_rapid_block_functions.html"><tt>ps2000aGetValuesBulk</tt></a>, where it is used to calculate the <tt>toSegmentIndex</tt> parameter.</p><p><b>When capture is stopped</b></p><p>If <tt>nProcessedCaptures</tt> = 0, you will also need to call <a href="ps2000a_tbx_rapid_block_functions.html#7"><tt>ps2000aGetNoOfCaptures</tt></a>, in order to determine how many waveform segments were captured, before calling <tt>ps2000aGetValues</tt> / <tt>getBlockData</tt> or <tt>ps2000aGetValuesBulk</tt> / <a href="ps2000a_tbx_rapid_block_functions.html#1"><tt>getRapidBlockData</tt></a>.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>nProcessedCaptures</tt> - the number of available captures that has been collected from calling <tt>ps2000aRunBlock</tt> or <tt>runBlock</tt>.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [status, nProcessedCaptures] = ps2000aGetNoOfProcessedCaptures(rapidBlockGroupObj);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> | <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> | <a href="ps2000a_tbx_rapid_block_functions.html#13"><tt>ps2000aGetValuesOverlappedBulk</tt></a></p><h2 id="10">ps2000aGetValuesBulk</h2><pre class="codeinput">[status, numSamples, overflow] = ps2000aGetValuesBulk(obj, noOfSamples, fromSegmentIndex, toSegmentIndex, <span class="keyword">...</span>
+                                                        downSampleRatio, downSampleRatioMode)
+</pre><p><tt>ps2000aGetValuesBulk(obj, noOfSamples, fromSegmentIndex, toSegmentIndex, downSampleRatio, downSampleRatioMode)</tt> retrieves waveforms captured using rapid block mode. The waveforms must have been collected sequentially and in the same run.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li><li><tt>noOfSamples</tt> - the number of samples required.</li><li><tt>fromSegmentIndex</tt> - the first segment from which the waveform should be retrieved.</li><li><tt>toSegmentIndex</tt> - the last segment from which the waveform should be retrieved.</li><li><tt>downSampleRatio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>downSampleRatioMode</tt> - which <a href="ps2000a_tbx_user_intro_guide.html#5">downsampling mode</a> to use (specified by an <tt>enPS2000ARatioMode</tt> enumeration value).</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li><li><tt>numSamples</tt> - the actual number of samples per waveform retrieved from the driver.</li><li><tt>overflow</tt> - an array of integers equal to or larger than the number of waveforms to be retrieved with each element corresponding to an overflow value as described in the <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> function.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    [status, numSamples, overflow] = invoke(rapidBlockGroupObj, <span class="string">'ps2000aGetValuesBulk'</span>, noOfSamples, <span class="keyword">...</span>
+                                        fromSegmentIndex, toSegmentIndex, downSampleRatio, downSampleRatioMode);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#1"><tt>getBlockData</tt></a> | <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> | <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> | <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a></p><h2 id="13">ps2000aGetValuesOverlappedBulk</h2><pre class="codeinput">[status, numSamples, overflow] = ps2000aGetValuesOverlappedBulk(obj, startIndex, downSampleRatio, <span class="keyword">...</span>
+                                    downsampleRatioMode, fromSegmentIndex, toSegmentIndex)
+</pre><p><tt>ps2000aGetValuesOverlappedBulk(obj, startIndex, downSampleRatio, downsampleRatioMode, fromSegmentIndex, toSegmentIndex)</tt> allows you to make a deferred data-collection request, which will later be executed, and the arguments validated, when you call <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> in rapid block mode. The advantage of this method is that the driver makes contact with the scope only once, when you call <tt>ps2000aRunBlock</tt>, compared with the two contacts that occur when you use the conventional <tt>ps2000aRunBlock</tt>, <a href="ps2000a_tbx_rapid_block_functions.html#10"><tt>ps2000aGetValuesBulk</tt></a> calling sequence. This slightly reduces the dead time between successive captures in rapid block mode.</p><p>After calling <tt>ps2000aRunBlock</tt>, you can optionally use <tt>ps2000aGetValuesBulk</tt> to request further copies of the data. This might be required if you wish to display the data with different data reduction settings.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li><li><tt>startIndex</tt> - a zero-based index that indicates the start point for data collection. It is measured in sample intervals from the start of the buffer.</li><li><tt>numSamples</tt> - a <a href="matlab:doc('libpointer')"><tt>libpointer</tt></a> object representing the number of raw samples to be collected before any downsampling is applied (the type of pointer should be specified as <tt>'uint32Ptr'</tt>. On exit, this will represent the actual number in the buffer. The number of samples retrieved will not be more than the number requested, and the data retrieved starts at <tt>startIndex</tt>.</li><li><tt>downSampleRatio</tt> - the downsampling factor that will be applied to the raw data.</li><li><tt>downSampleRatioMode</tt> - which downsampling mode to use (specified by an <tt>enPS2000ARatioMode</tt> enumeration).</li><li><tt>fromSegmentIndex</tt> - the first segment from which the waveform should be retrieved.</li><li><tt>toSegmentIndex</tt> - the last segment from which the waveform should be retrieved.</li><li><tt>overflow</tt> - a <tt>libpointer</tt> object to an array of integers equal to or larger than the number of waveforms to be retrieved with each element corresponding to an overflow value as described in the <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> function.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Using the GetValuesOverlappedBulk function</b></p><div><ol><li>Create a device object for the Instrument using <a href="matlab:doc('instrument/icdevice'])"><tt>icdevice</tt></a>.</li><li>Connect to the Instrument using <a href="matlab:doc('instrument/connect')"><tt>connect</tt></a>.</li><li>Select channel ranges and AC/DC coupling using <a href="ps2000a_tbx_device_functions.html#20"><tt>ps2000aSetChannel</tt></a>.</li><li>Using <a href="ps2000a_tbx_device_functions.html#"><tt>ps2000aGetTimebase2</tt></a>, select timebases until the required nanoseconds per sample is located.</li><li>Use the trigger setup function <a href="ps2000a_tbx_trigger_functions.html#5"><tt>setSimpleTrigger</tt></a> and to set up the trigger if required.</li><li>Wait until the oscilloscope is ready by polling <a href="ps2000a_tbx_device_functions.html#13"><tt>ps2000aIsReady</tt></a>.</li><li>Use <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a> to tell the driver where your memory buffer is.</li><li>Set up the transfer of the block of data from the oscilloscope using <tt>ps2000aGetValuesOverlappedBulk</tt>.</li><li>Start the oscilloscope running using <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a>.</li><li>Display the data.</li><li>Stop the oscilloscope.</li><li>Repeat steps 9 and 10 if needed.</li></ol></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Setup data buffers (see ps2000aSetDataBuffer function description in</span>
+    <span class="comment">% Device Functions).</span>
+
+    <span class="comment">% Set parameters</span>
+    startIndex          = 0;
+    pNumSamples         = libpointer(<span class="string">'uint32Ptr'</span>, get(ps2000aDeviceObj, <span class="string">'numPreTriggerSamples'</span>) + <span class="keyword">...</span>
+                            get(ps2000aDeviceObj, <span class="string">'numPostTriggerSamples'</span>));
+    downsampleRatio     = 1;
+    downsampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    numCaptures         = 10;
+    pOverflow           = libpointer(<span class="string">'int16Ptr'</span>, zeros(numCaptures, 1));
+
+    status.getValuesOverlappedBulk = invoke(rapidBlockGroupObj, <span class="string">'ps2000aGetValuesOverlappedBulk'</span>, startIndex, <span class="keyword">...</span>
+                                        pNumSamples, downSampleRatio, downsampleRatioMode, 0, numCaptures - 1, pOverflow);
+
+    <span class="comment">% Call the ps2000aRunBlock function and poll ps2000aIsReady until the</span>
+    <span class="comment">% device is ready or call runBlock.</span>
+
+    status.runBlock = invoke(blockGroupObj, <span class="string">'runBlock'</span>, 0);
+
+    <span class="comment">% Find the number of samples per waveform and retrieve overflow values</span>
+    <span class="comment">% post-capture.</span>
+
+    numSamples  = pNumSamples.Value;
+    overflow    = pOverflow.Value;
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> | <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> | <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a></p><h2 id="16">ps2000aSetNoOfCaptures</h2><pre class="codeinput">status = ps2000aSetNoOfCaptures(obj, nCaptures)
+</pre><p><tt>ps2000aSetNoOfCaptures(obj, nCaptures)</tt> sets the number of captures to be collected in one run of rapid block mode. If you do not call this function before a run, the driver will capture only one waveform. Once a value has been set, the value remains constant unless changed.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li><li><tt>nCaptures</tt> -  the number of waveforms to capture in one run.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set capture for 20 waveforms</span>
+    status = invoke(rapidBlockGroupObj, <span class="string">'ps2000aSetNoOfCaptures'</span>, 20);
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#16"><tt>ps2000aMemorySegments</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Rapidblock Group Functions
+%
+% This section provides a description of the Instrument Driver Rapidblock group
+% functions. Prior to calling the functions, a Rapidblock group object must be
+% created as shown in the <ps2000a_tbx_rapid_block_group.html Rapidblock Group> page.
+%
+%% getRapidBlockData
+
+[numSamples, overflow, channelA, channelB, channelC, channelD, dPort0, dPort1] = getRapidBlockData(obj, numCaptures, ...
+                                                                                                    ratio, ratioMode)  
+    
+%%
+% |getRapidBlockData(obj, numCaptures, ratio, ratioMode)| retrieves
+% waveforms captured using rapid block mode. The waveforms must have been
+% collected sequentially and in the same run.
+%
+% Memory for the data arrays from segment index 0 to |numCaptures| - 1 is
+% allocated and the driver is informed where to store the data prior to
+% retrieval. Data collection in Aggregation mode or with more than one
+% downsampling mode  is NOT supported by this function.
+%
+% Channel data will be returned as an array in the form |numSamples|
+% x |numCaptures| . Channels not enabled or not supported by this device will
+% be returned as an empty array.
+% 
+% This function can be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Rapidblock group.
+% * |numCaptures| - the number of waveform captures to retrieve.
+% * |ratio| - the downsampling factor that will be applied to the raw data.
+% * |ratioMode| - which <ps2000a_tbx_user_intro_guide.html#5 downsampling mode> to use (specified by an enumeration
+% from the |enPS2000ARatioMode| set excluding |PS2000A_RATIO_MODE_AGGREGATE|).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |numSamples| - the number of samples per waveform retrieved from the driver.
+% * |overflow| - a set of bit flags that indicate whether an overvoltage
+% has occurred on any of the channels. Each segment index has a
+% corresponding entry in the overflow array, with overflow(1) containing
+% the flags for the segment numbered fromSegmentIndex and the last element
+% in the array containing the flags for the segment numbered
+% toSegmentIndex.
+%
+% * |channelA| - an array containing data values (in millivolts) for channel A.
+% * |channelB| - an array containing data values (in millivolts) for channel B.
+% * |channelC| - an array containing data values (in millivolts) for channel C.
+% * |channelD| - an array containing data values (in millivolts) for channel D.
+% * |portD0| - an array containing data values in binary format for digital Port 0 (in MSB order)
+% * |portD1| - an array containing data values in binary format for digital Port 1 (in MSB order)
+% 
+% *Notes:* Channels not enabled available on a device e.g. C and D on a 2
+% channel oscilloscope, or PORT0 and PORT1 on a non-MSO oscilloscope will
+% be returned as an empty array.
+%
+% Use the '~' operator to ignore output variables that are not required.
+%
+% Mixed downsampling mode data collection is not supported by this function
+% e.g. collecting averaged and decimated data. For this, use the <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> and
+% <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> functions instead.
+%
+% *Example:*
+
+    % Retrieve raw data values for channel A following a rapid block capture
+    
+    numCaptures = 16;
+    ratio       = 1;
+    ratioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+
+    % Provide additional output arguments for the remaining channels e.g. chB
+    % for channel B, dPort1 for Digital PORT1.
+    [numSamples, overflow, chA, ~, ~, ~, dPort0, ~] = invoke(rapidBlockGroupObj, 'getRapidBlockData', numCaptures, ...
+                                                        ratio, ratioMode);
+
+%%
+% *See also:* <ps2000a_tbx_rapid_block_functions.html#11
+% |ps2000aGetValuesBulk|> | <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|> | <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> | <ps2000a_tbx_block_functions.html#32 |runBlock|>
+%
+
+%% ps2000aGetNoOfCaptures
+%
+
+[status, nCaptures] = ps2000aGetNoOfCaptures(obj)
+    
+%% 
+% |ps2000aGetNoOfCaptures(obj)| finds out how many captures are available in
+% rapid block mode after <ps2000a_tbx_block_functions.html#18
+% |ps2000aRunBlock|> or <ps2000a_tbx_block_functions.html#32 |runBlock|> have
+% been called when either the collection completed or the collection of
+% waveforms was interrupted by calling
+% <ps2000a_tbx_device_functions.html#27 |ps2000aStop|>.
+%
+% The returned value (nCaptures) can then be used to iterate through the
+% number of segments using <ps2000a_tbx_block_functions.html#13
+% |ps2000aGetValues|> or <ps2000a_tbx_block_functions.html#1
+% |getBlockData|>, or in a single call to <ps2000a_tbx_rapid_block_functions.html |ps2000aGetValuesBulk|> where
+% it is used to calculate the |toSegmentIndex| parameter.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Rapidblock group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |nCaptures| - the number of available captures that has been collected from calling |ps2000aRunBlock| or |runBlock|.
+%
+% *Example:*
+
+    [status, nCaptures] = ps2000aGetNoOfCaptures(rapidBlockGroupObj)
+
+%%
+% *See also:* <ps2000a_tbx_rapid_block_functions.html#11
+% |ps2000aGetNoOfProcesedCaptures|> | <ps2000a_tbx_block_functions.html#1 |getBlockData|> | <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> 
+% | <ps2000a_tbx_rapid_block_functions.html#1 |getRapidBlockData|> | <ps2000a_tbx_rapid_block_functions.html# |ps2000aGetValuesBulk|> 
+%
+
+%% ps2000aGetNoOfProcessedCaptures
+
+[status, nProcessedCaptures] = ps2000aGetNoOfProcessedCaptures(obj)
+    
+%% 
+% |ps2000aGetNoOfProcessedCaptures(obj)| gets the number of
+% captures collected and processed in one run of rapid block mode. It
+% enables your application to start processing captured data while the
+% driver is still transferring later captures from the device to the
+% computer.
+%
+% The function returns the number of captures the driver has processed
+% since you called <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|>
+% or <ps2000a_tbx_block_functions.html#32 |runBlock|>. It is for use in
+% rapid block mode, alongside the <ps2000a_tbx_rapid_block_functions.html
+% |ps2000aGetValuesOverlappedBulk|> function, when the driver is set to
+% transfer data from the device automatically as soon as the
+% |ps2000aRunBlock| or |runBlock| function is called. You can call
+% |ps2000aGetNoOfProcessedCaptures| during device capture, after collection
+% has completed or after interrupting waveform collection by calling
+% <ps2000a_tbx_device_functions.html#27 |ps2000aStop|>.
+%
+% The returned value (|nProcessedCaptures|) can then be used to iterate
+% through the number of segments using <ps2000a_tbx_block_functions.html#13
+% |ps2000aGetValues|> or <ps2000a_tbx_block_functions.html#1
+% |getBlockData|>, or in a single call to
+% <ps2000a_tbx_rapid_block_functions.html |ps2000aGetValuesBulk|>, where it
+% is used to calculate the |toSegmentIndex| parameter.
+% 
+% *When capture is stopped*
+% 
+% If |nProcessedCaptures| = 0, you will also need to call
+% <ps2000a_tbx_rapid_block_functions.html#7 
+% |ps2000aGetNoOfCaptures|>, in order to determine how many waveform
+% segments were captured, before calling |ps2000aGetValues| / |getBlockData|
+% or |ps2000aGetValuesBulk| / <ps2000a_tbx_rapid_block_functions.html#1 |getRapidBlockData|>.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Rapidblock group.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |nProcessedCaptures| - the number of available captures that has been
+% collected from calling |ps2000aRunBlock| or |runBlock|.
+%
+% *Example:*
+
+    [status, nProcessedCaptures] = ps2000aGetNoOfProcessedCaptures(rapidBlockGroupObj);
+
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|> |
+% <ps2000a_tbx_block_functions.html#32 |runBlock|> | <ps2000a_tbx_rapid_block_functions.html#13 |ps2000aGetValuesOverlappedBulk|>
+%
+
+%% ps2000aGetValuesBulk
+
+[status, numSamples, overflow] = ps2000aGetValuesBulk(obj, noOfSamples, fromSegmentIndex, toSegmentIndex, ...
+                                                        downSampleRatio, downSampleRatioMode)
+    
+%% 
+% |ps2000aGetValuesBulk(obj, noOfSamples, fromSegmentIndex, toSegmentIndex,
+% downSampleRatio, downSampleRatioMode)| retrieves waveforms captured using
+% rapid block mode. The waveforms must have been collected sequentially and
+% in the same run.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Rapidblock group.
+% * |noOfSamples| - the number of samples required.
+% * |fromSegmentIndex| - the first segment from which the waveform should be retrieved.
+% * |toSegmentIndex| - the last segment from which the waveform should be retrieved.
+% * |downSampleRatio| - the downsampling factor that will be applied to the raw data.
+% * |downSampleRatioMode| - which <ps2000a_tbx_user_intro_guide.html#5
+% downsampling mode> to use (specified by an |enPS2000ARatioMode|
+% enumeration value).
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+% * |numSamples| - the actual number of samples per waveform retrieved from the driver.
+% * |overflow| - an array of integers equal to or larger than the number of
+% waveforms to be retrieved with each element corresponding to an overflow
+% value as described in the <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> function.
+%
+% *Example:*
+
+    [status, numSamples, overflow] = invoke(rapidBlockGroupObj, 'ps2000aGetValuesBulk', noOfSamples, ...
+                                        fromSegmentIndex, toSegmentIndex, downSampleRatio, downSampleRatioMode);
+
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#1 |getBlockData|> | <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|> 
+% | <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> | <ps2000a_tbx_block_functions.html#32 |runBlock|>
+%
+
+%% ps2000aGetValuesOverlappedBulk
+
+[status, numSamples, overflow] = ps2000aGetValuesOverlappedBulk(obj, startIndex, downSampleRatio, ...
+                                    downsampleRatioMode, fromSegmentIndex, toSegmentIndex)
+    
+%%
+% |ps2000aGetValuesOverlappedBulk(obj, startIndex, downSampleRatio,
+% downsampleRatioMode, fromSegmentIndex, toSegmentIndex)| allows you to make
+% a deferred data-collection request, which will later be executed, and the
+% arguments validated, when you call <ps2000a_tbx_block_functions.html#18
+% |ps2000aRunBlock|> in rapid block mode. The advantage of this method is
+% that the driver makes contact with the scope only once, when you call
+% |ps2000aRunBlock|, compared with the two contacts that occur when you use
+% the conventional |ps2000aRunBlock|,
+% <ps2000a_tbx_rapid_block_functions.html#10 |ps2000aGetValuesBulk|> calling
+% sequence. This slightly reduces the dead time between successive captures
+% in rapid block mode.
+% 
+% After calling |ps2000aRunBlock|, you can optionally use
+% |ps2000aGetValuesBulk| to request further copies of the data. This might
+% be required if you wish to display the data with different data reduction
+% settings.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Rapidblock group.
+% * |startIndex| - a zero-based index that indicates the start point for
+% data collection. It is measured in sample intervals from the start of the
+% buffer.
+% * |numSamples| - a <matlab:doc('libpointer') |libpointer|> object
+% representing the number of raw samples to be collected before any
+% downsampling is applied (the type of pointer should be specified as
+% |'uint32Ptr'|. On exit, this will represent the actual number in the
+% buffer. The number of samples retrieved will not be more than the number
+% requested, and the data retrieved starts at |startIndex|.
+% * |downSampleRatio| - the downsampling factor that will be applied to the
+% raw data.
+% * |downSampleRatioMode| - which downsampling mode to use (specified by an
+% |enPS2000ARatioMode| enumeration).
+% * |fromSegmentIndex| - the first segment from which the waveform should
+% be retrieved.
+% * |toSegmentIndex| - the last segment from which the waveform should be
+% retrieved.
+% * |overflow| - a |libpointer| object to an array of integers equal to or
+% larger than the number of waveforms to be retrieved with each element
+% corresponding to an overflow value as described in the <ps2000a_tbx_block_functions.html#13
+% |ps2000aGetValues|>
+% function.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Using the GetValuesOverlappedBulk function*
+%
+% # Create a device object for the Instrument using <matlab:doc('instrument/icdevice']) |icdevice|>.
+% # Connect to the Instrument using <matlab:doc('instrument/connect') |connect|>.
+% # Select channel ranges and AC/DC coupling using <ps2000a_tbx_device_functions.html#20 |ps2000aSetChannel|>.
+% # Using <ps2000a_tbx_device_functions.html# |ps2000aGetTimebase2|>,
+% select timebases until the required nanoseconds per sample is located.
+% # Use the trigger setup function <ps2000a_tbx_trigger_functions.html#5
+% |setSimpleTrigger|> and to set up the trigger if required.
+% # Wait until the oscilloscope is ready by polling
+% <ps2000a_tbx_device_functions.html#13 |ps2000aIsReady|>.
+% # Use <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|> to tell the driver where your memory buffer is. 
+% # Set up the transfer of the block of data from the oscilloscope using |ps2000aGetValuesOverlappedBulk|. 
+% # Start the oscilloscope running using <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|>. 
+% # Display the data. 
+% # Stop the oscilloscope. 
+% # Repeat steps 9 and 10 if needed.
+%
+% *Example:*
+
+    % Setup data buffers (see ps2000aSetDataBuffer function description in
+    % Device Functions).
+
+    % Set parameters
+    startIndex          = 0;
+    pNumSamples         = libpointer('uint32Ptr', get(ps2000aDeviceObj, 'numPreTriggerSamples') + ...
+                            get(ps2000aDeviceObj, 'numPostTriggerSamples'));
+    downsampleRatio     = 1;
+    downsampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
+    numCaptures         = 10;
+    pOverflow           = libpointer('int16Ptr', zeros(numCaptures, 1));
+    
+    status.getValuesOverlappedBulk = invoke(rapidBlockGroupObj, 'ps2000aGetValuesOverlappedBulk', startIndex, ...
+                                        pNumSamples, downSampleRatio, downsampleRatioMode, 0, numCaptures - 1, pOverflow); 
+    
+    % Call the ps2000aRunBlock function and poll ps2000aIsReady until the
+    % device is ready or call runBlock.
+    
+    status.runBlock = invoke(blockGroupObj, 'runBlock', 0);
+    
+    % Find the number of samples per waveform and retrieve overflow values
+    % post-capture.
+    
+    numSamples  = pNumSamples.Value;
+    overflow    = pOverflow.Value; 
+
+%%
+% *See also:* <ps2000a_tbx_block_functions.html#18 |ps2000aRunBlock|> |
+% <ps2000a_tbx_block_functions.html#32 |runBlock|> | <ps2000a_tbx_device_functions.html#21 |ps2000aSetDataBuffer|>
+
+%% ps2000aSetNoOfCaptures
+
+status = ps2000aSetNoOfCaptures(obj, nCaptures)
+    
+%% 
+% |ps2000aSetNoOfCaptures(obj, nCaptures)| sets the number of captures to
+% be collected in one run of rapid block mode. If you do not call this
+% function before a run, the driver will capture only one waveform. Once a
+% value has been set, the value remains constant unless changed.
+%
+% This function may be used with the Test and Measurement Tool.
+%
+% *Input Arguments:*
+% 
+% * |obj| - the object representing the Rapidblock group.
+% * |nCaptures| -  the number of waveforms to capture in one run.
+% 
+% *Output Arguments:*
+% 
+% * |status| - status code returned by the driver.
+%
+% *Example:*
+
+    % Set capture for 20 waveforms
+    status = invoke(rapidBlockGroupObj, 'ps2000aSetNoOfCaptures', 20);
+
+%%
+% *See also:* <ps2000a_tbx_device_functions.html#16 |ps2000aMemorySegments|>
+%
+##### SOURCE END #####
+--></body></html>

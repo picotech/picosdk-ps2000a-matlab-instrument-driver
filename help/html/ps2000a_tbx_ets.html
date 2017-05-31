@@ -1,0 +1,171 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ETS (Equivalent Time Sampling)</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_ets.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>ETS (Equivalent Time Sampling)</h1><!--introduction--><p>ETS is a way of increasing the effective sampling rate of the scope when capturing repetitive signals. It is a modified form of block mode, and is controlled by the ps2000a set of trigger functions and the ps2000aSetEts function.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Overview</a></li><li><a href="#2">Trigger Stability</a></li><li><a href="#3">Using ETS Mode</a></li></ul></div><h2 id="1">Overview</h2><p>ETS works by capturing several cycles of a repetitive waveform, then combining them to produce a composite waveform that has a higher effective sampling rate than the individual captures. The scope hardware accurately measures the delay, which is a small fraction of a single sampling interval, between each trigger event and the subsequent sample. The driver then shifts each capture slightly in time and overlays them so that the trigger points are exactly lined up. The result is a larger set of samples spaced by a small fraction of the original sampling interval. The maximum effective sampling rates that can be achieved with this method are listed in the User's Guide for the scope device. Other scopes do not contain special ETS hardware, so the composite waveform is created by software.</p><h2 id="2">Trigger Stability</h2><p>Because of the high sensitivity of ETS mode to small time differences, the trigger must be set up to provide a stable waveform that varies as little as possible from one capture to the next.</p><p>
+  <table>
+      <tr>
+          <td style="border-color:#999"><b>Applicability</b></td>
+          <td style="border-color:#999; vertical-align:middle">Available in block mode only.
+              <br>Not suitable for one-shot (non-repetitive) signals.
+              <br>Aggregation is not supported.
+              <br>Edge-triggering only.
+              <br>Auto trigger delay (autoTriggerMs) is ignored.
+              <br>Cannot be used when MSO digital ports are enabled.
+          </td>
+      </tr>
+  </table>
+</p><h2 id="3">Using ETS Mode</h2><p>This is the general procedure for reading and displaying data in ETS mode using a single memory segment:</p><div><ol><li>Create a device object for the Instrument using <a href="matlab:doc('instrument/icdevice'])"><tt>icdevice</tt></a>.</li><li>Connect to the Instrument using <a href="matlab:doc('instrument/connect')"><tt>connect</tt></a>.</li><li>Select channel ranges and AC/DC coupling using <a href="ps2000a_tbx_device_functions.html#20"><tt>ps2000aSetChannel</tt></a>.</li><li>Use <a href="ps2000a_tbx_block_functions.html#21"><tt>ps2000aSetEts</tt></a> to enable ETS and set the parameters.</li><li>Use <a href="ps2000a_tbx_device_functions.html#14"><tt>ps2000aGetTimebase2</tt></a> to verify the maximum number of samples available for the memory segment specified.</li><li>Set the <a href="ps2000a_tbx_trigger_group.html">Trigger group</a> properties and use the <a href="ps2000a_tbx_trigger_functions.html#5"><tt>setSimpleTrigger</tt></a> function to setup the trigger if required.</li><li>Set the <tt>numPreTriggerSamples</tt> and <tt>numPostTriggerSamples</tt>  <a href="ps2000a_tbx_device_object.html#1">properties</a> to indicate how many samples to collect.</li><li>Start the oscilloscope running using the <a href="ps2000a_tbx_block_group.html">Block group's</a> <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> function. Alternatively, if you need to execute other code while waiting for the data collection to complete, call <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> and poll the <a href="ps2000a_tbx_block_functions.html#16"><tt>ps2000aIsReady</tt></a> function.</li><li>Use the <a href="ps2000a_tbx_block_functions.html#4"><tt>getEtsBlockData</tt></a> function to retrieve the data for each active channel (this function combines the <a href="ps2000a_tbx_device_functions.html#22"><tt>ps2000aSetDataBuffer</tt></a>,  <a href="ps2000a_tbx_block_functions.html#4"><tt>ps2000aSetEtsTimeBuffer</tt></a> and  <a href="ps2000a_tbx_block_functions.html#13"><tt>ps2000aGetValues</tt></a> functions in  one function).</li><li>Display/process the data.</li><li>While you want to collect updated captures, repeat steps 9 and 10.</li><li>Stop the oscilloscope using <a href="ps2000a_tbx_device_functions.html#28"><tt>ps2000aStop</tt></a>.</li><li>Disconnect from the Instrument using <a href="matlab:doc('instrument/disconnect'])"><tt>disconnect</tt></a>.</li><li>Use the <a href="matlab:doc('instrument/delete')"><tt>delete</tt></a> function to clean up.</li></ol></div><p>Refer to the <a href="../demos.xml">Examples</a> section for a published ETS mode capture example.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ETS (Equivalent Time Sampling)
+%
+% ETS is a way of increasing the effective sampling rate of the scope when
+% capturing repetitive signals. It is a modified form of block mode, and is
+% controlled by the ps2000a set of trigger functions and the ps2000aSetEts
+% function.
+
+%% Overview
+%
+% ETS works by capturing several cycles of a repetitive
+% waveform, then combining them to produce a composite waveform that has a
+% higher effective sampling rate than the individual captures. The scope
+% hardware accurately measures the delay, which is a small fraction of a
+% single sampling interval, between each trigger event and the subsequent
+% sample. The driver then shifts each capture slightly in time and overlays
+% them so that the trigger points are exactly lined up. The result is a
+% larger set of samples spaced by a small fraction of the original sampling
+% interval. The maximum effective sampling rates that can be achieved with
+% this method are listed in the User's Guide for the scope device. Other
+% scopes do not contain special ETS hardware, so the composite waveform is
+% created by software.
+
+%% Trigger Stability
+%
+% Because of the high sensitivity of ETS mode to
+% small time differences, the trigger must be set up to provide a stable
+% waveform that varies as little as possible from one capture to the next.
+% 
+% <html>
+%   <table>
+%       <tr>
+%           <td style="border-color:#999"><b>Applicability</b></td>
+%           <td style="border-color:#999; vertical-align:middle">Available in block mode only.
+%               <br>Not suitable for one-shot (non-repetitive) signals.
+%               <br>Aggregation is not supported.
+%               <br>Edge-triggering only.
+%               <br>Auto trigger delay (autoTriggerMs) is ignored.
+%               <br>Cannot be used when MSO digital ports are enabled.
+%           </td>
+%       </tr>
+%   </table>
+% </html>
+
+%% Using ETS Mode
+%
+% This is the general procedure for reading and displaying data in ETS mode
+% using a single memory segment:
+%
+% # Create a device object for the Instrument using
+% <matlab:doc('instrument/icdevice']) |icdevice|>.
+% # Connect to the Instrument using <matlab:doc('instrument/connect')
+% |connect|>.
+% # Select channel ranges and AC/DC coupling using
+% <ps2000a_tbx_device_functions.html#20 |ps2000aSetChannel|>.
+% # Use <ps2000a_tbx_block_functions.html#21 |ps2000aSetEts|> to enable ETS
+% and set the parameters.
+% # Use <ps2000a_tbx_device_functions.html#14 |ps2000aGetTimebase2|> to
+% verify the maximum number of samples available for the memory segment
+% specified.
+% # Set the <ps2000a_tbx_trigger_group.html Trigger group> properties and
+% use the <ps2000a_tbx_trigger_functions.html#5 |setSimpleTrigger|>
+% function to setup the trigger if required.
+% # Set the |numPreTriggerSamples| and |numPostTriggerSamples|
+%  <ps2000a_tbx_device_object.html#1 properties>
+% to indicate how many samples to collect.
+% # Start the oscilloscope running using the <ps2000a_tbx_block_group.html
+% Block group's> <ps2000a_tbx_block_functions.html#32 |runBlock|> function.
+% Alternatively, if you need to execute other code while waiting for the
+% data collection to complete, call <ps2000a_tbx_block_functions.html#18
+% |ps2000aRunBlock|> and poll the <ps2000a_tbx_block_functions.html#16
+% |ps2000aIsReady|> function.
+% # Use the <ps2000a_tbx_block_functions.html#4 |getEtsBlockData|> function
+% to retrieve the data for each active channel (this function combines the
+% <ps2000a_tbx_device_functions.html#22 |ps2000aSetDataBuffer|>,
+%  <ps2000a_tbx_block_functions.html#4 |ps2000aSetEtsTimeBuffer|> and
+%  <ps2000a_tbx_block_functions.html#13 |ps2000aGetValues|> functions in
+%  one function).
+% # Display/process the data.
+% # While you want to collect updated captures, repeat steps 9 and 10.
+% # Stop the oscilloscope using <ps2000a_tbx_device_functions.html#28 |ps2000aStop|>.
+% # Disconnect from the Instrument using <matlab:doc('instrument/disconnect']) |disconnect|>.
+% # Use the <matlab:doc('instrument/delete') |delete|> function to clean up.
+%
+% Refer to the <../demos.xml Examples> section for a published ETS mode capture
+% example.
+
+##### SOURCE END #####
+--></body></html>
