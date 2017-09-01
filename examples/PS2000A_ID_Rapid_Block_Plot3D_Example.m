@@ -28,7 +28,7 @@
 %   
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 %
-% *Copyright:* © 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Suggested Input Test Signal
 % This example was published using the following test signal:
@@ -166,7 +166,7 @@ set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 triggerGroupObj = get(ps2000aDeviceObj, 'Trigger');
 triggerGroupObj = triggerGroupObj(1);
 
-% Set the autoTriggerMs property in order to automatically trigger the
+% Set the |autoTriggerMs| property in order to automatically trigger the
 % oscilloscope after 1 second if a trigger event has not occurred. Set to 0
 % to wait indefinitely for a trigger event.
 
@@ -224,9 +224,6 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, chA, ~] = invoke(rapidBlockGroupObj, 'getRapidBlockData', numCaptures, ...
                                     downsamplingRatio, downsamplingRatioMode);
 
-% Stop the device.
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
-
 %% Process Data
 % Plot data values in 3D showing history.
 %
@@ -259,6 +256,9 @@ ylabel(axes1, 'Capture');
 zlabel(axes1, 'Voltage (mV)');
 
 hold(axes1, 'off');
+
+%% Stop the Device.
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
 % Disconnect device object from hardware.

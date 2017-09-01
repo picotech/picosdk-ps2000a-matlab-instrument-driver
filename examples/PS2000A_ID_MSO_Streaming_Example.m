@@ -31,7 +31,7 @@
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 %
-% *Copyright:* © 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
@@ -239,7 +239,7 @@ wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_D
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 2000000);
 
-% The autoStop parameter can be set to false (0) to allow for continuous
+% The |autoStop| parameter can be set to false (0) to allow for continuous
 % data collection.
 % set(streamingGroupObj, 'autoStop', PicoConstants.FALSE);
 
@@ -311,30 +311,30 @@ if (plotLiveData == PicoConstants.TRUE)
     % Plot on a single figure
     figure1 = figure('Name', 'PicoScope 2000 Series (A API) Example - MSO Streaming Data Capture', 'NumberTitle', 'off');
 
-    analogueAxes = subplot(2, 1, 1);
+    analogAxes = subplot(2, 1, 1);
     digitalAxes = subplot(2, 1, 2);
 
     % Estimate x-axis limit to try and avoid using too much CPU resources
     % when drawing - use max voltage range selected if plotting multiple
     % channels on the same graph.
-    xlim(analogueAxes, [0 (actualSampleInterval * maxSamples)]);
+    xlim(analogAxes, [0 (actualSampleInterval * maxSamples)]);
     xlim(digitalAxes, [0 (actualSampleInterval * maxSamples)]);
 
     yRange = channelARangeMV + 0.5;
-    ylim(analogueAxes,[(-1 * yRange) yRange]);
+    ylim(analogAxes,[(-1 * yRange) yRange]);
     
-    hold(analogueAxes,'on');
+    hold(analogAxes,'on');
     hold(digitalAxes, 'on');
 
-    grid(analogueAxes, 'on');
+    grid(analogAxes, 'on');
     grid(digitalAxes, 'on');
 
-    title(analogueAxes, 'Analog Channel Data Acquisition');
+    title(analogAxes, 'Analog Channel Data Acquisition');
     title(digitalAxes, 'Digital Channel Data Acquisition');
     xLabelStr = strcat('Time (', sampleIntervalTimeUnitsStr, ')'); %TODO: Update for microseonds
     
-    xlabel(analogueAxes, xLabelStr);
-    ylabel(analogueAxes, 'Voltage (mV)');
+    xlabel(analogAxes, xLabelStr);
+    ylabel(analogAxes, 'Voltage (mV)');
     
     xlabel(digitalAxes, xLabelStr);
     ylabel(digitalAxes, 'Level (Counts)');
@@ -413,9 +413,9 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         % the data if the User has selected 'Yes' at the prompt.
         
         % Copy data into final buffers
-        pBufferChAFinal.Value(previousTotal + 1:totalSamples) = bufferChAmV;
-        pBufferChBFinal.Value(previousTotal + 1:totalSamples) = bufferChBmV;
-        pBufferDPort0Final.Value(previousTotal + 1:totalSamples) = bufferDPort0;
+        pBufferChAFinal.Value(previousTotal + 1:totalSamples)       = bufferChAmV;
+        pBufferChBFinal.Value(previousTotal + 1:totalSamples)       = bufferChBmV;
+        pBufferDPort0Final.Value(previousTotal + 1:totalSamples)    = bufferDPort0;
         
         if (plotLiveData == PicoConstants.TRUE)
             
@@ -425,7 +425,7 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
             time = (double(actualSampleInterval) * double(downSampleRatio)) * (previousTotal:(totalSamples - 1));
         
             % Plot channel A and Digital PORT0 (combined values) only.
-            plot(analogueAxes, time, bufferChAmV);
+            plot(analogAxes, time, bufferChAmV);
             plot(digitalAxes, time, bufferDPort0);
             
         end
@@ -478,7 +478,7 @@ if (plotLiveData == PicoConstants.TRUE)
     drawnow;
     
     % Take hold off the axes.
-    hold(analogueAxes, 'off');
+    hold(analogAxes, 'off');
     hold(digitalAxes, 'off');
     
 end
@@ -490,12 +490,6 @@ if (hasTriggered == PicoConstants.TRUE)
 end
 
 fprintf('\n');
-
-%% Stop the Device
-% This function should be called regardless of whether the autoStop
-% property is enabled or not.
-
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Find the Number of Samples.
 % This is the number of samples held in the driver itself. The actual
@@ -528,15 +522,15 @@ dPort0Final     = pBufferDPort0Final.Value();
 
 scrsz = get(groot,'ScreenSize');
 
-analogueFinalFigure = figure('Name','PicoScope 2000 Series (A API) Example - MSO Streaming Mode Capture', ...
+analogFinalFigure = figure('Name','PicoScope 2000 Series (A API) Example - MSO Streaming Mode Capture', ...
     'NumberTitle', 'off', 'Position', [1 scrsz(4)/4 scrsz(3)/2 scrsz(4)/2]);
 
-movegui(analogueFinalFigure, 'west');
+movegui(analogFinalFigure, 'west');
 
-analogueFinalAxes = axes('Parent', analogueFinalFigure);
-hold(analogueFinalAxes, 'on');
+analogFinalAxes = axes('Parent', analogFinalFigure);
+hold(analogFinalAxes, 'on');
 
-title(analogueFinalAxes, 'Streaming Data Acquisition (Final)');
+title(analogFinalAxes, 'Streaming Data Acquisition (Final)');
 
 if (strcmp(sampleIntervalTimeUnitsStr, 'us'))
         
@@ -549,20 +543,20 @@ else
 end
 
 
-xlabel(analogueFinalAxes, xLabelStr);
-ylabel(analogueFinalAxes, 'Voltage (mV)');
+xlabel(analogFinalAxes, xLabelStr);
+ylabel(analogFinalAxes, 'Voltage (mV)');
 
 % Find the maximum voltage range
 maxYRange = max(channelARangeMV, channelBRangeMV);
-ylim(analogueFinalAxes,[(-1 * maxYRange) maxYRange]);
+ylim(analogFinalAxes,[(-1 * maxYRange) maxYRange]);
 
 time = (double(actualSampleInterval) * double(downSampleRatio)) * (0:length(channelAFinal) - 1);
-plot(analogueFinalAxes, time, channelAFinal, time, channelBFinal);
+plot(analogFinalAxes, time, channelAFinal, time, channelBFinal);
 
-grid(analogueFinalAxes, 'on');
-legend(analogueFinalAxes, 'Channel A', 'Channel B');
+grid(analogFinalAxes, 'on');
+legend(analogFinalAxes, 'Channel A', 'Channel B');
 
-hold(analogueFinalAxes, 'off');
+hold(analogFinalAxes, 'off');
 
 %% 
 % *Digital Data*
@@ -601,6 +595,12 @@ for i = 1:8
     grid on;
     
 end
+
+%% Stop the Device
+% This function should be called regardless of whether the autoStop
+% property is enabled or not.
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
 % Disconnect device object from hardware.

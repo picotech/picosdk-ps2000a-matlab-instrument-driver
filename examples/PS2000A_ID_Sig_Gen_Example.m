@@ -33,7 +33,7 @@
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 %
-% *Copyright:* © 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Test Setup
 % For this example the 'AWG' connector of the oscilloscope was connected to

@@ -28,7 +28,7 @@
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 % 
-% *Copyright:* © 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
@@ -165,7 +165,7 @@ set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 triggerGroupObj = get(ps2000aDeviceObj, 'Trigger');
 triggerGroupObj = triggerGroupObj(1);
 
-% Set the autoTriggerMs property in order to automatically trigger the
+% Set the |autoTriggerMs| property in order to automatically trigger the
 % oscilloscope after 1 second if a trigger event has not occurred. Set to 0
 % to wait indefinitely for a trigger event.
 
@@ -196,7 +196,7 @@ blockGroupObj = blockGroupObj(1);
 % set(ps2000aDeviceObj, 'numPostTriggerSamples', 16384);
 
 %%
-% This example uses the _runBlock_ function in order to collect a block of
+% This example uses the |runBlock| function in order to collect a block of
 % data - if other code needs to be executed while waiting for the device to
 % indicate that it is ready, use the _ps2000aRunBlock_ function and poll
 % the _ps2000aIsReady_ function.
@@ -219,9 +219,6 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, chA, chB, ~, ~, dPort0, ~] = invoke(blockGroupObj, 'getBlockData', startIndex, ...
                                                         segmentIndex, downsamplingRatio, downsamplingRatioMode);
 
-% Stop the device
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
-
 %% Process Data
 % In this example the data values returned from the device are displayed in
 % plots in with separate figures for analog and digital data.
@@ -239,10 +236,10 @@ timeMs = timeNs / 1e6;
 
 scrsz = get(groot,'ScreenSize');
 
-figure1 = figure('Name','PicoScope 2000 Series (A API) - MSO Block Mode Capture', ...
+analogFigure = figure('Name','PicoScope 2000 Series (A API) - MSO Block Mode Capture', ...
     'NumberTitle', 'off', 'Position', [1 scrsz(4)/4 scrsz(3)/2 scrsz(4)/2]);
 
-movegui(figure1, 'west');
+movegui(analogFigure, 'west');
 
 hold on;
 
@@ -259,10 +256,10 @@ hold off;
 %% 
 % *Digital Data*
 
-figure2 = figure('Name','PicoScope 2000 Series (A API) Example - MSO Block Mode Capture', ...
+digitalFigure = figure('Name','PicoScope 2000 Series (A API) Example - MSO Block Mode Capture', ...
     'NumberTitle', 'off', 'Position', [scrsz(3)/2 + 1 scrsz(4)/4 scrsz(3)/2 scrsz(4)/2]);
 
-movegui(figure2, 'east');
+movegui(digitalFigure, 'east');
 
 disp('Converting digital integer data to binary...');
 
@@ -298,6 +295,10 @@ for i = 1:8
 end
 
 hold off;
+
+%% Stop the Device
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
 % Disconnect device object from hardware.

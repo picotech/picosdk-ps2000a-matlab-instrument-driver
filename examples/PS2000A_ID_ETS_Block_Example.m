@@ -29,7 +29,7 @@
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 % 
-% *Copyright:* © 2016 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2016-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
@@ -95,7 +95,7 @@ connect(ps2000aDeviceObj)
 % Enabled        : 0 (PicoConstants.FALSE)
 % Type           : 1 (ps2000aEnuminfo.enPS2000ACoupling.PS2000A_DC)
 % Range          : 8 (ps2000aEnuminfo.enPS2000ARange.PS2000A_5V)
-% Analog   Offset: 0.0 V
+% Analog Offset  : 0.0 V
 
 [status.setChB] = invoke(ps2000aDeviceObj, 'ps2000aSetChannel', 1, 0, 1, 8, 0.0);
 
@@ -133,7 +133,6 @@ fprintf('ETS sampling interval: %d picoseconds.\n', sampleTimePicoSeconds);
 %
 % To use the fastest sampling interval possible, set one analog channel
 % and turn off all other channels.
-%
 
 % timebase     : 64 (default)
 % segment index: 0
@@ -176,7 +175,7 @@ blockGroupObj = get(ps2000aDeviceObj, 'Block');
 blockGroupObj = blockGroupObj(1);
 
 % Set pre-trigger and post-trigger samples as required - the total of this
-% should not exceed the value of maxSamples returned from the call to
+% should not exceed the value of |maxSamples| returned from the call to
 % ps2000aGetTimebase2. 
 
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 8000);
@@ -204,10 +203,6 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, etsTimes, chA, ~, ~, ~] = invoke(blockGroupObj, 'getEtsBlockData', startIndex, ...
                                                             segmentIndex, downsamplingRatio, downsamplingRatioMode);
 
-%% Stop the Device
-
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
-
 %% Process Data
 % In this example the data values returned from the device are displayed in
 % plots in a Figure.
@@ -221,6 +216,10 @@ title('Channel A');
 xlabel('Time (fs)');
 ylabel('Voltage (mV)');
 grid on;
+
+%% Stop the Device
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Turn off ETS Mode
 % If another operation is required that does not require Equivalent Time

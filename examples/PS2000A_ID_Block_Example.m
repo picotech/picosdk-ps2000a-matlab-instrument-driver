@@ -28,7 +28,7 @@
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 % 
-% *Copyright:* © 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
@@ -156,7 +156,7 @@ set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 triggerGroupObj = get(ps2000aDeviceObj, 'Trigger');
 triggerGroupObj = triggerGroupObj(1);
 
-% Set the autoTriggerMs property in order to automatically trigger the
+% Set the |autoTriggerMs| property in order to automatically trigger the
 % oscilloscope after 1 second if a trigger event has not occurred. Set to 0
 % to wait indefinitely for a trigger event.
 
@@ -178,7 +178,7 @@ blockGroupObj = get(ps2000aDeviceObj, 'Block');
 blockGroupObj = blockGroupObj(1);
 
 % Set pre-trigger and post-trigger samples as required - the total of this
-% should not exceed the value of maxSamples returned from the call to
+% should not exceed the value of |maxSamples| returned from the call to
 % |ps2000aGetTimebase2|. The default of 0 pre-trigger and 8192 post-trigger
 % samples is used in this example.
 
@@ -208,11 +208,6 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 % channel C if using a 4-channel PicoScope or an MSO device.
 [numSamples, overflow, chA, chB] = invoke(blockGroupObj, 'getBlockData', startIndex, segmentIndex, ...
                                             downsamplingRatio, downsamplingRatioMode);
-
-                                    
-%%  Stop the device
-
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Process Data
 % In this example the data values returned from the device are displayed in
@@ -248,6 +243,10 @@ title(axisHandleChB, 'Channel B');
 xlabel(axisHandleChB, 'Time (ms)');
 ylabel(axisHandleChB, 'Voltage (mV)');
 grid(axisHandleChB);
+
+%% Stop the Device
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
 % Disconnect device object from hardware.

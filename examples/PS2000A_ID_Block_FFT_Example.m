@@ -29,7 +29,7 @@
 %
 % *See also:* <matlab:doc('fft') |fft|> | <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
 % 
-% *Copyright:* © 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
+% *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
 %% Suggested Input Test Signal
 % This example was published using the following test signal:
@@ -111,8 +111,8 @@ end
 %
 % Use a while loop to query the function until the status indicates that a
 % valid timebase index has been selected. For the purposes of this example,
-% the signal is sampled at five times its frequency timebase index of 6252
-% is used.
+% the signal is sampled at five times its frequency so a timebase index of 
+% 6252 is used.
 
 % Initial call to ps2000aGetTimebase2 with parameters:
 %
@@ -152,7 +152,7 @@ set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 triggerGroupObj = get(ps2000aDeviceObj, 'Trigger');
 triggerGroupObj = triggerGroupObj(1);
 
-% Set the autoTriggerMs property in order to automatically trigger the
+% Set the |autoTriggerMs| property in order to automatically trigger the
 % oscilloscope after 1 second if a trigger event has not occurred. Set to 0
 % to wait indefinitely for a trigger event.
 
@@ -205,11 +205,6 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, chA, ~] = invoke(blockGroupObj, 'getBlockData', startIndex, segmentIndex, ...
                                             downsamplingRatio, downsamplingRatioMode);
 
-
-%% Stop the device
-
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
-
 %% Process Data
 % Plot data values, calculate and plot FFT.
 
@@ -256,6 +251,10 @@ title(chAFFTAxes, 'Single-Sided Amplitude Spectrum of y(t)');
 xlabel(chAFFTAxes, 'Frequency (Hz)');
 ylabel(chAFFTAxes, '|Y(f)|');
 grid(chAFFTAxes, 'on');
+
+%% Stop the device
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
 % Disconnect device object from hardware.
