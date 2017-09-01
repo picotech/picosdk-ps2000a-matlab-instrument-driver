@@ -17,7 +17,7 @@
 %
 % Ensure that the location of this class file is on the MATLAB Path.		
 %
-% Copyright: © 2013 - 2017 Pico Technology Ltd. See LICENSE file for terms.	
+% Copyright: © 2013-2017 Pico Technology Ltd. See LICENSE file for terms.	
 
 classdef PS2000aConstants
     
