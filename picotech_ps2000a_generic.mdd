@@ -17,11 +17,11 @@
 % OBJ is the device object.
 % End of function definition - DO NOT EDIT
 
-% Copyright © 2014 - 2017 Pico Technology Ltd. All rights reserved.
+% Copyright © 2014-2017 Pico Technology Ltd. All rights reserved.
 % You may copy and distribute this fiitsle as long as it remains unmodified. 
 % SB
     
-    fprintf('\nCopyright © 2014 - 2017 Pico Technology Ltd. All rights reserved.\n');
+    fprintf('\nCopyright © 2014-2017 Pico Technology Ltd. All rights reserved.\n');
     fprintf('\n');
     fprintf('PicoScope 2000 Series (A API) MATLAB Instrument Driver\n');
     fprintf('\n');
@@ -790,7 +790,7 @@
         if (any(pingStatus == PicoStatus.PICO_OK))
          
           % Device still connected
-          disp('Other PicoScope 2000 Series (A API) devices are still connected - libraries will not be unloaded.');
+          disp('Other PicoScope 2000 Series devices using the ps2000a shared library are still connected - libraries will not be unloaded.');
           
         else
 
@@ -1393,7 +1393,7 @@ PicoScope 2205 MSO - 650 ns
 % base device functions, OBJ is the device object.
 
     % Show warning message
-    warning('PS2000aInstrumentDriver:DeviceResetNotSupported', ...
+    warning('PS2000AInstrumentDriver:DeviceResetNotSupported', ...
         'devicereset is not supported by this Instrument Driver - please use the resetDevice function instead.');</MCode>
                </Code>
                <Description>The devicereset function is not supported by this Instrument Driver. Please use the resetDevice function instead.</Description>
