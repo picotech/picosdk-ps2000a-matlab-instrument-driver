@@ -12,5 +12,5 @@
 **/*.h
 
 # Help files to ignore
-help/index.html
-help/html/ps2000a_tbx_index.html
+/help/index.html
+/help/html/ps2000a_tbx_index.html
