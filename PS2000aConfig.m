@@ -28,7 +28,7 @@
 %
 % This file can be edited to suit application requirements.
 %
-% Copyright: © 2013 - 2017 Pico Technology Ltd. See LICENSE file for terms.	
+% Copyright: © 2013-2017 Pico Technology Ltd. See LICENSE file for terms.	
 
 %% Set Path to Shared Libraries, Prototype and Thunk Files
 % Set paths to shared library files, prototype and thunk files according to
