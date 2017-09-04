@@ -23,7 +23,7 @@
 %
 % *Description:*
 %     Demonstrates how to set properties and call functions in order to
-%     capture a block of data from a PicoScope 2000 Series Oscilloscope
+%     capture a block of data from a PicoScope 2000 Series oscilloscope
 %     using the underlying 'A' API library functions and calculate a Fast
 %     Fourier Transform (FFT) on the data collected.
 %
@@ -47,7 +47,7 @@ PS2000aConfig
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -63,7 +63,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -78,9 +78,9 @@ ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd', '');
 connect(ps2000aDeviceObj)
 
 %% Set Channels
-% Default driver settings applied to channels are listed below - 
-% use |ps2000aSetChannel| to turn channels on or off and set voltage ranges, 
-% coupling, as well as analog offset.
+% Default driver settings applied to channels are listed below - use the
+% Instrument Driver's |ps2000aSetChannel()| function to turn channels on or
+% off and set voltage ranges, coupling, as well as analog offset.
 
 % In this example, data is only collected on channel A so default settings
 % are used and all other channels are switched off.
@@ -101,9 +101,9 @@ if (ps2000aDeviceObj.channelCount == PicoConstants.QUAD_SCOPE)
 end
 
 %% Verify Timebase Index and Maximum Number of Samples
-% Use the |ps2000aGetTimebase2| function to query the driver as to the
+% Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
-% of samples available in the segment selected, then set the 'timebase'
+% of samples available in the segment selected, then set the |timebase|
 % property if required.
 %
 % To use the fastest sampling interval possible, enable one analog
@@ -114,7 +114,7 @@ end
 % the signal is sampled at five times its frequency so a timebase index of 
 % 6252 is used.
 
-% Initial call to ps2000aGetTimebase2 with parameters:
+% Initial call to ps2000aGetTimebase2() with parameters:
 %
 % timebase      : 6252
 % segment index : 0
@@ -139,7 +139,7 @@ while (status.getTimebase2 == PicoStatus.PICO_INVALID_TIMEBASE)
     
 end
 
-% Configure the device 'timebase' property value.
+% Configure the device |timebase| property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
 %% Set Simple Trigger
@@ -165,7 +165,7 @@ set(triggerGroupObj, 'autoTriggerMs', 1000);
 [status.setSimpleTrigger] = invoke(triggerGroupObj, 'setSimpleTrigger', 0, 1000, 2);
 
 %% Set Block Parameters and Capture Data
-% Capture a block of data and retrieve data values for Channels A and B.
+% Capture a block of data and retrieve data values for channels A and B.
 
 % Block data acquisition properties and functions are located in the 
 % Instrument Driver's Block group.
@@ -174,18 +174,18 @@ blockGroupObj = get(ps2000aDeviceObj, 'Block');
 blockGroupObj = blockGroupObj(1);
 
 % Set pre-trigger and post-trigger samples as required - the total of this
-% should not exceed the value of maxSamples returned from the call to
-% |ps2000aGetTimebase2|. The example below shows the number of pre-trigger
+% should not exceed the value of |maxSamples| returned from the call to
+% |ps2000aGetTimebase2()|. The example below shows the number of pre-trigger
 % and post trigger samples being adjusted.
 
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 8192);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 16384);
 
 %%
-% This example uses the |runBlock| function in order to collect a block of
+% This example uses the |runBlock()| function in order to collect a block of
 % data - if other code needs to be executed while waiting for the device to
-% indicate that it is ready, use the |ps2000aRunBlock| function and poll
-% the |ps2000aIsReady| function.
+% indicate that it is ready, use the |ps2000aRunBlock()| function and poll
+% the |ps2000aIsReady()| function.
 
 % Capture a block of data:
 %
@@ -201,7 +201,7 @@ downsamplingRatio       = 1;
 downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE;
 
 % Provide additional output arguments for other channels e.g. chC for
-% channel C if using a 4-channel PicoScope or an MSO device.
+% channel C if using a 4-channel PicoScope.
 [numSamples, overflow, chA, ~] = invoke(blockGroupObj, 'getBlockData', startIndex, segmentIndex, ...
                                             downsamplingRatio, downsamplingRatioMode);
 
@@ -212,7 +212,7 @@ figure1 = figure('Name','PicoScope 2000 Series (A API) Example - Block Mode Capt
     'NumberTitle','off');
 
 % Calculate sampling interval (nanoseconds) and convert to milliseconds.
-% Use the |timeIntervalNanoSeconds| output from the |ps2000aGetTimebase2|
+% Use the |timeIntervalNanoSeconds| output from the |ps2000aGetTimebase2()|
 % function or calculate it using the main Programmer's Guide.
 % Take into account the downsampling ratio used.
 
@@ -252,7 +252,7 @@ xlabel(chAFFTAxes, 'Frequency (Hz)');
 ylabel(chAFFTAxes, '|Y(f)|');
 grid(chAFFTAxes, 'on');
 
-%% Stop the device
+%% Stop the Device
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 

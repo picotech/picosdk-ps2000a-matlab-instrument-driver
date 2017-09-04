@@ -58,7 +58,7 @@ dPort0   = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -74,7 +74,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -134,7 +134,7 @@ end
 maxADCCount = double(get(ps2000aDeviceObj, 'maxADCValue'));
 
 %% 
-% Use the |ps2000aSetDigitalPort| function to enable/disable digital ports
+% Use the |ps2000aSetDigitalPort()| function to enable/disable digital ports
 % and set the logic level threshold. This function is located in the
 % Instrument Driver's Digital Group. Enabling a digital port will enable
 % all channels on that port, while setting the enabled parameter to 0 will
@@ -157,8 +157,8 @@ invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.enPS2000ADigitalPort
 %% Trigger Setup
 % Turn off trigger.
 %
-% If a trigger is set and the autoStop property in the driver is set to
-% '1', the device will stop collecting data once the number of post trigger
+% If a trigger is set and the |autoStop property| in the driver is set to
+% '1', the device will stop collecting data once the number of post-trigger
 % samples have been collected.
 
 % Trigger properties and functions are located in the Instrument Driver's
@@ -170,7 +170,7 @@ triggerGroupObj = triggerGroupObj(1);
 [status.setTriggerOff] = invoke(triggerGroupObj, 'setTriggerOff');
 
 %% Set Data Buffers
-% Data buffers for Channels A and B as well as Digital PORT0 - buffers
+% Data buffers for channels A and B as well as Digital PORT0 - buffers
 % should be set with the driver, and these MUST be passed with application
 % buffers to the wrapper driver in order to ensure data is correctly
 % copied.
@@ -219,23 +219,23 @@ wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_D
                                     pAppBufferDPort0, pDriverBufferDPort0, overviewBufferSize);
 
 %% Start Streaming and Collect Data
-% Use default value for streaming interval which is 1e-6 for 1MS/s. Collect
+% Use default value for streaming interval which is 1e-6 for 1 MS/s. Collect
 % data for 1 second with auto stop - maximum array size will depend on PC's
 % resources - type <matlab:doc('memory') |memory|> at the MATLAB command
 % prompt for further information.
 
 % To change the sample interval set the streamingInterval property of the
-% Streaming group object. The call to the |ps2000aRunStreaming| function
+% Streaming group object. The call to the |ps2000aRunStreaming()| function
 % will output the actual sampling interval used by the driver.
 
-% For 200kS/s, specify 5us
+% For 200 kS/s, specify 5 us
 % set(streamingGroupObj, 'streamingInterval', 5e-6);
 
-% For 10MS/s, specify 100ns
+% For 10 MS/s, specify 100 ns
 % set(streamingGroupObj, 'streamingInterval', 100e-9);
 
 % Set the number of pre- and post-trigger samples
-% If no trigger is set 'numPreTriggerSamples' is ignored.
+% If no trigger is set the library will still store the |numPreTriggerSamples| + |numPostTriggerSamples|.
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 2000000);
 
@@ -257,7 +257,7 @@ downSampleRatioMode = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_NONE
 maxSamples = get(ps2000aDeviceObj, 'numPreTriggerSamples') + ...
                 get(ps2000aDeviceObj, 'numPostTriggerSamples');
 
-% Take into account the downSamplesRatioMode - required if collecting data
+% Take into account the |downSampleRatioMode| - required if collecting data
 % without a trigger and using the autoStop flag.
 % finalBufferLength = round(1.5 * maxSamples / downSampleRatio);
 
@@ -331,7 +331,16 @@ if (plotLiveData == PicoConstants.TRUE)
 
     title(analogAxes, 'Analog Channel Data Acquisition');
     title(digitalAxes, 'Digital Channel Data Acquisition');
-    xLabelStr = strcat('Time (', sampleIntervalTimeUnitsStr, ')'); %TODO: Update for microseonds
+    
+	if (strcmp(sampleIntervalTimeUnitsStr, 'us'))
+        
+        xLabelStr = 'Time (\mus)';
+        
+    else
+       
+        xLabelStr = strcat('Time (', sampleIntervalTimeUnitsStr, ')');
+        
+    end
     
     xlabel(analogAxes, xLabelStr);
     ylabel(analogAxes, 'Voltage (mV)');

@@ -47,7 +47,7 @@ PS2000aConfig;
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -63,7 +63,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -79,11 +79,11 @@ connect(ps2000aDeviceObj);
 
 %% Set Analog Channels and Digital Ports
 % Default driver settings applied to channels are listed below - use the
-% Instrument Driver's |ps2000aSetChannel| function to turn channels on or
+% Instrument Driver's |ps2000aSetChannel()| function to turn channels on or
 % off and set voltage ranges, coupling, as well as analog offset.
 
-% In this example, data is only collected only on Channel A and Digital
-% PORT0 (D0 - D7) using default settings, while Channel B and Digital PORT1
+% In this example, data is only collected only on channel A and Digital
+% PORT0 (D0 - D7) using default settings, while channel B and Digital PORT1
 % are switched off.
 
 % Channel        : 1 (ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_B)
@@ -96,7 +96,7 @@ connect(ps2000aDeviceObj);
 [status.setChB] = invoke(ps2000aDeviceObj, 'ps2000aSetChannel', 1, 0, 0, 8, 0.0);
 
 %% 
-% Use the |ps2000aSetDigitalPort| function to enable/disable digital ports
+% Use the |ps2000aSetDigitalPort()| function to enable/disable digital ports
 % and set the logic level threshold. This function is located in the
 % Instrument Driver's Digital Group. Enabling a digital port will enable
 % all channels on that port, while setting the enabled parameter to 0 will
@@ -118,7 +118,7 @@ status.setDPort1 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.e
 
 %% Set Memory Segments
 % Configure number of memory segments, ideally a power of 2, query
-% ps2000aGetMaxSegments to find the maximum number of segments for the
+% |ps2000aGetMaxSegments()| to find the maximum number of segments for the
 % device.
 
 % nSegments : 16
@@ -126,15 +126,15 @@ status.setDPort1 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.e
 [status.memorySegments, nMaxSamples] = invoke(ps2000aDeviceObj, 'ps2000aMemorySegments', 16);
 
 % Set number of samples to collect pre- and post-trigger. Ensure that the
-% total does not exceeed nMaxSamples above.
+% total does not exceeed |nMaxSamples| above.
 
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 1024);
 
 %% Verify Timebase Index and Maximum Number of Samples
-% Use the |ps2000aGetTimebase2| function to query the driver as to the
+% Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
-% of samples available in the segment selected, then set the 'timebase'
+% of samples available in the segment selected, then set the |timebase|
 % property if required.
 %
 % To use the fastest sampling interval possible, enable one analog
@@ -144,7 +144,7 @@ set(ps2000aDeviceObj, 'numPostTriggerSamples', 1024);
 % valid timebase index has been selected. In this example, the timebase
 % index of 42 is valid.
 
-% Initial call to ps2000aGetTimebase2 with parameters:
+% Initial call to ps2000aGetTimebase2() with parameters:
 %
 % timebase      : 42 (420 ns for a PicoScope 2205 MSO)
 % segment index : 0

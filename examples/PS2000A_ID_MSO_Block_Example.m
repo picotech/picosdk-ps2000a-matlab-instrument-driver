@@ -64,7 +64,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -80,11 +80,11 @@ connect(ps2000aDeviceObj)
 
 %% Set Analog Channels and Digital Ports
 % Default driver settings applied to analog and digital channels are
-% listed below - use the Instrument Driver's |ps2000aSetChannel| function
+% listed below - use the Instrument Driver's |ps2000aSetChannel()| function
 % to turn analog channels on or off and set voltage ranges, coupling, as
 % well as analog offset.
 %
-% In this example, data is collected on Channels A and B using default
+% In this example, data is collected on channels A and B using default
 % settings and also on the Digital Port 0 channels (D0 - D7) while Digital
 % Port 1 (D8 - D15) is switched off.
 
@@ -95,7 +95,7 @@ connect(ps2000aDeviceObj)
 % Analog Offset  : 0.0 V
 
 %% 
-% Use the |ps2000aSetDigitalPort| function to enable/disable digital ports
+% Use the |ps2000aSetDigitalPort()| function to enable/disable digital ports
 % and set the logic level threshold. This function is located in the
 % Instrument Driver's Digital Group. Enabling a digital port will enable
 % all channels on that port, while setting the enabled parameter to 0 will
@@ -116,9 +116,9 @@ status.setDPort0 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.e
 status.setDPort1 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT1, 0, 0);
 
 %% Verify Timebase Index and Maximum Number of Samples
-% Use the |ps2000aGetTimebase2| function to query the driver as to the
+% Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
-% of samples available in the segment selected, then set the 'timebase'
+% of samples available in the segment selected, then set the |timebase|
 % property if required.
 %
 % To use the fastest sampling interval possible, enable one analog
@@ -128,7 +128,7 @@ status.setDPort1 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.e
 % valid timebase index has been selected. In this example, the timebase
 % index of 10 is valid.
 
-% Initial call to ps2000aGetTimebase2 with parameters:
+% Initial call to ps2000aGetTimebase2() with parameters:
 %
 % timebase      : 10 (100 ns for a PicoScope 2205 MSO)
 % segment index : 0
@@ -152,11 +152,11 @@ while (status.getTimebase2 == PicoStatus.PICO_INVALID_TIMEBASE)
     
 end
 
-% Configure the device 'timebase' property value.
+% Configure the device object's |timebase| property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
 %% Set Simple Trigger
-% Set a trigger on Channel A, with an auto timeout - the default value for
+% Set a trigger on channel A, with an auto timeout - the default value for
 % delay is used.
 
 % Trigger properties and functions are located in the Instrument
@@ -178,7 +178,7 @@ set(triggerGroupObj, 'autoTriggerMs', 1000);
 [status.setSimpleTrigger] = invoke(triggerGroupObj, 'setSimpleTrigger', 0, 1000, 2);
 
 %% Set Block Parameters and Capture Data
-% Capture a block of data and retrieve data values for Channels A, B, and
+% Capture a block of data and retrieve data values for channels A, B, and
 % D0 to D7.
 
 % Block data acquisition properties and functions are located in the 
@@ -188,18 +188,18 @@ blockGroupObj = get(ps2000aDeviceObj, 'Block');
 blockGroupObj = blockGroupObj(1);
 
 % Set pre-trigger and post-trigger samples as required - the total of this
-% should not exceed the value of maxSamples returned from the call to
-% ps2000aGetTimebase2. The default of 0 pre-trigger and 8192 post-trigger
+% should not exceed the value of |maxSamples| returned from the call to
+% |ps2000aGetTimebase2()|. The default of 0 pre-trigger and 8192 post-trigger
 % samples is used in this example.
 
 % set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 % set(ps2000aDeviceObj, 'numPostTriggerSamples', 16384);
 
 %%
-% This example uses the |runBlock| function in order to collect a block of
+% This example uses the |runBlock()| function in order to collect a block of
 % data - if other code needs to be executed while waiting for the device to
-% indicate that it is ready, use the _ps2000aRunBlock_ function and poll
-% the _ps2000aIsReady_ function.
+% indicate that it is ready, use the |ps2000aRunBlock()| function and poll
+% the |ps2000aIsReady()| function.
 
 % Capture a block of data:
 %
@@ -224,7 +224,7 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 % plots in with separate figures for analog and digital data.
 %
 % Calculate sampling interval (nanoseconds) and convert to milliseconds.
-% Use the |timeIntervalNanoSeconds| output from the |ps2000aGetTimebase2|
+% Use the |timeIntervalNanoSeconds| output from the |ps2000aGetTimebase2()|
 % function or calculate it using the main Programmer's Guide.
 % Take into account the downsampling ratio used.
 

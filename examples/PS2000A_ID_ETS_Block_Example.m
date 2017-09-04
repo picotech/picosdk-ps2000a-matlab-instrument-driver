@@ -24,7 +24,7 @@
 % *Description:*
 %     Demonstrates how to set properties and call functions in order to
 %     capture a block of data using Equivalent Time Sampling from a
-%     PicoScope 2000 Series Oscilloscope using the underlying 'A' API
+%     PicoScope 2000 Series oscilloscope using the underlying 'A' API
 %     library functions.
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
@@ -47,7 +47,7 @@ PS2000aConfig
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -63,7 +63,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -79,10 +79,10 @@ connect(ps2000aDeviceObj)
 
 %% Set Channels
 % Default driver settings applied to channels are listed below - use the
-% Instrument Driver's |ps2000aSetChannel| function to turn channels on or
+% Instrument Driver's |ps2000aSetChannel()| function to turn channels on or
 % off and set voltage ranges, coupling, as well as analog offset.
 
-% In this example, data is collected on channel A. If it is a
+% In this example, data is collected on channel A. If the PicoScope is a
 % 4-channel model, channels C and D will be switched off.
 
 % Channel        : 0 (ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A)
@@ -126,10 +126,10 @@ etsInterleave   = 4;
 fprintf('ETS sampling interval: %d picoseconds.\n', sampleTimePicoSeconds);
 
 %% Verify Maximum Samples
-% Driver default timebase index used for calling the |ps2000aGetTimebase2|
+% Driver default timebase index used for calling the |ps2000aGetTimebase2()|
 % function to query the driver as to the maximum number of samples
 % available in the buffer memory. The sample time for ETS mode is returned
-% in the call to |ps2000aSetEts| above.
+% in the call to |ps2000aSetEts()| above.
 %
 % To use the fastest sampling interval possible, set one analog channel
 % and turn off all other channels.
@@ -176,16 +176,16 @@ blockGroupObj = blockGroupObj(1);
 
 % Set pre-trigger and post-trigger samples as required - the total of this
 % should not exceed the value of |maxSamples| returned from the call to
-% ps2000aGetTimebase2. 
+% |ps2000aGetTimebase2()|. 
 
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 8000);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 8000);
 
 %%
-% This example uses the |runBlock| function in order to collect a block of
+% This example uses the |runBlock()| function in order to collect a block of
 % data - if other code needs to be executed while waiting for the device to
-% indicate that it is ready, use the |ps2000aRunBlock| function and poll
-% the |ps2000aIsReady| function.
+% indicate that it is ready, use the |ps2000aRunBlock()| function and poll
+% the |ps2000aIsReady()| function.
 
 % Capture a block of data:
 %
