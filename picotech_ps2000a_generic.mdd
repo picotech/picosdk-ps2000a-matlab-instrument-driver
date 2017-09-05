@@ -6,7 +6,7 @@
    <InstrumentType>Oscilloscope</InstrumentType>
    <InstrumentManufacturer>Pico Technology Ltd.</InstrumentManufacturer>
    <InstrumentModel>PicoScope 2000 Series (A API)</InstrumentModel>
-   <InstrumentVersion>1.2.28</InstrumentVersion>
+   <InstrumentVersion>1.2.29</InstrumentVersion>
    <Identify/>
    <Reset/>
    <Selftest/>
@@ -1714,7 +1714,18 @@ maxSegments - the maximum number of segments allowed.
     
     if (status ~= PicoStatus.PICO_OK)
            
-        error('ps2000aGetTimebase2:- status code %d - please refer to the PicoStatus.m file.', status);
+        % Inform the User that an invalid timebase index has been selected
+        if (status == PicoStatus.PICO_INVALID_TIMEBASE)
+           
+            warning('PS2000AInstrumentDriver:InvalidTimebase', ['Invalid timebase ', ...
+                'index used in call to ps2000aGetTimebase2().']);
+            
+        else
+            
+            error('PS2000AInstrumentDriver:GetTimebase2', ['ps2000aGetTimebase2:- Status code: ', ...
+                '%d. Please refer to the PicoStatus.m file.'], status);
+        
+        end
         
     end
     
