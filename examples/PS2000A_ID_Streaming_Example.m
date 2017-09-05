@@ -493,7 +493,7 @@ if (totalSamples < maxSamples)
  
 end
 
-% Retrieve data for the Channels.
+% Retrieve data for the channels.
 channelAFinal = pBufferChAFinal.Value();
 channelBFinal = pBufferChBFinal.Value();
 
@@ -524,7 +524,7 @@ ylabel(finalFigureAxes, 'Voltage (mV)');
 maxYRange = max(channelARangeMv, channelBRangeMv);
 ylim(finalFigureAxes,[(-1 * maxYRange) maxYRange]);
 
-% Calculated values for time axis, then plot.
+% Calculate values for time axis, then plot.
 timeAxis = (double(actualSampleInterval) * double(downSampleRatio)) * (0:length(channelAFinal) - 1);
 plot(timeAxis, channelAFinal, timeAxis, channelBFinal);
 
