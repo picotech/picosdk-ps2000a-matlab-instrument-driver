@@ -139,6 +139,8 @@ while (status.getTimebase2 == PicoStatus.PICO_INVALID_TIMEBASE)
     
 end
 
+fprintf('Timebase index: %d Sampling interval: %d ns\n', timebaseIndex, timeIntervalNanoseconds);
+
 % Configure the device |timebase| property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
