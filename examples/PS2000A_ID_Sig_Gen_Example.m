@@ -37,7 +37,7 @@
 
 %% Test Setup
 % For this example the 'AWG' connector of the oscilloscope was connected to
-% Channel A on another PicoScope oscilloscope running the PicoScope 6
+% channel A on another PicoScope oscilloscope running the PicoScope 6
 % software application. Images, where shown, depict output, or part of the
 % output in the PicoScope 6 display.
 %
@@ -57,7 +57,7 @@ PS2000aConfig;
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -73,7 +73,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -167,8 +167,8 @@ set(ps2000aDeviceObj.Signalgenerator(1), 'peakToPeakVoltage', 2000.0);
 % Define an Arbitrary Waveform - values must be in the range -1 to +1.
 % Arbitrary waveforms can also be read in from text and csv files using
 % <matlab:doc('dlmread') |dlmread|> and <matlab:doc('csvread') |csvread|>
-% respectively or use the |importAWGFile| function from the PicoScope
-% Support Toolbox. AWG Files created using PicoScope 6 can be read using
+% respectively or use the |importAWGFile| function from the <https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox PicoScope
+% Support Toolbox>. AWG Files created using PicoScope 6 can be read using
 % the above method.
 %
 % Any AWG files created using the PicoScope 6 application can be read using

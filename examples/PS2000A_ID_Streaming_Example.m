@@ -56,7 +56,7 @@ channelB = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_B;
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -72,7 +72,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -168,7 +168,7 @@ triggerGroupObj = triggerGroupObj(1);
 [status.setTriggerOff] = invoke(triggerGroupObj, 'setTriggerOff');
 
 %% Set Data Buffers
-% Data buffers for Channel A and B - buffers should be set with the driver,
+% Data buffers for channels A and B - buffers should be set with the driver,
 % and these MUST be passed with application buffers to the wrapper driver.
 % This will ensure that data is correctly copied from the driver buffers
 % for later processing.
@@ -206,13 +206,13 @@ streamingGroupObj = streamingGroupObj(1);
                                     pAppBufferChB, pDriverBufferChB, overviewBufferSize);
 
 %% Start Streaming and Collect Data
-% Use default value for streaming interval which is 1e-6 for 1 MS/s. Collect
-% data for 1 second with auto stop - maximum array size will depend on PC's
-% resources - type <matlab:doc('memory') |memory|> at the MATLAB command
-% prompt for further information.
+% Use default value for streaming interval which is 1e-6 for 1 MS/s.
+% Collect data for 1 second with auto stop - maximum array size will depend
+% on the PC's resources - type <matlab:doc('memory') |memory|> at the
+% MATLAB command prompt for further information.
 
 % To change the sample interval set the |streamingInterval| property of the
-% Streaming group object. The call to the |ps2000aRunStreaming| function
+% Streaming group object. The call to the |ps2000aRunStreaming()| function
 % will output the actual sampling interval used by the driver.
 
 % For 200 kS/s, specify 5 us
@@ -221,12 +221,13 @@ streamingGroupObj = streamingGroupObj(1);
 % For 10 MS/s, specify 100 ns
 % set(streamingGroupObj, 'streamingInterval', 100e-9);
 
-% Set the number of pre- and post-trigger samples.
-% If no trigger is set 'numPreTriggerSamples' is ignored.
+% Set the number of pre- and post-trigger samples
+% If no trigger is set the library will still store the
+% |numPreTriggerSamples| + |numPostTriggerSamples|.
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 2000000);
 
-% The autoStop parameter can be set to false (0) to allow for continuous
+% The |autoStop| parameter can be set to false (0) to allow for continuous
 % data collection.
 % set(streamingGroupObj, 'autoStop', PicoConstants.FALSE);
 
@@ -330,9 +331,9 @@ if (plotLiveData == PicoConstants.TRUE)
     
 end
 
-% Collect samples as long as the |hasAutoStopOccurred| flag has not been set
-% or the call to getStreamingLatestValues does not return an error code
-% (check for STOP button push inside loop).
+% Collect samples as long as the |hasAutoStopOccurred| flag has not been
+% set or the call to |getStreamingLatestValues()| does not return an error
+% code (check for STOP button push inside loop).
 while (hasAutoStopOccurred == PicoConstants.FALSE && status.getStreamingLatestValues == PicoStatus.PICO_OK)
     
     ready = PicoConstants.FALSE;
@@ -393,7 +394,7 @@ while (hasAutoStopOccurred == PicoConstants.FALSE && status.getStreamingLatestVa
         firstValuePosn  = startIndex + 1;
         lastValuePosn   = startIndex + newSamples;
         
-        % Convert data values to milliVolts from the application buffer(s).
+        % Convert data values to millivolts from the application buffer(s).
         bufferChAmV = adc2mv(pAppBufferChA.Value(firstValuePosn:lastValuePosn), channelARangeMv, maxADCCount);
         bufferChBmV = adc2mv(pAppBufferChB.Value(firstValuePosn:lastValuePosn), channelBRangeMv, maxADCCount);
 
@@ -476,6 +477,7 @@ fprintf('\n');
 %% Find the Number of Samples.
 % This is the number of samples held in the driver itself. The actual
 % number of samples collected when using a trigger is likely to be greater.
+
 [status.noOfStreamingValues, numStreamingValues] = invoke(streamingGroupObj, 'ps2000aNoOfStreamingValues');
 
 fprintf('Number of samples available from the driver: %u.\n\n', numStreamingValues);

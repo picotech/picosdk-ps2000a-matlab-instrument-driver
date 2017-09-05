@@ -219,10 +219,10 @@ wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_D
                                     pAppBufferDPort0, pDriverBufferDPort0, overviewBufferSize);
 
 %% Start Streaming and Collect Data
-% Use default value for streaming interval which is 1e-6 for 1 MS/s. Collect
-% data for 1 second with auto stop - maximum array size will depend on PC's
-% resources - type <matlab:doc('memory') |memory|> at the MATLAB command
-% prompt for further information.
+% Use default value for streaming interval which is 1e-6 for 1 MS/s.
+% Collect data for 1 second with auto stop - maximum array size will depend
+% on the PC's resources - type <matlab:doc('memory') |memory|> at the
+% MATLAB command prompt for further information.
 
 % To change the sample interval set the streamingInterval property of the
 % Streaming group object. The call to the |ps2000aRunStreaming()| function
@@ -235,7 +235,8 @@ wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_D
 % set(streamingGroupObj, 'streamingInterval', 100e-9);
 
 % Set the number of pre- and post-trigger samples
-% If no trigger is set the library will still store the |numPreTriggerSamples| + |numPostTriggerSamples|.
+% If no trigger is set the library will still store the
+% |numPreTriggerSamples| + |numPostTriggerSamples|.
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 2000000);
 
@@ -350,7 +351,9 @@ if (plotLiveData == PicoConstants.TRUE)
 
 end
 
-% Get data values as long as power status has not changed (check for STOP button push inside loop)
+% Collect samples as long as the |hasAutoStopOccurred| flag has not been
+% set or the call to |getStreamingLatestValues()| does not return an error
+% code (check for STOP button push inside loop).
 while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues == PicoStatus.PICO_OK)
     
     ready = PicoConstants.FALSE;
@@ -411,8 +414,7 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         firstValuePosn  = startIndex + 1;
         lastValuePosn   = startIndex + newSamples;
         
-        % Convert analog data values to millivolts from the application
-        % buffer(s).
+        % Convert analog data values to millivolts from the application buffer(s).
         bufferChAmV     = adc2mv(pAppBufferChA.Value(firstValuePosn:lastValuePosn), channelARangeMV, maxADCCount);
         bufferChBmV     = adc2mv(pAppBufferChB.Value(firstValuePosn:lastValuePosn), channelBRangeMV, maxADCCount);
         
@@ -503,6 +505,7 @@ fprintf('\n');
 %% Find the Number of Samples.
 % This is the number of samples held in the driver itself. The actual
 % number of samples collected when using a trigger is likely to be greater.
+
 [status.noOfStreamingValues, numStreamingValues] = invoke(streamingGroupObj, 'ps2000aNoOfStreamingValues');
 
 fprintf('Number of samples available from the driver: %u.\n\n', numStreamingValues);

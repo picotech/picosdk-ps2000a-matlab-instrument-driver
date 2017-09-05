@@ -46,7 +46,7 @@ PS2000aConfig;
 
 %% Device Connection
 
-% Check if an Instrument session using the device object 'ps2000aDeviceObj'
+% Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
 if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps2000aDeviceObj.status, 'open'))
     
@@ -62,7 +62,7 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
         
     else
 
-        % Exit script if User 
+        % Exit script if User selects 'No'
         return;
         
     end
@@ -78,7 +78,7 @@ connect(ps2000aDeviceObj);
 
 %% Set Channels
 % Default driver settings applied to channels are listed below - use
-% |ps2000aSetChannel| to turn channels on or off and set voltage ranges,
+% |ps2000aSetChannel()| to turn channels on or off and set voltage ranges,
 % coupling, as well as analog offset.
 
 % In this example, data is only collected on channel A so default settings
@@ -100,7 +100,7 @@ if (ps2000aDeviceObj.channelCount == PicoConstants.QUAD_SCOPE)
 end
 
 %% Set Memory Segments
-% Configure the number of memory segments and query |ps2000aGetMaxSegments|
+% Configure the number of memory segments and query |ps2000aGetMaxSegments()|
 % to find the maximum number of samples for each segment.
 
 % nSegments : 16
@@ -109,15 +109,15 @@ nSegments = 16;
 [status.memorySegments, nMaxSamples] = invoke(ps2000aDeviceObj, 'ps2000aMemorySegments', nSegments);
 
 % Set the number of pre- and post-trigger samples to collect. Ensure that
-% the total does not exceeed nMaxSamples above.
+% the total does not exceeed |nMaxSamples| above.
 
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 512);
 
 %% Verify Timebase Index and Maximum Number of Samples
-% Use the |ps2000aGetTimebase2| function to query the driver as to the
+% Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
-% of samples available in the segment selected then set the 'timebase'
+% of samples available in the segment selected then set the |timebase|
 % property if required.
 %
 % To use the fastest sampling interval possible, enable one analog
@@ -127,7 +127,7 @@ set(ps2000aDeviceObj, 'numPostTriggerSamples', 512);
 % valid timebase index has been selected. In this example, the timebase
 % index of 42 is valid.
 
-% Initial call to ps2000aGetTimebase2 with parameters:
+% Initial call to ps2000aGetTimebase2() with parameters:
 %
 % timebase      : 42 (320 ns for a PicoScope 2208A)
 % segment index : 0
@@ -152,11 +152,11 @@ while (status.getTimebase2 == PicoStatus.PICO_INVALID_TIMEBASE)
     
 end
 
-% Configure the device 'timebase' property value.
+% Configure the device object's |timebase| property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
 %% Set Simple Trigger 
-% Set a trigger on Channel A, with an auto timeout - the default value for
+% Set a trigger on channel A, with an auto timeout - the default value for
 % trigger delay is used. The trigger will wait for a rising edge through
 % the specified threshold unless the timeout occurs first.
 
@@ -202,10 +202,10 @@ blockGroupObj = get(ps2000aDeviceObj, 'Block');
 blockGroupObj = blockGroupObj(1);
 
 %% 
-% This example uses the |runBlock| function in order to collect a block of
+% This example uses the |runBlock()| function in order to collect a block of
 % data - if other code needs to be executed while waiting for the device to
-% indicate that it is ready, use the |ps2000aRunBlock| function and poll
-% the |ps2000aIsReady| function until the device indicates that it has
+% indicate that it is ready, use the |ps2000aRunBlock()| function and poll
+% the |ps2000aIsReady()| function until the device indicates that it has
 % data available for retrieval.
 
 % Capture the blocks of data:
@@ -228,7 +228,7 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 % Plot data values in 3D showing history.
 %
 % Calculate the time period over which samples were taken for each waveform.
-% Use the |timeIntNs| output from the |ps2000aGetTimebase2| function or
+% Use the |timeIntNs| output from the |ps2000aGetTimebase2()| function or
 % calculate the sampling interval using the main Programmer's Guide.
 % Take into account the downsampling ratio used.
 
@@ -258,6 +258,7 @@ zlabel(axes1, 'Voltage (mV)');
 hold(axes1, 'off');
 
 %% Stop the Device.
+
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
