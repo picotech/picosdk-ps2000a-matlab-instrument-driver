@@ -33,7 +33,7 @@
 %% Suggested Input Test Signal
 % This example was published using the following test signal:
 %
-% * Channel A: 4 Vpp Swept Sine wave (Start: 10 kHz, Stop: 20 kHz, Sweep type: Up, Increment: 1.5 kHz, Increment Time: 1 ms)
+% * Channel A: 4 Vpp Swept sine wave (Start: 10 kHz, Stop: 20 kHz, Sweep type: Up, Increment: 1.5 kHz, Increment Time: 1 ms)
 
 %% Clear Command Window and Close any Figures
 

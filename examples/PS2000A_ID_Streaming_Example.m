@@ -36,8 +36,8 @@
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
 %
-% * Channel A: 3 Vpp, 1 Hz Sine wave
-% * Channel B: 2 Vpp, 4 Hz Square wave 
+% * Channel A: 3 Vpp, 1 Hz sine wave
+% * Channel B: 2 Vpp, 4 Hz square wave 
 
 %% Clear Command Window and Close any Figures
 

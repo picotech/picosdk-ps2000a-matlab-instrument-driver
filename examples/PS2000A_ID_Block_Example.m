@@ -23,7 +23,7 @@
 %
 % *Description:*
 %     Demonstrates how to set properties and call functions in order to
-%     capture a block of data from a PicoScope 2000 Series oscilloscope
+%     capture a block of data from a PicoScope 2000 Series Oscilloscope
 %     using the underlying 'A' API library functions.
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>
@@ -33,8 +33,8 @@
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
 %
-% * Channel A: 4 Vpp, 1 kHz Sine wave
-% * Channel B: 2 Vpp, 1 kHz Ramp Up wave
+% * Channel A: 4 Vpp, 1 kHz sine wave
+% * Channel B: 2 Vpp, 1 kHz ramp up wave
 
 %% Clear Command Window and Close any Figures
 

@@ -95,7 +95,7 @@ sigGenGroupObj = get(ps2000aDeviceObj, 'Signalgenerator');
 sigGenGroupObj = sigGenGroupObj(1);
 
 %% Function Generator - Simple
-% Output a Sine wave, 2000 mVpp, 0 mV offset, 1000 Hz (uses preset values
+% Output a sine wave, 2000 mVpp, 0 mV offset, 1000 Hz (uses preset values
 % for offset, peak to peak voltage and frequency from the Signalgenerator
 % groups's properties).
 
