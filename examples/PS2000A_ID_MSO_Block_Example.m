@@ -33,9 +33,9 @@
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
 %
-% * Channel A: 4 Vpp, 4 kHz Sine wave
-% * Channel B: 2 Vpp, 2 kHz Square wave
-% * PORT0    : 4 Vpp, 5 kHz Square wave (applied to all channels)
+% * Channel A: 4 Vpp, 4 kHz sine wave
+% * Channel B: 2 Vpp, 2 kHz square wave
+% * PORT0    : 4 Vpp, 5 kHz square wave (applied to all channels)
 
 %% Clear Command Window and Close any Figures
 

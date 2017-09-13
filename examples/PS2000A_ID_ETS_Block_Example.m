@@ -24,7 +24,7 @@
 % *Description:*
 %     Demonstrates how to set properties and call functions in order to
 %     capture a block of data using Equivalent Time Sampling from a
-%     PicoScope 2000 Series oscilloscope using the underlying 'A' API
+%     PicoScope 2000 Series Oscilloscope using the underlying 'A' API
 %     library functions.
 %
 % *See also:* <matlab:doc('icdevice') |icdevice|> | <matlab:doc('instrument/invoke') |invoke|>

@@ -23,7 +23,7 @@
 %
 % *Description:*
 %     Demonstrates how to set properties and call functions in order to
-%     capture a block of data from a PicoScope 2000 Series oscilloscope
+%     capture a block of data from a PicoScope 2000 Series Oscilloscope
 %     using the underlying 'A' API library functions and calculate a Fast
 %     Fourier Transform (FFT) on the data collected.
 %
@@ -34,7 +34,7 @@
 %% Suggested Input Test Signal
 % This example was published using the following test signal:
 %
-% * Channel A: 4 Vpp, 1 kHz Square wave
+% * Channel A: 4 Vpp, 1 kHz square wave
 
 %% Clear Command Window and Close any Figures
 

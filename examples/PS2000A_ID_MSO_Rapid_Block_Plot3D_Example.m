@@ -33,8 +33,8 @@
 %% Suggested Input Test Signals
 % This example was published using the following test signal:
 %
-% * Channel A: 4 Vpp, 8 kHz Sine wave
-% * PORT0    : 4 Vpp, 4 kHz Square wave (applied to all channels).
+% * Channel A: 4 Vpp, 8 kHz sine wave
+% * PORT0    : 4 Vpp, 4 kHz square wave (applied to all channels).
 
 %% Clear Command Window and Close any Figures
 
