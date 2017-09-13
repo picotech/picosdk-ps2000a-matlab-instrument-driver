@@ -33,8 +33,8 @@
 %% Suggested Input Test Signals
 % This example was published using the following test signals:
 %
-% * Channel A: 4 Vpp, 1 kHz Sine wave
-% * Channel B: 2 Vpp, 1 kHz Ramp Up wave
+% * Channel A: 4 Vpp, 1 kHz sine wave
+% * Channel B: 2 Vpp, 1 kHz ramp up wave
 
 %% Clear Command Window and Close any Figures
 

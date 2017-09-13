@@ -43,8 +43,9 @@
 %
 % *Note:* The various signal generator functions called in this script may
 % be combined with the functions used in the various data acquisition
-% examples in order to output a signal and acquire data. These functions
-% should be called prior to the start of data collection.
+% examples in order to output a signal and acquire data. The functions to
+% setup the signal generator should be called prior to the start of data
+% collection.
 
 %% Clear Command Window and Close any Figures
 
@@ -95,7 +96,7 @@ sigGenGroupObj = get(ps2000aDeviceObj, 'Signalgenerator');
 sigGenGroupObj = sigGenGroupObj(1);
 
 %% Function Generator - Simple
-% Output a Sine wave, 2000 mVpp, 0 mV offset, 1000 Hz (uses preset values
+% Output a sine wave, 2000 mVpp, 0 mV offset, 1000 Hz (uses preset values
 % for offset, peak to peak voltage and frequency from the Signalgenerator
 % groups's properties).
 
@@ -168,8 +169,7 @@ set(ps2000aDeviceObj.Signalgenerator(1), 'peakToPeakVoltage', 2000.0);
 % Arbitrary waveforms can also be read in from text and csv files using
 % <matlab:doc('dlmread') |dlmread|> and <matlab:doc('csvread') |csvread|>
 % respectively or use the |importAWGFile| function from the <https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox PicoScope
-% Support Toolbox>. AWG Files created using PicoScope 6 can be read using
-% the above method.
+% Support Toolbox>.
 %
 % Any AWG files created using the PicoScope 6 application can be read using
 % the above method.

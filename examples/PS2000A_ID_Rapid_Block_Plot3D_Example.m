@@ -100,7 +100,7 @@ if (ps2000aDeviceObj.channelCount == PicoConstants.QUAD_SCOPE)
 end
 
 %% Set Memory Segments
-% Configure the number of memory segments and query |ps2000aGetMaxSegments()|
+% Configure the number of memory segments and query |ps2000aMemorySegments()|
 % to find the maximum number of samples for each segment.
 
 % nSegments : 16
@@ -257,7 +257,7 @@ zlabel(axes1, 'Voltage (mV)');
 
 hold(axes1, 'off');
 
-%% Stop the Device.
+%% Stop the Device
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
