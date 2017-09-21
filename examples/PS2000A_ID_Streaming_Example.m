@@ -474,6 +474,12 @@ end
 
 fprintf('\n');
 
+%% Stop the Device
+% This function should be called regardless of whether the autoStop
+% property is enabled or not.
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
+
 %% Find the Number of Samples.
 % This is the number of samples held in the driver itself. The actual
 % number of samples collected when using a trigger is likely to be greater.
@@ -531,12 +537,6 @@ plot(timeAxis, channelAFinal, timeAxis, channelBFinal);
 grid(finalFigureAxes, 'on');
 legend(finalFigureAxes, 'Channel A', 'Channel B');
 hold(finalFigureAxes, 'off');
-
-%% Stop the Device
-% This function should be called regardless of whether the autoStop
-% property is enabled or not.
-
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
 %% Disconnect Device
 % Disconnect device object from hardware.
