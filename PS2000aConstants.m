@@ -33,7 +33,7 @@ classdef PS2000aConstants
         PS2206_MAX_ETS_CYCLES	= 250;
         PS2206_MAX_INTERLEAVE	= 10;
 
-        % External Channel ADC Count
+        % External Trigger Input ADC Count
         PS2000A_EXT_MAX_VALUE   = 32767;
         PS2000A_EXT_MIN_VALUE   = -32767;
         
