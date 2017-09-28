@@ -6,7 +6,7 @@
    <InstrumentType>Oscilloscope</InstrumentType>
    <InstrumentManufacturer>Pico Technology Ltd.</InstrumentManufacturer>
    <InstrumentModel>PicoScope 2000 Series (A API)</InstrumentModel>
-   <InstrumentVersion>1.2.29</InstrumentVersion>
+   <InstrumentVersion>1.2.30</InstrumentVersion>
    <Identify/>
    <Reset/>
    <Selftest/>
@@ -3787,7 +3787,7 @@ status - status code returned by the driver.
 
         end
 
-        if (obj.DriverData.displayOutput == PicoConstants.TRUE)
+        if (deviceObj.DriverData.displayOutput == PicoConstants.TRUE)
         
             fprintf('getRapidBlockData: Retrieving data...\n');
             
@@ -3809,7 +3809,7 @@ status - status code returned by the driver.
 
         if (getValuesBulkStatus == PicoStatus.PICO_OK)
 
-            if (portCount &gt; 0 &amp;&amp; obj.DriverData.displayOutput == PicoConstants.TRUE)
+            if (portCount &gt; 0 &amp;&amp; deviceObj.DriverData.displayOutput == PicoConstants.TRUE)
 
                 fprintf('getRapidBlockData: Retrieving digital port data and assigning to port array.\n');
 
@@ -3854,7 +3854,7 @@ status - status code returned by the driver.
 
             end
 
-            if (obj.DriverData.displayOutput == PicoConstants.TRUE)
+            if (deviceObj.DriverData.displayOutput == PicoConstants.TRUE)
                 
                 fprintf('getRapidBlockData: Converting analog channels to millivolts and assigning to channel array.\n');
                 
@@ -3915,7 +3915,7 @@ status - status code returned by the driver.
 
             end
 
-            if (obj.DriverData.displayOutput == PicoConstants.TRUE)
+            if (deviceObj.DriverData.displayOutput == PicoConstants.TRUE)
                 
                 fprintf('getRapidBlockData: Data succesfully retrieved.\n\n');
                 
