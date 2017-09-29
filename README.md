@@ -18,7 +18,7 @@ This Instrument Driver package includes the following:
 
 The driver will work with the following PicoScope models:
 
-* PicoScope 2206/7/8 (including ‘A’ and 'B' models)
+* PicoScope 2206/7/8 (including 'A' and 'B' models)
 * PicoScope 2405A
 * PicoScope 2406/7/8B
 * PicoScope 2205 MSO and 2205A MSO
