@@ -31,21 +31,21 @@
 % 
 % *Copyright:* © 2016-2017 Pico Technology Ltd. See LICENSE file for terms.
 
-%% Suggested Input Test Signals
+%% Suggested input test signal
 % This example was published using the following test signals:
 %
 % * Channel A: 4 Vpp, 1 MHz sine wave
 
-%% Clear Command Window and Close any Figures
+%% Clear command window and close any figures
 
 clc;
 close all;
 
-%% Load Configuration Information
+%% Load configuration information
 
 PS2000aConfig
 
-%% Device Connection
+%% Device connection
 
 % Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
@@ -57,13 +57,13 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
     
     if (openDevice == PicoConstants.TRUE)
         
-        % Close connection to device
+        % Close connection to device.
         disconnect(ps2000aDeviceObj);
         delete(ps2000aDeviceObj);
         
     else
 
-        % Exit script if User selects 'No'
+        % Exit script if User selects 'No'.
         return;
         
     end
@@ -77,7 +77,7 @@ ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd', '');
 % Connect device object to hardware.
 connect(ps2000aDeviceObj)
 
-%% Set Channels
+%% Set channels
 % Default driver settings applied to channels are listed below - use the
 % Instrument Driver's |ps2000aSetChannel()| function to turn channels on or
 % off and set voltage ranges, coupling, as well as analog offset.
@@ -106,8 +106,8 @@ if (ps2000aDeviceObj.channelCount == PicoConstants.QUAD_SCOPE)
     
 end
 
-%% Set ETS Mode Parameters
-% Set Equivalent Time Sampling Parameters
+%% Set ETS mode parameters
+% Set Equivalent Time Sampling Parameters.
 % The underlying driver will return the sampling interval to be used (in
 % picoseconds).
 
@@ -125,7 +125,7 @@ etsInterleave   = 4;
 
 fprintf('ETS sampling interval: %d picoseconds.\n', sampleTimePicoSeconds);
 
-%% Verify Maximum Samples
+%% Verify maximum samples
 % Driver default timebase index used for calling the |ps2000aGetTimebase2()|
 % function to query the driver as to the maximum number of samples
 % available in the buffer memory. The sample time for ETS mode is returned
@@ -142,7 +142,7 @@ timebaseIndex = get(ps2000aDeviceObj, 'timebase');
 [status.getTimebase2, ~, maxSamples] = invoke(ps2000aDeviceObj, ...
                                         'ps2000aGetTimebase2', timebaseIndex, 0);
    
-%% Set Simple Trigger
+%% Set simple trigger
 % Set a trigger on channel A, with an auto timeout - the default value for
 % delay is used.
 
@@ -165,7 +165,7 @@ set(triggerGroupObj, 'autoTriggerMs', 1000);
 
 [status.setSimpleTrigger] = invoke(triggerGroupObj, 'setSimpleTrigger', 0, 1000, 2);
 
-%% Set Block Parameters and Capture Data
+%% Set block parameters and capture data
 % Capture a block of data and retrieve data values for channel A.
 
 % Block data acquisition properties and functions are located in the 
@@ -203,7 +203,7 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, etsTimes, chA, ~, ~, ~] = invoke(blockGroupObj, 'getEtsBlockData', startIndex, ...
                                                             segmentIndex, downsamplingRatio, downsamplingRatioMode);
 
-%% Process Data
+%% Process data
 % In this example the data values returned from the device are displayed in
 % plots in a Figure.
 
@@ -217,11 +217,11 @@ xlabel('Time (fs)');
 ylabel('Voltage (mV)');
 grid on;
 
-%% Stop the Device
+%% Stop the device
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
-%% Turn off ETS Mode
+%% Turn off ETS mode
 % If another operation is required that does not require Equivalent Time
 % Sampling of data, turn ETS mode off.
 
@@ -231,7 +231,7 @@ etsInterleave   = 4;
 
 [status.setEts, sampleTimePicoSeconds] = invoke(blockGroupObj, 'ps2000aSetEts', mode, etsCycles, etsInterleave);
 
-%% Disconnect Device
+%% Disconnect device
 % Disconnect device object from hardware.
 
 disconnect(ps2000aDeviceObj);

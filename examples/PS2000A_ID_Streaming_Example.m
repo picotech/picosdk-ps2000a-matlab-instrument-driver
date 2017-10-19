@@ -33,28 +33,28 @@
 %
 % *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
-%% Suggested Input Test Signals
+%% Suggested input test signals
 % This example was published using the following test signals:
 %
 % * Channel A: 3 Vpp, 1 Hz sine wave
 % * Channel B: 2 Vpp, 4 Hz square wave 
 
-%% Clear Command Window and Close any Figures
+%% Clear command window and close any figures
 
 clc;
 close all;
 
-%% Load Configuration Information
+%% Load configuration information
 
 PS2000aConfig;
 
-%% Parameter Definitions
+%% Parameter definitions
 % Define any parameters that might be required throughout the script.
 
 channelA = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
 channelB = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_B;
 
-%% Device Connection
+%% Device connection
 
 % Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
@@ -66,13 +66,13 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
     
     if (openDevice == PicoConstants.TRUE)
         
-        % Close connection to device
+        % Close connection to device.
         disconnect(ps2000aDeviceObj);
         delete(ps2000aDeviceObj);
         
     else
 
-        % Exit script if User selects 'No'
+        % Exit script if User selects 'No'.
         return;
         
     end
@@ -86,7 +86,7 @@ ps2000aDeviceObj = icdevice('picotech_ps2000a_generic', '');
 % Connect device object to hardware.
 connect(ps2000aDeviceObj);
 
-%% Display Unit Information Information From Shared Library
+%% Display unit information from shared library
 
 fprintf('Unit Information:\n\n');
 
@@ -94,7 +94,7 @@ fprintf('Unit Information:\n\n');
 
 disp(unitInfo);
 
-%% Channel Setup
+%% Channel setup
 % All channels are enabled by default. Channel settings are changed as
 % shown below.
 
@@ -151,7 +151,7 @@ end
 % data is collected.
 maxADCCount = double(get(ps2000aDeviceObj, 'maxADCValue'));
 
-%% Trigger Setup
+%% Trigger setup
 % Turn off trigger.
 %
 % If a trigger is set and the |autoStop| property of the Instrument
@@ -167,7 +167,7 @@ triggerGroupObj = triggerGroupObj(1);
 
 [status.setTriggerOff] = invoke(triggerGroupObj, 'setTriggerOff');
 
-%% Set Data Buffers
+%% Set data buffers
 % Data buffers for channels A and B - buffers should be set with the driver,
 % and these MUST be passed with application buffers to the wrapper driver.
 % This will ensure that data is correctly copied from the driver buffers
@@ -205,7 +205,7 @@ streamingGroupObj = streamingGroupObj(1);
 [status.setAppAndDriverBuffersB] = invoke(streamingGroupObj, 'setAppAndDriverBuffers', channelB, ...
                                     pAppBufferChB, pDriverBufferChB, overviewBufferSize);
 
-%% Start Streaming and Collect Data
+%% Start streaming and collect data
 % Use default value for streaming interval which is 1e-6 for 1 MS/s.
 % Collect data for 1 second with auto stop - maximum array size will depend
 % on the PC's resources - type <matlab:doc('memory') |memory|> at the
@@ -288,14 +288,14 @@ status.getStreamingLatestValues = PicoStatus.PICO_OK; % OK
 % Display a 'Stop' button.
 [stopFig.h, stopFig.h] = stopButton();             
              
-flag = 1; % Use flag variable to indicate if stop button has been clicked (0)
+flag = 1; % Use flag variable to indicate if stop button has been clicked (0).
 setappdata(gcf, 'run', flag);
 
 % Plot Properties - these are for displaying data as it is collected.
 
 if (plotLiveData == PicoConstants.TRUE)
     
-    % Plot on a single figure 
+    % Plot on a single figure. 
     figure1 = figure('Name','PicoScope 2000 Series (A API) Example - Streaming Mode Capture', ...
          'NumberTitle','off');
 
@@ -407,7 +407,7 @@ while (hasAutoStopOccurred == PicoConstants.FALSE && status.getStreamingLatestVa
         
         if (plotLiveData == PicoConstants.TRUE)
             
-            % Time axis
+            % Time axis.
             % Multiply by ratio mode as samples get reduced.
             time = (double(actualSampleInterval) * double(downSampleRatio)) * (previousTotal:(totalSamples - 1));
         
@@ -435,7 +435,7 @@ while (hasAutoStopOccurred == PicoConstants.FALSE && status.getStreamingLatestVa
 
     end
    
-    % Check if 'STOP' button pressed
+    % Check if 'STOP' button pressed.
     flag = getappdata(gcf, 'run');
     drawnow;
 
@@ -474,13 +474,13 @@ end
 
 fprintf('\n');
 
-%% Stop the Device
+%% Stop the device
 % This function should be called regardless of whether the autoStop
 % property is enabled or not.
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
-%% Find the Number of Samples.
+%% Find the number of samples.
 % This is the number of samples held in the driver itself. The actual
 % number of samples collected when using a trigger is likely to be greater.
 
@@ -488,7 +488,7 @@ fprintf('\n');
 
 fprintf('Number of samples available from the driver: %u.\n\n', numStreamingValues);
 
-%% Process Data
+%% Process data
 % Process data post-capture if required - here the data will be plotted.
 
 % Reduce size of arrays if required.
@@ -538,7 +538,7 @@ grid(finalFigureAxes, 'on');
 legend(finalFigureAxes, 'Channel A', 'Channel B');
 hold(finalFigureAxes, 'off');
 
-%% Disconnect Device
+%% Disconnect device
 % Disconnect device object from hardware.
 
 disconnect(ps2000aDeviceObj);

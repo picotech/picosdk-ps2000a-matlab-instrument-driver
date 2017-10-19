@@ -33,30 +33,30 @@
 %
 % *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
-%% Suggested Input Test Signals
+%% Suggested input test signals
 % This example was published using the following test signals:
 %
 % * Channel A: 3 Vpp, 1 Hz sine wave
 % * Channel B: 2 Vpp, 4 Hz square wave 
 % * PORT0    : 4 Vpp, 10 Hz square wave
 
-%% Clear Command Window and Close any Figures
+%% Clear command window and close any figures
 
 clc;
 close all;
 
-%% Load Configuration Information
+%% Load configuration information
 
 PS2000aConfig;
 
-%% Parameter Definitions
+%% Parameter definitions
 % Define any parameters that might be required throughout the script.
 
 channelA = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_A;
 channelB = ps2000aEnuminfo.enPS2000AChannel.PS2000A_CHANNEL_B;
 dPort0   = ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT0;
 
-%% Device Connection
+%% Device connection
 
 % Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
@@ -68,13 +68,13 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
     
     if (openDevice == PicoConstants.TRUE)
         
-        % Close connection to device
+        % Close connection to device.
         disconnect(ps2000aDeviceObj);
         delete(ps2000aDeviceObj);
         
     else
 
-        % Exit script if User selects 'No'
+        % Exit script if User selects 'No'.
         return;
         
     end
@@ -85,10 +85,10 @@ end
 % The serial number can be specified as a second input parameter.
 ps2000aDeviceObj = icdevice('picotech_ps2000a_generic', '');
 
-% Connect device
+% Connect device.
 connect(ps2000aDeviceObj);
 
-%% Display Unit Information From Shared Library
+%% Display unit information from shared library
 
 fprintf('Unit Information:\n\n');
 
@@ -96,7 +96,7 @@ fprintf('Unit Information:\n\n');
 
 disp(unitInfo);
 
-%% Set Analog Channels and Digital Ports
+%% Set analog channels and digital ports
 % All channels are enabled by default. Analog channel settings are
 % changed as shown below.
 
@@ -154,7 +154,7 @@ invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.enPS2000ADigitalPort
 
 invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT1, 0, 0);
 
-%% Trigger Setup
+%% Trigger setup
 % Turn off trigger.
 %
 % If a trigger is set and the |autoStop property| in the driver is set to
@@ -169,7 +169,7 @@ triggerGroupObj = triggerGroupObj(1);
 
 [status.setTriggerOff] = invoke(triggerGroupObj, 'setTriggerOff');
 
-%% Set Data Buffers
+%% Set data buffers
 % Data buffers for channels A and B as well as Digital PORT0 - buffers
 % should be set with the driver, and these MUST be passed with application
 % buffers to the wrapper driver in order to ensure data is correctly
@@ -205,20 +205,19 @@ streamingGroupObj = get(ps2000aDeviceObj, 'Streaming');
 streamingGroupObj = streamingGroupObj(1);
 
 % Register application buffer and driver buffers (with the wrapper library).
-
 [status.setAppAndDriverBuffersA] = invoke(streamingGroupObj, 'setAppAndDriverBuffers', channelA, ...
                                     pAppBufferChA, pDriverBufferChA, overviewBufferSize);
 
 [status.setAppAndDriverBuffersB] = invoke(streamingGroupObj, 'setAppAndDriverBuffers', channelB, ...
                                     pAppBufferChB, pDriverBufferChB, overviewBufferSize);
 
-% The wrapper uses a zero-based enumeration to identify the digital port
+% The wrapper uses a zero-based enumeration to identify the digital port.
 wrapperDPort0 = ps2000aWrapEnuminfo.enPS2000AWrapDigitalPortIndex.PS2000A_WRAP_DIGITAL_PORT0;                                
                                 
 [status.setAppAndDriverDPort0] = invoke(streamingGroupObj, 'setAppAndDriverDigiBuffers', wrapperDPort0, ...
                                     pAppBufferDPort0, pDriverBufferDPort0, overviewBufferSize);
 
-%% Start Streaming and Collect Data
+%% Start streaming and collect data
 % Use default value for streaming interval which is 1e-6 for 1 MS/s.
 % Collect data for 1 second with auto stop - maximum array size will depend
 % on the PC's resources - type <matlab:doc('memory') |memory|> at the
@@ -309,7 +308,7 @@ setappdata(gcf, 'run', flag);
 
 if (plotLiveData == PicoConstants.TRUE)
     
-    % Plot on a single figure
+    % Plot on a single figure.
     figure1 = figure('Name', 'PicoScope 2000 Series (A API) Example - MSO Streaming Data Capture', 'NumberTitle', 'off');
 
     analogAxes = subplot(2, 1, 1);
@@ -333,7 +332,7 @@ if (plotLiveData == PicoConstants.TRUE)
     title(analogAxes, 'Analog Channel Data Acquisition');
     title(digitalAxes, 'Digital Channel Data Acquisition');
     
-	if (strcmp(sampleIntervalTimeUnitsStr, 'us'))
+    if (strcmp(sampleIntervalTimeUnitsStr, 'us'))
         
         xLabelStr = 'Time (\mus)';
         
@@ -379,7 +378,7 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         
     end
     
-    % Check for data
+    % Check for data.
     [newSamples, startIndex] = invoke(streamingGroupObj, 'availableData');
     
     if (newSamples > 0)
@@ -390,7 +389,7 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         if (triggered == PicoConstants.TRUE)
             
             % Adjust trigger position as MATLAB does not use zero-based
-            % indexing
+            % indexing.
             bufferTriggerPosition = triggeredAt + 1;
             
             fprintf('Triggered - index in buffer: %d\n', bufferTriggerPosition);
@@ -423,16 +422,16 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         % Process collected data further if required - this example plots
         % the data if the User has selected 'Yes' at the prompt.
         
-        % Copy data into final buffers
+        % Copy data into final buffers.
         pBufferChAFinal.Value(previousTotal + 1:totalSamples)       = bufferChAmV;
         pBufferChBFinal.Value(previousTotal + 1:totalSamples)       = bufferChBmV;
         pBufferDPort0Final.Value(previousTotal + 1:totalSamples)    = bufferDPort0;
         
         if (plotLiveData == PicoConstants.TRUE)
             
-            % Time axis
+            % Time axis.
         
-            % Multiply by ratio mode as samples get reduced
+            % Multiply by ratio mode as samples get reduced.
             time = (double(actualSampleInterval) * double(downSampleRatio)) * (previousTotal:(totalSamples - 1));
         
             % Plot channel A and Digital PORT0 (combined values) only.
@@ -453,7 +452,7 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         
     end
     
-    % Check if auto stop has occurred
+    % Check if auto stop has occurred.
     hasAutoStopped = invoke(streamingGroupObj, 'autoStopped');
     
     if (hasAutoStopped == PicoConstants.TRUE)
@@ -463,7 +462,7 @@ while (hasAutoStopped == PicoConstants.FALSE && status.getStreamingLatestValues 
         
     end
     
-    % Check if 'STOP' button pressed
+    % Check if 'STOP' button pressed.
     flag = getappdata(gcf, 'run');
     drawnow;
     
@@ -502,7 +501,13 @@ end
 
 fprintf('\n');
 
-%% Find the Number of Samples.
+%% Stop the device
+% This function should be called regardless of whether the autoStop
+% property is enabled or not.
+
+[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
+
+%% Find the number of samples.
 % This is the number of samples held in the driver itself. The actual
 % number of samples collected when using a trigger is likely to be greater.
 
@@ -510,7 +515,7 @@ fprintf('\n');
 
 fprintf('Number of samples available from the driver: %u.\n\n', numStreamingValues);
 
-%% Process Data
+%% Process data
 % Process data post-capture if required - here the data will be plotted.
 
 % Reduce size of arrays if required.
@@ -530,7 +535,7 @@ dPort0Final     = pBufferDPort0Final.Value();
 % Plot total analog and digital data collected on separate figures.
 
 %%
-% *Analog Data*
+% *Analog data*
 
 scrsz = get(groot,'ScreenSize');
 
@@ -558,7 +563,7 @@ end
 xlabel(analogFinalAxes, xLabelStr);
 ylabel(analogFinalAxes, 'Voltage (mV)');
 
-% Find the maximum voltage range
+% Find the maximum voltage range.
 maxYRange = max(channelARangeMV, channelBRangeMV);
 ylim(analogFinalAxes,[(-1 * maxYRange) maxYRange]);
 
@@ -571,7 +576,7 @@ legend(analogFinalAxes, 'Channel A', 'Channel B');
 hold(analogFinalAxes, 'off');
 
 %% 
-% *Digital Data*
+% *Digital data*
 
 digitalFinalFigure = figure('Name','PicoScope 2000 Series (A API) Example - MSO Streaming Mode Capture', ...
     'NumberTitle', 'off', 'Position', [scrsz(3)/2 + 1 scrsz(4)/4 scrsz(3)/2 scrsz(4)/2]);
@@ -608,13 +613,7 @@ for i = 1:8
     
 end
 
-%% Stop the Device
-% This function should be called regardless of whether the autoStop
-% property is enabled or not.
-
-[status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
-
-%% Disconnect Device
+%% Disconnect device
 % Disconnect device object from hardware.
 
 disconnect(ps2000aDeviceObj);

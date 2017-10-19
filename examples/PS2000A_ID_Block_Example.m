@@ -30,22 +30,22 @@
 % 
 % *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
-%% Suggested Input Test Signals
+%% Suggested input test signals
 % This example was published using the following test signals:
 %
 % * Channel A: 4 Vpp, 1 kHz sine wave
 % * Channel B: 2 Vpp, 1 kHz ramp up wave
 
-%% Clear Command Window and Close any Figures
+%% Clear command window and close any figures
 
 clc;
 close all;
 
-%% Load Configuration Information
+%% Load configuration information
 
 PS2000aConfig
 
-%% Device Connection
+%% Device connection
 
 % Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
@@ -57,13 +57,13 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
     
     if (openDevice == PicoConstants.TRUE)
         
-        % Close connection to device
+        % Close connection to device.
         disconnect(ps2000aDeviceObj);
         delete(ps2000aDeviceObj);
         
     else
 
-        % Exit script if User selects 'No'
+        % Exit script if User selects 'No'.
         return;
         
     end
@@ -78,7 +78,7 @@ ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd', '');
 
 connect(ps2000aDeviceObj)
 
-%% Set Channels
+%% Set channels
 % Default driver settings applied to channels are listed below - use the
 % Instrument Driver's |ps2000aSetChannel()| function to turn channels on or
 % off and set voltage ranges, coupling, as well as analog offset.
@@ -105,7 +105,7 @@ if (ps2000aDeviceObj.channelCount == PicoConstants.QUAD_SCOPE)
     
 end
 
-%% Verify Timebase Index and Maximum Number of Samples
+%% Verify timebase index and maximum number of samples
 % Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
 % of samples available in the segment selected, then set the |timebase|
@@ -148,7 +148,7 @@ fprintf('Timebase index: %d, sampling interval: %d ns\n', timebaseIndex, timeInt
 % Configure the device object's |timebase| property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
-%% Set Simple Trigger
+%% Set simple trigger
 % Set a trigger on channel A, with an auto timeout - the default value for
 % delay is used.
 
@@ -170,7 +170,7 @@ set(triggerGroupObj, 'autoTriggerMs', 1000);
 
 [status.setSimpleTrigger] = invoke(triggerGroupObj, 'setSimpleTrigger', 0, 1000, 2);
 
-%% Set Block Parameters and Capture Data
+%% Set block parameters and capture data
 % Capture a block of data and retrieve data values for channels A and B.
 
 % Block data acquisition properties and functions are located in the 
@@ -211,7 +211,7 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, chA, chB] = invoke(blockGroupObj, 'getBlockData', startIndex, segmentIndex, ...
                                             downsamplingRatio, downsamplingRatioMode);
 
-%% Process Data
+%% Process data
 % In this example the data values returned from the device are displayed in
 % plots in a Figure.
 
@@ -229,7 +229,7 @@ timeMs = timeNs / 1e6;
 % Channel A
 axisHandleChA = subplot(2,1,1); 
 plot(axisHandleChA, timeMs, chA, 'b');
-ylim(axisHandleChA, [-2500 2500]); % Adjust vertical axis for signal
+ylim(axisHandleChA, [-2500 2500]); % Adjust vertical axis for signal.
 
 title(axisHandleChA, 'Channel A');
 xlabel(axisHandleChA, 'Time (ms)');
@@ -239,18 +239,18 @@ grid(axisHandleChA);
 % Channel B
 axisHandleChB = subplot(2,1,2); 
 plot(axisHandleChB, timeMs, chB, 'r');
-ylim(axisHandleChB, [-1500 1500]); % Adjust vertical axis for signal
+ylim(axisHandleChB, [-1500 1500]); % Adjust vertical axis for signal.
 
 title(axisHandleChB, 'Channel B');
 xlabel(axisHandleChB, 'Time (ms)');
 ylabel(axisHandleChB, 'Voltage (mV)');
 grid(axisHandleChB);
 
-%% Stop the Device
+%% Stop the device
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
-%% Disconnect Device
+%% Disconnect device
 % Disconnect device object from hardware.
 
 disconnect(ps2000aDeviceObj);

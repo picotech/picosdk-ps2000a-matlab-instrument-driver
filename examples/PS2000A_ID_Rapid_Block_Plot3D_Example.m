@@ -30,21 +30,21 @@
 %
 % *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
-%% Suggested Input Test Signal
+%% Suggested input test signal
 % This example was published using the following test signal:
 %
 % * Channel A: 4 Vpp Swept sine wave (Start: 10 kHz, Stop: 20 kHz, Sweep type: Up, Increment: 1.5 kHz, Increment Time: 1 ms)
 
-%% Clear Command Window and Close any Figures
+%% Clear command window and close any figures
 
 clc;
 close all;
 
-%% Load Configuration Information
+%% Load configuration information
 
 PS2000aConfig;
 
-%% Device Connection
+%% Device connection
 
 % Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
@@ -56,13 +56,13 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
     
     if (openDevice == PicoConstants.TRUE)
         
-        % Close connection to device
+        % Close connection to device.
         disconnect(ps2000aDeviceObj);
         delete(ps2000aDeviceObj);
         
     else
 
-        % Exit script if User selects 'No'
+        % Exit script if User selects 'No'.
         return;
         
     end
@@ -76,7 +76,7 @@ ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd');
 % Connect device object to hardware.
 connect(ps2000aDeviceObj);
 
-%% Set Channels
+%% Set channels
 % Default driver settings applied to channels are listed below - use
 % |ps2000aSetChannel()| to turn channels on or off and set voltage ranges,
 % coupling, as well as analog offset.
@@ -99,7 +99,7 @@ if (ps2000aDeviceObj.channelCount == PicoConstants.QUAD_SCOPE)
     
 end
 
-%% Set Memory Segments
+%% Set memory segments
 % Configure the number of memory segments and query |ps2000aMemorySegments()|
 % to find the maximum number of samples for each segment.
 
@@ -114,7 +114,7 @@ nSegments = 16;
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 512);
 
-%% Verify Timebase Index and Maximum Number of Samples
+%% Verify timebase index and maximum number of samples
 % Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
 % of samples available in the segment selected then set the |timebase|
@@ -155,7 +155,7 @@ end
 % Configure the device object's |timebase| property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
-%% Set Simple Trigger 
+%% Set simple trigger
 % Set a trigger on channel A, with an auto timeout - the default value for
 % trigger delay is used. The trigger will wait for a rising edge through
 % the specified threshold unless the timeout occurs first.
@@ -178,7 +178,7 @@ set(triggerGroupObj, 'autoTriggerMs', 1000);
 
 [status.setSimpleTrigger] = invoke(triggerGroupObj, 'setSimpleTrigger', 0, 500, 2);
 
-%% Setup Rapid Block Parameters and Capture Data
+%% Setup rapid block parameters and capture data
 % Capture a set of data using rapid block mode and retrieve data values for
 % channel A.
 
@@ -224,7 +224,7 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 [numSamples, overflow, chA, ~] = invoke(rapidBlockGroupObj, 'getRapidBlockData', numCaptures, ...
                                     downsamplingRatio, downsamplingRatioMode);
 
-%% Process Data
+%% Process data
 % Plot data values in 3D showing history.
 %
 % Calculate the time period over which samples were taken for each waveform.
@@ -257,11 +257,11 @@ zlabel(axes1, 'Voltage (mV)');
 
 hold(axes1, 'off');
 
-%% Stop the Device
+%% Stop the device
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
-%% Disconnect Device
+%% Disconnect device
 % Disconnect device object from hardware.
 
 disconnect(ps2000aDeviceObj);

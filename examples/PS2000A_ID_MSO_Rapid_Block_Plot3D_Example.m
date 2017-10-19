@@ -30,22 +30,22 @@
 %
 % *Copyright:* © 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
 
-%% Suggested Input Test Signals
+%% Suggested input test signals
 % This example was published using the following test signal:
 %
 % * Channel A: 4 Vpp, 8 kHz sine wave
 % * PORT0    : 4 Vpp, 4 kHz square wave (applied to all channels).
 
-%% Clear Command Window and Close any Figures
+%% Clear command window and close any figures
 
 clc;
 close all;
 
-%% Load Configuration Information
+%% Load configuration information
 
 PS2000aConfig;
 
-%% Device Connection
+%% Device connection
 
 % Check if an Instrument session using the device object |ps2000aDeviceObj|
 % is still open, and if so, disconnect if the User chooses 'Yes' when prompted.
@@ -57,13 +57,13 @@ if (exist('ps2000aDeviceObj', 'var') && ps2000aDeviceObj.isvalid && strcmp(ps200
     
     if (openDevice == PicoConstants.TRUE)
         
-        % Close connection to device
+        % Close connection to device.
         disconnect(ps2000aDeviceObj);
         delete(ps2000aDeviceObj);
         
     else
 
-        % Exit script if User selects 'No'
+        % Exit script if User selects 'No'.
         return;
         
     end
@@ -77,7 +77,7 @@ ps2000aDeviceObj = icdevice('picotech_ps2000a_generic.mdd');
 % Connect device object to hardware.
 connect(ps2000aDeviceObj);
 
-%% Set Analog Channels and Digital Ports
+%% Set analog channels and digital ports
 % Default driver settings applied to channels are listed below - use the
 % Instrument Driver's |ps2000aSetChannel()| function to turn channels on or
 % off and set voltage ranges, coupling, as well as analog offset.
@@ -116,7 +116,7 @@ status.setDPort0 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.e
 
 status.setDPort1 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.enPS2000ADigitalPort.PS2000A_DIGITAL_PORT1, 0, 0);
 
-%% Set Memory Segments
+%% Set memory segments
 % Configure number of memory segments, ideally a power of 2, query
 % |ps2000aGetMaxSegments()| to find the maximum number of segments for the
 % device.
@@ -131,7 +131,7 @@ status.setDPort1 = invoke(digitalObj, 'ps2000aSetDigitalPort', ps2000aEnuminfo.e
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
 set(ps2000aDeviceObj, 'numPostTriggerSamples', 1024);
 
-%% Verify Timebase Index and Maximum Number of Samples
+%% Verify timebase index and maximum number of samples
 % Use the |ps2000aGetTimebase2()| function to query the driver as to the
 % suitability of using a particular timebase index and the maximum number
 % of samples available in the segment selected, then set the |timebase|
@@ -173,7 +173,7 @@ fprintf('Timebase index: %d, sampling interval: %d ns\n', timebaseIndex, timeInt
 % Configure the device 'timebase' property value.
 set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
-%% Set Simple Trigger 
+%% Set simple trigger
 % Set a trigger on Channel A, with an auto timeout - the default value for
 % trigger delay is used. The trigger will wait for a rising edge through
 % the specified threshold unless the timeout occurs first.
@@ -196,7 +196,7 @@ set(triggerGroupObj, 'autoTriggerMs', 1000);
 
 [status.setSimpleTrigger] = invoke(triggerGroupObj, 'setSimpleTrigger', 0, 500, 2);
 
-%% Setup Rapid Block Parameters and Capture Data
+%% Setup rapid block parameters and capture data
 % Capture a set of data using rapid block mode and retrieve data values for
 % Channel A.
 
@@ -252,7 +252,7 @@ downsamplingRatioMode   = ps2000aEnuminfo.enPS2000ARatioMode.PS2000A_RATIO_MODE_
 timeNs = double(timeIntNs) * downsamplingRatio * double(0:numSamples - 1);
 
 %%
-% *Analog Data*
+% *Analog data*
 
 % Channel A
 
@@ -279,7 +279,7 @@ zlabel('Voltage (mV)');
 hold off;
 
 %% 
-% *Digital Data*
+% *Digital data*
 
 digitalFigure = figure('Name','PicoScope 2000 Series (A API) Example - MSO Rapid Block Mode Capture', ...
     'NumberTitle', 'off', 'Position', [scrsz(3)/2 + 1 scrsz(4)/4 scrsz(3)/2 scrsz(4)/2]);
@@ -328,11 +328,11 @@ for i = 1:8
     
 end
 
-%% Stop the Device
+%% Stop the device
 
 [status.stop] = invoke(ps2000aDeviceObj, 'ps2000aStop');
 
-%% Disconnect Device
+%% Disconnect device
 % Disconnect device object from hardware.
 
 disconnect(ps2000aDeviceObj);
