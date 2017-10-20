@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Connecting and Disconnecting</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_connecting_and_disconnecting.m"><style type="text/css">
+      --><title>Connecting and Disconnecting</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-10-20"><meta name="DC.source" content="ps2000a_tbx_connecting_and_disconnecting.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,9 +66,17 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Connecting and Disconnecting</h1><!--introduction--><p>This page describes how to connect to and disconnect from a PicoScope 2000 Series (A API) Oscilloscope or Mixed Signal Oscilloscope using the the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Connecting to an Instrument</a></li><li><a href="#4">Disconnecting from an Instrument</a></li><li><a href="#5">Working with Multiple Instruments</a></li></ul></div><h2 id="1">Connecting to an Instrument</h2><p>Prior to attempting to establish a connection with the instrument, run the PS2000aConfig.m script.</p><p>First create a device object using the <a href="matlab:doc('/instrument/icdevice')"><tt>icdevice</tt></a> function. The Instrument Driver name should be passed as the argument and a second optional argument can be used to specify the serial number of the device as shown below:</p><pre class="codeinput">    ps2000aDeviceObj = icdevice(<span class="string">'picotech_ps2000a_generic.mdd'</span>, <span class="string">'TT003/0010'</span>);
+  </style></head><body><div class="content"><h1>Connecting and Disconnecting</h1><!--introduction--><p>This page describes how to connect to and disconnect from a PicoScope 2000 Series (A API) Oscilloscope or Mixed Signal Oscilloscope using the the PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Connecting to an Instrument</a></li><li><a href="#4">Disconnecting from an Instrument</a></li><li><a href="#5">Working with Multiple Instruments</a></li></ul></div><h2 id="1">Connecting to an Instrument</h2><p>Prior to attempting to establish a connection with the instrument, run the PS2000aConfig.m script.</p><pre class="codeinput">PS2000aConfig;
+
+<span class="comment">% Create a device object using the</span>
+<span class="comment">% &lt;matlab:doc('/instrument/icdevice') |icdevice|&gt; function.</span>
+<span class="comment">% The Instrument Driver name should be passed as the argument and a second</span>
+<span class="comment">% optional argument can be used to specify the serial number of the device</span>
+<span class="comment">% as shown below:</span>
+
+    ps2000aDeviceObj = icdevice(<span class="string">'picotech_ps2000a_generic.mdd'</span>, <span class="string">'TT003/0010'</span>);
 </pre><pre class="codeoutput">
-Copyright &copy; 2014 - 2017 Pico Technology Ltd. All rights reserved.
+Copyright &copy; 2014-2017 Pico Technology Ltd. All rights reserved.
 
 PicoScope 2000 Series (A API) MATLAB Instrument Driver
 
@@ -89,7 +97,7 @@ Serial number(s): TT003/0010,GS002/0021
    Driver Information
       DriverType:         MATLAB generic
       DriverName:         picotech_ps2000a_generic.mdd
-      DriverVersion:      1.2.26
+      DriverVersion:      1.2.30
  
    Communication State
       Status:             open
@@ -179,7 +187,7 @@ Libraries unloaded successfully.
     disconnect(ps2000aDeviceObj2);
     delete(ps2000aDeviceObj2);
 </pre><pre class="codeoutput">
-Copyright &copy; 2014 - 2017 Pico Technology Ltd. All rights reserved.
+Copyright &copy; 2014-2017 Pico Technology Ltd. All rights reserved.
 
 PicoScope 2000 Series (A API) MATLAB Instrument Driver
 
@@ -188,7 +196,7 @@ Number of units found: 2
 Serial number(s): TT003/0010,GS002/0021
 
 
-Copyright &copy; 2014 - 2017 Pico Technology Ltd. All rights reserved.
+Copyright &copy; 2014-2017 Pico Technology Ltd. All rights reserved.
 
 PicoScope 2000 Series (A API) MATLAB Instrument Driver
 
@@ -208,7 +216,7 @@ Opening PicoScope 2000 Series device...
    Driver Information
       DriverType:         MATLAB generic
       DriverName:         picotech_ps2000a_generic.mdd
-      DriverVersion:      1.2.26
+      DriverVersion:      1.2.30
  
    Communication State
       Status:             open
@@ -289,7 +297,7 @@ Opening PicoScope 2000 Series device...
    Driver Information
       DriverType:         MATLAB generic
       DriverName:         picotech_ps2000a_generic.mdd
-      DriverVersion:      1.2.26
+      DriverVersion:      1.2.30
  
    Communication State
       Status:             open
@@ -359,10 +367,10 @@ Connected to PicoScope 2000 Series device:-
  Signal Generator Type: Arbitrary Waveform Generator
 
 Connection to PicoScope 2408B with serial number TT003/0010 closed successfully.
-Other PicoScope 2000 Series (A API) devices are still connected - libraries will not be unloaded.
+Other PicoScope 2000 Series devices using the ps2000a shared library are still connected - libraries will not be unloaded.
 Connection to PicoScope 2207BMSO with serial number GS002/0021 closed successfully.
 Libraries unloaded successfully.
-</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Connecting and Disconnecting
 %
@@ -375,8 +383,10 @@ Libraries unloaded successfully.
 %
 % Prior to attempting to establish a connection with the instrument, run the
 % PS2000aConfig.m script.
-%
-% First create a device object using the
+
+PS2000aConfig;
+
+% Create a device object using the
 % <matlab:doc('/instrument/icdevice') |icdevice|> function.
 % The Instrument Driver name should be passed as the argument and a second
 % optional argument can be used to specify the serial number of the device

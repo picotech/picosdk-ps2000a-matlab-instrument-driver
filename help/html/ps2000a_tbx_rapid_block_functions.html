@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Rapidblock Group Functions</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="ps2000a_tbx_rapid_block_functions.m"><style type="text/css">
+      --><title>Rapidblock Group Functions</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-10-20"><meta name="DC.source" content="ps2000a_tbx_rapid_block_functions.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -116,7 +116,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 </pre><p><b>See also:</b> <a href="ps2000a_tbx_block_functions.html#18"><tt>ps2000aRunBlock</tt></a> | <a href="ps2000a_tbx_block_functions.html#32"><tt>runBlock</tt></a> | <a href="ps2000a_tbx_device_functions.html#21"><tt>ps2000aSetDataBuffer</tt></a></p><h2 id="16">ps2000aSetNoOfCaptures</h2><pre class="codeinput">status = ps2000aSetNoOfCaptures(obj, nCaptures)
 </pre><p><tt>ps2000aSetNoOfCaptures(obj, nCaptures)</tt> sets the number of captures to be collected in one run of rapid block mode. If you do not call this function before a run, the driver will capture only one waveform. Once a value has been set, the value remains constant unless changed.</p><p>This function may be used with the Test and Measurement Tool.</p><p><b>Input Arguments:</b></p><div><ul><li><tt>obj</tt> - the object representing the Rapidblock group.</li><li><tt>nCaptures</tt> -  the number of waveforms to capture in one run.</li></ul></div><p><b>Output Arguments:</b></p><div><ul><li><tt>status</tt> - status code returned by the driver.</li></ul></div><p><b>Example:</b></p><pre class="codeinput">    <span class="comment">% Set capture for 20 waveforms</span>
     status = invoke(rapidBlockGroupObj, <span class="string">'ps2000aSetNoOfCaptures'</span>, 20);
-</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#16"><tt>ps2000aMemorySegments</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+</pre><p><b>See also:</b> <a href="ps2000a_tbx_device_functions.html#16"><tt>ps2000aMemorySegments</tt></a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Rapidblock Group Functions
 %

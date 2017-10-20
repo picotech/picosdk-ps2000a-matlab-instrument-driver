@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>PS2000aSetup</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-17"><meta name="DC.source" content="PS2000aSetup.m"><style type="text/css">
+      --><title>PS2000aSetup</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-10-20"><meta name="DC.source" content="PS2000aSetup.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,31 +66,65 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>PS2000aSetup</h1><p>Checks for</p><pre class="codeinput">    <span class="comment">% Download SDK</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">PS2000aSetup</a></li><li><a href="#2">Download PicoScope Support Toolbox if not Installed</a></li></ul></div><h2 id="1">PS2000aSetup</h2><p>Checks for prerequisites and prompts User to install the relevant dependencies if not already installed.</p><pre class="codeinput">    <span class="comment">% Download SDK</span>
 
     <span class="comment">% Windows</span>
 
+        <span class="comment">% Check for presence of SDK otherwise prompt to download</span>
+
     <span class="comment">% Linux</span>
+
+        <span class="comment">% Check if driver location is present otherwise prompt to install</span>
+        <span class="comment">% using instructions</span>
 
     <span class="comment">% Mac OS X</span>
 
-    <span class="comment">% Download PicoScope Support Toolbox</span>
-</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+        <span class="comment">% Check for PicoScope 6 install</span>
+</pre><h2 id="2">Download PicoScope Support Toolbox if not Installed</h2><pre class="codeinput">    ps2000aSetup.psTbxName = <span class="string">'PicoScope Support Toolbox'</span>;
+    ps2000aSetup.v = ver; <span class="comment">% Find installed toolbox information</span>
+
+    <span class="keyword">if</span> (~any(strcmp(ps2000aSetup.psTbxName, {ps2000aSetup.v.Name})))
+
+        <span class="comment">% Download Toolbox file if MATLAB 2014b or later</span>
+
+
+        <span class="comment">% Down</span>
+
+    <span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% PS2000aSetup 
-% Checks for 
+% Checks for prerequisites and prompts User to install the relevant
+% dependencies if not already installed.
 
     % Download SDK
 
     % Windows
     
+        % Check for presence of SDK otherwise prompt to download
+    
     % Linux
+    
+        % Check if driver location is present otherwise prompt to install
+        % using instructions
     
     % Mac OS X
     
-    % Download PicoScope Support Toolbox
+        % Check for PicoScope 6 install
+    
+%% Download PicoScope Support Toolbox if not Installed
 
+    ps2000aSetup.psTbxName = 'PicoScope Support Toolbox';
+    ps2000aSetup.v = ver; % Find installed toolbox information
 
+    if (~any(strcmp(ps2000aSetup.psTbxName, {ps2000aSetup.v.Name})))
+       
+        % Download Toolbox file if MATLAB 2014b or later
+        
+        
+        % Down
+        
+    end
 
 
 
