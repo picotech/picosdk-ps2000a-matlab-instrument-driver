@@ -1,6 +1,6 @@
 # PicoScope 2000 Series (A API) - MATLAB Generic Instrument Driver
 
-This MATLAB® Generic Instrument Driver allows you to acquire data from the PicoScope® 2000 Series USB oscilloscopes and mixed signal oscilloscopes, and 
+This MATLAB® Generic Instrument Driver allows you to acquire data from the PicoScope<sup>®</sup> 2000 Series USB oscilloscopes and mixed signal oscilloscopes, and 
 control signal generator functionality. The data could be processed in MATLAB using functions from Toolboxes such as [Signal Processing Toolbox](https://www.mathworks.com/products/signal.html). 
 
 This Instrument Driver package includes the following: 
