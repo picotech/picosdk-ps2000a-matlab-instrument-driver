@@ -16,12 +16,12 @@ Use one of two methods to describe the issue:
 1. A list of steps to reproduce the issue. 
 1. A natural language description of what you were doing when the issue occurred if you are unable to work out what the steps are. 
 
-#### Actual result
+#### Actual Result
 
 
 
-#### Expected result
+#### Expected Result
 
 
 
-### Additional notes
+### Additional Notes
