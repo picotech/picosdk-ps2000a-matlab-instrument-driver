@@ -6,7 +6,7 @@
    <InstrumentType>Oscilloscope</InstrumentType>
    <InstrumentManufacturer>Pico Technology Ltd.</InstrumentManufacturer>
    <InstrumentModel>PicoScope 2000 Series (A API)</InstrumentModel>
-   <InstrumentVersion>1.2.30</InstrumentVersion>
+   <InstrumentVersion>1.2.31</InstrumentVersion>
    <Identify/>
    <Reset/>
    <Selftest/>
@@ -17,11 +17,11 @@
 % OBJ is the device object.
 % End of function definition - DO NOT EDIT
 
-% Copyright © 2014-2017 Pico Technology Ltd. All rights reserved.
+% Copyright © 2014-2018 Pico Technology Ltd. All rights reserved.
 % You may copy and distribute this fiitsle as long as it remains unmodified. 
 % SB
     
-    fprintf('\nCopyright © 2014-2017 Pico Technology Ltd. All rights reserved.\n');
+    fprintf('\nCopyright © 2014-2018 Pico Technology Ltd. All rights reserved.\n');
     fprintf('\n');
     fprintf('PicoScope 2000 Series (A API) MATLAB Instrument Driver\n');
     fprintf('\n');
@@ -2927,7 +2927,7 @@ timeUnits - the time units in which timeUpper and timeLower are measured (repres
     timeUnits = 0;
 
     [status, timeUnits] = calllib('ps2000a', ...
-        'ps2000aGetTriggerTimeOffset64', deviceObj.DriverData.unithandle, ...
+        'ps2000aGetTriggerTimeOffset64', deviceObj.DriverData.unitHandle, ...
         time, timeUnits, segmentIndex);
     
     if (status ~= PicoStatus.PICO_OK)
@@ -3024,7 +3024,7 @@ bit 0 denoting Channel A.</Description>
     ready = 0; % Initialise value for pointer
     
     [status, ready] = calllib('ps2000a', 'ps2000aIsReady', ...
-                            unitHandle, ready);
+                            deviceObj.DriverData.unitHandle, ready);
 
     if (status == PicoStatus.PICO_OK || status == PicoStatus.PICO_BUSY)
 
