@@ -6,7 +6,7 @@
    <InstrumentType>Oscilloscope</InstrumentType>
    <InstrumentManufacturer>Pico Technology Ltd.</InstrumentManufacturer>
    <InstrumentModel>PicoScope 2000 Series (A API)</InstrumentModel>
-   <InstrumentVersion>1.2.31</InstrumentVersion>
+   <InstrumentVersion>1.2.32</InstrumentVersion>
    <Identify/>
    <Reset/>
    <Selftest/>
@@ -4557,7 +4557,7 @@ status - status code returned by the driver.
         
         if (abs(offsetVoltageUV + peakToPeakVoltageUV) &gt; 4000000)
             
-            error(['setSigGenBuiltInSimple: The sum of offsetVoltage and ' ...
+            error(['setSigGenArbitrary: The sum of offsetVoltage and ' ...
                 'peakToPeakVoltage cannot exceed +/-4000mV.']);
             
         end
@@ -4618,12 +4618,12 @@ status - status code returned by the driver.
 
         end
         
-        % Convert start frequency to delta phase value
+        % Convert increment frequency to delta phase value
         pDeltaPhaseIncrement = libpointer('uint32Ptr', 0);
         
         status = calllib('ps2000a', 'ps2000aSigGenFrequencyToPhase', ...
             deviceObj.DriverData.unitHandle, ...
-            deviceObj.DriverData.startFrequency, indexMode, ... 
+            increment, indexMode, ... 
             length(arbitraryWave), pDeltaPhaseIncrement);
         
         if (status ~= PicoStatus.PICO_OK)
