@@ -157,7 +157,7 @@ set(ps2000aDeviceObj, 'timebase', timebaseIndex);
 
 %% Set simple trigger
 % Set a trigger on channel A, with an auto timeout - the default value for
-% trigger delay is used. The trigger will wait for a rising edge through
+% trigger delay is used. The device will wait for a rising edge through
 % the specified threshold unless the timeout occurs first.
 
 % Trigger properties and functions are located in the Instrument

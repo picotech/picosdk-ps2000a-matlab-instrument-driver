@@ -36,7 +36,7 @@
 %% Suggested input test signals
 % This example was published using the following test signals:
 %
-% * Channel A: 3 Vpp, 1 Hz sine wave
+% * Channel A: 3 Vpp, 2 Hz sine wave
 % * Channel B: 2 Vpp, 4 Hz square wave 
 
 %% Clear command window and close any figures
@@ -221,7 +221,7 @@ streamingGroupObj = streamingGroupObj(1);
 % For 10 MS/s, specify 100 ns
 % set(streamingGroupObj, 'streamingInterval', 100e-9);
 
-% Set the number of pre- and post-trigger samples
+% Set the number of pre- and post-trigger samples.
 % If no trigger is set the library will still store the
 % |numPreTriggerSamples| + |numPostTriggerSamples|.
 set(ps2000aDeviceObj, 'numPreTriggerSamples', 0);
