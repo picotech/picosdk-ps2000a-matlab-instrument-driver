@@ -6,7 +6,7 @@
    <InstrumentType>Oscilloscope</InstrumentType>
    <InstrumentManufacturer>Pico Technology Ltd.</InstrumentManufacturer>
    <InstrumentModel>PicoScope 2000 Series (A API)</InstrumentModel>
-   <InstrumentVersion>1.2.32</InstrumentVersion>
+   <InstrumentVersion>1.2.33</InstrumentVersion>
    <Identify/>
    <Reset/>
    <Selftest/>
@@ -21,9 +21,10 @@
 % You may copy and distribute this fiitsle as long as it remains unmodified. 
 % SB
     
-    fprintf('\nCopyright © 2014-2018 Pico Technology Ltd. All rights reserved.\n');
+    fprintf('PicoScope 2000 Series (A API) MATLAB Instrument Driver\n\n');
+    fprintf('Copyright © 2014-2018 Pico Technology Ltd. All rights reserved.\n');
     fprintf('\n');
-    fprintf('PicoScope 2000 Series (A API) MATLAB Instrument Driver\n');
+    
     fprintf('\n');
 
     % Load libraries
@@ -209,8 +210,6 @@
     
     obj.DriverData.displayOutput = obj.displayOutput;
     
-    
-    
     % Enumerate units 
     % ---------------
     
@@ -245,10 +244,10 @@
 % OBJ is the device object.
 % End of function definition - DO NOT EDIT
 
-% Copyright © 2014 - 2016 Pico Technology Ltd. All rights reserved.
+% Copyright © 2014-2018 Pico Technology Ltd. All rights reserved.
 % You may copy and distribute this file as long as it remains unmodified.
 
-    disp('Opening PicoScope 2000 Series device...');
+    disp('Opening PicoScope 2000 Series (A API) device...');
     
     % Structure to hold status values while connecting to the device.
     % Only output when the driver is called using command line or script.
@@ -535,9 +534,11 @@
 
             obj.DriverData.ddsFrequency = obj.DriverData.constants.PS2000A_AWG_DDS_FREQUENCY;
 
-            % 2405 and '6' variants plus the 2205A MSO
+            % Maximum sampling rate varies for the 
+            % 2405 and 2206A/B variants plus the 2205A MSO
             if (~isempty(strfind(obj.InstrumentModel, '2405')) || ...
-                strcmp(obj.InstrumentModel(4), '6') || ...
+                strcmp(obj.InstrumentModel, obj.DriverData.variants.MODEL_PS2206A) || ...
+                strcmp(obj.InstrumentModel, obj.DriverData.variants.MODEL_PS2206B) || ...
                 strcmp(obj.InstrumentModel, obj.DriverData.variants.MODEL_PS2205AMSO))
 
                 obj.DriverData.maxSamplingRate = PicoConstants.MAX_SAMPLING_RATE_500MSPS;
@@ -600,7 +601,7 @@
         
         % Display unit information to user if not using TMTool
         fprintf('\n');
-        fprintf('Connected to PicoScope 2000 Series device:-\n\n');
+        fprintf('Connected to PicoScope 2000 Series (A API) device:-\n\n');
         fprintf('      Instrument Model: %s\n', get(obj, 'InstrumentModel'));
         fprintf('   Batch/Serial Number: %s\n', unitSerial);
         fprintf('       Analog Channels: %d\n', obj.DriverData.channelCount);
