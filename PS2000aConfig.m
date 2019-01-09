@@ -189,14 +189,14 @@ if (~any(strcmp(ps2000aConfigInfo.psTbxName, {ps2000aConfigInfo.v.Name})))
     
     if (isempty(ps2000aConfigInfo.psTbxFound))
         
-        psTbxNotFoundWarningMsg = sprintf(['Please install the PicoScope Support Toolbox via the '...
-            'Add-Ons Explorer or download the zip file from MATLAB Central File Exchange' ...
-            ' and add the location of the extracted contents to the MATLAB path.']);
+        ps2000aConfigInfo.psTbxNotFoundWarningMsg = sprintf(['Please install the PicoScope Support Toolbox '...
+            'via the Add-Ons Explorer or download the zip file from MATLAB Central File Exchange ' ...
+            'and add the location of the extracted contents to the MATLAB path.']);
         
-        warning('PS2000aConfig:PSTbxDirNotFound', psTbxNotFoundWarningMsg);
+        warning('PS2000aConfig:PSTbxDirNotFound', ps2000aConfigInfo.psTbxNotFoundWarningMsg);
         
-        f = warndlg(psTbxNotFoundWarningMsg, 'PicoScope Support Toolbox Not Found', 'modal');
-        uiwait(f);
+        ps2000aConfigInfo.f = warndlg(ps2000aConfigInfo.psTbxNotFoundWarningMsg, 'PicoScope Support Toolbox Not Found', 'modal');
+        uiwait(ps2000aConfigInfo.f);
         
         web('https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox');
             
