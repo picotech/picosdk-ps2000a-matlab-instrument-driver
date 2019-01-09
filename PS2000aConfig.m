@@ -183,31 +183,22 @@ if (~any(strcmp(ps2000aConfigInfo.psTbxName, {ps2000aConfigInfo.v.Name})))
     
     % If the PicoScope Support Toolbox has not been installed, check to see
     % if the folder is on the MATLAB path, having been downloaded via zip
-    % file or copied from the Microsoft Windows Pico SDK installer
-    % directory.
+    % file.
     
     ps2000aConfigInfo.psTbxFound = strfind(path, ps2000aConfigInfo.psTbxName);
     
-    if (isempty(ps2000aConfigInfo.psTbxFound) && ispc())
+    if (isempty(ps2000aConfigInfo.psTbxFound))
         
-        % Check if the folder is present in the relevant SDK installation
-        % directory on Windows platforms (if the SDK installer has been
-        % used).
+        psTbxNotFoundWarningMsg = sprintf(['Please install the PicoScope Support Toolbox via the '...
+            'Add-Ons Explorer or download the zip file from MATLAB Central File Exchange' ...
+            ' and add the location of the extracted contents to the MATLAB path.']);
         
-        % Obtain the folder name
-        ps2000aConfigInfo.psTbxFolderName = fullfile('C:\PicoSDK', 'MATLAB' , ps2000aConfigInfo.psTbxName);
-
-        % If it is present in the SDK directory, add the PicoScope Support
-        % Toolbox folder and sub-folders to the MATLAB path.
-        if (exist(ps2000aConfigInfo.psTbxFolderName, 'dir') == 7)
-
-            addpath(genpath(ps2000aConfigInfo.psTbxFolderName));
-
-        end
-            
-    else
+        warning('PS2000aConfig:PSTbxDirNotFound', psTbxNotFoundWarningMsg);
         
-        warning('PS2000aConfig:PSTbxDirNotFound', 'PicoScope Support Toolbox directory not found.');
+        f = warndlg(psTbxNotFoundWarningMsg, 'PicoScope Support Toolbox Not Found', 'modal');
+        uiwait(f);
+        
+        web('https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox');
             
     end
     
