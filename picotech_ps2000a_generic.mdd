@@ -6303,12 +6303,35 @@ pwqEnabled - indicates whether the pulse width qualifier will successfully be se
 
     deviceObj = get(obj, 'Parent');
     
-    status = calllib('ps2000a', 'ps2000aSetTriggerDigitalPortProperties', ...
+    status = calllib('ps2000a', 'ps2000aSetTriggerChannelConditions', ...
             deviceObj.DriverData.unitHandle, conditions, nConditions);
         
     if( status ~= PicoStatus.PICO_OK)
 
-        error('ps2000aIsTriggerOrPulseWidthQualifierEnabled:- status code: %d. Please refer to the PicoStatus.m file.', status); 
+        error('ps2000aSetTriggerChannelConditions:- status code: %d. Please refer to the PicoStatus.m file.', status); 
+
+    end</MCode>
+               </Code>
+               <Description/>
+            </Method>
+            <Method>
+               <Name>ps2000aSetTriggerChannelDirections</Name>
+               <Location>trigger</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>MCode</Type>
+               <Code>
+                  <MCode>function [status] = ps2000aSetTriggerChannelDirections(obj, channelA, channelB, channelC, channelD, ext)
+% For group functions, OBJ is the group object. For
+% base device functions, OBJ is the device object.
+
+    deviceObj = get(obj, 'Parent');
+    
+    status = calllib('ps2000a', 'ps2000aSetTriggerChannelDirections', ...
+            deviceObj.DriverData.unitHandle, channelA, channelB, channelC, channelD, ext, 0);
+        
+    if( status ~= PicoStatus.PICO_OK)
+
+        error('ps2000aSetTriggerChannelDirections:- status code: %d. Please refer to the PicoStatus.m file.', status); 
 
     end</MCode>
                </Code>
