@@ -6292,6 +6292,29 @@ triggerEnabled - indicates whether the trigger will successfully be set when ps2
 pwqEnabled - indicates whether the pulse width qualifier will successfully be set when ps2000aRunBlock, runBlock or ps2000aRunStreaming is called. A non-zero value indicates that the pulse width qualifier is set, zero that the pulse width qualifier is not set.</Description>
             </Method>
             <Method>
+               <Name>ps2000aSetTriggerChannelConditions</Name>
+               <Location>trigger</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>MCode</Type>
+               <Code>
+                  <MCode>function [status] = ps2000aSetTriggerChannelConditions(obj, conditions, nConditions)
+% For group functions, OBJ is the group object. For
+% base device functions, OBJ is the device object.
+
+    deviceObj = get(obj, 'Parent');
+    
+    status = calllib('ps2000a', 'ps2000aSetTriggerDigitalPortProperties', ...
+            deviceObj.DriverData.unitHandle, conditions, nConditions);
+        
+    if( status ~= PicoStatus.PICO_OK)
+
+        error('ps2000aIsTriggerOrPulseWidthQualifierEnabled:- status code: %d. Please refer to the PicoStatus.m file.', status); 
+
+    end</MCode>
+               </Code>
+               <Description/>
+            </Method>
+            <Method>
                <Name>ps2000aSetTriggerDigitalPortProperties</Name>
                <Location>trigger</Location>
                <CapabilityGroup>Base</CapabilityGroup>
