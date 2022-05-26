@@ -6420,6 +6420,28 @@ pwqEnabled - indicates whether the pulse width qualifier will successfully be se
                <Description/>
             </Method>
             <Method>
+               <Name>ps2000aSetTriggerDelay</Name>
+               <Location>trigger</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>MCode</Type>
+               <Code>
+                  <MCode>function [status] = ps2000aSetTriggerDelay(obj)
+% For group functions, OBJ is the group object. For
+% base device functions, OBJ is the device object.
+
+    deviceObj = get(obj, 'Parent');
+    
+    status = calllib('ps2000a', 'ps2000a', deviceObj.DriverData.delay);
+    
+    if( status ~= PicoStatus.PICO_OK)
+
+        error('ps2000aSetTriggerDelay:- status code: %d. Please refer to the PicoStatus.m file.', status); 
+
+    end</MCode>
+               </Code>
+               <Description/>
+            </Method>
+            <Method>
                <Name>ps2000aSetTriggerDigitalPortProperties</Name>
                <Location>trigger</Location>
                <CapabilityGroup>Base</CapabilityGroup>
