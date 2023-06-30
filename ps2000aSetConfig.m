@@ -1,3 +1,4 @@
+function [ps2000aStructs, ps2000aEnumInfo, ps2000aWrapStructs, ps2000aWrapEnuminfo] = ps2000aSetConfig()
 %% PS2000aConfig
 % Configures paths according to platforms and loads information from
 % prototype files for PicoScope 2000 Series (A API) Oscilloscopes. The folder 
@@ -215,6 +216,6 @@ cd(ps2000aConfigInfo.workingDir);
 ps2000aConfigInfo.ps2000aMFile = str2func(strcat('ps2000aMFile_', ps2000aConfigInfo.archStr));
 ps2000aConfigInfo.ps2000aWrapMFile = str2func(strcat('ps2000aWrapMFile_', ps2000aConfigInfo.archStr));
 
-[ps2000aMethodinfo, ps2000aStructs, ps2000aEnuminfo, ps2000aThunkLibName] = ps2000aConfigInfo.ps2000aMFile(); 
+[ps2000aMethodinfo, ps2000aStructs, ps2000aEnumInfo, ps2000aThunkLibName] = ps2000aConfigInfo.ps2000aMFile(); 
 
 [ps2000aWrapMethodinfo, ps2000aWrapStructs, ps2000aWrapEnuminfo, ps2000aWrapThunkLibName] = ps2000aConfigInfo.ps2000aWrapMFile();
